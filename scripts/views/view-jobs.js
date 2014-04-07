@@ -14,13 +14,34 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #candidates" : "candidates",
-			"click #profile"	: "profile"
+			"click #add-new-job"	: "addNewJob",
+			"click #job-list > li"	: "expandJob",
+			"click #candidates" 	: "candidates",
+			"click #profile"		: "profile"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Jobs view initialized...");
+		},
+
+		addNewJob : function(){
+			alert(1);
+		},
+
+		expandJob : function(event){
+			var item = $(event.target);
+
+			if($(item).hasClass("expanded")){
+				$("#job-list > li").removeClass("expanded");
+			}else{
+				$("#job-list > li").removeClass("expanded");
+				$(item).addClass("expanded");
+			}
+			
+			event.stopImmediatePropagation();
+			event.stopPropagation();
+			event.bubbles
 		},
 
 		candidates : function(){

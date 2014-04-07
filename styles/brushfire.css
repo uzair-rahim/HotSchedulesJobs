@@ -195,14 +195,14 @@ button{
 	border-radius: 3px;
 	border: 1px solid #d0d4da;
 	box-shadow: none;
-	background: #f4f6f7;
+	background-color: #f4f6f7;
 }
 
 button.primary{
 	color: #ffffff;
 	border: 1px solid #0b6f9b;
 	box-shadow: none;
-	background: #3e92ce;
+	background-color: #3e92ce;
 }
 
 ul.grid-list{
@@ -211,6 +211,11 @@ ul.grid-list{
 	width: calc(100% - 20px);
 	margin: 0 10px 20px 10px;
 	border-top: 1px dotted #bbbbbb;
+}
+
+ul.grid-list.sub{
+	margin: 0 10px 5px 10px;
+	background-color: #ffffff;
 }
 
 ul.grid-list li{
@@ -223,11 +228,20 @@ ul.grid-list li{
 	overflow: hidden;
 }
 
+ul.grid-list li.expanded{
+	height: auto;
+	background-color: #f5f5f5;
+}
+
+ul.grid-list li:hover{
+	background-color: #fcfcfc;
+}
+
 ul.grid-list li .job-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
-	width: 174px;
+	width: 180px;
 	height: 40px;
 	border-right: 1px dotted #bbbbbb;
 }
@@ -236,20 +250,25 @@ ul.grid-list li .job-info .job-name{
 	display: block;
 	float: left;
 	clear: both;
+	margin: 0 0 0 5px;
 	width: 160px;
 	color: #2d3c4b;
 	font-size: 14px;
-	font-weight: bold;
 	line-height: 22px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
+ul.grid-list li .job-info .job-name.new{
+	font-weight: bold;
+}
+
 ul.grid-list li .job-info .job-shift{
 	display: block;
 	float: left;
 	clear: both;
+	margin: 0 0 0 5px;
 	width: 160px;
 	color: #959ba2;
 	font-size: 12px;
@@ -257,6 +276,108 @@ ul.grid-list li .job-info .job-shift{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 550px){
+	ul.grid-list li .job-info{
+		border-right: none;
+		width: 200px;
+
+	}
+
+	ul.grid-list li .job-info .job-name,
+	ul.grid-list li .job-info .job-shift{
+		width: 200px;
+	}
+}
+
+ul.grid-list li .candidates-info{
+	display: block;
+	float: left;
+	margin: 5px 0;
+	width: 264px;
+	height: 40px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-right: 1px dotted #bbbbbb;
+}
+
+@media screen and (max-width: 550px){
+	ul.grid-list li .candidates-info{
+		display: none;
+	}
+}
+
+ul.grid-list li .candidates-info .candidates-list{
+	display: block;
+	float: left;
+
+	margin: 0 0 0 5px;
+}
+
+ul.grid-list li .candidates-info .candidates-list li{
+	display: block;
+	float: left;
+	clear: none;
+	width: 38px;
+	height: 38px;
+	margin: 0 0 0 4px;
+	border-radius: 20px;
+	background-color: #fafbfc;
+	border: 1px solid #e5e5e5;
+	background-image: url("../images/default-avatar.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 38px auto;
+	overflow: hidden;
+}
+
+ul.grid-list li .candidates-info .candidates-list li.new{
+	border: 1px solid #007bff;
+}
+
+ul.grid-list li .candidates-info .candidates-list li img{
+	width: 38px;
+	height: 38px;
+}
+
+ul.grid-list li .candidates-info .more{
+	display: block;
+	float: left;
+	margin: 0 10px;
+	line-height: 42px;
+	color: #969ba2;
+}
+
+ul.grid-list li .candidates-info .more.new{
+	font-weight: bold;
+	color: #007bff;
+}
+
+ul.grid-list li .share-info{
+	display: block;
+	float: left;
+	margin: 5px 0;
+	width: 110px;
+	height: 40px;
+	line-height: 42px;
+	color: #969ba2;
+	font-size: 12px;
+	text-indent: 40px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border-right: 1px dotted #bbbbbb;
+	background-image: url("../images/icon-share.png");
+	background-repeat: no-repeat;
+	background-position: 15px 10px;
+	background-size: auto 20px;
+}
+
+@media screen and (max-width: 800px){
+	ul.grid-list li .share-info{
+		display: none;
+	}
 }
 
 ul.grid-list li .posted-info{
@@ -272,5 +393,104 @@ ul.grid-list li .posted-info{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+ul.grid-list li .posted-info.new{
+	font-weight: bold;
+}
+
+@media screen and (max-width: 900px){
+	ul.grid-list li .posted-info{
+		display: none;
+	}
+}
+
+ul.grid-list li .job-actions{
+	display: block;
+	float: right;
+	margin: 5px 0;
+	width: 150px;
+	height: 40px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+ul.grid-list li .job-actions button{
+	margin: 5px;
+	float: right;
+}
+
+@media screen and (max-width: 620px){
+	ul.grid-list li .job-actions{
+		width: 80px;
+	}
+
+	ul.grid-list li .job-actions button:first-child{
+		display: none;
+	}
+}
+
+ul.grid-list li .candidate-picture{
+	display: block;
+	float: left;
+	clear: none;
+	width: 38px;
+	height: 38px;
+	margin: 5px 0 0 4px;
+	border-radius: 20px;
+	background-color: #fafbfc;
+	border: 1px solid #e5e5e5;
+	background-image: url("../images/default-avatar.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 38px auto;
+	overflow: hidden;
+}
+
+ul.grid-list li .candidate-picture img{
+	width: 38px;
+	height: 38px;
+}
+
+
+ul.grid-list li .candidate-info{
+	display: block;
+	float: left;
+	margin: 5px 0;
+	width: 210px;
+	height: 40px;
 	border-right: 1px dotted #bbbbbb;
 }
+
+ul.grid-list li .candidate-info .candidate-name{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 0 0 5px;
+	width: 160px;
+	color: #2d3c4b;
+	font-size: 14px;
+	line-height: 22px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+ul.grid-list li .candidate-info .candidate-name.new{
+	font-weight: bold;
+}
+
+ul.grid-list li .candidate-info .candidate-job{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 0 0 5px;
+	width: 160px;
+	color: #959ba2;
+	font-size: 12px;
+	line-height: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+

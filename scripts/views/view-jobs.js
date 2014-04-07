@@ -16,6 +16,7 @@ define([
 		events : {
 			"click #add-new-job"	: "addNewJob",
 			"click #job-list > li"	: "expandJob",
+			"click .edit-job"		: "editJob",
 			"click #candidates" 	: "candidates",
 			"click #profile"		: "profile"
 		},
@@ -26,11 +27,16 @@ define([
 		},
 
 		addNewJob : function(){
-			alert(1);
+			alert("Add New Job");
+		},
+
+		editJob : function(event){
+			alert("Edit Job");
+			event.stopPropagation();
 		},
 
 		expandJob : function(event){
-			var item = $(event.target);
+			var item = $(event.target).closest("#job-list li");
 
 			if($(item).hasClass("expanded")){
 				$("#job-list > li").removeClass("expanded");
@@ -39,9 +45,6 @@ define([
 				$(item).addClass("expanded");
 			}
 			
-			event.stopImmediatePropagation();
-			event.stopPropagation();
-			event.bubbles
 		},
 
 		candidates : function(){

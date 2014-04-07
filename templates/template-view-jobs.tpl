@@ -25,7 +25,7 @@
 		<div class="posted-info new">Posted 5:00PM</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 		<ul class="grid-list sub">
 			<li>
@@ -66,7 +66,7 @@
 		<div class="posted-info">Posted Monday</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 	</li>
 	<li>
@@ -85,7 +85,7 @@
 		<div class="posted-info">Posted Wednesday</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 	</li>
 	<li>
@@ -100,7 +100,7 @@
 		<div class="posted-info">Posted 3/24/2014</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 	</li>
 	<li>
@@ -117,7 +117,7 @@
 		<div class="posted-info">Posted 3/24/2014</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 	</li>
 	<li>
@@ -132,7 +132,7 @@
 		<div class="posted-info">Posted 3/24/2014</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 	</li>
 	<li>
@@ -147,7 +147,7 @@
 		<div class="posted-info">Posted 3/24/2014</div>
 		<div class="job-actions">
 			<button>Posted</button>
-			<button>Edit</button>
+			<button class="edit-job">Edit</button>
 		</div>
 	</li>
 </ul>

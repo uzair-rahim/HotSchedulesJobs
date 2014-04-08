@@ -4,9 +4,10 @@
 	</ul>
 </div>
 <div id="toolbar">
+	<button id="back">Back</button>
 	<button class="primary">Send Message</button>
 	<button>Archive</button>
 </div>
 <!--
-<button id="back">Back</button> Candidates  <button id="profile">Profile</button>
+<button id="profile">Profile</button>
 -->

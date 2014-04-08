@@ -14,11 +14,11 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #add-new-job"	: "addNewJob",
-			"click #job-list > li"	: "expandJob",
-			"click .edit-job"		: "editJob",
-			"click #candidates" 	: "candidates",
-			"click #profile"		: "profile"
+			"click #add-new-job"		: "addNewJob",
+			"click #job-list > li"		: "expandJob",
+			"click .edit-job"			: "editJob",
+			"click .view-candidates" 	: "candidates",
+			"click .view-profile"		: "profile"
 		},
 
 		initialize : function(){
@@ -36,7 +36,7 @@ define([
 		},
 
 		expandJob : function(event){
-			var item = $(event.target).closest("#job-list li");
+			var item = $(event.target).closest("#job-list > li");
 
 			if($(item).hasClass("expanded")){
 				$("#job-list > li").removeClass("expanded");
@@ -47,11 +47,15 @@ define([
 			
 		},
 
-		candidates : function(){
+		candidates : function(event){
+			alert("View All Candidates");
+			event.stopPropagation();
 			App.router.navigate("candidates/job", true);
 		},
 
-		profile : function(){
+		profile : function(event){
+			alert("View Candidate's Profile");
+			event.stopPropagation();
 			App.router.navigate("profile/jobs/jobs", true);
 		},
 

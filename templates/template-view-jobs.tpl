@@ -37,7 +37,7 @@
 					<div class="candidate-job">Cook @ Roaring Fork</div>
 				</div>
 			</li>
-			<li>
+			<li class="view-profile">
 				<div class="candidate-picture">
 					<img src="images/Jake.jpg"/>
 				</div>
@@ -45,6 +45,9 @@
 					<div class="candidate-name new">Ben Scott</div>
 					<div class="candidate-job">Bartender @ McDonalds</div>
 				</div>
+			</li>
+			<li class="foot">
+				<a class="view-candidates">View All Candidates</a>
 			</li>
 		</ul>
 	</li>
@@ -151,6 +154,3 @@
 		</div>
 	</li>
 </ul>
-<!--
-<button id="candidates">Candidates</button><button id="profile">Profile</button>
--->

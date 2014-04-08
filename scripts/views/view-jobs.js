@@ -40,8 +40,10 @@ define([
 
 			if($(item).hasClass("expanded")){
 				$("#job-list > li").removeClass("expanded");
+				$("#job-list > li").removeClass("faded");
 			}else{
 				$("#job-list > li").removeClass("expanded");
+				$("#job-list > li").addClass("faded");
 				$(item).addClass("expanded");
 			}
 			
@@ -50,13 +52,13 @@ define([
 		candidates : function(event){
 			alert("View All Candidates");
 			event.stopPropagation();
-			App.router.navigate("candidates/job", true);
+			//App.router.navigate("candidates/job", true);
 		},
 
 		profile : function(event){
 			alert("View Candidate's Profile");
 			event.stopPropagation();
-			App.router.navigate("profile/jobs/jobs", true);
+			//App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		serializeData : function(){

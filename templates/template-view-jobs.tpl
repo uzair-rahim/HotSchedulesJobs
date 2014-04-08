@@ -90,6 +90,36 @@
 			<button>Posted</button>
 			<button class="edit-job">Edit</button>
 		</div>
+		<ul class="grid-list sub">
+			<li>
+				<div class="candidate-picture">
+					<img src="images/Christi.jpg"/>
+				</div>
+				<div class="candidate-info">
+					<div class="candidate-name new">Brittney Smith</div>
+					<div class="candidate-job">Cook @ Roaring Fork</div>
+				</div>
+			</li>
+			<li class="view-profile">
+				<div class="candidate-picture">
+					<img src="images/Jake.jpg"/>
+				</div>
+				<div class="candidate-info">
+					<div class="candidate-name new">Ben Scott</div>
+					<div class="candidate-job">Bartender @ McDonalds</div>
+				</div>
+			</li>
+			<li>
+				<div class="candidate-picture"></div>
+				<div class="candidate-info">
+					<div class="candidate-name new">Christopher Nolan</div>
+					<div class="candidate-job">Cook @ CPK</div>
+				</div>
+			</li>
+			<li class="foot">
+				<a class="view-candidates">View All Candidates</a>
+			</li>
+		</ul>
 	</li>
 	<li>
 		<div class="job-info">

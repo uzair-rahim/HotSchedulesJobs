@@ -18,7 +18,10 @@ define([
 			"click #job-list > li"		: "expandJob",
 			"click .edit-job"			: "editJob",
 			"click .view-candidates" 	: "candidates",
-			"click .view-profile"		: "profile"
+			"click .view-profile"		: "profile",
+			"click .candidate-select"	: "candidateSelect",
+			"click .candidate-message"	: "candidateMessage",
+			"click .candidate-archive"	: "candidateArchive"
 		},
 
 		initialize : function(){
@@ -37,6 +40,9 @@ define([
 
 		expandJob : function(event){
 			var item = $(event.target).closest("#job-list > li");
+			
+			$(".candidate-select").prop("checked", false);
+			$("#archive-candidates").css("display", "none");
 
 			if($(item).hasClass("expanded")){
 				$("#job-list > li").removeClass("expanded");
@@ -59,6 +65,26 @@ define([
 			alert("View Candidate's Profile");
 			event.stopPropagation();
 			//App.router.navigate("profile/jobs/jobs", true);
+		},
+
+		candidateSelect : function(event){
+			var count = $(".candidate-select:checked").length;
+			if(count > 0){
+				$("#archive-candidates").css("display", "block");
+			}else{
+				$("#archive-candidates").css("display", "none");
+			}
+			event.stopPropagation();
+		},
+
+		candidateMessage : function(event){
+			alert("Send Message");
+			event.stopPropagation();
+		},
+
+		candidateArchive : function(event){
+			alert("Archive Candidate");
+			event.stopPropagation();
 		},
 
 		serializeData : function(){

@@ -56,9 +56,9 @@ define([
 		},
 
 		candidates : function(event){
-			alert("View All Candidates");
+			//alert("View All Candidates");
 			event.stopPropagation();
-			//App.router.navigate("candidates/job", true);
+			App.router.navigate("candidates/job", true);
 		},
 
 		profile : function(event){

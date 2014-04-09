@@ -24,8 +24,8 @@ define([
 		},
 
 		onShow : function(){
-			if(typeof this.options.mode === "undefined"){
-				$("#back").hide();
+			if(typeof this.options.mode !== "undefined"){
+				$("#breadcrumb").prepend("<li id='back'>Job</li>");
 			}
 		},
 

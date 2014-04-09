@@ -194,7 +194,7 @@ button.primary:hover{
 	font-size: 14px;
 	line-height: 30px;
 	text-shadow: 0 1px 0 #fff;
-	padding: 0 10px;
+	padding: 0 5px 0 10px;
 }
 
 #breadcrumb li:last-child{
@@ -567,7 +567,16 @@ ul.grid-list li .candidate-referral{
 	display: block;
 	float: left;
 	margin: 5px 0;
-	width: 130px;
+	width: 270px;
+	height: 40px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+ul.grid-list li .candidate-referral .date{
+	display: block;
+	float: left;
+	max-width: 80px;
 	height: 40px;
 	line-height: 40px;
 	color: #2d3c4b;
@@ -578,11 +587,62 @@ ul.grid-list li .candidate-referral{
 	text-overflow: ellipsis;
 }
 
-ul.grid-list li .candidate-referral.new{
+ul.grid-list li .candidate-referral .date.new{
 	font-weight: bold;
 }
 
-@media screen and (max-width: 800px){
+ul.grid-list li .candidate-referral .referred-by{
+	display: block;
+	float: left;
+	width: 190px;
+	height: 40px;
+	line-height: 40px;
+	color: #2d3c4b;
+	font-size: 12px;
+	text-indent: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+ul.grid-list li .candidate-referral .referred-by .picture{
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-indent: 0;
+	margin: 8px 0 0 4px;
+	border-radius: 10px;
+	background-color: #fafbfc;
+	border: 1px solid #e5e5e5;
+	background-image: url("../images/default-avatar.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px auto;
+	overflow: hidden;
+}
+
+ul.grid-list li .candidate-referral .referred-by .picture img{
+	width: 20px;
+	height: 20px;
+}
+
+ul.grid-list li .candidate-referral .referred-by .name{
+	display: block;
+	float: left;
+	width: 160px;
+	height: 40px;
+	line-height: 40px;
+	color: #2d3c4b;
+	font-size: 12px;
+	text-indent: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 950px){
 	ul.grid-list li .candidate-referral{
 		display: none;
 	}
@@ -676,7 +736,6 @@ ul.grid-list li .candidate-network span{
 		display: none;
 	}
 }
-
 
 ul.grid-list li .new-info{
 	display: none;

@@ -166,6 +166,7 @@ define([
 			},
 
 			logout : function(){
+				Utils.DeleteUserSession();
 				App.router.navigate("login", true);
 			}
 			

@@ -14,12 +14,16 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			
+			"click #logout" : "logout"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Settings view initialized...");
+		},
+
+		logout : function(){
+			App.router.navigate("logout", true);
 		},
 
 		serializeData : function(){

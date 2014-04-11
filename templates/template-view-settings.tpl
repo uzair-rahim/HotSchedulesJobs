@@ -5,3 +5,7 @@
 		{{/each}}
 	</ul>
 </div>
+
+<div id="toolbar">
+	<button id="logout">Logout</button>
+</div>

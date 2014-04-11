@@ -468,7 +468,7 @@ ul.grid-list li .job-actions{
 	display: block;
 	float: right;
 	margin: 5px 0;
-	width: 150px;
+	width: 160px;
 	height: 40px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -479,7 +479,7 @@ ul.grid-list li .job-actions button{
 	float: right;
 }
 
-@media screen and (max-width: 620px){
+@media screen and (max-width: 630px){
 	ul.grid-list li .job-actions{
 		width: 70px;
 	}

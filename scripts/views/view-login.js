@@ -15,8 +15,8 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #login"		: "login",
-			"click #signup"		: "signup"
+			"click #login"	: "login",
+			"click #signup"	: "signup"
 		},
 
 		initialize : function(){
@@ -30,20 +30,26 @@ define([
 			var emailField = $("#emailaddress").val();
 			var passwordField = $("#password").val();
 
-			/*
 			var auth = new ModelAuthenticate({email : emailField, password : passwordField});
 				auth.fetch({
-					success : function(){
+					success : function(response){
 						console.log("User successfully authenticated...");
+
+						var user = new Object();
+							user.guid = response.attributes.guid;
+							user.firstname = response.attributes.firstname;
+							user.lastname = response.attributes.lastname;
+							user.employerIds = response.attributes.employerIds;
+							user.brushfireToken = response.attributes.brushfireToken;
+
+							Utils.CreateUserSession(user);
+							App.router.navigate("jobs", true);
 					},
 
 					error : function(){
 						console.log("Error authenticating user...");
 					}
 				});
-			*/
-			
-			App.router.navigate("jobs", true);
 		},
 
 		signup : function(){

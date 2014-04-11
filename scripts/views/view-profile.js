@@ -15,7 +15,7 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #back" : "back"
+			"click #breadcrumb li" : "back"
 		},
 
 		initialize : function(){
@@ -23,13 +23,23 @@ define([
 			console.log("Profile view initialized...");
 		},
 
-		back : function(){
-			window.history.back();
+		back : function(event){
+			var index = $(event.target).index();
+			var goBack = (index+1) - App.getTrailLength();
+
+			for(var i = 0; i <= goBack*(-1); i++){
+				App.popTrail();
+			}
+
+			if(goBack !== 0){
+				window.history.go(goBack);
+			}
 		},
 
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
+				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;
 		}
 		

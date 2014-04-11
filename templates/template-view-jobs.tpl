@@ -1,6 +1,8 @@
 <div id="sub-nav">
 	<ul id="breadcrumb">
-		<li>Jobs</li>
+		{{#each breadcrumb}}
+			<li>{{this}}</li>
+		{{/each}}
 	</ul>
 </div>
 <div id="toolbar">
@@ -37,7 +39,7 @@
 				</div>
 				<div class="candidate-info">
 					<div class="candidate-name new">Brittney Smith</div>
-					<div class="candidate-job">Cook @ Roaring Fork</div>
+					<div class="candidate-job">Bartender @ Roaring Fork</div>
 				</div>
 				<div class="candidate-referral">
 					<div class="date new">Wednesday</div>
@@ -62,12 +64,49 @@
 					<div class="candidate-job">Bartender @ McDonalds</div>
 				</div>
 				<div class="candidate-referral">
-					<div class="date">March 1</div>
-					<div class="referred-by">Sunday</div>
+					<div class="date new">March 1</div>
+					<div class="referred-by">
+						<div class="picture"><img src="images/profiles/Amy.jpg"/></div>
+						<div class="name">Heather A.</div>
+					</div>
 				</div>
 				<div class="candidate-archive"></div>
 				<div class="candidate-message"></div>
 				<div class="candidate-rating four"></div>
+				<div class="candidate-endorse">0</div>
+				<div class="candidate-network"><span>77</span> / 500</div>
+			</li>
+			<li class="view-profile">
+				<input class="candidate-select" type="checkbox"/>
+				<div class="candidate-picture"></div>
+				<div class="candidate-info">
+					<div class="candidate-name">Andrew Kipswich</div>
+					<div class="candidate-job">Bartender @ Roaring Fork</div>
+				</div>
+				<div class="candidate-referral">
+					<div class="date">Wednesday</div>
+				</div>
+				<div class="candidate-archive"></div>
+				<div class="candidate-message"></div>
+				<div class="candidate-rating"></div>
+				<div class="candidate-endorse">0</div>
+				<div class="candidate-network"><span>77</span> / 500</div>
+			</li>
+			<li class="view-profile">
+				<input class="candidate-select" type="checkbox"/>
+				<div class="candidate-picture">
+					<img src="images/profiles/Amy.jpg"/>
+				</div>
+				<div class="candidate-info">
+					<div class="candidate-name">Heather Amber</div>
+					<div class="candidate-job">Bartender @ McDonalds</div>
+				</div>
+				<div class="candidate-referral">
+					<div class="date">Wednesday</div>
+				</div>
+				<div class="candidate-archive"></div>
+				<div class="candidate-message"></div>
+				<div class="candidate-rating five"></div>
 				<div class="candidate-endorse">0</div>
 				<div class="candidate-network"><span>77</span> / 500</div>
 			</li>

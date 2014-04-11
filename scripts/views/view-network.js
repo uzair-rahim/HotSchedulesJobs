@@ -14,7 +14,9 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #profile" : "profile"
+			"click .view-profile"		: "profile",
+			"click .candidate-select"	: "networkSelect",
+			"click .candidate-message"	: "networkMessage"
 		},
 
 		initialize : function(){
@@ -26,9 +28,20 @@ define([
 			App.router.navigate("profile/network/network", true)
 		},
 
+		networkSelect : function(event){
+			var count = $(".candidate-select:checked").length;
+			event.stopPropagation();
+		},
+
+		networkMessage : function(event){
+			alert("Send Message");
+			event.stopPropagation();
+		},
+
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
+				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;
 		}
 		

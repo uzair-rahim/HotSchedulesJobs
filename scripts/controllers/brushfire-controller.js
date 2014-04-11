@@ -69,6 +69,9 @@ define([
 			},
 
 			jobs : function(){
+				App.clearTrail();
+				App.pushTrail("jobs");
+
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
@@ -80,6 +83,9 @@ define([
 			},
 
 			candidates : function(){
+				App.clearTrail();
+				App.pushTrail("candidates");
+
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
@@ -91,6 +97,8 @@ define([
 			},
 
 			candidatesByJob : function(){
+				App.pushTrail("candidates");
+
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
@@ -101,18 +109,10 @@ define([
 				layout.body.show(view);
 			},
 
-			profile : function(id, selection){
-				var layout = new LayoutApp();
-				App.body.show(layout);
-
-				var nav = new ViewNav({tab : selection});
-				var view = new ViewProfile();
-
-				layout.nav.show(nav);
-				layout.body.show(view);
-			},
-
 			network : function(){
+				App.clearTrail();
+				App.pushTrail("network");
+
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
@@ -124,6 +124,9 @@ define([
 			},
 
 			messages : function(){
+				App.clearTrail();
+				App.pushTrail("messages");
+
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
@@ -135,11 +138,28 @@ define([
 			},
 
 			settings : function(){
+				App.clearTrail();
+				App.pushTrail("settings");
+
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
 				var nav = new ViewNav();
 				var view = new ViewSettings();
+
+				layout.nav.show(nav);
+				layout.body.show(view);
+			},
+
+			profile : function(id, selection){
+
+				App.pushTrail("profile");
+
+				var layout = new LayoutApp();
+				App.body.show(layout);
+
+				var nav = new ViewNav({tab : selection});
+				var view = new ViewProfile();
 
 				layout.nav.show(nav);
 				layout.body.show(view);

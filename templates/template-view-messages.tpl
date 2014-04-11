@@ -1,6 +1,8 @@
 <div id="sub-nav">
 	<ul id="breadcrumb">
-		<li>Messages</li>
+		{{#each breadcrumb}}
+			<li>{{this}}</li>
+		{{/each}}
 	</ul>
 </div>
 <!--

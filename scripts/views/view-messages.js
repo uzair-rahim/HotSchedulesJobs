@@ -29,6 +29,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
+				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;
 		}
 		

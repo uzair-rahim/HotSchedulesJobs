@@ -16,6 +16,7 @@ define([
 		var App = new Marionette.Application();
 		
 			App.Language = new Object();
+			App.Breadcrumb = new Array();
 
 		// Add regions to the App
 		App.addRegions({
@@ -106,6 +107,31 @@ define([
 				}
 
 			});
+		}
+
+		// Get Trail length
+		App.getTrail = function(){
+			return App.Breadcrumb;
+		}
+
+		// Push trail to Breadcrumb
+		App.pushTrail = function(trail){
+			App.Breadcrumb.push(trail);
+		}
+
+		// Pop trail from Breadcrumb
+		App.popTrail = function(){
+			App.Breadcrumb.pop();
+		}
+
+		// Clear trail
+		App.clearTrail = function(){
+			App.Breadcrumb.length = 0;
+		}
+
+		// Get Trail length
+		App.getTrailLength = function(){
+			return App.Breadcrumb.length;
 		}
 
 		return App;

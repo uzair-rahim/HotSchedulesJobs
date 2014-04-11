@@ -56,15 +56,13 @@ define([
 		},
 
 		candidates : function(event){
-			//alert("View All Candidates");
 			event.stopPropagation();
 			App.router.navigate("candidates/job", true);
 		},
 
 		profile : function(event){
-			alert("View Candidate's Profile");
 			event.stopPropagation();
-			//App.router.navigate("profile/jobs/jobs", true);
+			App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		candidateSelect : function(event){
@@ -90,6 +88,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
+				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;
 		}
 		

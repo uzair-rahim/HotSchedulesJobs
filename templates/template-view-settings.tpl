@@ -1,5 +1,7 @@
 <div id="sub-nav">
 	<ul id="breadcrumb">
-		<li>Settings</li>
+		{{#each breadcrumb}}
+			<li>{{this}}</li>
+		{{/each}}
 	</ul>
 </div>

@@ -14,32 +14,60 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #profile" : "profile",
-			"click #back"	 : "back"
+			"click #breadcrumb li" 		: "back",
+			"click #send-message"		: "sendMessage",
+			"click .view-profile"		: "profile",
+			"click .candidate-select"	: "candidateSelect",
+			"click .candidate-message"	: "candidateMessage",
+			"click .candidate-archive"	: "candidateArchive"
 		},
 
-		initialize : function(options){
+		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Candidates view initialized...");
 		},
 
-		onShow : function(){
-			if(typeof this.options.mode !== "undefined"){
-				$("#breadcrumb").prepend("<li id='back'>Job</li>");
+		back : function(event){
+			var index = $(event.target).index();
+			var goBack = (index+1) - App.getTrailLength();
+
+			if(goBack !== 0){
+				window.history.go(goBack);
 			}
 		},
 
-		back : function(){
-			window.history.back();
+		sendMessage : function(){
+			alert("Send a Message");
 		},
 
 		profile : function(){
 			App.router.navigate("profile/candidates/candidates", true);
 		},
 
+		candidateSelect : function(event){
+			var count = $(".candidate-select:checked").length;
+			if(count > 0){
+				$("#archive-candidates").css("display", "block");
+			}else{
+				$("#archive-candidates").css("display", "none");
+			}
+			event.stopPropagation();
+		},
+
+		candidateMessage : function(event){
+			alert("Send Message");
+			event.stopPropagation();
+		},
+
+		candidateArchive : function(event){
+			alert("Archive Candidate");
+			event.stopPropagation();
+		},
+
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
+				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;
 		}
 		

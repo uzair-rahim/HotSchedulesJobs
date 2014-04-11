@@ -10,6 +10,62 @@
 	<button id="archive-candidates">Archive Candidates</button>
 </div>
 <ul id="job-list" class="grid-list">
+	{{#each jobs}}
+		<li>
+			<div class="job-info">
+				<div class="job-name {{hasNewCandidates this}}">{{jobName}}</div>
+				<div class="job-shift">Sun - Thu: Lunch and Dinner</div>
+			</div>
+			<div class="candidates-info">
+				{{#if_not_eq this.candidates.length 0}}
+					<ul class="candidates-list">
+						{{#each this.candidates}}
+							<li class="{{#if_eq seen false}}new{{/if_eq}}"></li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<div class="more">No Candidates</div>
+				{{/if_not_eq}}
+			</div>
+			<div class="share-info">0 shares</div>
+			<div class="posted-info {{hasNewCandidates this}}">Created {{dateConverter created}}</div>
+			<div class="job-actions">
+				<button>Posted</button>
+				<button class="edit-job">Edit</button>
+			</div>
+			<div class="count {{hasNewCandidates this}}">{{this.candidates.length}}</div>
+			{{#if_not_eq this.candidates.length 0}}
+				<ul class="grid-list sub">
+					{{#each this.candidates}}
+						<li class="view-profile">
+							<input class="candidate-select" type="checkbox"/>
+							<div class="candidate-picture"></div>
+							<div class="candidate-info">
+								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
+								<div class="candidate-job">Not Available</div>
+							</div>
+							<div class="candidate-referral">
+								<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>
+								<div class="referred-by">
+									<div class="picture"></div>
+									<div class="name">Not Available</div>
+								</div>
+							</div>
+							<div class="candidate-archive"></div>
+							<div class="candidate-message"></div>
+							<div class="candidate-rating"></div>
+							<div class="candidate-endorse">0</div>
+							<div class="candidate-network"><span>0</span> / 0</div>
+						</li>
+					{{/each}}
+				</ul>
+			{{/if_not_eq}}
+		</li>
+	{{/each}}
+</ul>
+
+<!--
+<ul id="job-list" class="grid-list">
 	<li>
 		<div class="job-info">
 			<div class="job-name new">Bartender</div>
@@ -19,6 +75,8 @@
 			<ul class="candidates-list">
 				<li class="new"><img src="images/profiles/Christi.jpg"/></li>
 				<li class="new"><img src="images/profiles/Jake.jpg"/></li>
+				<li class="new"></li>
+				<li class="new"></li>
 				<li class="new"></li>
 				<li class="new"><img src="images/profiles/Amy.jpg"/></li>
 			</ul>
@@ -30,7 +88,7 @@
 			<button>Posted</button>
 			<button class="edit-job">Edit</button>
 		</div>
-		<div class="new-info">9</div>
+		<div class="count">9</div>
 		<ul class="grid-list sub">
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
@@ -116,9 +174,6 @@
 		</ul>
 	</li>
 
-
-
-
 	<li>
 		<div class="job-info">
 			<div class="job-name new">Hostess</div>
@@ -137,7 +192,7 @@
 			<button>Posted</button>
 			<button class="edit-job">Edit</button>
 		</div>
-		<div class="new-info">3</div>
+		<div class="count">3</div>
 		<ul class="grid-list sub">
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
@@ -199,85 +254,6 @@
 		</ul>
 	</li>
 
-
-	<li>
-		<div class="job-info">
-			<div class="job-name">Cook</div>
-			<div class="job-shift">Sun - Thu: Lunch and Dinner</div>
-		</div>
-		<div class="candidates-info">
-			<ul class="candidates-list">
-				<li class="new"></li>
-				<li class="new"><img src="images/profiles/Brittney.jpg"/></li>
-				<li><img src="images/profiles/Lisa.jpg"/></li>
-				<li><img src="images/profiles/Kim.jpg"/></li>
-			</ul>
-			<div class="more">+ 2 More</div>
-		</div>
-		<div class="share-info">2 shares</div>
-		<div class="posted-info">Posted Monday</div>
-		<div class="job-actions">
-			<button>Posted</button>
-			<button class="edit-job">Edit</button>
-		</div>
-	</li>
-
-
-
-	<li>
-		<div class="job-info">
-			<div class="job-name">Dishwasher</div>
-			<div class="job-shift">Mon - Fri: Breakfast, Lunch, and Dinner</div>
-		</div>
-		<div class="candidates-info">
-			<div class="more">No Candidates</div>
-		</div>
-		<div class="share-info">0 shares</div>
-		<div class="posted-info">Posted 3/24/2014</div>
-		<div class="job-actions">
-			<button>Posted</button>
-			<button class="edit-job">Edit</button>
-		</div>
-	</li>
-
-
-
-	<li>
-		<div class="job-info">
-			<div class="job-name">Server</div>
-			<div class="job-shift">Mon - Fri: Breakfast, Lunch, and Dinner</div>
-		</div>
-		<div class="candidates-info">
-			<div class="more">No Candidates</div>
-		</div>
-		<div class="share-info">0 shares</div>
-		<div class="posted-info">Posted 3/24/2014</div>
-		<div class="job-actions">
-			<button>Posted</button>
-			<button class="edit-job">Edit</button>
-		</div>
-	</li>
-
-
-
-	<li>
-		<div class="job-info">
-			<div class="job-name">Busser</div>
-			<div class="job-shift">Mon - Fri: Breakfast, Lunch, and Dinner</div>
-		</div>
-		<div class="candidates-info">
-			<div class="more">No Candidates</div>
-		</div>
-		<div class="share-info">0 shares</div>
-		<div class="posted-info">Posted 3/24/2014</div>
-		<div class="job-actions">
-			<button>Posted</button>
-			<button class="edit-job">Edit</button>
-		</div>
-	</li>
-
-
-
 	<li>
 		<div class="job-info">
 			<div class="job-name">Driver</div>
@@ -293,7 +269,6 @@
 			<button class="edit-job">Edit</button>
 		</div>
 	</li>
-
-
-
+	
 </ul>
+-->

@@ -11,6 +11,13 @@
 	<button id="archive-candidates">Archive Candidates</button>
 </div>
 
+{{#each jobs}}
+	{{#if_gt this.candidates.length 0}}
+		<div class="grid-list-head">{{jobName}}</div>
+	{{/if_gt}}
+{{/each}}
+
+<!--
 <div class="grid-list-head">Cook</div>
 <ul id="candidates-list" class="grid-list">
 	<li class="view-profile">
@@ -118,3 +125,4 @@
 	</li>
 
 </ul>
+-->

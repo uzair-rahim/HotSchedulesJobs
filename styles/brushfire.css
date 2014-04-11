@@ -370,8 +370,9 @@ ul.grid-list li .candidates-info{
 ul.grid-list li .candidates-info .candidates-list{
 	display: block;
 	float: left;
-
+	width: 180px;
 	margin: 0 0 0 5px;
+	overflow: hidden;
 }
 
 ul.grid-list li .candidates-info .candidates-list li{
@@ -752,14 +753,14 @@ ul.grid-list li .candidate-network span{
 	}
 }
 
-ul.grid-list li .new-info{
+ul.grid-list li .count{
 	display: none;
 	float: right;
 	margin: 14px 0;
 	min-width: 20px;
 	height: 20px;
 	line-height: 20px;
-	color: #3e92ce;
+	color: #888888;
 	font-size: 12px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -767,11 +768,16 @@ ul.grid-list li .new-info{
 	border-radius: 20px;
 	background-color: #fafbfc;
 	text-align: center;
+	border: 1px solid #bbbbbb;
+}
+
+ul.grid-list li .count.new{
+	color: #3e92ce;
 	border: 1px solid #3e92ce;
 }
 
 @media screen and (max-width: 550px){
-	ul.grid-list li .new-info{
+	ul.grid-list li .count{
 		display: block;
 	}
 }

@@ -95,18 +95,18 @@ define([
 
 			var ln = navigator.language;
 			var model = new ModelLanguage({language : ln});
-			model.fetch({
-				success : function(response){
-					console.log("Language pack successfully loaded...");
-					App.Language = response.attributes.items;
-					App.startApp();
-				},
+				model.fetch({
+					success : function(response){
+						console.log("Language pack successfully loaded...");
+						App.Language = response.attributes.items;
+						App.startApp();
+					},
 
-				error : function(){
-					console.log("Error loading language pack...");
-				}
+					error : function(){
+						console.log("Error loading language pack...");
+					}
 
-			});
+				});
 		}
 
 		// Get Trail length

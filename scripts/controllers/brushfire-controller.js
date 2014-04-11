@@ -16,9 +16,11 @@ define([
 		"scripts/views/view-profile",
 		"scripts/views/view-network",
 		"scripts/views/view-messages",
-		"scripts/views/view-settings"
+		"scripts/views/view-settings",
+		"scripts/models/model-jobtypes",
+		"scripts/collections/collection-jobs"
 	],
-	function($, App, Utils, Marionette, LayoutPortal, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings){
+	function($, App, Utils, Marionette, LayoutPortal, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -76,10 +78,44 @@ define([
 				App.body.show(layout);
 
 				var nav = new ViewNav({tab : "jobs"});
-				var view = new ViewJobs();
 
-				layout.nav.show(nav);
-				layout.body.show(view);
+				var jobtypes = new ModelJobTypes();
+				var jobs = new CollectionJobs();
+				var models = new Object();
+
+				$.when(
+					jobtypes.fetch({
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(jobtypesResponse){
+							console.log("Job Types fetched successfully...");
+							models.jobtypes = jobtypesResponse.attributes;
+						},
+						error : function(){
+							console.log("Error fetching Job Types...");
+						}
+					}),
+					jobs.fetch({
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(collection, jobsResponse){
+							console.log("Jobs fetched successfully...");
+							models.jobs = jobsResponse;
+						},
+						error : function(){
+							console.log("Error fetching Jobs...");
+						}
+					})
+
+				).then(function(){
+					var view = new ViewJobs({model : models});
+						layout.nav.show(nav);
+						layout.body.show(view);
+				});
+
+				
 			},
 
 			candidates : function(){
@@ -90,10 +126,44 @@ define([
 				App.body.show(layout);
 
 				var nav = new ViewNav({tab : "candidates"});
-				var view = new ViewCandidates();
 
-				layout.nav.show(nav);
-				layout.body.show(view);
+				var jobtypes = new ModelJobTypes();
+				var jobs = new CollectionJobs();
+				var models = new Object();
+
+				$.when(
+					jobtypes.fetch({
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(jobtypesResponse){
+							console.log("Job Types fetched successfully...");
+							models.jobtypes = jobtypesResponse.attributes;
+						},
+						error : function(){
+							console.log("Error fetching Job Types...");
+						}
+					}),
+					jobs.fetch({
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(collection, jobsResponse){
+							console.log("Jobs fetched successfully...");
+							models.jobs = jobsResponse;
+						},
+						error : function(){
+							console.log("Error fetching Jobs...");
+						}
+					})
+
+				).then(function(){
+					var view = new ViewJobs({model : models});
+					var view = new ViewCandidates({model : models});
+						layout.nav.show(nav);
+						layout.body.show(view);
+				});
+
 			},
 
 			candidatesByJob : function(){

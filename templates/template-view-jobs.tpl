@@ -58,8 +58,12 @@
 							<div class="candidate-network"><span>0</span> / 0</div>
 						</li>
 					{{/each}}
+					<li class="foot">
+						<a class="view-candidates" id="{{../guid}}">View All Candidates</a>
+					</li>
 				</ul>
 			{{/if_not_eq}}
+			<div class="edit-mode"></div>
 		</li>
 	{{/each}}
 </ul>

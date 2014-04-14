@@ -158,7 +158,6 @@ define([
 					})
 
 				).then(function(){
-					var view = new ViewJobs({model : models});
 					var view = new ViewCandidates({model : models});
 						layout.nav.show(nav);
 						layout.body.show(view);
@@ -166,17 +165,50 @@ define([
 
 			},
 
-			candidatesByJob : function(){
+			candidatesByJob : function(id){
 				App.pushTrail("candidates");
 
 				var layout = new LayoutApp();
 				App.body.show(layout);
 
 				var nav = new ViewNav({tab : "jobs"});
-				var view = new ViewCandidates({mode : "child"});
 
-				layout.nav.show(nav);
-				layout.body.show(view);
+				var jobtypes = new ModelJobTypes();
+				var jobs = new CollectionJobs({guid : id});
+				var models = new Object();
+
+				$.when(
+					jobtypes.fetch({
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(jobtypesResponse){
+							console.log("Job Types fetched successfully...");
+							models.jobtypes = jobtypesResponse.attributes;
+						},
+						error : function(){
+							console.log("Error fetching Job Types...");
+						}
+					}),
+					jobs.fetch({
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(collection, jobsResponse){
+							console.log("Jobs fetched successfully...");
+							models.jobs = jobsResponse;
+						},
+						error : function(){
+							console.log("Error fetching Jobs...");
+						}
+					})
+
+				).then(function(){
+					var view = new ViewCandidates({model : models, mode : "child"});
+						layout.nav.show(nav);
+						layout.body.show(view);
+				});
+
 			},
 
 			network : function(){

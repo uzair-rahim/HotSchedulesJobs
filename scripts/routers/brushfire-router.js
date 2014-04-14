@@ -16,7 +16,7 @@ define([
 				"accountVerification"	: "accountVerification",
 				"jobs"					: "jobs",
 				"candidates"			: "candidates",
-				"candidates/job"		: "candidatesByJob",
+				"candidates/job/:guid"	: "candidatesByJob",
 				"profile/:id/:tab"		: "profile",
 				"network"				: "network",
 				"messages"				: "messages",

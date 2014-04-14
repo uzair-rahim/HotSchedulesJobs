@@ -12,8 +12,32 @@
 </div>
 
 {{#each jobs}}
-	{{#if_gt this.candidates.length 0}}
-		<div class="grid-list-head">{{jobName}}</div>
+	{{#if_gt candidates.length 0}}
+		<div class="grid-list-head">{{jobName}} ({{candidates.length}})</div>
+		<ul id="candidates-list" class="grid-list">
+		{{#each candidates}}
+			<li class="view-profile">
+				<input class="candidate-select" type="checkbox"/>
+				<div class="candidate-picture"></div>
+				<div class="candidate-info">
+					<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
+					<div class="candidate-job">Not Available</div>
+				</div>
+				<div class="candidate-referral">
+					<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>
+					<div class="referred-by">
+						<div class="picture"></div>
+						<div class="name">Not Available</div>
+					</div>
+				</div>
+				<div class="candidate-archive"></div>
+				<div class="candidate-message"></div>
+				<div class="candidate-rating"></div>
+				<div class="candidate-endorse">0</div>
+				<div class="candidate-network"><span>0</span> / 0</div>
+			</li>
+		{{/each}}
+		</ul>
 	{{/if_gt}}
 {{/each}}
 

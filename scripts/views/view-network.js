@@ -24,8 +24,9 @@ define([
 			console.log("Network view initialized...");
 		},
 
-		profile : function(){
-			App.router.navigate("profile/network/network", true)
+		profile : function(event){
+			event.stopPropagation();
+			//App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		networkSelect : function(event){

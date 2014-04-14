@@ -57,12 +57,13 @@ define([
 
 		candidates : function(event){
 			event.stopPropagation();
-			App.router.navigate("candidates/job", true);
+			var guid = $(event.target).attr("id");
+			App.router.navigate("candidates/job/"+guid, true);
 		},
 
 		profile : function(event){
 			event.stopPropagation();
-			App.router.navigate("profile/jobs/jobs", true);
+			//App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		candidateSelect : function(event){

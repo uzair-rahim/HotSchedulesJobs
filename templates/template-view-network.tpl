@@ -10,7 +10,7 @@
 	<button id="send-message" class="primary">Send Message</button>
 </div>
 
-<div class="grid-list-head">Recent Applicants</div>
+<div class="grid-list-head">People Following You Business (3)</div>
 <ul id="candidates-list" class="grid-list">
 	<li class="view-profile">
 		<input class="candidate-select" type="checkbox"/>

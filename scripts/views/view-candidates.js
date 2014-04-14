@@ -40,8 +40,9 @@ define([
 			alert("Send a Message");
 		},
 
-		profile : function(){
-			App.router.navigate("profile/candidates/candidates", true);
+		profile : function(event){
+			event.stopPropagation();
+			//App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		candidateSelect : function(event){
@@ -70,6 +71,8 @@ define([
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.jobs = this.model.jobs;
 				jsonObject.breadcrumb = App.getTrail();
+
+				console.log(jsonObject);
 			return jsonObject;
 		}
 		

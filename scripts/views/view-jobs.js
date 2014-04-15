@@ -13,10 +13,12 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
+		editable : true,
 		events : {
 			"click #add-new-job"		: "addNewJob",
 			"click #job-list > li"		: "expandJob",
 			"click .edit-job"			: "editJob",
+			"click .posted"				: "posted",
 			"click .view-candidates" 	: "candidates",
 			"click .view-profile"		: "profile",
 			"click .candidate-select"	: "candidateSelect",
@@ -35,6 +37,12 @@ define([
 
 		editJob : function(event){
 			alert("Edit Job");
+			alert(this.editable);
+			event.stopPropagation();
+		},
+
+		posted : function(event){
+			alert("Posted");
 			event.stopPropagation();
 		},
 
@@ -43,14 +51,18 @@ define([
 			
 			$(".candidate-select").prop("checked", false);
 			$("#archive-candidates").css("display", "none");
+			$(".grid-list.sub").removeClass("show");
 
 			if($(item).hasClass("expanded")){
 				$("#job-list > li").removeClass("expanded");
 				$("#job-list > li").removeClass("faded");
+				this.editable = true;
 			}else{
 				$("#job-list > li").removeClass("expanded");
 				$("#job-list > li").addClass("faded");
 				$(item).addClass("expanded");
+				$(item).find(".grid-list.sub").addClass("show");
+				this.editable = false;
 			}
 			
 		},

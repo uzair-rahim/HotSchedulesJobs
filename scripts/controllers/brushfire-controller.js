@@ -176,6 +176,7 @@ define([
 				var jobtypes = new ModelJobTypes();
 				var jobs = new CollectionJobs({guid : id});
 				var models = new Object();
+					models.jobs = new Object();
 
 				$.when(
 					jobtypes.fetch({
@@ -196,7 +197,7 @@ define([
 						},
 						success : function(collection, jobsResponse){
 							console.log("Jobs fetched successfully...");
-							models.jobs = jobsResponse;
+							models.jobs.jobs = jobsResponse;
 						},
 						error : function(){
 							console.log("Error fetching Jobs...");

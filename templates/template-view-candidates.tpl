@@ -18,7 +18,11 @@
 		{{#each candidates}}
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
-				<div class="candidate-picture"></div>
+				<div class="candidate-picture">
+					{{#hasPhoto this.user.photo.url}}
+						<img src="{{this.user.photo.url}}"/>
+					{{/hasPhoto}}
+				</div>
 				<div class="candidate-info">
 					<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 					<div class="candidate-job">Not Available</div>

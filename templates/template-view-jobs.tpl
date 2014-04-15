@@ -20,7 +20,11 @@
 				{{#if_not_eq this.candidates.length 0}}
 					<ul class="candidates-list">
 						{{#each this.candidates}}
-							<li class="{{#if_eq seen false}}new{{/if_eq}}"></li>
+							<li class="{{#if_eq seen false}}new{{/if_eq}}">
+								{{#hasPhoto this.user.photo.url}}
+									<img src="{{this.user.photo.url}}"/>
+								{{/hasPhoto}}
+							</li>
 						{{/each}}
 					</ul>
 				{{else}}
@@ -30,7 +34,7 @@
 			<div class="share-info">0 shares</div>
 			<div class="posted-info {{hasNewCandidates this}}">Created {{dateConverter created}}</div>
 			<div class="job-actions">
-				<button>Posted</button>
+				<button class="posted">Posted</button>
 				<button class="edit-job">Edit</button>
 			</div>
 			<div class="count {{hasNewCandidates this}}">{{this.candidates.length}}</div>
@@ -39,7 +43,11 @@
 					{{#each this.candidates}}
 						<li class="view-profile">
 							<input class="candidate-select" type="checkbox"/>
-							<div class="candidate-picture"></div>
+							<div class="candidate-picture">
+								{{#hasPhoto this.user.photo.url}}
+									<img src="{{this.user.photo.url}}"/>
+								{{/hasPhoto}}
+							</div>
 							<div class="candidate-info">
 								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 								<div class="candidate-job">Not Available</div>

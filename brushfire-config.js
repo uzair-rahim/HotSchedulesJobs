@@ -4,6 +4,7 @@ require.config({
 		utils			: "brushfire-utils",
 		modernizr		: "libraries/thirdparty/modernizr.2.6.2",
 		jquery			: "libraries/thirdparty/jquery.1.10",
+		jqueryui		: "libraries/thirdparty/jquery.ui.1.10",
 		jquerycookie	: "libraries/thirdparty/jquery.cookie",
 		jquerydatatable	: "libraries/thirdparty/jquery.dataTables.min",
 		vldt			: "libraries/thirdparty/vldt",

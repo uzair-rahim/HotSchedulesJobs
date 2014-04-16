@@ -71,7 +71,7 @@
 					</li>
 				</ul>
 			{{/if_not_eq}}
-			<div class="edit-mode"></div>
+			<div class="edit-mode">Edit Mode</div>
 		</li>
 	{{/each}}
 </ul>

@@ -13,7 +13,6 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
-		editable : true,
 		events : {
 			"click #add-new-job"		: "addNewJob",
 			"click #job-list > li"		: "expandJob",
@@ -37,7 +36,6 @@ define([
 
 		editJob : function(event){
 			alert("Edit Job");
-			alert(this.editable);
 			event.stopPropagation();
 		},
 
@@ -47,24 +45,28 @@ define([
 		},
 
 		expandJob : function(event){
-			var item = $(event.target).closest("#job-list > li");
-			
-			$(".candidate-select").prop("checked", false);
-			$("#archive-candidates").css("display", "none");
-			$(".grid-list.sub").removeClass("show");
+			var all = $("#job-list > li");
+			var allCandidates = $("#job-list > li .grid-list.sub")
+			var li = $(event.target).closest("#job-list > li");
+			var edit = $(li).find(".edit-mode");
+			var candidates = $(li).find(".grid-list.sub");
 
-			if($(item).hasClass("expanded")){
-				$("#job-list > li").removeClass("expanded");
-				$("#job-list > li").removeClass("faded");
-				this.editable = true;
-			}else{
-				$("#job-list > li").removeClass("expanded");
-				$("#job-list > li").addClass("faded");
-				$(item).addClass("expanded");
-				$(item).find(".grid-list.sub").addClass("show");
-				this.editable = false;
+			var isEditExpanded = $(edit).hasClass("show");
+			var isCandidatesListExpanded = $(candidates).hasClass("show");
+
+			$(all).removeClass("expanded");
+			$(allCandidates).removeClass("show");
+
+			if(!isEditExpanded){
+				if(!isCandidatesListExpanded){
+					$(candidates).addClass("show");
+					$(li).addClass("expanded");
+				}else{
+					$(candidates).removeClass("show");
+					$(li).removeClass("expanded");
+				}
 			}
-			
+
 		},
 
 		candidates : function(event){

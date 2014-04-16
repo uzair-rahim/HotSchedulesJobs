@@ -1,5 +1,6 @@
 define([
 		"jquery",
+		"jqueryui",
 		"jquerycookie",
 		"app",
 		"utils",
@@ -7,7 +8,7 @@ define([
 		"hbs!templates/template-view-login",
 		"scripts/models/model-authenticate"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelAuthenticate){
+	function($, jqueryUI, Cookie, App, Utils, Marionette, Template, ModelAuthenticate){
 	"use strict";
 
 	var ViewLogin = Marionette.ItemView.extend({
@@ -48,6 +49,8 @@ define([
 
 					error : function(){
 						console.log("Error authenticating user...");
+						$(".login-form-container").effect("shake");
+						$("#toast").text("Invalid email address or password please try again").addClass("show");
 					}
 				});
 		},

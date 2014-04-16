@@ -17,6 +17,8 @@ define([
 			"click #add-new-job"		: "addNewJob",
 			"click #job-list > li"		: "expandJob",
 			"click .edit-job"			: "editJob",
+			"click .save-job"			: "saveJob",
+			"click .cancel-edit"		: "cancelEdit",
 			"click .posted"				: "posted",
 			"click .view-candidates" 	: "candidates",
 			"click .view-profile"		: "profile",
@@ -35,7 +37,46 @@ define([
 		},
 
 		editJob : function(event){
-			alert("Edit Job");
+			var all = $("#job-list > li");
+			var allEdits = $("#job-list > li .edit-mode");
+			var allCandidates = $("#job-list > li .grid-list.sub")
+			var li = $(event.target).closest("#job-list > li");
+			var edit = $(li).find(".edit-mode");
+			var candidates = $(li).find(".grid-list.sub");
+
+			var isEditExpanded = $(edit).hasClass("show");
+			var isCandidatesListExpanded = $(candidates).hasClass("show");
+
+			if(!isCandidatesListExpanded){
+
+				$(all).removeClass("expanded");
+				$(allEdits).removeClass("show");
+				$(allCandidates).removeClass("show");
+
+				if(!isEditExpanded){
+					$(edit).addClass("show");
+					$(li).addClass("expanded");
+				}else{
+					$(edit).removeClass("show");
+					$(li).removeClass("expanded");
+				}
+			}
+
+			event.stopPropagation();
+		},
+
+		cancelEdit : function(event){
+			
+			var all = $("#job-list > li");
+			var allEdits = $("#job-list > li .edit-mode");
+
+			$(all).removeClass("expanded");
+			$(allEdits).removeClass("show");
+
+			event.stopPropagation();
+		},
+
+		saveJob : function(event){
 			event.stopPropagation();
 		},
 
@@ -46,7 +87,8 @@ define([
 
 		expandJob : function(event){
 			var all = $("#job-list > li");
-			var allCandidates = $("#job-list > li .grid-list.sub")
+			var allEdits = $("#job-list > li .edit-mode");
+			var allCandidates = $("#job-list > li .grid-list.sub");
 			var li = $(event.target).closest("#job-list > li");
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
@@ -54,10 +96,12 @@ define([
 			var isEditExpanded = $(edit).hasClass("show");
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
 
-			$(all).removeClass("expanded");
-			$(allCandidates).removeClass("show");
-
 			if(!isEditExpanded){
+
+				$(all).removeClass("expanded");
+				$(allEdits).removeClass("show");
+				$(allCandidates).removeClass("show");
+
 				if(!isCandidatesListExpanded){
 					$(candidates).addClass("show");
 					$(li).addClass("expanded");

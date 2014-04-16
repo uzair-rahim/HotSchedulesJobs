@@ -59,45 +59,6 @@ button.primary:hover{
 
 
 
-
-#toast{
-	position: relative;
-	display: block;
-	float: left;
-	width: 100%;
-	height: 30px;
-	top: -50px;
-	line-height: 30px;
-	text-align: center;
-	font-weight: lighter;
-	font-size: 16px;
-	color: #e6e6e6;
-	background-color: rgba(0,0,0,0.8);
-	white-space: nowrap;
-	overflow: hidden;
-
-	-webkit-transition: top 500ms;
-    -moz-transition: top 500ms;
-    -o-transition: top 500ms;
-    -ms-transition: top 500ms;
-    transition: top 500ms;
-}
-
-#toast.show{
-	top: 0;
-}
-
-@media screen and (max-width: 640px){
-	#toast{
-		font-size: 14px;
-	}
-}
-
-
-
-
-
-
 #app-nav{
 	display: block;
 	float: left;
@@ -277,4 +238,41 @@ button.primary:hover{
 
 #toolbar #archive-candidates{
 	display: none;
+}
+
+
+
+
+
+#toast{
+	position: relative;
+	display: block;
+	float: left;
+	width: 100%;
+	height: 30px;
+	top: -50px;
+	line-height: 30px;
+	text-align: center;
+	font-weight: lighter;
+	font-size: 16px;
+	color: #e6e6e6;
+	background-color: rgba(0,0,0,0.8);
+	white-space: nowrap;
+	overflow: hidden;
+
+	-webkit-transition: top 500ms;
+    -moz-transition: top 500ms;
+    -o-transition: top 500ms;
+    -ms-transition: top 500ms;
+    transition: top 500ms;
+}
+
+#toast.show{
+	top: 0;
+}
+
+@media screen and (max-width: 640px){
+	#toast{
+		font-size: 14px;
+	}
 }

@@ -20,14 +20,23 @@ ul.grid-list{
 }
 
 ul.grid-list.sub{
-	display: none;
+	display: block;
 	width: 100%;
-	margin: 0 0 5px 0;
+	height: 0;
+	margin: 0;
+	opacity: 0;
 	background-color: #ffffff;
+	overflow: hidden;
+	-webkit-transition: all 500ms;
+	   -moz-transition: all 500ms;
+	     -o-transition: all 500ms;
+	        transition: all 500ms;
 }
 
 ul.grid-list.sub.show{
-	display: block;
+	opacity: 1;
+	height: auto;
+	margin: 0 0 5px 0;
 }
 
 ul.grid-list li{
@@ -71,6 +80,82 @@ ul.grid-list li.foot a{
 	font-size: 12px;
 }
 
+ul.grid-list li .edit-mode{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0;
+	width: 100%;
+	height: 0;
+	opacity: 0;
+	border-top: 1px dotted #bbbbbb;
+	background-color: #ffffff;
+	-webkit-transition: all 500ms;
+	   -moz-transition: all 500ms;
+	     -o-transition: all 500ms;
+	        transition: all 500ms;
+}
+
+ul.grid-list li .edit-mode.show{
+	opacity: 1;
+	height: 220px;
+	background-color: #ffffff;
+}
+
+@media screen and (max-width: 1000px){
+	ul.grid-list li .edit-mode.show{
+		height: 390px;
+	}
+}
+
+ul.grid-list li .edit-mode .job-details{
+	display: block;
+	float: left;
+	margin: 10px 0;
+	width: 500px;
+	height: 150px;
+	border-right: 1px dotted #bbbbbb;
+}
+
+ul.grid-list li .edit-mode .job-description{
+	display: block;
+	float: left;
+	margin: 10px 0;
+	width: 500px;
+	height: 150px;
+}
+
+@media screen and (max-width: 1000px){
+
+	ul.grid-list li .edit-mode .job-details{
+		margin: 10px;
+		clear: both;
+		border-right: none;
+		border-bottom: 1px dotted #bbbbbb;
+		width: calc(100% - 20px);
+	}
+
+	ul.grid-list li .edit-mode .job-description{
+		margin: 10px;
+		clear: both;
+		width: calc(100% - 20px);
+	}
+
+}
+
+ul.grid-list li .edit-mode .edit-actions{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	height: 50px;
+	background-color: #f5f5f5;
+	border-top: 1px dotted #bbbbbb;
+}
+
+ul.grid-list li .edit-mode .edit-actions button{
+	margin: 10px 0 0 10px;
+}
 
 
 
@@ -269,29 +354,6 @@ ul.grid-list li .job-actions button{
 		display: none;
 	}
 }
-
-
-
-
-
-
-ul.grid-list li .edit-mode{
-	display: none;
-	float: left;
-	clear: both;
-	width: 100%;
-	height:100%;
-	background-color: #ffffff;
-}
-
-ul.grid-list li .edit-mode.show{
-	display: block;
-}
-
-
-
-
-
 
 ul.grid-list li .candidate-select{
 	display: block;

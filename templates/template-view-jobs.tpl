@@ -71,7 +71,14 @@
 					</li>
 				</ul>
 			{{/if_not_eq}}
-			<div class="edit-mode">Edit Mode</div>
+			<div class="edit-mode">
+				<div class="job-details"></div>
+				<div class="job-description"></div>
+				<div class="edit-actions">
+					<button class="primary save-job">Save</button>
+					<button class="cancel-edit">Cancel</button>
+				</div>
+			</div>
 		</li>
 	{{/each}}
 </ul>

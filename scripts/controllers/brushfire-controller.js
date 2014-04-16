@@ -27,7 +27,13 @@ define([
 
 			session : function(){
 				console.log("App routed to session...");
-				App.router.navigate("login", true);
+
+				if(Utils.CheckSession()){
+					App.router.navigate("jobs", true);	
+				}else{
+					App.router.navigate("login", true);	
+				}
+				
 			},
 
 			login : function(){
@@ -71,201 +77,232 @@ define([
 			},
 
 			jobs : function(){
-				App.clearTrail();
-				App.pushTrail("jobs");
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("jobs");
 
-				var nav = new ViewNav({tab : "jobs"});
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var jobtypes = new ModelJobTypes();
-				var jobs = new CollectionJobs();
-				var models = new Object();
+					var nav = new ViewNav({tab : "jobs"});
 
-				$.when(
-					jobtypes.fetch({
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
-						success : function(jobtypesResponse){
-							console.log("Job Types fetched successfully...");
-							models.jobtypes = jobtypesResponse.attributes;
-						},
-						error : function(){
-							console.log("Error fetching Job Types...");
-						}
-					}),
-					jobs.fetch({
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
-						success : function(collection, jobsResponse){
-							console.log("Jobs fetched successfully...");
-							models.jobs = jobsResponse;
-						},
-						error : function(){
-							console.log("Error fetching Jobs...");
-						}
-					})
+					var jobtypes = new ModelJobTypes();
+					var jobs = new CollectionJobs();
+					var models = new Object();
 
-				).then(function(){
-					var view = new ViewJobs({model : models});
-						layout.nav.show(nav);
-						layout.body.show(view);
-				});
+					$.when(
+						jobtypes.fetch({
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(jobtypesResponse){
+								console.log("Job Types fetched successfully...");
+								models.jobtypes = jobtypesResponse.attributes;
+							},
+							error : function(){
+								console.log("Error fetching Job Types...");
+							}
+						}),
+						jobs.fetch({
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(collection, jobsResponse){
+								console.log("Jobs fetched successfully...");
+								models.jobs = jobsResponse;
+							},
+							error : function(){
+								console.log("Error fetching Jobs...");
+							}
+						})
+
+					).then(function(){
+						var view = new ViewJobs({model : models});
+							layout.nav.show(nav);
+							layout.body.show(view);
+					});	
+				}else{
+					App.router.navigate("login", true);
+				}
 
 				
 			},
 
 			candidates : function(){
-				App.clearTrail();
-				App.pushTrail("candidates");
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("candidates");
 
-				var nav = new ViewNav({tab : "candidates"});
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var jobtypes = new ModelJobTypes();
-				var jobs = new CollectionJobs();
-				var models = new Object();
+					var nav = new ViewNav({tab : "candidates"});
 
-				$.when(
-					jobtypes.fetch({
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
-						success : function(jobtypesResponse){
-							console.log("Job Types fetched successfully...");
-							models.jobtypes = jobtypesResponse.attributes;
-						},
-						error : function(){
-							console.log("Error fetching Job Types...");
-						}
-					}),
-					jobs.fetch({
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
-						success : function(collection, jobsResponse){
-							console.log("Jobs fetched successfully...");
-							models.jobs = jobsResponse;
-						},
-						error : function(){
-							console.log("Error fetching Jobs...");
-						}
-					})
+					var jobtypes = new ModelJobTypes();
+					var jobs = new CollectionJobs();
+					var models = new Object();
 
-				).then(function(){
-					var view = new ViewCandidates({model : models});
-						layout.nav.show(nav);
-						layout.body.show(view);
-				});
+					$.when(
+						jobtypes.fetch({
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(jobtypesResponse){
+								console.log("Job Types fetched successfully...");
+								models.jobtypes = jobtypesResponse.attributes;
+							},
+							error : function(){
+								console.log("Error fetching Job Types...");
+							}
+						}),
+						jobs.fetch({
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(collection, jobsResponse){
+								console.log("Jobs fetched successfully...");
+								models.jobs = jobsResponse;
+							},
+							error : function(){
+								console.log("Error fetching Jobs...");
+							}
+						})
+
+					).then(function(){
+						var view = new ViewCandidates({model : models});
+							layout.nav.show(nav);
+							layout.body.show(view);
+					});
+				}else{
+					App.router.navigate("login", true);
+				}
 
 			},
 
 			candidatesByJob : function(id){
-				App.pushTrail("candidates");
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+				if(Utils.CheckSession()){
+					App.pushTrail("candidates");
 
-				var nav = new ViewNav({tab : "jobs"});
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var jobtypes = new ModelJobTypes();
-				var jobs = new CollectionJobs({guid : id});
-				var models = new Object();
-					models.jobs = new Object();
+					var nav = new ViewNav({tab : "jobs"});
 
-				$.when(
-					jobtypes.fetch({
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
-						success : function(jobtypesResponse){
-							console.log("Job Types fetched successfully...");
-							models.jobtypes = jobtypesResponse.attributes;
-						},
-						error : function(){
-							console.log("Error fetching Job Types...");
-						}
-					}),
-					jobs.fetch({
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
-						success : function(collection, jobsResponse){
-							console.log("Jobs fetched successfully...");
-							models.jobs.jobs = jobsResponse;
-						},
-						error : function(){
-							console.log("Error fetching Jobs...");
-						}
-					})
+					var jobtypes = new ModelJobTypes();
+					var jobs = new CollectionJobs({guid : id});
+					var models = new Object();
+						models.jobs = new Object();
 
-				).then(function(){
-					var view = new ViewCandidates({model : models, mode : "child"});
-						layout.nav.show(nav);
-						layout.body.show(view);
-				});
+					$.when(
+						jobtypes.fetch({
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(jobtypesResponse){
+								console.log("Job Types fetched successfully...");
+								models.jobtypes = jobtypesResponse.attributes;
+							},
+							error : function(){
+								console.log("Error fetching Job Types...");
+							}
+						}),
+						jobs.fetch({
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(collection, jobsResponse){
+								console.log("Jobs fetched successfully...");
+								models.jobs.jobs = jobsResponse;
+							},
+							error : function(){
+								console.log("Error fetching Jobs...");
+							}
+						})
+
+					).then(function(){
+						var view = new ViewCandidates({model : models, mode : "child"});
+							layout.nav.show(nav);
+							layout.body.show(view);
+					});
+
+				}else{
+					App.router.navigate("login", true);
+				}
 
 			},
 
 			network : function(){
-				App.clearTrail();
-				App.pushTrail("network");
+				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("network");
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var nav = new ViewNav({tab : "network"});
-				var view = new ViewNetwork();
+					var nav = new ViewNav({tab : "network"});
+					var view = new ViewNetwork();
 
-				layout.nav.show(nav);
-				layout.body.show(view);
+					layout.nav.show(nav);
+					layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
 			},
 
 			messages : function(){
-				App.clearTrail();
-				App.pushTrail("messages");
+				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("messages");
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var nav = new ViewNav();
-				var view = new ViewMessages();
+					var nav = new ViewNav();
+					var view = new ViewMessages();
 
-				layout.nav.show(nav);
-				layout.body.show(view);
+					layout.nav.show(nav);
+					layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
 			},
 
 			settings : function(){
-				App.clearTrail();
-				App.pushTrail("settings");
+				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("settings");
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var nav = new ViewNav();
-				var view = new ViewSettings();
+					var nav = new ViewNav();
+					var view = new ViewSettings();
 
-				layout.nav.show(nav);
-				layout.body.show(view);
+					layout.nav.show(nav);
+					layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
 			},
 
 			profile : function(id, selection){
+				if(Utils.CheckSession()){
+					App.pushTrail("profile");
 
-				App.pushTrail("profile");
+					var layout = new LayoutApp();
+					App.body.show(layout);
 
-				var layout = new LayoutApp();
-				App.body.show(layout);
+					var nav = new ViewNav({tab : selection});
+					var view = new ViewProfile();
 
-				var nav = new ViewNav({tab : selection});
-				var view = new ViewProfile();
-
-				layout.nav.show(nav);
-				layout.body.show(view);
+					layout.nav.show(nav);
+					layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
 			},
 
 			logout : function(){

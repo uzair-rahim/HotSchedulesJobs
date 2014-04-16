@@ -50,6 +50,7 @@ define([
 			if(!isCandidatesListExpanded){
 
 				$(all).removeClass("expanded");
+				$(all).addClass("faded");
 				$(allEdits).removeClass("show");
 				$(allCandidates).removeClass("show");
 
@@ -59,6 +60,7 @@ define([
 				}else{
 					$(edit).removeClass("show");
 					$(li).removeClass("expanded");
+					$(all).removeClass("faded");
 				}
 			}
 
@@ -71,12 +73,20 @@ define([
 			var allEdits = $("#job-list > li .edit-mode");
 
 			$(all).removeClass("expanded");
+			$(all).removeClass("faded");
 			$(allEdits).removeClass("show");
 
 			event.stopPropagation();
 		},
 
 		saveJob : function(event){
+			var all = $("#job-list > li");
+			var allEdits = $("#job-list > li .edit-mode");
+
+			$(all).removeClass("expanded");
+			$(all).removeClass("faded");
+			$(allEdits).removeClass("show");
+
 			event.stopPropagation();
 		},
 
@@ -99,6 +109,7 @@ define([
 			if(!isEditExpanded){
 
 				$(all).removeClass("expanded");
+				$(all).addClass("faded");
 				$(allEdits).removeClass("show");
 				$(allCandidates).removeClass("show");
 
@@ -108,6 +119,7 @@ define([
 				}else{
 					$(candidates).removeClass("show");
 					$(li).removeClass("expanded");
+					$(all).removeClass("faded");
 				}
 			}
 

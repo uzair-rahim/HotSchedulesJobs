@@ -68,6 +68,7 @@
 					{{/each}}
 					<li class="foot">
 						<a class="view-candidates" id="{{../guid}}">View All Candidates</a>
+						<a class="close-candidates">Close</a>
 					</li>
 				</ul>
 			{{/if_not_eq}}

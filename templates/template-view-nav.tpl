@@ -9,6 +9,3 @@
 	<li id="messages"></li>
 	<li id="settings"></li>
 </ul>
-<!--
-<button id="logout">Logout</button>
--->

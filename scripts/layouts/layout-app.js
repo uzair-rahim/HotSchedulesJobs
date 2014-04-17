@@ -13,7 +13,7 @@ define([
 			className : "app",
 			template : Template,
 			regions : {
-				nav  : "#app-nav",
+				head  : "#app-head",
 				body : "#app-body"
 			},
 			

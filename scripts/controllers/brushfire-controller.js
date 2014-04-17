@@ -3,13 +3,13 @@ define([
         "app",
         "utils",
 		"marionette",
-		"scripts/layouts/layout-portal",
 		"scripts/layouts/layout-app",
 		"scripts/views/view-login",
 		"scripts/views/view-signup",
 		"scripts/views/view-find-business",
 		"scripts/views/view-add-business",
 		"scripts/views/view-account-verification",
+		"scripts/views/view-head",
 		"scripts/views/view-nav",
 		"scripts/views/view-jobs",
 		"scripts/views/view-candidates",
@@ -20,13 +20,55 @@ define([
 		"scripts/models/model-jobtypes",
 		"scripts/collections/collection-jobs"
 	],
-	function($, App, Utils, Marionette, LayoutPortal, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
 
+			layout : null,
+
+			setLayout : function(){
+				console.log("Setting layout...");
+
+				if(this.layout === null){
+					this.layout = new LayoutApp();
+					App.body.show(this.layout);
+				}
+
+				if(Utils.CheckSession()){
+					var nav = new ViewNav();
+					this.layout.head.show(nav);
+				}else{
+					var head = new ViewHead();
+					this.layout.head.show(head);
+				}
+			},
+
+			setHeader : function(checkFor){
+				console.log("Setting header...");
+
+				var currentHead = this.layout.head.currentView.el.className;
+
+				switch(checkFor){
+					case "heading" :
+						if(currentHead !== "heading"){
+							var head = new ViewHead();
+							this.layout.head.show(head);
+						}
+					break;
+					case "navigation" :
+						if(currentHead !== "navigation"){
+							var nav = new ViewNav();
+							this.layout.head.show(nav);
+						}
+					break;
+				}				
+			},
+
 			session : function(){
 				console.log("App routed to session...");
+
+				this.setLayout();
 
 				if(Utils.CheckSession()){
 					App.router.navigate("jobs", true);	
@@ -37,43 +79,43 @@ define([
 			},
 
 			login : function(){
-				var layout = new LayoutPortal();
-				App.body.show(layout);
-
+				this.setLayout();
+				this.setHeader("heading");
+				
 				var view = new ViewLogin();
-				layout.body.show(view);
+				this.layout.body.show(view);
 			},
 
 			signup : function(){
-				var layout = new LayoutPortal();
-				App.body.show(layout);
+				this.setLayout();
+				this.setHeader("heading");
 
 				var view = new ViewSignup();
-				layout.body.show(view);
+				this.layout.body.show(view);
 			},
 
 			findBusiness : function(){
-				var layout = new LayoutPortal();
-				App.body.show(layout);
+				this.setLayout();
+				this.setHeader("heading");
 
 				var view = new ViewFindBusiness();
-				layout.body.show(view);
+				this.layout.body.show(view);
 			},
 
 			addBusiness : function(){
-				var layout = new LayoutPortal();
-				App.body.show(layout);
+				this.setLayout();
+				this.setHeader("heading");
 
 				var view = new ViewAddBusiness();
-				layout.body.show(view);
+				this.layout.body.show(view);
 			},
 
 			accountVerification : function(){
-				var layout = new LayoutPortal();
-				App.body.show(layout);
+				this.setLayout();
+				this.setHeader("heading");
 
 				var view = new ViewAccountVerification();
-				layout.body.show(view);
+				this.layout.body.show(view);
 			},
 
 			jobs : function(){
@@ -82,10 +124,8 @@ define([
 					App.clearTrail();
 					App.pushTrail("jobs");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
-
-					var nav = new ViewNav({tab : "jobs"});
+					this.setLayout();
+					this.setHeader("navigation");
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
@@ -119,8 +159,7 @@ define([
 
 					).then(function(){
 						var view = new ViewJobs({model : models});
-							layout.nav.show(nav);
-							layout.body.show(view);
+							this.layout.body.show(view);
 					});	
 				}else{
 					App.router.navigate("login", true);
@@ -135,10 +174,8 @@ define([
 					App.clearTrail();
 					App.pushTrail("candidates");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
-
-					var nav = new ViewNav({tab : "candidates"});
+					this.setLayout();
+					this.setHeader("navigation");
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
@@ -172,8 +209,7 @@ define([
 
 					).then(function(){
 						var view = new ViewCandidates({model : models});
-							layout.nav.show(nav);
-							layout.body.show(view);
+							this.layout.body.show(view);
 					});
 				}else{
 					App.router.navigate("login", true);
@@ -186,10 +222,8 @@ define([
 				if(Utils.CheckSession()){
 					App.pushTrail("candidates");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
-
-					var nav = new ViewNav({tab : "jobs"});
+					this.setLayout();
+					this.setHeader("navigation");
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs({guid : id});
@@ -224,8 +258,7 @@ define([
 
 					).then(function(){
 						var view = new ViewCandidates({model : models, mode : "child"});
-							layout.nav.show(nav);
-							layout.body.show(view);
+							this.layout.body.show(view);
 					});
 
 				}else{
@@ -235,18 +268,15 @@ define([
 			},
 
 			network : function(){
-				if(Utils.CheckSession()){
+				if(!Utils.CheckSession()){
 					App.clearTrail();
 					App.pushTrail("network");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
+					this.setLayout();
+					this.setHeader("navigation");
 
-					var nav = new ViewNav({tab : "network"});
 					var view = new ViewNetwork();
-
-					layout.nav.show(nav);
-					layout.body.show(view);
+					this.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -257,14 +287,11 @@ define([
 					App.clearTrail();
 					App.pushTrail("messages");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
+					this.setLayout();
+					this.setHeader("navigation");
 
-					var nav = new ViewNav();
 					var view = new ViewMessages();
-
-					layout.nav.show(nav);
-					layout.body.show(view);
+					this.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -275,14 +302,11 @@ define([
 					App.clearTrail();
 					App.pushTrail("settings");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
+					this.setLayout();
+					this.setHeader("navigation");
 
-					var nav = new ViewNav();
 					var view = new ViewSettings();
-
-					layout.nav.show(nav);
-					layout.body.show(view);
+					this.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -292,14 +316,11 @@ define([
 				if(Utils.CheckSession()){
 					App.pushTrail("profile");
 
-					var layout = new LayoutApp();
-					App.body.show(layout);
+					this.setLayout();
+					this.setHeader("navigation");
 
-					var nav = new ViewNav({tab : selection});
 					var view = new ViewProfile();
-
-					layout.nav.show(nav);
-					layout.body.show(view);
+					this.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}

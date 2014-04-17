@@ -1,26 +1,3 @@
-#brushfire{
-	display: block;
-	float: left;
-	clear: both;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-.app{
-	display: block;
-	float: left;
-	clear: both;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-
-
-
-
-
 a{
 	color: #3e92ce;
 	text-decoration: underline;
@@ -59,7 +36,25 @@ button.primary:hover{
 
 
 
-#app-nav{
+#brushfire{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.app{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#app-head{
 	display: block;
 	float: left;
 	clear: both;
@@ -68,14 +63,32 @@ button.primary:hover{
 	overflow: hidden;
 }
 
+.heading{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	height: 100%;
+	color: #ffffff;
+	text-align: center;
+	font-size: 18px;
+	line-height: 40px;
+	font-weight: lighter;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: rgba(56,69,76, 0.8);
+}
+
 .navigation{
 	display: block;
 	float: left;
-	width: 100%;
 	clear: both;
+	width: 100%;
+	height: 100%;
 	overflow: hidden;
 	background-color: #39454c;
 }
+
 
 #nav-logo{
 	display: block;

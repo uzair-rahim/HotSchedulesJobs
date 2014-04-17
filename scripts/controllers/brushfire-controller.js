@@ -121,6 +121,9 @@ define([
 			jobs : function(){
 
 				if(Utils.CheckSession()){
+
+					var that = this;
+
 					App.clearTrail();
 					App.pushTrail("jobs");
 
@@ -130,6 +133,8 @@ define([
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
 					var models = new Object();
+
+
 
 					$.when(
 						jobtypes.fetch({
@@ -159,7 +164,7 @@ define([
 
 					).then(function(){
 						var view = new ViewJobs({model : models});
-							this.layout.body.show(view);
+							that.layout.body.show(view);
 					});	
 				}else{
 					App.router.navigate("login", true);
@@ -171,6 +176,9 @@ define([
 			candidates : function(){
 
 				if(Utils.CheckSession()){
+
+					var that = this;
+
 					App.clearTrail();
 					App.pushTrail("candidates");
 
@@ -209,7 +217,7 @@ define([
 
 					).then(function(){
 						var view = new ViewCandidates({model : models});
-							this.layout.body.show(view);
+							that.layout.body.show(view);
 					});
 				}else{
 					App.router.navigate("login", true);
@@ -219,7 +227,11 @@ define([
 
 			candidatesByJob : function(id){
 
+				var that = this;
+
 				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("jobs");
 					App.pushTrail("candidates");
 
 					this.setLayout();
@@ -258,7 +270,7 @@ define([
 
 					).then(function(){
 						var view = new ViewCandidates({model : models, mode : "child"});
-							this.layout.body.show(view);
+							that.layout.body.show(view);
 					});
 
 				}else{
@@ -268,7 +280,10 @@ define([
 			},
 
 			network : function(){
-				if(!Utils.CheckSession()){
+
+				var that = this;
+
+				if(Utils.CheckSession()){
 					App.clearTrail();
 					App.pushTrail("network");
 
@@ -276,13 +291,16 @@ define([
 					this.setHeader("navigation");
 
 					var view = new ViewNetwork();
-					this.layout.body.show(view);
+					that.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
 			},
 
 			messages : function(){
+				
+				var that = this;
+
 				if(Utils.CheckSession()){
 					App.clearTrail();
 					App.pushTrail("messages");
@@ -291,13 +309,16 @@ define([
 					this.setHeader("navigation");
 
 					var view = new ViewMessages();
-					this.layout.body.show(view);
+					that.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
 			},
 
 			settings : function(){
+
+				var that = this;
+
 				if(Utils.CheckSession()){
 					App.clearTrail();
 					App.pushTrail("settings");
@@ -306,13 +327,16 @@ define([
 					this.setHeader("navigation");
 
 					var view = new ViewSettings();
-					this.layout.body.show(view);
+					that.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
 			},
 
 			profile : function(id, selection){
+
+				var that = this;
+
 				if(Utils.CheckSession()){
 					App.pushTrail("profile");
 
@@ -320,7 +344,7 @@ define([
 					this.setHeader("navigation");
 
 					var view = new ViewProfile();
-					this.layout.body.show(view);
+					that.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}

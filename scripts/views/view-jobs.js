@@ -162,6 +162,7 @@ define([
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.jobs = this.model.jobs;
 				jsonObject.breadcrumb = App.getTrail();
+				console.log(jsonObject);
 			return jsonObject;
 		}
 		

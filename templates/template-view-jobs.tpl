@@ -73,8 +73,29 @@
 				</ul>
 			{{/if_not_eq}}
 			<div class="edit-mode">
-				<div class="job-details"></div>
-				<div class="job-description"></div>
+				<div class="job-details">
+					<div class="input-container">
+						<label>Position</label>
+						<div class="custom-select">
+							<button>{{jobName}}</button>
+						</div>
+					</div>
+					<div class="input-container">
+						<label>Wage</label>
+						<div class="dollar">$</div>
+						<input type="text" class="wage" value="{{wage}}"/>
+					</div>
+					<div class="input-container">
+						<label>Frequency</label>
+						<div class="custom-select">
+							<button>{{wageType}}</button>
+						</div>
+					</div>
+				</div>
+				<div class="job-description">
+					<label>Description</label>
+					<textarea></textarea>
+				</div>
 				<div class="edit-actions">
 					<button class="primary save-job">Save</button>
 					<button class="cancel-edit">Cancel</button>

@@ -16,6 +16,11 @@ button{
 	border-radius: 3px;
 	border: 1px solid #d0d4da;
 	background-color: #f4f6f7;
+	text-transform: lowercase;
+}
+
+button:first-letter{
+	text-transform: capitalize;
 }
 
 button:hover{
@@ -32,8 +37,128 @@ button.primary:hover{
 	background-color: #2d81bd;
 }
 
+label{
+	font-weight: bold;
+	color: #626970;
+}
+
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="password"]{
+	width: 100%;
+	margin: 3px 7px 2px 0;
+	padding: 6px 9px 5px;
+	font-size: 14px;
+	line-height: 14px;
+	background: #fff;
+	border: 1px solid #c4c6c6;
+	border-top-color: #a8a9aa;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 0 0 #f0f0f0, 0 0 0 1px rgba(255,255,255, 0.5);
+	cursor: text;
+}
+
+textarea:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="url"]:hover,
+input[type="number"]:hover,
+input[type="password"]:hover{
+	border: 1px solid #4ea6e5;
+	
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus{
+	border: 1px solid #1e8dc6;
+	border-top-color: #327cc7;
+	border-bottom-color: #4ea6e5;
+}
+
+textarea[disabled],
+textarea[disabled]:hover,
+input[type="text"][disabled],
+input[type="text"][disabled]:hover,
+input[type="email"][disabled],
+input[type="email"][disabled]:hover,
+input[type="url"][disabled],
+input[type="url"][disabled]:hover,
+input[type="number"][disabled],
+input[type="number"][disabled]:hover,
+input[type="password"][disabled],
+input[type="password"][disabled]:hover{
+	background-color: #f0f2f3;
+	border: 1px solid #c4c6c6;
+	border-top-color: #a8a9aa;
+	color: #959ba2;
+	box-shadow: inset 0 1px 0 0 #e2e4e5, 0 0 0 1px #fff;
+	cursor: default;
+}
+
+textarea.error,
+input[type="text"].error,
+input[type="email"].error,
+input[type="url"].error,
+input[type="number"].error,
+input[type="password"].error{
+	color: #bf2b1b;
+	border: 1px solid #bf2b1b;
+}
+
+textarea.error:hover,
+input[type="text"].error:hover,
+input[type="email"].error:hover,
+input[type="url"].error:hover,
+input[type="number"].error:hover,
+input[type="password"].error:hover,
+input[type="text"].error:focus,
+input[type="email"].error:focus,
+input[type="url"].error:focus,
+input[type="number"].error:focus,
+input[type="password"].error:focus{
+	border: 1px solid #ff4040;
+}
+
+.custom-select button{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 6px 20px 7px 8px;
+	background-image: url("../images/icon-select-pointer.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: auto 8px;
+}
 
 
+.rbc-logo{
+	position: absolute;
+	display: block;
+	float: left;
+	bottom: 18px;
+	left: 50%;
+	margin: 0 0 0 -80px;
+	width: 160px;
+	height: 45px;
+	background-image: url("../images/logo-rbc.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 160px 45px;
+}
+
+@media screen and (max-height: 650px){
+	.rbc-logo{
+		display: none;
+	}
+}
 
 
 #brushfire{
@@ -41,6 +166,7 @@ button.primary:hover{
 	float: left;
 	clear: both;
 	width: 100%;
+	min-width: 320px;
 	height: 100%;
 	overflow: hidden;
 }
@@ -52,6 +178,13 @@ button.primary:hover{
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+}
+
+.app.background{
+	background-image: url("../images/background.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 #app-head{
@@ -95,7 +228,7 @@ button.primary:hover{
 	float: left;
 	width: 40px;
 	height: 40px;
-	background-image: url("../images/logo-hsj-80-white.png");
+	background-image: url("../images/logo-bf-80-white.png");
 	background-position: center;
 	background-size: 24px auto;
 	background-repeat: no-repeat;

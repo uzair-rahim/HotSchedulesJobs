@@ -65,6 +65,22 @@ define([
 				}				
 			},
 
+			setBackground : function(){
+				var app = $(document).find(".app");
+
+				if(!$(app).hasClass("background")){
+					$(app).addClass("background");
+				}
+			},
+
+			removeBackground : function(){
+				var app = $(document).find(".app");
+
+				if($(app).hasClass("background")){
+					$(app).removeClass("background");
+				}
+			},
+
 			session : function(){
 				console.log("App routed to session...");
 
@@ -81,6 +97,7 @@ define([
 			login : function(){
 				this.setLayout();
 				this.setHeader("heading");
+				this.setBackground();
 				
 				var view = new ViewLogin();
 				this.layout.body.show(view);
@@ -89,6 +106,7 @@ define([
 			signup : function(){
 				this.setLayout();
 				this.setHeader("heading");
+				this.setBackground();
 
 				var view = new ViewSignup();
 				this.layout.body.show(view);
@@ -97,6 +115,7 @@ define([
 			findBusiness : function(){
 				this.setLayout();
 				this.setHeader("heading");
+				this.setBackground();
 
 				var view = new ViewFindBusiness();
 				this.layout.body.show(view);
@@ -105,6 +124,7 @@ define([
 			addBusiness : function(){
 				this.setLayout();
 				this.setHeader("heading");
+				this.setBackground();
 
 				var view = new ViewAddBusiness();
 				this.layout.body.show(view);
@@ -113,6 +133,7 @@ define([
 			accountVerification : function(){
 				this.setLayout();
 				this.setHeader("heading");
+				this.setBackground();
 
 				var view = new ViewAccountVerification();
 				this.layout.body.show(view);
@@ -127,14 +148,9 @@ define([
 					App.clearTrail();
 					App.pushTrail("jobs");
 
-					this.setLayout();
-					this.setHeader("navigation");
-
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
 					var models = new Object();
-
-
 
 					$.when(
 						jobtypes.fetch({
@@ -163,6 +179,10 @@ define([
 						})
 
 					).then(function(){
+						that.removeBackground();
+						that.setLayout();
+						that.setHeader("navigation");
+
 						var view = new ViewJobs({model : models});
 							that.layout.body.show(view);
 					});	
@@ -182,9 +202,6 @@ define([
 					App.clearTrail();
 					App.pushTrail("candidates");
 
-					this.setLayout();
-					this.setHeader("navigation");
-
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
 					var models = new Object();
@@ -216,6 +233,10 @@ define([
 						})
 
 					).then(function(){
+						that.removeBackground();
+						that.setLayout();
+						that.setHeader("navigation");
+
 						var view = new ViewCandidates({model : models});
 							that.layout.body.show(view);
 					});
@@ -233,9 +254,6 @@ define([
 					App.clearTrail();
 					App.pushTrail("jobs");
 					App.pushTrail("candidates");
-
-					this.setLayout();
-					this.setHeader("navigation");
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs({guid : id});
@@ -269,6 +287,10 @@ define([
 						})
 
 					).then(function(){
+						that.removeBackground();
+						that.setLayout();
+						that.setHeader("navigation");
+
 						var view = new ViewCandidates({model : models, mode : "child"});
 							that.layout.body.show(view);
 					});
@@ -287,6 +309,7 @@ define([
 					App.clearTrail();
 					App.pushTrail("network");
 
+					this.removeBackground();
 					this.setLayout();
 					this.setHeader("navigation");
 
@@ -305,6 +328,7 @@ define([
 					App.clearTrail();
 					App.pushTrail("messages");
 
+					this.removeBackground();
 					this.setLayout();
 					this.setHeader("navigation");
 
@@ -323,6 +347,7 @@ define([
 					App.clearTrail();
 					App.pushTrail("settings");
 
+					this.removeBackground();
 					this.setLayout();
 					this.setHeader("navigation");
 
@@ -340,6 +365,7 @@ define([
 				if(Utils.CheckSession()){
 					App.pushTrail("profile");
 
+					this.removeBackground();
 					this.setLayout();
 					this.setHeader("navigation");
 

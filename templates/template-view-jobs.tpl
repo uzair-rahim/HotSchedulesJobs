@@ -76,8 +76,13 @@
 				<div class="job-details">
 					<div class="input-container">
 						<label>Position</label>
-						<div class="custom-select">
-							<button>{{jobName}}</button>
+						<div class="custom-select" id="position" data-index="0" data-value="{{jobName}}">
+							<button class="custom-select-button">{{jobName}}</button>
+							<ul class="custom-select-list">
+								{{#each ../jobtypes}}
+									<li>{{name}}</li>
+								{{/each}}
+							</ul>
 						</div>
 					</div>
 					<div class="input-container">
@@ -87,14 +92,21 @@
 					</div>
 					<div class="input-container">
 						<label>Frequency</label>
-						<div class="custom-select">
-							<button>{{wageType}}</button>
+						<div class="custom-select" id="wage-type" data-index="0" data-value="{{wageType}}">
+							<button class="custom-select-button">{{wageType}}</button>
+							<ul class="custom-select-list">
+								<li>Hourly<li>
+								<li>Weekly<li>
+								<li>Bi-Weekly<li>
+								<li>Monthly<li>
+								<li>Annually<li>
+							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="job-description">
 					<label>Description</label>
-					<textarea></textarea>
+					<textarea>{{description}}</textarea>
 				</div>
 				<div class="edit-actions">
 					<button class="primary save-job">Save</button>

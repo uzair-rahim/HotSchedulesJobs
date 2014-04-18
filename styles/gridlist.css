@@ -39,7 +39,7 @@ ul.grid-list.sub.show{
 	margin: 0 0 5px 0;
 }
 
-ul.grid-list li{
+ul.grid-list > li{
 	display: block;
 	float: left;
 	clear: both;
@@ -50,35 +50,35 @@ ul.grid-list li{
 	overflow: hidden;
 }
 
-ul.grid-list li:hover{
+ul.grid-list > li:hover{
 	background-color: #f7fafc;
 }
 
-ul.grid-list li.faded{
+ul.grid-list > li.faded{
 	opacity: 0.5;
 }
 
-ul.grid-list li.expanded{
+ul.grid-list > li.expanded{
 	opacity: 1;
 	background-color: #f7fafc;
 	border-top: 1px dotted #3e92ce;
 	border-bottom: 1px dotted #3e92ce;
 }
 
-ul.grid-list li.expanded:hover{
+ul.grid-list > li.expanded:hover{
 	background-color: #f7fafc;
 }
 
 
-ul.grid-list li.foot{
+ul.grid-list > li.foot{
 	height: 24px;
 }
 
-ul.grid-list li.foot:hover{
+ul.grid-list > li.foot:hover{
 	background-color: #ffffff;
 }
 
-ul.grid-list li.foot a{
+ul.grid-list > li.foot a{
 	display: block;
 	float: left;
 	margin: 0 5px 0 10px;
@@ -86,7 +86,7 @@ ul.grid-list li.foot a{
 	font-size: 12px;
 }
 
-ul.grid-list li .edit-mode{
+ul.grid-list > li .edit-mode{
 	display: block;
 	float: left;
 	clear: both;
@@ -102,19 +102,19 @@ ul.grid-list li .edit-mode{
 	        transition: all 500ms;
 }
 
-ul.grid-list li .edit-mode.show{
+ul.grid-list > li .edit-mode.show{
 	opacity: 1;
 	height: 260px;
 	background-color: #ffffff;
 }
 
 @media screen and (max-width: 1000px){
-	ul.grid-list li .edit-mode.show{
+	ul.grid-list > li .edit-mode.show{
 		height: 260px;
 	}
 }
 
-ul.grid-list li .edit-mode .job-details{
+ul.grid-list > li .edit-mode .job-details{
 	display: block;
 	float: left;
 	clear: both;
@@ -123,21 +123,21 @@ ul.grid-list li .edit-mode .job-details{
 	height: 60px;
 }
 
-ul.grid-list li .edit-mode .job-details .input-container{
+ul.grid-list > li .edit-mode .job-details .input-container{
 	display: block;
 	float: left;
 	margin: 0 10px 0 0;
 	width: 80px;
 }
 
-ul.grid-list li .edit-mode .job-details .input-container label{
+ul.grid-list > li .edit-mode .job-details .input-container label{
 	display: block;
 	float: left;
 	clear: both;
 	margin: 0 0 5px 0;
 }
 
-ul.grid-list li .edit-mode .job-details .input-container label + .dollar{
+ul.grid-list > li .edit-mode .job-details .input-container label + .dollar{
 	position: relative;
 	display: block;
 	float: left;
@@ -147,27 +147,27 @@ ul.grid-list li .edit-mode .job-details .input-container label + .dollar{
 	color: #626970;
 }
 
-ul.grid-list li .edit-mode .job-details .input-container label{
+ul.grid-list > li .edit-mode .job-details .input-container label{
 
 }
 
-ul.grid-list li .edit-mode .job-details .input-container .custom-select{
+ul.grid-list > li .edit-mode .job-details .input-container .custom-select{
 	display: block;
 	float: left;
 	margin: 2px 0 0 0;
 }
 
-ul.grid-list li .edit-mode .job-details .input-container .custom-select button{
+ul.grid-list > li .edit-mode .job-details .input-container .custom-select button{
 	max-width: 80px;
 }
 
-ul.grid-list li .edit-mode .job-details .input-container .wage{
+ul.grid-list > li .edit-mode .job-details .input-container .wage{
 	width: 55px;
 	text-indent: 10px;
 	text-align: left;
 }
 
-ul.grid-list li .edit-mode .job-description{
+ul.grid-list > li .edit-mode .job-description{
 	display: block;
 	float: left;
 	clear: both;
@@ -176,13 +176,13 @@ ul.grid-list li .edit-mode .job-description{
 	height: 120px;
 }
 
-ul.grid-list li .edit-mode .job-description label{
+ul.grid-list > li .edit-mode .job-description label{
 	display: block;
 	float: left;
 	clear: both;
 }
 
-ul.grid-list li .edit-mode .job-description textarea{
+ul.grid-list > li .edit-mode .job-description textarea{
 	display: block;
 	float: left;
 	clear: both;
@@ -192,7 +192,7 @@ ul.grid-list li .edit-mode .job-description textarea{
 	height: 80px;
 }
 
-ul.grid-list li .edit-mode .edit-actions{
+ul.grid-list > li .edit-mode .edit-actions{
 	display: block;
 	float: left;
 	clear: both;
@@ -202,7 +202,7 @@ ul.grid-list li .edit-mode .edit-actions{
 	border-top: 1px dotted #bbbbbb;
 }
 
-ul.grid-list li .edit-mode .edit-actions button{
+ul.grid-list > li .edit-mode .edit-actions button{
 	margin: 10px 0 0 10px;
 }
 
@@ -210,7 +210,7 @@ ul.grid-list li .edit-mode .edit-actions button{
 
 
 
-ul.grid-list li .job-info{
+ul.grid-list > li .job-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
@@ -219,7 +219,7 @@ ul.grid-list li .job-info{
 	border-right: 1px dotted #bbbbbb;
 }
 
-ul.grid-list li .job-info .job-name{
+ul.grid-list > li .job-info .job-name{
 	display: block;
 	float: left;
 	clear: both;
@@ -233,11 +233,11 @@ ul.grid-list li .job-info .job-name{
 	text-overflow: ellipsis;
 }
 
-ul.grid-list li .job-info .job-name.new{
+ul.grid-list > li .job-info .job-name.new{
 	font-weight: bold;
 }
 
-ul.grid-list li .job-info .job-shift{
+ul.grid-list > li .job-info .job-shift{
 	display: block;
 	float: left;
 	clear: both;
@@ -252,7 +252,7 @@ ul.grid-list li .job-info .job-shift{
 }
 
 @media screen and (max-width: 550px){
-	ul.grid-list li .job-info{
+	ul.grid-list > li .job-info{
 		border-right: none;
 		width: 190px;
 
@@ -264,7 +264,7 @@ ul.grid-list li .job-info .job-shift{
 	}
 }
 
-ul.grid-list li .candidates-info{
+ul.grid-list > li .candidates-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
@@ -276,12 +276,12 @@ ul.grid-list li .candidates-info{
 }
 
 @media screen and (max-width: 550px){
-	ul.grid-list li .candidates-info{
+	ul.grid-list > li .candidates-info{
 		display: none;
 	}
 }
 
-ul.grid-list li .candidates-info .candidates-list{
+ul.grid-list > li .candidates-info .candidates-list{
 	display: block;
 	float: left;
 	width: 180px;
@@ -289,7 +289,7 @@ ul.grid-list li .candidates-info .candidates-list{
 	overflow: hidden;
 }
 
-ul.grid-list li .candidates-info .candidates-list li{
+ul.grid-list > li .candidates-info .candidates-list li{
 	display: block;
 	float: left;
 	clear: none;
@@ -306,16 +306,16 @@ ul.grid-list li .candidates-info .candidates-list li{
 	overflow: hidden;
 }
 
-ul.grid-list li .candidates-info .candidates-list li.new{
+ul.grid-list > li .candidates-info .candidates-list li.new{
 	border: 1px solid #3e92ce;
 }
 
-ul.grid-list li .candidates-info .candidates-list li img{
+ul.grid-list > li .candidates-info .candidates-list li img{
 	width: 40px;
 	height: 40px;
 }
 
-ul.grid-list li .candidates-info .more{
+ul.grid-list > li .candidates-info .more{
 	display: block;
 	float: left;
 	margin: 0 10px;
@@ -323,12 +323,12 @@ ul.grid-list li .candidates-info .more{
 	color: #969ba2;
 }
 
-ul.grid-list li .candidates-info .more.new{
+ul.grid-list > li .candidates-info .more.new{
 	font-weight: bold;
 	color: #3e92ce;
 }
 
-ul.grid-list li .share-info{
+ul.grid-list > li .share-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
@@ -349,12 +349,12 @@ ul.grid-list li .share-info{
 }
 
 @media screen and (max-width: 800px){
-	ul.grid-list li .share-info{
+	ul.grid-list > li .share-info{
 		display: none;
 	}
 }
 
-ul.grid-list li .posted-info{
+ul.grid-list > li .posted-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
@@ -369,17 +369,17 @@ ul.grid-list li .posted-info{
 	text-overflow: ellipsis;
 }
 
-ul.grid-list li .posted-info.new{
+ul.grid-list > li .posted-info.new{
 	font-weight: bold;
 }
 
 @media screen and (max-width: 900px){
-	ul.grid-list li .posted-info{
+	ul.grid-list > li .posted-info{
 		display: none;
 	}
 }
 
-ul.grid-list li .job-actions{
+ul.grid-list > li .job-actions{
 	display: block;
 	float: right;
 	margin: 5px 0;
@@ -389,34 +389,34 @@ ul.grid-list li .job-actions{
 	white-space: nowrap;
 }
 
-ul.grid-list li .job-actions button{
+ul.grid-list > li .job-actions button{
 	margin: 5px;
 	float: right;
 }
 
 @media screen and (max-width: 630px){
-	ul.grid-list li .job-actions{
+	ul.grid-list > li .job-actions{
 		width: 70px;
 	}
 
-	ul.grid-list li .job-actions button:first-child{
+	ul.grid-list > li .job-actions button:first-child{
 		display: none;
 	}
 }
 
-ul.grid-list li .candidate-select{
+ul.grid-list > li .candidate-select{
 	display: block;
 	float: left;
 	margin: 18px 5px 0 10px;
 }
 
 @media screen and (max-width: 500px){
-	ul.grid-list li .candidate-select{
+	ul.grid-list > li .candidate-select{
 		display: none;
 	}
 }
 
-ul.grid-list li .candidate-picture{
+ul.grid-list > li .candidate-picture{
 	display: block;
 	float: left;
 	clear: none;
@@ -433,13 +433,13 @@ ul.grid-list li .candidate-picture{
 	overflow: hidden;
 }
 
-ul.grid-list li .candidate-picture img{
+ul.grid-list > li .candidate-picture img{
 	width: 40px;
 	height: 40px;
 }
 
 
-ul.grid-list li .candidate-info{
+ul.grid-list > li .candidate-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
@@ -448,7 +448,7 @@ ul.grid-list li .candidate-info{
 	border-right: 1px dotted #bbbbbb;
 }
 
-ul.grid-list li .candidate-info .candidate-name{
+ul.grid-list > li .candidate-info .candidate-name{
 	display: block;
 	float: left;
 	clear: both;
@@ -462,11 +462,11 @@ ul.grid-list li .candidate-info .candidate-name{
 	text-overflow: ellipsis;
 }
 
-ul.grid-list li .candidate-info .candidate-name.new{
+ul.grid-list > li .candidate-info .candidate-name.new{
 	font-weight: bold;
 }
 
-ul.grid-list li .candidate-info .candidate-job{
+ul.grid-list > li .candidate-info .candidate-job{
 	display: block;
 	float: left;
 	clear: both;
@@ -481,19 +481,19 @@ ul.grid-list li .candidate-info .candidate-job{
 }
 
 @media screen and (max-width: 800px){
-	ul.grid-list li .candidate-info{
+	ul.grid-list > li .candidate-info{
 		border-right: none;
 		width: 155px;
 
 	}
 
-	ul.grid-list li .candidate-info .candidate-name,
-	ul.grid-list li .candidate-info .candidate-job{
+	ul.grid-list > li .candidate-info .candidate-name,
+	ul.grid-list > li .candidate-info .candidate-job{
 		width: 155px;
 	}
 }
 
-ul.grid-list li .candidate-referral{
+ul.grid-list > li .candidate-referral{
 	display: block;
 	float: left;
 	margin: 5px 0;
@@ -503,7 +503,7 @@ ul.grid-list li .candidate-referral{
 	white-space: nowrap;
 }
 
-ul.grid-list li .candidate-referral .date{
+ul.grid-list > li .candidate-referral .date{
 	display: block;
 	float: left;
 	max-width: 80px;
@@ -517,11 +517,11 @@ ul.grid-list li .candidate-referral .date{
 	text-overflow: ellipsis;
 }
 
-ul.grid-list li .candidate-referral .date.new{
+ul.grid-list > li .candidate-referral .date.new{
 	font-weight: bold;
 }
 
-ul.grid-list li .candidate-referral .referred-by{
+ul.grid-list > li .candidate-referral .referred-by{
 	display: block;
 	float: left;
 	width: 190px;
@@ -535,7 +535,7 @@ ul.grid-list li .candidate-referral .referred-by{
 	text-overflow: ellipsis;
 }
 
-ul.grid-list li .candidate-referral .referred-by .picture{
+ul.grid-list > li .candidate-referral .referred-by .picture{
 	display: block;
 	float: left;
 	width: 20px;
@@ -553,12 +553,12 @@ ul.grid-list li .candidate-referral .referred-by .picture{
 	overflow: hidden;
 }
 
-ul.grid-list li .candidate-referral .referred-by .picture img{
+ul.grid-list > li .candidate-referral .referred-by .picture img{
 	width: 20px;
 	height: 20px;
 }
 
-ul.grid-list li .candidate-referral .referred-by .name{
+ul.grid-list > li .candidate-referral .referred-by .name{
 	display: block;
 	float: left;
 	width: 160px;
@@ -573,12 +573,12 @@ ul.grid-list li .candidate-referral .referred-by .name{
 }
 
 @media screen and (max-width: 950px){
-	ul.grid-list li .candidate-referral{
+	ul.grid-list > li .candidate-referral{
 		display: none;
 	}
 }
 
-ul.grid-list li .candidate-message{
+ul.grid-list > li .candidate-message{
 	display: block;
 	float: right;
 	margin: 5px 0;
@@ -591,11 +591,11 @@ ul.grid-list li .candidate-message{
 	overflow: hidden;
 }
 
-ul.grid-list li .candidate-message:hover{
+ul.grid-list > li .candidate-message:hover{
 	background-image: url("../images/icon-message-hover.png");
 }
 
-ul.grid-list li .candidate-archive{
+ul.grid-list > li .candidate-archive{
 	display: block;
 	float: right;
 	margin: 5px 0;
@@ -608,11 +608,11 @@ ul.grid-list li .candidate-archive{
 	overflow: hidden;
 }
 
-ul.grid-list li .candidate-archive:hover{
+ul.grid-list > li .candidate-archive:hover{
 	background-image: url("../images/icon-archive-hover.png");
 }
 
-ul.grid-list li .candidate-endorse{
+ul.grid-list > li .candidate-endorse{
 	display: block;
 	float: right;
 	margin: 5px 0;
@@ -632,12 +632,12 @@ ul.grid-list li .candidate-endorse{
 }
 
 @media screen and (max-width: 400px){
-	ul.grid-list li .candidate-endorse{
+	ul.grid-list > li .candidate-endorse{
 		display: none;
 	}
 }
 
-ul.grid-list li .candidate-network{
+ul.grid-list > li .candidate-network{
 	display: block;
 	float: right;
 	margin: 5px 0;
@@ -656,18 +656,18 @@ ul.grid-list li .candidate-network{
 	background-size: 40px auto;
 }
 
-ul.grid-list li .candidate-network span{
+ul.grid-list > li .candidate-network span{
 	font-weight: bold;
 	color: #a9a9a9;
 }
 
 @media screen and (max-width: 500px){
-	ul.grid-list li .candidate-network{
+	ul.grid-list > li .candidate-network{
 		display: none;
 	}
 }
 
-ul.grid-list li .count{
+ul.grid-list > li .count{
 	display: none;
 	float: right;
 	margin: 14px 0;
@@ -685,18 +685,18 @@ ul.grid-list li .count{
 	border: 1px solid #bbbbbb;
 }
 
-ul.grid-list li .count.new{
+ul.grid-list > li .count.new{
 	color: #3e92ce;
 	border: 1px solid #3e92ce;
 }
 
 @media screen and (max-width: 550px){
-	ul.grid-list li .count{
+	ul.grid-list > li .count{
 		display: block;
 	}
 }
 
-ul.grid-list li .candidate-rating{
+ul.grid-list > li .candidate-rating{
 	display: block;
 	float: right;
 	width: 106px;
@@ -710,28 +710,28 @@ ul.grid-list li .candidate-rating{
 	white-space: nowrap;
 }
 
-ul.grid-list li .candidate-rating.five{
+ul.grid-list > li .candidate-rating.five{
 	background-position: 0 0;
 }
 
-ul.grid-list li .candidate-rating.four{
+ul.grid-list > li .candidate-rating.four{
 	background-position: -22px 0;
 }
 
-ul.grid-list li .candidate-rating.three{
+ul.grid-list > li .candidate-rating.three{
 	background-position: -44px 0;
 }
 
-ul.grid-list li .candidate-rating.two{
+ul.grid-list > li .candidate-rating.two{
 	background-position: -66px 0;
 }
 
-ul.grid-list li .candidate-rating.one{
+ul.grid-list > li .candidate-rating.one{
 	background-position: -88px 0;
 }
 
 @media screen and (max-width: 700px){
-	ul.grid-list li .candidate-rating{
+	ul.grid-list > li .candidate-rating{
 		display: none;
 	}
 }

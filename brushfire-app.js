@@ -27,6 +27,7 @@ define([
 		App.on("initialize:before", function(){
 			console.log("Brushfire before initialized...");
 			App.getLanguagePack();
+			Utils.InitCustomSelect();
 		});
 
 		// Add initializer to the App

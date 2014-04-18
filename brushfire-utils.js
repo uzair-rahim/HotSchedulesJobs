@@ -52,6 +52,51 @@ define([
 				}
 			},
 
+			// Custom select
+			InitCustomSelect : function(){
+				console.log("Custom Select Initialized...");
+
+				$(document.body).delegate(".custom-select button", "click", function(event){
+					var list = $(event.target).next();
+					var isVisibile = $(list).hasClass("show");
+
+					var customSelect = $(".custom-select-list");
+					$(customSelect).removeClass("show");
+
+					if(isVisibile){
+						$(list).removeClass("show");
+					}else{
+						$(list).addClass("show");
+					}
+				});
+
+				$(document.body).delegate(".custom-select ul li", "click", function(event){
+					var button = $(event.target).parent().parent().find("button");
+					var select = $(event.target).parent().parent();
+					var list = $(event.target).parent();
+					var item = $(event.target);
+					var index = $(item).index();
+					var value = $(item).text();
+					
+					$(select).attr("data-index", index);
+					$(select).attr("data-value", value);
+					$(list).removeClass("show");
+					$(button).text(value);
+
+				});
+
+				$(document.body).on("click", function(event){
+					var element = $(event.target);
+					var isCustomSelect = $(element).hasClass("custom-select-button");
+					var customSelect = $(".custom-select-list");
+
+					if(!isCustomSelect){
+						$(customSelect).removeClass("show");	
+					}
+					
+				});
+			}
+
 		});
 
 		var brushfireUtils = new BrushfireUtils();

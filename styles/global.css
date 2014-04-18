@@ -128,6 +128,9 @@ input[type="password"].error:focus{
 }
 
 .custom-select button{
+	display: block;
+	float: left;
+	clear: both;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -138,6 +141,37 @@ input[type="password"].error:focus{
 	background-size: auto 8px;
 }
 
+.custom-select ul{
+	position: absolute;
+	display: none;
+	float: left;
+	clear: both;
+	margin: 30px 0 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	border-radius: 3px;
+	border: 1px solid #d0d4da;
+	background-color: #f4f6f7;
+}
+
+.custom-select ul.show{
+	display: block;
+}
+
+.custom-select ul li{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	line-height: 24px;
+	text-indent: 10px;
+	padding: 0 16px 0 0;
+}
+
+.custom-select ul li:hover{
+	color: #ffffff;
+	background-color: #3e92ce;
+}
 
 .rbc-logo{
 	position: absolute;
@@ -209,7 +243,7 @@ input[type="password"].error:focus{
 	font-weight: lighter;
 	white-space: nowrap;
 	overflow: hidden;
-	background-color: rgba(56,69,76, 0.8);
+	background-color: rgba(0,153,204, 0.8);
 }
 
 .navigation{

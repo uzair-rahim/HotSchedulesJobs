@@ -420,8 +420,8 @@ input[type="password"].error:focus{
 
 
 
-#toast{
-	position: relative;
+#app-toast{
+	position: absolute;
 	display: block;
 	float: left;
 	width: 100%;
@@ -435,20 +435,25 @@ input[type="password"].error:focus{
 	background-color: rgba(0,0,0,0.8);
 	white-space: nowrap;
 	overflow: hidden;
+	z-index: 999;
 
-	-webkit-transition: top 500ms;
-    -moz-transition: top 500ms;
-    -o-transition: top 500ms;
-    -ms-transition: top 500ms;
-    transition: top 500ms;
+	-webkit-transition: top 300ms;
+    -moz-transition: top 300ms;
+    -o-transition: top 300ms;
+    -ms-transition: top 300ms;
+    transition: top 300ms;
 }
 
-#toast.show{
-	top: 0;
+#app-toast.show{
+	top: 70px;
+}
+
+#app-toast.show-on-portal{
+	top: 40px;
 }
 
 @media screen and (max-width: 640px){
-	#toast{
+	#app-toast{
 		font-size: 14px;
 	}
 }

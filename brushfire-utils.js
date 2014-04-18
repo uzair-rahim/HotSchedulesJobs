@@ -26,7 +26,7 @@ define([
 
 				for(var key in defaults){
 					if(typeof(options[key]) === "undefined"){
-						option[key] = defaults[key];
+						options[key] = defaults[key];
 					}
 				}
 
@@ -95,6 +95,36 @@ define([
 					}
 					
 				});
+			},
+
+			// Toast
+			ShowToast : function(options){
+				var defaults = {
+					portal : false,
+					message : "There was an error"
+				}
+
+				var className = "show";
+
+				if(typeof options === "undefined"){
+					options = defaults;
+				}else{
+					for(var key in defaults){
+						if(typeof(options[key]) === "undefined"){
+							options[key] = defaults[key];
+						}
+					}
+				}
+				
+				if(options.portal){
+					className = "show-on-portal";
+				}
+
+				$(document).find("#app-toast").addClass(className);
+
+				var remove = setTimeout(function(){
+					$(document).find("#app-toast").removeClass(className);
+				}, 4000);
 			}
 
 		});

@@ -16,11 +16,6 @@ button{
 	border-radius: 3px;
 	border: 1px solid #d0d4da;
 	background-color: #f4f6f7;
-	text-transform: lowercase;
-}
-
-button:first-letter{
-	text-transform: capitalize;
 }
 
 button:hover{

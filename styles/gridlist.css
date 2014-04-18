@@ -9,6 +9,7 @@
 	text-indent: 10px;
 	font-size: 16px;
 	font-weight: bold;
+	text-transform: capitalize;
 }
 
 ul.grid-list{
@@ -231,6 +232,7 @@ ul.grid-list > li .job-info .job-name{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	text-transform: capitalize;
 }
 
 ul.grid-list > li .job-info .job-name.new{
@@ -734,4 +736,14 @@ ul.grid-list > li .candidate-rating.one{
 	ul.grid-list > li .candidate-rating{
 		display: none;
 	}
+}
+
+/* Overrides */
+
+.wage-type button.custom-select-button{
+	text-transform: lowercase;
+}
+
+.wage-type button.custom-select-button:first-letter{
+	text-transform: capitalize;
 }

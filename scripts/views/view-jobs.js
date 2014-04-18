@@ -4,9 +4,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
-		"hbs!templates/template-view-jobs"
+		"hbs!templates/template-view-jobs",
+		"scripts/models/model-job"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, App, Utils, Marionette, Template, ModelJob){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -80,12 +81,58 @@ define([
 		},
 
 		saveJob : function(event){
-			var all = $("#job-list > li");
-			var allEdits = $("#job-list > li .edit-mode");
+			console.log("Save job...");
 
-			$(all).removeClass("expanded");
-			$(all).removeClass("faded");
-			$(allEdits).removeClass("show");
+			var item = $(event.target).parent().closest("#job-list > li");
+			var index = $(item).index();
+			var job = this.model.jobs[index];
+
+			var update = new Object();
+				update.shifts = new Object();
+				update.jobType = new Object();
+				update.employer = new Object();
+				update.updatedBy = new Object();
+				update.createdBy = new Object();
+
+				update.id = job.id;
+				update.guid = job.guid;
+				update.jobName = $(item).find(".position .custom-select-button").text();
+				update.description = $(item).find(".description").val();
+				update.wage = $(item).find(".wage").val(); 
+				update.wageType = $(item).find(".wage-type .custom-select-button").text().replace("-", "").toUpperCase();
+
+				update.jobType.id = job.jobType.id;
+				update.jobType.guid = $(item).find(".position .custom-select-list li:contains('"+update.jobName+"')").attr("id");
+
+				update.employer.id = job.employer.id;
+				update.employer.guid = job.employer.guid;
+
+				update.created = job.created;
+				update.createdBy = job.createdBy;
+
+				update.updatedBy.id = job.updatedBy.id
+				update.updatedBy.guid = Utils.GetUserSession().guid;
+
+				update.shifts = [{id : 0}];
+
+				console.log(update);
+
+				var that = this;
+				var model = new ModelJob();				
+					model.save(update,{
+						type : "PUT",
+						headers : {
+							'token' : Utils.GetUserSession().brushfireToken
+						},
+						success : function(){
+							console.log("Job successfully saved");
+							App.router.controller.jobs();
+						},
+						error : function(){
+							console.log("There was an error trying to save the job");
+						}
+					});
+
 
 			event.stopPropagation();
 		},
@@ -162,7 +209,6 @@ define([
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.jobs = this.model.jobs;
 				jsonObject.breadcrumb = App.getTrail();
-				console.log(jsonObject);
 			return jsonObject;
 		}
 		

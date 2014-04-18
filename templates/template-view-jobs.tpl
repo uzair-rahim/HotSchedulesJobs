@@ -11,10 +11,10 @@
 </div>
 <ul id="job-list" class="grid-list">
 	{{#each jobs}}
-		<li>
+		<li data-id="{{id}}" data-guid="{{guid}}">
 			<div class="job-info">
 				<div class="job-name {{hasNewCandidates this}}">{{jobName}}</div>
-				<div class="job-shift">Sun - Thu: Lunch and Dinner</div>
+				<div class="job-shift">@ ${{wage}} / {{wageType}}</div>
 			</div>
 			<div class="candidates-info">
 				{{#if_not_eq this.candidates.length 0}}
@@ -76,11 +76,11 @@
 				<div class="job-details">
 					<div class="input-container">
 						<label>Position</label>
-						<div class="custom-select" id="position" data-index="0" data-value="{{jobName}}">
+						<div class="custom-select position" data-index="0" data-value="{{jobName}}">
 							<button class="custom-select-button">{{jobName}}</button>
 							<ul class="custom-select-list">
 								{{#each ../jobtypes}}
-									<li>{{name}}</li>
+									<li id="{{guid}}">{{name}}</li>
 								{{/each}}
 							</ul>
 						</div>
@@ -92,7 +92,7 @@
 					</div>
 					<div class="input-container">
 						<label>Frequency</label>
-						<div class="custom-select" id="wage-type" data-index="0" data-value="{{wageType}}">
+						<div class="custom-select wage-type" data-index="0" data-value="{{wageType}}">
 							<button class="custom-select-button">{{wageType}}</button>
 							<ul class="custom-select-list">
 								<li>Hourly<li>
@@ -106,7 +106,7 @@
 				</div>
 				<div class="job-description">
 					<label>Description</label>
-					<textarea>{{description}}</textarea>
+					<textarea class="description">{{description}}</textarea>
 				</div>
 				<div class="edit-actions">
 					<button class="primary save-job">Save</button>

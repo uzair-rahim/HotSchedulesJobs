@@ -444,6 +444,18 @@ input[type="password"].error:focus{
     transition: top 300ms;
 }
 
+#app-toast.error{
+	background-color: rgba(190,37,37,0.8);
+}
+
+#app-toast.warning{
+	background-color: rgba(224,179,25,0.8);
+}
+
+#app-toast.success{
+	background-color: rgba(126,187,10,0.8);
+}
+
 #app-toast.show{
 	top: 70px;
 }
@@ -456,4 +468,30 @@ input[type="password"].error:focus{
 	#app-toast{
 		font-size: 14px;
 	}
+}
+
+
+
+
+#app-modal{
+	position: absolute;
+	display: none;
+	float: left;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	opacity: 0.4;
+	background-color: #0f161a;
+	background-image: url("../images/large-velocity-load.gif");
+	background-size: auto;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 69px;
+	z-index: 9999;
+}
+
+
+#app-modal.show{
+	display: block;
 }

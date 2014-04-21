@@ -58,12 +58,14 @@ define([
 		// The method is called when the first AJAX request begins
 		$(document).ajaxStart(function(){
 			console.log("ajaxStart...");
+			Utils.ShowLoadingAnimation();
 		});
 
 		// AJAX Stop
 		// The method is called when the ALL AJAX requests have completed
 		$(document).ajaxStop(function(){
 			console.log("ajaxStop...");
+			Utils.HideLoadingAnimation();
 		});
 
 		// AJAX Complete
@@ -105,6 +107,7 @@ define([
 
 					error : function(){
 						console.log("Error loading language pack...");
+						Utils.ShowToast({portal : false, type : "success", message : "Error loading language pack"});
 					}
 
 				});

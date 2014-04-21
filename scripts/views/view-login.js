@@ -50,14 +50,14 @@ define([
 					error : function(){
 						console.log("Error authenticating user...");
 						$(".login-form-container").effect("shake");
-						$("#toast").text("Invalid email address or password please try again").addClass("show");
+						Utils.ShowToast({portal : true, type : "error", message : "Invalid email address or password"});
 					}
 				});
 		},
 
 		signup : function(){
 			console.log("Signup...");
-			Utils.ShowToast({portal : true, message : "Something went seriously wrong..."});
+			Utils.ShowToast({portal : true, type : "warning", message : "Something went seriously wrong..."});
 			//App.router.navigate("signup", true);
 		},
 		

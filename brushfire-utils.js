@@ -101,6 +101,7 @@ define([
 			ShowToast : function(options){
 				var defaults = {
 					portal : false,
+					type : "",
 					message : "There was an error"
 				}
 
@@ -120,11 +121,23 @@ define([
 					className = "show-on-portal";
 				}
 
-				$(document).find("#app-toast").addClass(className);
+				$(document).find("#app-toast").addClass(options.type).addClass(className).text(options.message);
 
 				var remove = setTimeout(function(){
-					$(document).find("#app-toast").removeClass(className);
+					$(document).find("#app-toast").removeClass(className).removeClass(options.type);
 				}, 4000);
+			},
+
+			// Show loading animation
+
+			ShowLoadingAnimation : function(){
+				$(document).find("#app-modal").addClass("show");
+			},
+
+			// Hide loading animation
+
+			HideLoadingAnimation : function(){
+				$(document).find("#app-modal").removeClass("show");
 			}
 
 		});

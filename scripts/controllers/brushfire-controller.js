@@ -163,6 +163,7 @@ define([
 							},
 							error : function(){
 								console.log("Error fetching Job Types...");
+								Utils.ShowToast({portal : false, type : "error", message : "Error fetching Job Types..."});
 							}
 						}),
 						jobs.fetch({
@@ -175,6 +176,7 @@ define([
 							},
 							error : function(){
 								console.log("Error fetching Jobs...");
+								Utils.ShowToast({portal : false, type : "error", message : "Error fetching Jobs..."});
 							}
 						})
 
@@ -217,6 +219,7 @@ define([
 							},
 							error : function(){
 								console.log("Error fetching Job Types...");
+								Utils.ShowToast({portal : false, type : "error", message : "Error fetching Job Types..."});
 							}
 						}),
 						jobs.fetch({
@@ -229,6 +232,7 @@ define([
 							},
 							error : function(){
 								console.log("Error fetching Jobs...");
+								Utils.ShowToast({portal : false, type : "error", message : "Error fetching Jobs..."});
 							}
 						})
 
@@ -271,6 +275,7 @@ define([
 							},
 							error : function(){
 								console.log("Error fetching Job Types...");
+								Utils.ShowToast({portal : false, type : "error", message : "Error fetching Job Types..."});
 							}
 						}),
 						jobs.fetch({
@@ -283,6 +288,7 @@ define([
 							},
 							error : function(){
 								console.log("Error fetching Jobs...");
+								Utils.ShowToast({portal : false, type : "error", message : "Error fetching Jobs..."});
 							}
 						})
 

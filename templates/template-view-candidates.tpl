@@ -39,118 +39,33 @@
 				<div class="candidate-rating"></div>
 				<div class="candidate-endorse">0</div>
 				<div class="candidate-network"><span>0</span> / 0</div>
+				<div class="hourly-profile">
+					<div class="about-section">
+						<label>About</label>
+						<p class="about">This letter may come to you as a surprise but I really prayed to God to help me choose somebody that will be my true partner. My name is Augusto Nandu Savimbi. I am the first son of Mr. Jonas Savinbi, the leader of the UNITA movement in Angola.</p>
+					</div>
+					<div class="history-section">
+						<label>Work History</label>
+						<ul class="work-history">
+							<li>
+								<div class="employer-logo"></div>
+								<div class="employment-info">
+									<div class="employer-name">Bartender<span>@ PF Changs</span></div>
+									<div class="employment-date">September 2012 - February 2014</div>
+								</div>
+							</li>
+							<li>
+								<div class="employer-logo"></div>
+								<div class="employment-info">
+									<div class="employer-name">Bartender<span>@ McDonalds</span></div>
+									<div class="employment-date">October 2009 - July 2012</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</li>
 		{{/each}}
 		</ul>
 	{{/if_gt}}
 {{/each}}
-
-<!--
-<div class="grid-list-head">Cook</div>
-<ul id="candidates-list" class="grid-list">
-	<li class="view-profile">
-		<input class="candidate-select" type="checkbox"/>
-		<div class="candidate-picture">
-			<img src="images/profiles/Christi.jpg"/>
-		</div>
-		<div class="candidate-info">
-			<div class="candidate-name new">Brittney Smith</div>
-			<div class="candidate-job">Cook @ Roaring Fork</div>
-		</div>
-		<div class="candidate-referral">
-			<div class="date new">Wednesday</div>
-			<div class="referred-by">
-				<div class="picture"><img src="images/profiles/Kim.jpg"/></div>
-				<div class="name">Yuan L.</div>
-			</div>
-		</div>
-		<div class="candidate-archive"></div>
-		<div class="candidate-message"></div>
-		<div class="candidate-rating five"></div>
-		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
-	</li>
-
-	<li class="view-profile">
-		<input class="candidate-select" type="checkbox"/>
-		<div class="candidate-picture">
-			<img src="images/profiles/Michael.jpg"/>
-		</div>
-		<div class="candidate-info">
-			<div class="candidate-name new">Ben Scott</div>
-			<div class="candidate-job">Cook @ Roaring Fork</div>
-		</div>
-		<div class="candidate-referral">
-			<div class="date">3/1/13</div>
-		</div>
-		<div class="candidate-archive"></div>
-		<div class="candidate-message"></div>
-		<div class="candidate-rating three"></div>
-		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
-	</li>
-
-	<li class="view-profile">
-		<input class="candidate-select" type="checkbox"/>
-		<div class="candidate-picture">
-			<img src="images/profiles/Ray.jpg"/>
-		</div>
-		<div class="candidate-info">
-			<div class="candidate-name new">Christopher Nolan</div>
-			<div class="candidate-job">Cook @ CPK</div>
-		</div>
-		<div class="candidate-referral">
-			<div class="date">3/1/13</div>
-		</div>
-		<div class="candidate-archive"></div>
-		<div class="candidate-message"></div>
-		<div class="candidate-rating one"></div>
-		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
-	</li>
-</ul>
-
-
-<div class="grid-list-head">Bartender</div>
-<ul id="candidates-list" class="grid-list">
-	<li class="view-profile">
-		<input class="candidate-select" type="checkbox"/>
-		<div class="candidate-picture">
-			<img src="images/profiles/Jake.jpg"/>
-		</div>
-		<div class="candidate-info">
-			<div class="candidate-name new">Ben Scott</div>
-			<div class="candidate-job">Bartender @ McDonalds</div>
-		</div>
-		<div class="candidate-referral">
-			<div class="date">March 1</div>
-			<div class="referred-by">Sunday</div>
-		</div>
-		<div class="candidate-archive"></div>
-		<div class="candidate-message"></div>
-		<div class="candidate-rating four"></div>
-		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
-	</li>
-
-	<li class="view-profile">
-		<input class="candidate-select" type="checkbox"/>
-		<div class="candidate-picture">
-			<img src="images/profiles/Monica.jpg"/>
-		</div>
-		<div class="candidate-info">
-			<div class="candidate-name new">Brittney Smith</div>
-			<div class="candidate-job">Bartender @ McDonalds</div>
-		</div>
-		<div class="candidate-referral">
-			<div class="date">3/1/13</div>
-		</div>
-		<div class="candidate-archive"></div>
-		<div class="candidate-message"></div>
-		<div class="candidate-rating two"></div>
-		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
-	</li>
-
-</ul>
--->

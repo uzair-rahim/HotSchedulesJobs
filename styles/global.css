@@ -239,7 +239,7 @@ input[type="password"].error:focus{
 	font-weight: lighter;
 	white-space: nowrap;
 	overflow: hidden;
-	background-color: rgba(0,153,204, 0.8);
+	background-color: rgba(255,170,0, 0.8);
 }
 
 .navigation{
@@ -258,7 +258,7 @@ input[type="password"].error:focus{
 	float: left;
 	width: 40px;
 	height: 40px;
-	background-image: url("../images/logo-bf-80-white.png");
+	background-image: url("../images/logo-bf-80-gold.png");
 	background-position: center;
 	background-size: 24px auto;
 	background-repeat: no-repeat;
@@ -494,4 +494,125 @@ input[type="password"].error:focus{
 
 #app-modal.show{
 	display: block;
+}
+
+.add-job{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0;
+	width: 100%;
+	height: 0;
+	opacity: 0;
+	border-top: 1px dotted #bbbbbb;
+	background-color: #ffffff;
+	overflow: hidden;
+	-webkit-transition: all 500ms;
+	   -moz-transition: all 500ms;
+	     -o-transition: all 500ms;
+	        transition: all 500ms;
+}
+
+.add-job.show{
+	opacity: 1;
+	height: 260px;
+	background-color: #ffffff;
+}
+
+@media screen and (max-width: 1000px){
+	.add-job.show{
+		height: 260px;
+	}
+}
+
+.add-job .add-actions{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	height: 50px;
+	background-color: #f7fafc;
+	border-top: 1px dotted #bbbbbb;
+}
+
+.add-job .add-actions button{
+	margin: 10px 0 0 10px;
+}
+
+.add-job .job-details{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 10px 0 0 10px;
+	width: calc(100% - 20px);
+	height: 60px;
+}
+
+.add-job .job-details .input-container{
+	display: block;
+	float: left;
+	margin: 0 10px 0 0;
+	width: 80px;
+}
+
+.add-job .job-details .input-container label{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 0 5px 0;
+}
+
+.add-job .job-details .input-container label + .dollar{
+	position: relative;
+	display: block;
+	float: left;
+	top: 30px;
+	left: -24px;
+	font-size: 12px;
+	color: #626970;
+}
+
+.add-job .job-details .input-container label{
+
+}
+
+.add-job .job-details .input-container .custom-select{
+	display: block;
+	float: left;
+	margin: 2px 0 0 0;
+}
+
+.add-job .job-details .input-container .custom-select button{
+	max-width: 80px;
+}
+
+.add-job .job-details .input-container .wage{
+	width: 55px;
+	text-indent: 10px;
+	text-align: left;
+}
+
+.add-job .job-description{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 10px 0 10px 10px;
+	width: calc(100% - 20px);
+	height: 120px;
+}
+
+.add-job .job-description label{
+	display: block;
+	float: left;
+	clear: both;
+}
+
+.add-job .job-description textarea{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 10px 0 0 0;
+	max-width: 300px;
+	width: calc(100% - 20px);
+	height: 80px;
 }

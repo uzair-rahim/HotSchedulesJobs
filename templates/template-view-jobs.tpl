@@ -9,6 +9,49 @@
 	<button id="add-new-job" class="primary">Add New Job</button>
 	<button id="archive-candidates">Archive Candidates</button>
 </div>
+
+<div id="add-job" class="add-job">
+	<div class="job-details">
+		<div class="input-container">
+			<label>Position</label>
+			<div class="custom-select position" data-index="0" data-value="{{jobs.[0].jobName}}">
+				<button class="custom-select-button">{{jobs.[0].jobName}}</button>
+				<ul class="custom-select-list">
+					{{#each jobtypes}}
+						<li id="{{guid}}">{{name}}</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+		<div class="input-container">
+			<label>Wage</label>
+			<div class="dollar">$</div>
+			<input type="text" class="wage" value=""/>
+		</div>
+		<div class="input-container">
+			<label>Frequency</label>
+			<div class="custom-select wage-type" data-index="0" data-value="Hourly">
+				<button class="custom-select-button">Hourly</button>
+				<ul class="custom-select-list">
+					<li>Hourly</li>
+					<li>Weekly</li>
+					<li>Bi-Weekly</li>
+					<li>Monthly</li>
+					<li>Annually</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="job-description">
+		<label>Description</label>
+		<textarea class="description"></textarea>
+	</div>
+	<div class="add-actions">
+		<button id="save-add" class="primary">Save</button>
+		<button id="cancel-add">Cancel</button>	
+	</div>
+</div>
+
 <ul id="job-list" class="grid-list">
 	{{#each jobs}}
 		<li data-id="{{id}}" data-guid="{{guid}}">
@@ -95,11 +138,11 @@
 						<div class="custom-select wage-type" data-index="0" data-value="{{wageType}}">
 							<button class="custom-select-button">{{wageType}}</button>
 							<ul class="custom-select-list">
-								<li>Hourly<li>
-								<li>Weekly<li>
-								<li>Bi-Weekly<li>
-								<li>Monthly<li>
-								<li>Annually<li>
+								<li>Hourly</li>
+								<li>Weekly</li>
+								<li>Bi-Weekly</li>
+								<li>Monthly</li>
+								<li>Annually</li>
 							</ul>
 						</div>
 					</div>

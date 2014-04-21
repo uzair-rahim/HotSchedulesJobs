@@ -57,7 +57,7 @@ define([
 
 		signup : function(){
 			console.log("Signup...");
-			Utils.ShowToast({portal : true, type : "warning", message : "Something went seriously wrong..."});
+			Utils.ShowToast({portal : true, message : "Something went seriously wrong..."});
 			//App.router.navigate("signup", true);
 		},
 		

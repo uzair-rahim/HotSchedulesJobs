@@ -14,7 +14,7 @@
 	<div class="job-details">
 		<div class="input-container">
 			<label>Position</label>
-			<div class="custom-select position" data-index="0" data-value="{{jobs.[0].jobName}}">
+			<div id="new-position" class="custom-select position" data-index="0" data-value="{{jobs.[0].jobName}}">
 				<button class="custom-select-button">{{jobs.[0].jobName}}</button>
 				<ul class="custom-select-list">
 					{{#each jobtypes}}
@@ -26,11 +26,11 @@
 		<div class="input-container">
 			<label>Wage</label>
 			<div class="dollar">$</div>
-			<input type="text" class="wage" value=""/>
+			<input id="new-wage" type="text" class="wage" value=""/>
 		</div>
 		<div class="input-container">
 			<label>Frequency</label>
-			<div class="custom-select wage-type" data-index="0" data-value="Hourly">
+			<div id="new-wage-type" class="custom-select wage-type" data-index="0" data-value="Hourly">
 				<button class="custom-select-button">Hourly</button>
 				<ul class="custom-select-list">
 					<li>Hourly</li>
@@ -44,7 +44,7 @@
 	</div>
 	<div class="job-description">
 		<label>Description</label>
-		<textarea class="description"></textarea>
+		<textarea id="new-description" class="description"></textarea>
 	</div>
 	<div class="add-actions">
 		<button id="save-add" class="primary">Save</button>

@@ -44,7 +44,47 @@ define([
 		},
 
 		saveAddJob : function(){
-			$("#add-job").removeClass("show");
+
+			var job = new Object();	
+				job.shifts = new Object();
+				job.jobType = new Object();
+				job.employer = new Object();
+				job.updatedBy = new Object();
+				job.createdBy = new Object();
+
+				job.id = 0;
+				job.jobType.id = 0;
+				job.employer.id = 0;
+				job.updatedBy.id = 0;
+				job.createdBy.id = 0;
+				job.shifts = [{id : 0}];
+				job.updatedBy.guid = Utils.GetUserSession().guid;
+				job.createdBy.guid = Utils.GetUserSession().guid;
+				job.employer.guid = Utils.GetUserSession().employerIds[0];
+
+				job.jobName = $("#new-position button").text();
+				job.description = $("#new-description").val();
+				job.wage = $("#new-wage").val(); 
+				job.wageType = $("#new-wage-type .custom-select-button").text().replace("-", "").toUpperCase();
+				job.jobType.guid = $("#new-position .custom-select-list li:contains('"+job.jobName+"')").attr("id");
+
+			var that = this;
+			var model = new ModelJob();				
+				model.save(job,{
+					type : "POST",
+					headers : {
+						'token' : Utils.GetUserSession().brushfireToken
+					},
+					success : function(){
+						console.log("Job successfully saved");
+						App.router.controller.jobs();
+					},
+					error : function(){
+						console.log("There was an error trying to save the job");
+						Utils.ShowToast({portal : false, type : "error", message : "Error saving job..."});
+					}
+				});
+
 		},
 
 		editJob : function(event){
@@ -59,7 +99,7 @@ define([
 			var isEditExpanded = $(edit).hasClass("show");
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
 
-			if(!isAddJobExpanded){
+			//if(!isAddJobExpanded){
 				if(!isCandidatesListExpanded){
 
 					$(all).removeClass("expanded");
@@ -76,7 +116,7 @@ define([
 						$(all).removeClass("faded");
 					}
 				}
-			}
+			//}
 
 			event.stopPropagation();
 		},
@@ -128,8 +168,6 @@ define([
 
 				update.shifts = [{id : 0}];
 
-				console.log(update);
-
 				var that = this;
 				var model = new ModelJob();				
 					model.save(update,{
@@ -168,7 +206,7 @@ define([
 			var isEditExpanded = $(edit).hasClass("show");
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
 
-			if(!isAddJobExpanded){
+			//if(!isAddJobExpanded){
 				if(!isEditExpanded){
 
 					$(all).removeClass("expanded");
@@ -185,8 +223,8 @@ define([
 						$(all).removeClass("faded");
 					}
 				}
-				
-			}
+
+			//}
 
 		},
 

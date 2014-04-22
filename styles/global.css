@@ -211,10 +211,10 @@ input[type="password"].error:focus{
 }
 
 .app.background{
-	background-image: url("../images/background.png");
+	/*background-image: url("../images/background.png");
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover;*/
 }
 
 #app-head{
@@ -624,8 +624,20 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	clear: both;
+	opacity: 0;
 	width: 100%;
+	max-height: 0;
 	border-top: 1px dotted #3e92ce;
+	-webkit-transition: all 500ms;
+	   -moz-transition: all 500ms;
+	     -o-transition: all 500ms;
+	        transition: all 500ms;
+}
+
+.hourly-profile.show{
+	opacity: 1;
+    max-height:1000px;
+
 }
 
 .hourly-profile > .about-section{
@@ -652,6 +664,7 @@ input[type="password"].error:focus{
 		clear: both;
 		max-width: 100%;
 		width: calc(100% - 20px);
+		height: auto;
 	}
 
 	.hourly-profile > .history-section{
@@ -659,6 +672,7 @@ input[type="password"].error:focus{
 		clear: both;
 		max-width: 100%;
 		width: calc(100% - 20px);
+		height: auto;
 	}
 }
 
@@ -668,7 +682,10 @@ input[type="password"].error:focus{
 }
 
 
-.hourly-profile > .about-section > p.about{
+.hourly-profile > .about-section > .about{
+	display: block;
+	float: left;
+	clear: both;
 	color: #303c4b;
 	padding: 15px;
 	margin: 5px 0;
@@ -680,6 +697,7 @@ input[type="password"].error:focus{
 .hourly-profile > .history-section > ul.work-history{
 	display: block;
 	float: left;
+	clear: both;
 	width: 100%;
 	margin: 5px 0;
 	border: 1px solid #d5d7db;
@@ -708,6 +726,16 @@ input[type="password"].error:focus{
 	border-radius: 27px;
 	border: 1px solid #e1e1e1;
 	background-color: #fafbfc;
+	background-image: url("../images/default-restaurant.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 38px auto;
+	overflow: hidden;
+}
+
+.hourly-profile > .history-section > ul.work-history li .employer-logo img{
+	width: 54px;
+	height: 54px;
 }
 
 .hourly-profile > .history-section > ul.work-history li .employment-info{
@@ -720,9 +748,13 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	clear: both;
+	width: 100%;
 	line-height: 16px;
 	font-weight: bold;
 	color: #2f3b4b;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .hourly-profile > .history-section > ul.work-history li .employment-info .employer-name span{
@@ -735,5 +767,9 @@ input[type="password"].error:focus{
 	clear: both;
 	line-height: 16px;
 	color: #969ba3;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 

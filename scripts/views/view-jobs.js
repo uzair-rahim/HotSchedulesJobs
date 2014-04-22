@@ -90,6 +90,7 @@ define([
 		editJob : function(event){
 			var isAddJobExpanded = $("#add-job").hasClass("show");
 			var all = $("#job-list > li");
+			var allListItems = $("#job-list li");
 			var allEdits = $("#job-list > li .edit-mode");
 			var allCandidates = $("#job-list > li .grid-list.sub")
 			var li = $(event.target).closest("#job-list > li");
@@ -104,11 +105,14 @@ define([
 
 					$(all).removeClass("expanded");
 					$(all).addClass("faded");
+					$(allListItems).removeClass("expanded");
+					$(allListItems).removeClass("faded");
 					$(allEdits).removeClass("show");
 					$(allCandidates).removeClass("show");
 
 					if(!isEditExpanded){
 						$(edit).addClass("show");
+						$(li).removeClass("faded");
 						$(li).addClass("expanded");
 					}else{
 						$(edit).removeClass("show");
@@ -197,11 +201,14 @@ define([
 		expandJob : function(event){
 			var isAddJobExpanded = $("#add-job").hasClass("show");
 			var all = $("#job-list > li");
+			var allListItems = $("#job-list li");
 			var allEdits = $("#job-list > li .edit-mode");
 			var allCandidates = $("#job-list > li .grid-list.sub");
 			var li = $(event.target).closest("#job-list > li");
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
+			var allProfiles = $(li).find(".hourly-profile");
+
 
 			var isEditExpanded = $(edit).hasClass("show");
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
@@ -210,9 +217,13 @@ define([
 				if(!isEditExpanded){
 
 					$(all).removeClass("expanded");
+					$(allListItems).removeClass("expanded");
+					$(allListItems).removeClass("faded");
 					$(all).addClass("faded");
 					$(allEdits).removeClass("show");
 					$(allCandidates).removeClass("show");
+					$(allProfiles).removeClass("show");
+
 
 					if(!isCandidatesListExpanded){
 						$(candidates).addClass("show");
@@ -235,8 +246,28 @@ define([
 		},
 
 		profile : function(event){
+
+			var item = $(event.target).closest("#candidates-list > li");
+			var allItems = $("#candidates-list > li");
+			var profile = $(item).find(".hourly-profile");
+			var isProfileExpanded = $(profile).hasClass("show");
+			var allProfiles = $(".hourly-profile");
+
+			$(allItems).removeClass("expanded");
+			$(allItems).addClass("faded");
+			$(allProfiles).removeClass("show");
+
+			if(!isProfileExpanded){
+				$(item).addClass("expanded");	
+				$(item).removeClass("faded");	
+				$(profile).addClass("show");
+			}else{
+				$(item).removeClass("expanded");
+				$(allItems).removeClass("faded");	
+				$(allProfiles).removeClass("show");
+			}
+
 			event.stopPropagation();
-			//App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		candidateSelect : function(event){

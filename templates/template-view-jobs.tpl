@@ -82,7 +82,7 @@
 			</div>
 			<div class="count {{hasNewCandidates this}}">{{this.candidates.length}}</div>
 			{{#if_not_eq this.candidates.length 0}}
-				<ul class="grid-list sub">
+				<ul id="candidates-list" class="grid-list sub">
 					{{#each this.candidates}}
 						<li class="view-profile">
 							<input class="candidate-select" type="checkbox"/>
@@ -107,6 +107,35 @@
 							<div class="candidate-rating"></div>
 							<div class="candidate-endorse">0</div>
 							<div class="candidate-network"><span>0</span> / 0</div>
+							<div class="hourly-profile">
+								<div class="about-section">
+									<label>About</label>
+									<div class="about">This letter may come to you as a surprise but I really prayed to God to help me choose somebody that will be my true partner. My name is Augusto Nandu Savimbi. I am the first son of Mr. Jonas Savinbi, the leader of the UNITA movement in Angola.</div>
+								</div>
+								<div class="history-section">
+									<label>Work History</label>
+									<ul class="work-history">
+										<li>
+											<div class="employer-logo">
+												<img src="images/profiles/PFChangs.jpg"/>
+											</div>
+											<div class="employment-info">
+												<div class="employer-name">Bartender<span>@ PF Changs</span></div>
+												<div class="employment-date">Sep 2012 - Feb 2014</div>
+											</div>
+										</li>
+										<li>
+											<div class="employer-logo">
+												<img src="images/profiles/McDonalds.jpg"/>
+											</div>
+											<div class="employment-info">
+												<div class="employer-name">Bartender<span>@ McDonalds</span></div>
+												<div class="employment-date">Oct 2009 - Jul 2012</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 					{{/each}}
 					<li class="foot">

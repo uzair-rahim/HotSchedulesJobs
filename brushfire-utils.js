@@ -129,16 +129,19 @@ define([
 			},
 
 			// Show loading animation
-
 			ShowLoadingAnimation : function(){
 				$(document).find("#app-modal").addClass("show");
 			},
 
 			// Hide loading animation
-
 			HideLoadingAnimation : function(){
 				$(document).find("#app-modal").removeClass("show");
-			}
+			},
+
+			// Back to top
+			InitBackToTop : function(){
+				
+			},
 
 		});
 

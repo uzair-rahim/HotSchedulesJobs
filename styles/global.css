@@ -190,27 +190,7 @@ input[type="password"].error:focus{
 	}
 }
 
-#app-to-top{
-	position: absolute;
-	display: block;
-	float: left;
-	padding: 10px;
-	bottom: -50px;
-	right: 40px;
-	color: #ffffff;
-	background-color: #39454c;
-	text-transform: uppercase;
-	z-index: 1000;
-	-webkit-transition: bottom 300ms;
-    -moz-transition: bottom 300ms;
-    -o-transition: bottom 300ms;
-    -ms-transition: bottom 300ms;
-    transition: bottom 300ms;
-}
 
-#app-to-top.show{
-	bottom: 0;
-}
 
 #brushfire{
 	display: block;

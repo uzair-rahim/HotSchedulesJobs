@@ -136,13 +136,8 @@ define([
 			// Hide loading animation
 			HideLoadingAnimation : function(){
 				$(document).find("#app-modal").removeClass("show");
-			},
-
-			// Back to top
-			InitBackToTop : function(){
-				
-			},
-
+			}
+			
 		});
 
 		var brushfireUtils = new BrushfireUtils();

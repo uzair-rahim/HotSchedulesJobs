@@ -107,7 +107,7 @@ define([
 
 					error : function(){
 						console.log("Error loading language pack...");
-						Utils.ShowToast({portal : false, type : "success", message : "Error loading language pack"});
+						Utils.ShowToast({ message : "Error loading language pack"});
 					}
 
 				});

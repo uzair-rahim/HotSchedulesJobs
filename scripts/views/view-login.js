@@ -17,7 +17,7 @@ define([
 		template: Template,
 		events : {
 			"click #login"	: "login",
-			"click #signup"	: "signup"
+			"click #forgot-password"	: "signup"
 		},
 
 		initialize : function(){
@@ -50,14 +50,14 @@ define([
 					error : function(){
 						console.log("Error authenticating user...");
 						$(".login-form-container").effect("shake");
-						Utils.ShowToast({portal : true, type : "error", message : "Invalid email address or password"});
+						Utils.ShowToast({message : "Invalid email address or password"});
 					}
 				});
 		},
 
 		signup : function(){
 			console.log("Signup...");
-			Utils.ShowToast({portal : true, message : "Something went seriously wrong..."});
+			Utils.ShowToast({message : "Something went seriously wrong..."});
 			//App.router.navigate("signup", true);
 		},
 		

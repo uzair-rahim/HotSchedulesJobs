@@ -1,11 +1,15 @@
 define([
-		"backbone"
+		"backbone",
+		"utils"
 	],
-	function(Backbone){
+	function(Backbone, Utils){
 		var Language = Backbone.Model.extend({
 
-			urlRoot : "/brushfire/services/rest/i18n/",
 			language: "en",
+
+			urlRoot : function(){
+				return Utils.GetURL("/services/rest/i18n/");
+			},
 
 			initialize : function(options){
 
@@ -17,7 +21,7 @@ define([
 			},
 			
 			url : function(){
-				var url = this.urlRoot + this.language;
+				var url = this.urlRoot() + this.language;
 				return url;
 			}
 

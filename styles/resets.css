@@ -5,6 +5,7 @@
 	font-size: 12px;
 	color: #222222;
 	cursor: default;
+	-webkit-text-size-adjust: 100%;
 }
 
 *::selection {

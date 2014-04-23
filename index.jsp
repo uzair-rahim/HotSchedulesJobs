@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="styles/resets.css"/>
     <link rel="stylesheet" type="text/css" href="styles/global.css"/>
     <link rel="stylesheet" type="text/css" href="styles/gridlist.css"/>
+    <script type="text/javascript">
+      var CONTEXT_ROOT = '<%= request.getContextPath() %>'; 
+    </script>
     <script src="libraries/thirdparty/require.js" data-main="brushfire-config"></script>
   </head>
   <body>

@@ -243,6 +243,109 @@ input[type="password"].error:focus{
 	background-color: rgba(255,170,0, 0.8);
 }
 
+
+
+.login-form-container{
+	position: absolute;
+	display: block;
+	float: left;
+	width: 320px;
+	height: 340px;
+	top: 0;
+	left: 50%;
+	margin: 160px 0 0 -160px;
+	overflow: hidden;
+	background-color: rgba(255,170,0, 0.8);
+}
+
+@media screen and (max-width: 440px){
+	.login-form-container{
+		width: calc(100% - 20px);
+		top: 0;
+		left: 0;
+		margin: 90px 0 0 10px;
+	}
+}
+
+@media screen and (max-width: 380px) and (orientation: landscape){
+	.login-form-container{
+		width: calc(100% - 20px);
+		top: 0;
+		left: 0;
+		margin: 90px 0 0 10px;
+	}
+}
+
+
+
+
+.login-form-container .logo{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 20px 30px;
+	width: calc(100% - 60px);
+	height: 80px;
+	background-image: url("../images/logo-bf-wide.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 80px;
+	}
+
+
+.login-form-container input[type="email"],
+.login-form-container input[type="password"]{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 80px);
+	margin: 4px 30px;
+}
+
+.login-form-container input[type="email"]:hover,
+.login-form-container input[type="password"]:hover{
+	border-color: #e49904;
+}
+
+
+
+.login-form-container button#login{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 60px);
+	margin: 15px 30px;
+	color: #ffffff;
+	background-color: #e49904;
+	border: 1px solid #ffffff;
+	font-size: 14px;
+	-webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    -ms-transition: all 300ms;
+    transition: all 300ms;
+}
+
+.login-form-container button#login:hover{
+	background-color: #c17804;
+}
+
+.login-form-container a#forgot-password{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 60px);
+	margin: 10px 30px;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.login-form-container a#forgot-password:hover{
+	
+}
+
+
 .navigation{
 	display: block;
 	float: left;

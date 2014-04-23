@@ -6,6 +6,14 @@ define([
 	function($, Cookie, Backbone){
 		var BrushfireUtils = Backbone.Model.extend({
 
+			CONTEXT : CONTEXT_ROOT,
+
+			// Get URL
+			GetURL : function(url){
+				//return this.CONTEXT + url;
+				return "../brushfire" + url;
+			},
+
 			// Check user session
 			CheckSession : function(){
 				console.log("Checking user session...");
@@ -100,7 +108,7 @@ define([
 			// Toast
 			ShowToast : function(options){
 				var defaults = {
-					portal : false,
+					portal : true,
 					type : "",
 					message : "There was an error"
 				}

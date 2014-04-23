@@ -81,7 +81,7 @@ define([
 					},
 					error : function(){
 						console.log("There was an error trying to save the job");
-						Utils.ShowToast({portal : false, type : "error", message : "Error saving job..."});
+						Utils.ShowToast({ message : "Error saving job..."});
 					}
 				});
 
@@ -185,7 +185,7 @@ define([
 						},
 						error : function(){
 							console.log("There was an error trying to save the job");
-							Utils.ShowToast({portal : false, type : "error", message : "Error saving job..."});
+							Utils.ShowToast({ message : "Error saving job..."});
 						}
 					});
 
@@ -282,12 +282,12 @@ define([
 
 		candidateMessage : function(event){
 			event.stopPropagation();
-			Utils.ShowToast({portal : true, type : "success", message : "Message sent"});
+			Utils.ShowToast({ message : "Message sent"});
 		},
 
 		candidateArchive : function(event){
 			event.stopPropagation();
-			Utils.ShowToast({portal : false, type : "success", message : "Candidate archived"});
+			Utils.ShowToast({ message : "Candidate archived"});
 		},
 
 		serializeData : function(){

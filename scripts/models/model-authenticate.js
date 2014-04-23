@@ -1,10 +1,13 @@
 define([
-		"backbone"
+		"backbone",
+		"utils"
 	],
-	function(Backbone){
+	function(Backbone, Utils){
 		var Authenticate = Backbone.Model.extend({
 
-			urlRoot : "/brushfire/services/rest/auth/login",
+			urlRoot : function(){
+				return Utils.GetURL("/services/rest/auth/login");
+			},
 
 			initialize : function(options){
 				console.log("Authenticate model initialized...");
@@ -13,7 +16,7 @@ define([
 			},
 			
 			url : function(){
-				var url = this.urlRoot + "/" + this.email + "/" + this.password;
+				var url = this.urlRoot() + "/" + this.email + "/" + this.password;
 				return url;
 			}
 

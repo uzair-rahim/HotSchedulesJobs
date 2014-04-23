@@ -1,16 +1,20 @@
 define([
-	"backbone"
+		"backbone",
+		"utils"
 	],
-	function(Backbone){
+	function(Backbone, Utils){
 		var Job = Backbone.Model.extend({
-			urlRoot : "/brushfire/services/rest/job/",
+
+			urlRoot : function(){
+				return Utils.GetURL("/services/rest/job/");
+			},
 			
 			initialize : function(){
 				console.log("Job model initialized...");
 			},
 
 			url : function(){
-				var url = this.urlRoot;
+				var url = this.urlRoot();
 				return url;
 			}
 

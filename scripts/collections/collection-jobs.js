@@ -1,14 +1,17 @@
 define([
-	"backbone",
-	"utils",
-	"scripts/models/model-job"
+		"backbone",
+		"utils",
+		"scripts/models/model-job"
 	],
 	function(Backbone, Utils, Job){
 	"use strict";
 
 	var Jobs = Backbone.Collection.extend({
 		model : Job,
-		urlRoot : "/brushfire/services/rest/job/",
+
+		urlRoot : function(){
+			return Utils.GetURL("/services/rest/job/");
+		},
 
 		initialize : function(options){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
@@ -21,7 +24,7 @@ define([
 
 		url : function(){
 			var user= Utils.GetUserSession();
-			var url = this.urlRoot;
+			var url = this.urlRoot();
 			
 			if(typeof this.guid !== "undefined"){
 				url += this.guid;

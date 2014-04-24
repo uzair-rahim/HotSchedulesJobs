@@ -240,46 +240,42 @@ input[type="password"].error:focus{
 	font-weight: lighter;
 	white-space: nowrap;
 	overflow: hidden;
+	background-color: rgba(0,153,205, 0.8);
 	background-color: rgba(255,170,0, 0.8);
 }
 
 
-
-.login-form-container{
+.form-container{
 	position: absolute;
+	display: block;
+	float: left;
+	width: 600px;
+	height: 340px;
+	top: 0;
+	left: 50%;
+	margin: 160px 0 0 -300px;
+	overflow: hidden;
+}
+
+@media screen and (max-width: 640px){
+	.form-container{
+		width: 300px;
+		height: 500px;
+		margin: 90px 0 0 -150px;
+	}
+}
+
+.form-container .login-form{
 	display: block;
 	float: left;
 	width: 320px;
 	height: 340px;
-	top: 0;
-	left: 50%;
-	margin: 160px 0 0 -160px;
 	overflow: hidden;
+	background-color: rgba(0,153,205, 0.8);
 	background-color: rgba(255,170,0, 0.8);
 }
 
-@media screen and (max-width: 440px){
-	.login-form-container{
-		width: calc(100% - 20px);
-		top: 0;
-		left: 0;
-		margin: 90px 0 0 10px;
-	}
-}
-
-@media screen and (max-width: 380px) and (orientation: landscape){
-	.login-form-container{
-		width: calc(100% - 20px);
-		top: 0;
-		left: 0;
-		margin: 90px 0 0 10px;
-	}
-}
-
-
-
-
-.login-form-container .logo{
+.form-container .login-form .logo{
 	display: block;
 	float: left;
 	clear: both;
@@ -293,8 +289,8 @@ input[type="password"].error:focus{
 	}
 
 
-.login-form-container input[type="email"],
-.login-form-container input[type="password"]{
+.form-container .login-form input[type="email"],
+.form-container .login-form input[type="password"]{
 	display: block;
 	float: left;
 	clear: both;
@@ -302,20 +298,19 @@ input[type="password"].error:focus{
 	margin: 4px 30px;
 }
 
-.login-form-container input[type="email"]:hover,
-.login-form-container input[type="password"]:hover{
+.form-container .login-form input[type="email"]:hover,
+.form-container .login-form input[type="password"]:hover{
 	border-color: #e49904;
 }
 
-
-
-.login-form-container button#login{
+.form-container button{
 	display: block;
 	float: left;
 	clear: both;
 	width: calc(100% - 60px);
 	margin: 15px 30px;
 	color: #ffffff;
+	background-color: #068dba;
 	background-color: #e49904;
 	border: 1px solid #ffffff;
 	font-size: 14px;
@@ -326,11 +321,19 @@ input[type="password"].error:focus{
     transition: all 300ms;
 }
 
-.login-form-container button#login:hover{
+.form-container .login-form button#login{
+	background-color: #068dba;
+	background-color: #e49904;
+	border: 1px solid #ffffff;
+	font-size: 14px;
+}
+
+.form-container .login-form button#login:hover{
+	background-color: #096d8e;
 	background-color: #c17804;
 }
 
-.login-form-container a#forgot-password{
+.form-container .login-form a#forgot-password{
 	display: block;
 	float: left;
 	clear: both;
@@ -341,10 +344,71 @@ input[type="password"].error:focus{
 	color: #ffffff;
 }
 
-.login-form-container a#forgot-password:hover{
-	
+.form-container .signup-services{
+	display: block;
+	float: left;
+	width: 280px;
+	height: 340px;
+	overflow: hidden;
+	background-color: rgba(0,153,200, 0.9);
+	background-color: rgba(255,170,0, 0.9);
 }
 
+.form-container .signup-services button{
+	margin: 5px 30px;
+}
+
+.form-container .signup-services button#login-with-facebook{
+	margin-top: 130px;
+	background-color: #578EDF;
+	border: 1px solid #ffffff;
+}
+
+.form-container .signup-services button#login-with-facebook:hover{
+	background-color: #406daf;
+}
+
+.form-container .signup-services button#login-with-hotschedules{	
+	background-color: #3cb950;
+	border: 1px solid #ffffff;
+}
+
+.form-container .signup-services button#login-with-hotschedules:hover{
+	background-color: #30a243;
+}
+
+.form-container .signup-services .message{
+	display: block;
+	float: left;
+	width: calc(100% - 60px);
+	margin: 10px 30px;
+	text-align: center;
+	font-style: italic;
+	color: rgba(255,255,255, 0.8);
+}
+
+@media screen and (max-width: 640px){
+	.form-container .login-form{
+		clear: both;
+		width: 100%;
+		height: 280px;
+	}
+
+	.form-container .login-form .logo{
+		margin: 10px 30px;
+	}
+
+	.form-container .signup-services{
+		clear: both;
+		width: 100%;
+		height: 180px;
+	}
+
+	.form-container .signup-services button#login-with-facebook{
+		margin-top: 35px;
+	}
+
+}
 
 .navigation{
 	display: block;

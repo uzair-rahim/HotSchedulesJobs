@@ -49,7 +49,7 @@ define([
 
 					error : function(){
 						console.log("Error authenticating user...");
-						$(".login-form-container").effect("shake");
+						$(".form-container").effect("shake");
 						Utils.ShowToast({message : "Invalid email address or password"});
 					}
 				});

@@ -115,8 +115,36 @@ define([
 		},
 
 		candidateArchive : function(event){
-			alert("Archive Candidate");
+
+			var candidate = $(event.target).closest("#candidates-list > li");
+			var job = $(candidate).closest("#candidates-list");
+			var request = new Object();
+			var update = new Object();
+
+				request.type = "update";
+				request.jobGuid = $(job).attr("data-guid");
+				request.guid = $(candidate).attr("data-guid");
+
+				update.id = $(candidate).attr("data-id");;
+				update.archived = true;
+
+				var candidate = new ModelCandidate(request);
+
+					candidate.save(update, {
+						headers : {
+							"token" : Utils.GetUserSession().brushfireToken
+						},
+						success : function(){
+							console.log("Candidate successfully marked as archived...");
+						},
+						error : function(){
+							console.log("There was an error trying to mark the cadndidates as archived");
+							Utils.ShowToast({ message : "Unexpected error occured"});
+						}
+					});
+
 			event.stopPropagation();
+			
 		},
 
 		serializeData : function(){

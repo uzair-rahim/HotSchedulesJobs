@@ -1,1 +1,1 @@
-this app lets your find talent
+this app lets you find talent

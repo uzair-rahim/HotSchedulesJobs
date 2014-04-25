@@ -84,7 +84,7 @@
 			{{#if_not_eq this.candidates.length 0}}
 				<ul id="candidates-list" class="grid-list sub">
 					{{#each this.candidates}}
-						<li class="view-profile">
+						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}">
 							<input class="candidate-select" type="checkbox"/>
 							<div class="candidate-picture">
 								{{#hasPhoto this.user.photo.url}}

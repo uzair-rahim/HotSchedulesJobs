@@ -5,9 +5,10 @@ define([
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-jobs",
-		"scripts/models/model-job"
+		"scripts/models/model-job",
+		"scripts/models/model-candidate"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelJob){
+	function($, Cookie, App, Utils, Marionette, Template, ModelJob, ModelCandidate){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -247,7 +248,11 @@ define([
 
 		profile : function(event){
 
-			var item = $(event.target).closest("#candidates-list > li");
+			var item = $(event.target).closest(".view-profile");
+			var job = $(item).closest("#job-list > li");
+			var candidatesList = $(job).find(".candidates-list");
+			var isNewCandidate = $(item).find(".candidate-name").hasClass("new");
+			var candidateGuid = $(item).attr("id");
 			var allItems = $("#candidates-list > li");
 			var profile = $(item).find(".hourly-profile");
 			var isProfileExpanded = $(profile).hasClass("show");
@@ -261,6 +266,44 @@ define([
 				$(item).addClass("expanded");	
 				$(item).removeClass("faded");	
 				$(profile).addClass("show");
+
+				if(isNewCandidate){
+					$(item).find("*").removeClass("new");
+
+					$(job).find(".candidates-list li:eq("+$(item).index()+")").removeClass("new");
+
+					var request = new Object();
+					var update = new Object();
+
+					request.type = "update";
+					request.jobGuid = $(job).attr("data-guid");
+					request.guid = $(item).attr("data-guid");
+
+					update.id = $(item).attr("data-id");;
+					update.seen = true;
+
+					var candidate = new ModelCandidate(request);
+
+						candidate.save(update, {
+							headers : {
+								"token" : Utils.GetUserSession().brushfireToken
+							},
+							success : function(){
+								console.log("Candidate successfully marked as seen...");
+
+								if(!$(candidatesList).find("*").hasClass("new")){
+									$(job).find("*").removeClass("new")
+								}
+
+							},
+							error : function(){
+								console.log("There was an error trying to mark the cadndidates as seen");
+								Utils.ShowToast({ message : "Unexpected error occured"});
+							}
+						});
+
+				}
+
 			}else{
 				$(item).removeClass("expanded");
 				$(allItems).removeClass("faded");	

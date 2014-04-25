@@ -14,9 +14,9 @@
 {{#each jobs}}
 	{{#if_gt candidates.length 0}}
 		<div class="grid-list-head">{{jobName}} ({{candidates.length}})</div>
-		<ul id="candidates-list" class="grid-list">
+		<ul id="candidates-list" class="grid-list" data-id="{{id}}" data-guid="{{guid}}">
 		{{#each candidates}}
-			<li class="view-profile">
+			<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}">
 				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.user.photo.url}}

@@ -351,6 +351,7 @@ define([
 						},
 						success : function(){
 							console.log("Candidate successfully marked as archived...");
+							App.router.controller.jobs();
 						},
 						error : function(){
 							console.log("There was an error trying to mark the cadndidates as archived");

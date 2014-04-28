@@ -136,6 +136,7 @@ define([
 						},
 						success : function(){
 							console.log("Candidate successfully marked as archived...");
+							Backbone.history.loadUrl();
 						},
 						error : function(){
 							console.log("There was an error trying to mark the cadndidates as archived");

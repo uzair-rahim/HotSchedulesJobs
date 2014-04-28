@@ -95,12 +95,18 @@ define([
 			},
 
 			login : function(){
-				this.setLayout();
-				this.setHeader("heading");
-				this.setBackground();
+
+
+				if(Utils.CheckSession()){
+					App.router.navigate("jobs", true);	
+				}else{
+					this.setLayout();
+					this.setHeader("heading");
+					this.setBackground();
 				
-				var view = new ViewLogin();
-				this.layout.body.show(view);
+					var view = new ViewLogin();
+					this.layout.body.show(view);
+				}
 			},
 
 			signup : function(){

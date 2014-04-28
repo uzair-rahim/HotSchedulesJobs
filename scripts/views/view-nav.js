@@ -59,27 +59,35 @@ define([
 		},
 
 		jobs : function(){
-			App.router.navigate("jobs", true);
+			this.route("jobs");
 		},
 
 		candidates : function(){
-			App.router.navigate("candidates", true);
+			this.route("candidates");
 		},
 
 		network : function(){
-			App.router.navigate("network", true);
+			this.route("network");
 		},
 
 		messages : function(){
-			App.router.navigate("messages", true);
+			this.route("messages");
 		},
 
 		settings : function(){
-			App.router.navigate("settings", true);
+			this.route("settings");
 		},
 
 		logout : function(){
 			App.router.navigate("logout", true);
+		},
+
+		route : function(fragment){
+			if(Backbone.history.fragment === fragment){
+				Backbone.history.loadUrl();
+			}else{
+				App.router.navigate(fragment, true);
+			}
 		},
 
 		serializeData : function(){

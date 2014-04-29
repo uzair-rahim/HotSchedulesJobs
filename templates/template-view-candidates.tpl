@@ -100,7 +100,7 @@
 								<div class="name">Not Available</div>
 							</div>
 						</div>
-						<div class="candidate-archive"></div>
+						<div class="candidate-unarchive"></div>
 						<div class="candidate-message"></div>
 						<div class="candidate-rating"></div>
 						<div class="candidate-endorse">0</div>

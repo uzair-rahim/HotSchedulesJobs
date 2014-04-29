@@ -614,6 +614,23 @@ ul.grid-list > li .candidate-archive:hover{
 	background-image: url("../images/icon-archive-hover.png");
 }
 
+ul.grid-list > li .candidate-unarchive{
+	display: block;
+	float: right;
+	margin: 5px 0;
+	width: 40px;
+	height: 40px;
+	background-image: url("../images/icon-unarchive.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 22px auto;
+	overflow: hidden;
+}
+
+ul.grid-list > li .candidate-unarchive:hover{
+	background-image: url("../images/icon-unarchive-hover.png");
+}
+
 ul.grid-list > li .candidate-endorse{
 	display: block;
 	float: right;

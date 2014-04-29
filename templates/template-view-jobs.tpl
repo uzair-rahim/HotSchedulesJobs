@@ -57,7 +57,7 @@
 		<li data-id="{{id}}" data-guid="{{guid}}">
 			<div class="job-info">
 				<div class="job-name {{hasNewCandidates this}}">{{jobName}}</div>
-				<div class="job-shift">@ ${{wage}} / {{wageType}}</div>
+				<div class="job-shift">@ ${{formatCurrency wage}} / {{wageType}}</div>
 			</div>
 			<div class="candidates-info">
 				{{#if_not_eq this.candidates.length 0}}

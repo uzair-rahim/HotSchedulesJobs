@@ -16,8 +16,9 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #login"	: "login",
-			"click #forgot-password"	: "signup"
+			"click #login"			 : "login",
+			"click #signup"			 : "signup",
+			"click #forgot-password" : "forgotPassword"
 		},
 
 		initialize : function(){
@@ -57,8 +58,12 @@ define([
 
 		signup : function(){
 			console.log("Signup...");
+			App.router.navigate("signup", true);
+		},
+
+		forgotPassword : function(){
+			console.log("Forgot Password...");
 			Utils.ShowToast({message : "Something went seriously wrong..."});
-			//App.router.navigate("signup", true);
 		},
 		
 		serializeData : function(){

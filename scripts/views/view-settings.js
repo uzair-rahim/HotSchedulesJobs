@@ -28,8 +28,10 @@ define([
 
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.employerProfile = this.model;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
+				console.log(jsonObject);
 			return jsonObject;
 		}
 		

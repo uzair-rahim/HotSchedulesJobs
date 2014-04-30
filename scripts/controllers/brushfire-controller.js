@@ -18,9 +18,10 @@ define([
 		"scripts/views/view-messages",
 		"scripts/views/view-settings",
 		"scripts/models/model-jobtypes",
-		"scripts/collections/collection-jobs"
+		"scripts/collections/collection-jobs",
+		"scripts/collections/collection-employer-profile",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -363,8 +364,37 @@ define([
 					this.setLayout();
 					this.setHeader("navigation");
 
-					var view = new ViewSettings();
-					that.layout.body.show(view);
+
+					var employerGUIDs = Utils.GetUserSession().employerIds;
+
+					if(employerGUIDs.length != 0){
+
+						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[0]});
+
+							employerProfiles.fetch({
+								headers : {
+									"token" : Utils.GetUserSession().brushfireToken
+								},
+								success : function(response){
+									var modelProfiles = response.models;
+									var modelProfile = response.models[0].attributes;
+
+									var view = new ViewSettings({model : modelProfile});
+									that.layout.body.show(view);
+
+								},
+								error : function(){
+									console.log("Error fetching employer profiles...")
+								}
+							});
+					
+
+					}else{
+						var view = new ViewSettings();
+							that.layout.body.show(view);
+					}
+
+
 				}else{
 					App.router.navigate("login", true);
 				}

@@ -250,7 +250,7 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	width: 600px;
-	height: 340px;
+	height: 380px;
 	top: 0;
 	left: 50%;
 	margin: 160px 0 0 -300px;
@@ -286,7 +286,7 @@ input[type="password"].error:focus{
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: auto 80px;
-	}
+}
 
 
 .form-container .login-form input[type="email"],
@@ -344,7 +344,7 @@ input[type="password"].error:focus{
 	color: #ffffff;
 }
 
-.form-container .signup-services{
+.form-container .login-services{
 	display: block;
 	float: left;
 	width: 280px;
@@ -354,30 +354,30 @@ input[type="password"].error:focus{
 	background-color: rgba(255,170,0, 0.9);
 }
 
-.form-container .signup-services button{
+.form-container .login-services button{
 	margin: 5px 30px;
 }
 
-.form-container .signup-services button#login-with-facebook{
+.form-container .login-services button#login-with-facebook{
 	margin-top: 130px;
 	background-color: #578EDF;
 	border: 1px solid #ffffff;
 }
 
-.form-container .signup-services button#login-with-facebook:hover{
+.form-container .login-services button#login-with-facebook:hover{
 	background-color: #406daf;
 }
 
-.form-container .signup-services button#login-with-hotschedules{	
+.form-container .login-services button#login-with-hotschedules{	
 	background-color: #3cb950;
 	border: 1px solid #ffffff;
 }
 
-.form-container .signup-services button#login-with-hotschedules:hover{
+.form-container .login-services button#login-with-hotschedules:hover{
 	background-color: #30a243;
 }
 
-.form-container .signup-services .message{
+.form-container .login-services .message{
 	display: block;
 	float: left;
 	width: calc(100% - 60px);
@@ -398,16 +398,93 @@ input[type="password"].error:focus{
 		margin: 10px 30px;
 	}
 
-	.form-container .signup-services{
+	.form-container .login-services{
 		clear: both;
 		width: 100%;
 		height: 180px;
 	}
 
-	.form-container .signup-services button#login-with-facebook{
+	.form-container .login-services button#login-with-facebook{
 		margin-top: 35px;
 	}
 
+}
+
+.form-container .link{
+	display: block;
+	float: left;
+	width: 100%;
+	margin: 10px 0 0 0;
+	text-align: center;
+	color: #666666;
+	text-decoration: underline;
+	-webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    -ms-transition: all 300ms;
+    transition: all 300ms;
+}
+
+.form-container .link:hover{
+	color: #222222;
+}
+
+.form-container .signup-form .logo{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 20px 30px;
+	width: calc(100% - 60px);
+	height: 80px;
+	background-image: url("../images/logo-bf-wide.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 80px;
+}
+
+.form-container .signup-form{
+	display: block;
+	float: left;
+	width: 600px;
+	height: 340px;
+	overflow: hidden;
+	background-color: rgba(0,153,205, 0.8);
+	background-color: rgba(255,170,0, 0.8);
+}
+
+.form-container .signup-form input{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 80px);
+	margin: 4px 30px;
+}
+
+.form-container .signup-form input:hover{
+	border-color: #e49904;
+}
+
+@media screen and (max-width: 640px){
+	.form-container .signup-form{
+		clear: both;
+		width: 100%;
+	}
+
+	.form-container .signup-form .logo{
+		margin: 10px 30px;
+	}
+}
+
+.form-container .signup-form button#signup{
+	background-color: #068dba;
+	background-color: #e49904;
+	border: 1px solid #ffffff;
+	font-size: 14px;
+}
+
+.form-container .signup-form button#signup:hover{
+	background-color: #096d8e;
+	background-color: #c17804;
 }
 
 .navigation{

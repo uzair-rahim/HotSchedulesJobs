@@ -251,7 +251,7 @@ define([
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
 
 			//if(!isAddJobExpanded){
-				//if(!isEditExpanded){
+				if(!isEditExpanded){
 
 					$(all).removeClass("expanded");
 					$(allListItems).removeClass("expanded");
@@ -270,7 +270,7 @@ define([
 						$(li).removeClass("expanded");
 						$(all).removeClass("faded");
 					}
-				//}
+				}
 			//}
 
 		},

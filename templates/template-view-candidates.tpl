@@ -9,6 +9,7 @@
 <div id="toolbar">
 	<button id="send-message" class="primary">Send Message</button>
 	<button id="archive-candidates">Archive Candidates</button>
+	<button id="filter"></button>
 </div>
 
 {{#each jobs}}

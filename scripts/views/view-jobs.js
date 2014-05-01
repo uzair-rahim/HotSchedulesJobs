@@ -38,6 +38,18 @@ define([
 
 		addNewJob : function(){
 			$("#add-job").addClass("show");
+
+			var jobs = $("#job-list > li");
+			var cadndidates = $(".grid-list.sub");
+			var profiles = $(".hourly-profile");
+			var edits = $(".edit-mode");
+
+			$(jobs).removeClass("expanded").removeClass("faded");
+
+			$(cadndidates).removeClass("show");
+			$(profiles).removeClass("show");
+			$(edits).removeClass("show");
+
 		},
 
 		cancelAddJob : function(){
@@ -46,49 +58,60 @@ define([
 
 		saveAddJob : function(){
 
-			var job = new Object();	
-				job.shifts = new Object();
-				job.jobType = new Object();
-				job.employer = new Object();
-				job.updatedBy = new Object();
-				job.createdBy = new Object();
+			var wage = $("#new-wage").val();
 
-				job.id = 0;
-				job.jobType.id = 0;
-				job.employer.id = 0;
-				job.updatedBy.id = 0;
-				job.createdBy.id = 0;
-				job.shifts = [{id : 0}];
-				job.updatedBy.guid = Utils.GetUserSession().guid;
-				job.createdBy.guid = Utils.GetUserSession().guid;
-				job.employer.guid = Utils.GetUserSession().employerIds[0];
+			if(wage === "" || isNaN(wage)){
+				Utils.ShowToast({message : "Invalid wage..."});
+			}else{
+				var job = new Object();	
+					job.shifts = new Object();
+					job.jobType = new Object();
+					job.employer = new Object();
+					job.updatedBy = new Object();
+					job.createdBy = new Object();
 
-				job.jobName = $("#new-position button").text();
-				job.description = $("#new-description").val();
-				job.wage = $("#new-wage").val(); 
-				job.wageType = $("#new-wage-type .custom-select-button").text().replace("-", "").toUpperCase();
-				job.jobType.guid = $("#new-position .custom-select-list li:contains('"+job.jobName+"')").attr("id");
+					job.id = 0;
+					job.jobType.id = 0;
+					job.employer.id = 0;
+					job.updatedBy.id = 0;
+					job.createdBy.id = 0;
+					job.shifts = [{id : 0}];
+					job.updatedBy.guid = Utils.GetUserSession().guid;
+					job.createdBy.guid = Utils.GetUserSession().guid;
+					job.employer.guid = Utils.GetUserSession().employerIds[0];
 
-			var that = this;
-			var model = new ModelJob();				
-				model.save(job,{
-					type : "POST",
-					headers : {
-						'token' : Utils.GetUserSession().brushfireToken
-					},
-					success : function(){
-						console.log("Job successfully saved");
-						App.router.controller.jobs();
-					},
-					error : function(){
-						console.log("There was an error trying to save the job");
-						Utils.ShowToast({ message : "Error saving job..."});
-					}
-				});
+					job.jobName = $("#new-position button").text();
+					job.description = $("#new-description").val();
+					job.wage = wage; 
+					job.wageType = $("#new-wage-type .custom-select-button").text().replace("-", "").toUpperCase();
+					job.jobType.guid = $("#new-position .custom-select-list li:contains('"+job.jobName+"')").attr("id");
+
+				var that = this;
+				var model = new ModelJob();				
+					model.save(job,{
+						type : "POST",
+						headers : {
+							'token' : Utils.GetUserSession().brushfireToken
+						},
+						success : function(){
+							console.log("Job successfully saved");
+							App.router.controller.jobs();
+						},
+						error : function(){
+							console.log("There was an error trying to save the job");
+							Utils.ShowToast({ message : "Error saving job..."});
+						}
+					});
+
+			}
+
+			
 
 		},
 
 		editJob : function(event){
+
+			var add = $("#add-job");
 			var isAddJobExpanded = $("#add-job").hasClass("show");
 			var all = $("#job-list > li");
 			var allListItems = $("#job-list li");
@@ -97,12 +120,15 @@ define([
 			var li = $(event.target).closest("#job-list > li");
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
+			var profile = $(".hourly-profile");
+
+			$(add).removeClass("show");
 
 			var isEditExpanded = $(edit).hasClass("show");
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
 
 			//if(!isAddJobExpanded){
-				if(!isCandidatesListExpanded){
+				//if(!isCandidatesListExpanded){
 
 					$(all).removeClass("expanded");
 					$(all).addClass("faded");
@@ -110,6 +136,7 @@ define([
 					$(allListItems).removeClass("faded");
 					$(allEdits).removeClass("show");
 					$(allCandidates).removeClass("show");
+					$(profile).removeClass("show");
 
 					if(!isEditExpanded){
 						$(edit).addClass("show");
@@ -120,7 +147,7 @@ define([
 						$(li).removeClass("expanded");
 						$(all).removeClass("faded");
 					}
-				}
+				//}
 			//}
 
 			event.stopPropagation();
@@ -145,51 +172,58 @@ define([
 			var index = $(item).index();
 			var job = this.model.jobs[index];
 
-			var update = new Object();
-				update.shifts = new Object();
-				update.jobType = new Object();
-				update.employer = new Object();
-				update.updatedBy = new Object();
-				update.createdBy = new Object();
+			var wage = $(item).find(".wage").val();
 
-				update.id = job.id;
-				update.guid = job.guid;
-				update.jobName = $(item).find(".position .custom-select-button").text();
-				update.description = $(item).find(".description").val();
-				update.wage = $(item).find(".wage").val(); 
-				update.wageType = $(item).find(".wage-type .custom-select-button").text().replace("-", "").toUpperCase();
+			if(wage === "" || isNaN(wage)){
+				Utils.ShowToast({message : "Invalid wage..."});
+			}else{
 
-				update.jobType.id = job.jobType.id;
-				update.jobType.guid = $(item).find(".position .custom-select-list li:contains('"+update.jobName+"')").attr("id");
+				var update = new Object();
+					update.shifts = new Object();
+					update.jobType = new Object();
+					update.employer = new Object();
+					update.updatedBy = new Object();
+					update.createdBy = new Object();
 
-				update.employer.id = job.employer.id;
-				update.employer.guid = job.employer.guid;
+					update.id = job.id;
+					update.guid = job.guid;
+					update.jobName = $(item).find(".position .custom-select-button").text();
+					update.description = $(item).find(".description").val();
+					update.wage = wage
+					update.wageType = $(item).find(".wage-type .custom-select-button").text().replace("-", "").toUpperCase();
 
-				update.created = job.created;
-				update.createdBy = job.createdBy;
+					update.jobType.id = job.jobType.id;
+					update.jobType.guid = $(item).find(".position .custom-select-list li:contains('"+update.jobName+"')").attr("id");
 
-				update.updatedBy.id = job.updatedBy.id
-				update.updatedBy.guid = Utils.GetUserSession().guid;
+					update.employer.id = job.employer.id;
+					update.employer.guid = job.employer.guid;
 
-				update.shifts = [{id : 0}];
+					update.created = job.created;
+					update.createdBy = job.createdBy;
 
-				var that = this;
-				var model = new ModelJob();				
-					model.save(update,{
-						type : "PUT",
-						headers : {
-							'token' : Utils.GetUserSession().brushfireToken
-						},
-						success : function(){
-							console.log("Job successfully saved");
-							App.router.controller.jobs();
-						},
-						error : function(){
-							console.log("There was an error trying to save the job");
-							Utils.ShowToast({ message : "Error saving job..."});
-						}
-					});
+					update.updatedBy.id = job.updatedBy.id
+					update.updatedBy.guid = Utils.GetUserSession().guid;
 
+					update.shifts = [{id : 0}];
+
+					var that = this;
+					var model = new ModelJob();				
+						model.save(update,{
+							type : "PUT",
+							headers : {
+								'token' : Utils.GetUserSession().brushfireToken
+							},
+							success : function(){
+								console.log("Job successfully saved");
+								App.router.controller.jobs();
+							},
+							error : function(){
+								console.log("There was an error trying to save the job");
+								Utils.ShowToast({ message : "Error saving job..."});
+							}
+						});	
+
+			} 
 
 			event.stopPropagation();
 		},
@@ -200,6 +234,7 @@ define([
 		},
 
 		expandJob : function(event){
+			var add = $("#add-job");
 			var isAddJobExpanded = $("#add-job").hasClass("show");
 			var all = $("#job-list > li");
 			var allListItems = $("#job-list li");
@@ -210,12 +245,13 @@ define([
 			var candidates = $(li).find(".grid-list.sub");
 			var allProfiles = $(li).find(".hourly-profile");
 
+			$(add).removeClass("show");
 
 			var isEditExpanded = $(edit).hasClass("show");
 			var isCandidatesListExpanded = $(candidates).hasClass("show");
 
 			//if(!isAddJobExpanded){
-				if(!isEditExpanded){
+				//if(!isEditExpanded){
 
 					$(all).removeClass("expanded");
 					$(allListItems).removeClass("expanded");
@@ -234,8 +270,7 @@ define([
 						$(li).removeClass("expanded");
 						$(all).removeClass("faded");
 					}
-				}
-
+				//}
 			//}
 
 		},

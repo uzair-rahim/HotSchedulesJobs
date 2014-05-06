@@ -396,7 +396,7 @@ ul.grid-list > li .job-actions button{
 	float: right;
 }
 
-@media screen and (max-width: 630px){
+@media screen and (max-width: 640px){
 	ul.grid-list > li .job-actions{
 		width: 70px;
 	}
@@ -412,7 +412,7 @@ ul.grid-list > li .candidate-select{
 	margin: 18px 5px 0 10px;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 510px){
 	ul.grid-list > li .candidate-select{
 		display: none;
 	}
@@ -574,7 +574,7 @@ ul.grid-list > li .candidate-referral .referred-by .name{
 	text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 950px){
+@media screen and (max-width: 960px){
 	ul.grid-list > li .candidate-referral{
 		display: none;
 	}

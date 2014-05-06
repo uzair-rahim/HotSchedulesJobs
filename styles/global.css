@@ -32,15 +32,6 @@ button.primary:hover{
 	background-color: #2d81bd;
 }
 
-button#filter{
-	width: 30px;
-	height: 30px;
-	background-image: url("../images/icon-filter.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 10px auto;
-}
-
 label{
 	font-weight: bold;
 	color: #626970;
@@ -650,6 +641,36 @@ input[type="password"].error:focus{
 
 #breadcrumb li:last-child{
 	color: #2d3c4b;
+}
+
+#page-actions{
+	display: block;
+	float: right;
+}
+
+#page-actions li{
+	display: block;
+	float: left;
+	width: 30px;
+	height: 30px;
+}
+
+#page-actions li#filter{
+	background-image: url("../images/icon-filter.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10px auto;
+}
+
+#page-actions li#filter:hover{
+	background-image: url("../images/icon-filter-hover.png");
+}
+
+#page-actions li#filter{
+	background-image: url("../images/icon-filter.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10px auto;
 }
 
 #toolbar{

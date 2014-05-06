@@ -35,7 +35,7 @@
 				<ul class="custom-select-list">
 					<li>Hourly</li>
 					<li>Weekly</li>
-					<li>Bi-Weekly</li>
+					<li>Biweekly</li>
 					<li>Monthly</li>
 					<li>Annually</li>
 				</ul>
@@ -72,6 +72,7 @@
 							{{/if_eq}}
 						{{/each}}
 					</ul>
+					<div class="more {{hasNewCandidates ../this}}">{{moreCandidates this.candidates}}</div>
 				{{else}}
 					<div class="more">No Candidates</div>
 				{{/if_not_eq}}
@@ -173,7 +174,7 @@
 							<ul class="custom-select-list">
 								<li>Hourly</li>
 								<li>Weekly</li>
-								<li>Bi-Weekly</li>
+								<li>Biweekly</li>
 								<li>Monthly</li>
 								<li>Annually</li>
 							</ul>

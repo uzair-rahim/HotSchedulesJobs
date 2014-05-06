@@ -28,8 +28,7 @@ define([
 					firstname		: "",
 					lastname		: "",
 					guid			: "",
-					employerIds		: "",
-					brushfireToken	: ""
+					employerIds		: ""
 				}
 
 				for(var key in defaults){

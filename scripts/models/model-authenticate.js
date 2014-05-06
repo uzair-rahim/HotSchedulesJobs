@@ -1,6 +1,6 @@
 define([
-		"backbone",
-		"utils"
+	"backbone",
+	"utils"
 	],
 	function(Backbone, Utils){
 		var Authenticate = Backbone.Model.extend({

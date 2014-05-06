@@ -1,6 +1,6 @@
 define([
-		"backbone",
-		"utils"
+	"backbone",
+	"utils"
 	],
 	function(Backbone, Utils){
 		var JobTypes = Backbone.Model.extend({

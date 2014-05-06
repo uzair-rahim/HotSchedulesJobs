@@ -1,7 +1,8 @@
 define([
-	"backbone"
+	"backbone",
+	"utils"
 	],
-	function(Backbone){
+	function(Backbone, Utils){
 		var User = Backbone.Model.extend({
 
 			defaults : {

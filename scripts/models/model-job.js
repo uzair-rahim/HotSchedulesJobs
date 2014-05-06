@@ -9,13 +9,13 @@ define([
 				return Utils.GetURL("/services/rest/job/");
 			},
 			
-			initialize : function(){
-				console.log("Job model initialized...");
-			},
-
 			url : function(){
 				var url = this.urlRoot();
 				return url;
+			},
+
+			initialize : function(){
+				console.log("Job model initialized...");
 			}
 
 		});

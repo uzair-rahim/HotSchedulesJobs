@@ -9,10 +9,6 @@ define([
 				return Utils.GetURL("/services/rest/job/");
 			},
 			
-			initialize : function(){
-				console.log("Candidate model initialized...");
-			},
-
 			url : function(){
 				var url = this.urlRoot();
 
@@ -21,6 +17,10 @@ define([
 				}
 
 				return url;
+			},
+
+			initialize : function(){
+				console.log("Candidate model initialized...");
 			}
 
 		});

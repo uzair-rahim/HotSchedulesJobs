@@ -8,15 +8,21 @@ define([
 
 	var EmployerProfiles = Backbone.Collection.extend({
 		model : EmployerProfile,
-		urlRoot : '/brushfire/services/rest/employer',
+
+		urlRoot : function(){
+			return Utils.GetURL("/services/rest/employer");
+		},
+		
+		url : function(){
+			var url = this.urlRoot() + "/"+this.guid;
+			return url;
+		},
+
 		initialize : function(options){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			this.guid = options.guid;
-		},
-		url : function(){
-			var url = this.urlRoot + "/"+this.guid;
-			return url;
 		}
+		
 	});
 
 	return EmployerProfiles;

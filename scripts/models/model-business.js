@@ -3,9 +3,17 @@ define([
 	],
 	function(Backbone){
 		var Business = Backbone.Model.extend({
-			url : "/brushfire/services/rest/employer",
-			defaults : {
+			defaults : {},
+
+			urlRoot : function(){
+				return Utils.GetURL("/services/rest/employer");
 			},
+
+			url : function(){
+				var url = this.urlRoot();
+				return url;
+			},
+
 			initialize : function(){
 				console.log('Business model initialize...');
 			}

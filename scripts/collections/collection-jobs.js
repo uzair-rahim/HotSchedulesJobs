@@ -12,16 +12,7 @@ define([
 		urlRoot : function(){
 			return Utils.GetURL("/services/rest/job/");
 		},
-
-		initialize : function(options){
-			_.bindAll.apply(_, [this].concat(_.functions(this)));
-			console.log("Jobs collection initialized....");
-			
-			if(typeof options !== "undefined"){
-				this.guid = options.guid;	
-			}
-		},
-
+		
 		url : function(){
 			var user= Utils.GetUserSession();
 			var url = this.urlRoot();
@@ -33,7 +24,17 @@ define([
 			}
 
 			return url;
+		},
+
+		initialize : function(options){
+			_.bindAll.apply(_, [this].concat(_.functions(this)));
+			console.log("Jobs collection initialized....");
+			
+			if(typeof options !== "undefined"){
+				this.guid = options.guid;	
+			}
 		}
+
 	});
 
 	return Jobs;

@@ -11,6 +11,11 @@ define([
 				return Utils.GetURL("/services/rest/i18n/");
 			},
 
+			url : function(){
+				var url = this.urlRoot() + this.language;
+				return url;
+			},
+
 			initialize : function(options){
 
 				console.log("Language model initialized...");
@@ -18,13 +23,8 @@ define([
 					this.language = options.language;
 				}
 
-			},
-			
-			url : function(){
-				var url = this.urlRoot() + this.language;
-				return url;
 			}
-
+			
 		});
 
 		return Language;

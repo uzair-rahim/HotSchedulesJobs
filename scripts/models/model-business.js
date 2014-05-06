@@ -3,7 +3,6 @@ define([
 	"utils"
 	],
 	function(Backbone, Utils){
-	function(Backbone){
 		var Business = Backbone.Model.extend({
 			defaults : {},
 

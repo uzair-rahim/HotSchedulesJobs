@@ -24,7 +24,7 @@ define([
 
 		continue : function(){
 			console.log("Continue...");
-			App.router.navigate("login", true);
+			App.router.navigate("logout", true);
 		},
 		
 		serializeData : function(){

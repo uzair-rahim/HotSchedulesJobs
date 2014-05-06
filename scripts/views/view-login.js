@@ -44,7 +44,13 @@ define([
 							user.employerIds = response.attributes.employerIds;
 
 							Utils.CreateUserSession(user);
-							App.router.navigate("jobs", true);
+
+							if(user.employerIds.length > 0){
+								App.router.navigate("jobs", true);
+							}else{
+								App.router.navigate("addBusiness", true);
+							}
+
 					},
 
 					error : function(){

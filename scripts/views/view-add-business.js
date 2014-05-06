@@ -30,7 +30,7 @@ define([
 
 		cancel : function(){
 			console.log("Cancel...");
-			App.router.navigate("findBusiness", true);
+			App.router.navigate("logout", true);
 		},
 		
 		serializeData : function(){

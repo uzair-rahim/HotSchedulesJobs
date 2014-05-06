@@ -75,9 +75,6 @@ define([
 					user.password = $("#password").val();
 
 					model.save(user, {
-						headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-						},
 						success : function(response){
 							var errorCode = response.get("errorCode");
 							if( errorCode === -1){
@@ -101,8 +98,7 @@ define([
 			var authsession = {
 				firstname : response.attributes.firstname,
 				lastname : response.attributes.lastname,
-				guid : response.attributes.guid,
-				brushfireToken : response.attributes.brushfireToken
+				guid : response.attributes.guid
 			}
 			Utils.CreateUserSession(authsession);
 		},

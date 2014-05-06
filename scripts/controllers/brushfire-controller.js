@@ -161,9 +161,6 @@ define([
 
 					$.when(
 						jobtypes.fetch({
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(jobtypesResponse){
 								console.log("Job Types fetched successfully...");
 								models.jobtypes = jobtypesResponse.attributes;
@@ -174,9 +171,6 @@ define([
 							}
 						}),
 						jobs.fetch({
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(collection, jobsResponse){
 								console.log("Jobs fetched successfully...");
 								models.jobs = jobsResponse;
@@ -217,9 +211,6 @@ define([
 
 					$.when(
 						jobtypes.fetch({
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(jobtypesResponse){
 								console.log("Job Types fetched successfully...");
 								models.jobtypes = jobtypesResponse.attributes;
@@ -230,9 +221,6 @@ define([
 							}
 						}),
 						jobs.fetch({
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(collection, jobsResponse){
 								console.log("Jobs fetched successfully...");
 								models.jobs = jobsResponse;
@@ -273,9 +261,6 @@ define([
 
 					$.when(
 						jobtypes.fetch({
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(jobtypesResponse){
 								console.log("Job Types fetched successfully...");
 								models.jobtypes = jobtypesResponse.attributes;
@@ -286,9 +271,6 @@ define([
 							}
 						}),
 						jobs.fetch({
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(collection, jobsResponse){
 								console.log("Jobs fetched successfully...");
 								models.jobs.jobs = jobsResponse;
@@ -372,9 +354,6 @@ define([
 						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[0]});
 
 							employerProfiles.fetch({
-								headers : {
-									"token" : Utils.GetUserSession().brushfireToken
-								},
 								success : function(response){
 									var modelProfiles = response.models;
 									var modelProfile = response.models[0].attributes;

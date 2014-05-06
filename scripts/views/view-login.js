@@ -42,7 +42,6 @@ define([
 							user.firstname = response.attributes.firstname;
 							user.lastname = response.attributes.lastname;
 							user.employerIds = response.attributes.employerIds;
-							user.brushfireToken = response.attributes.brushfireToken;
 
 							Utils.CreateUserSession(user);
 							App.router.navigate("jobs", true);

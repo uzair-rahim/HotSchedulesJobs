@@ -69,9 +69,6 @@ define([
 				var businesses = new CollectionBusinesses({name : businessName, address : businessAddress});
 
 				businesses.fetch({
-					headers : {
-						"token" : Utils.GetUserSession().brushfireToken
-					},
 					success : function(response){
 						that.model = response.models[0].attributes.businesses;
 						that.render();
@@ -109,9 +106,6 @@ define([
 			
 			var modelBusiness = new ModelBusiness();	
 				modelBusiness.save(businessObject, {
-					headers : {
-						"token" : Utils.GetUserSession().brushfireToken
-					},
 					success : function(){
 						console.log("Business successfully saved...");
 						Utils.ShowToast({message : "Great success..."});

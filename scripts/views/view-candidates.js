@@ -76,9 +76,6 @@ define([
 					var candidate = new ModelCandidate(request);
 
 						candidate.save(update, {
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(){
 								console.log("Candidate successfully marked as seen...");
 							},
@@ -131,9 +128,6 @@ define([
 				var candidate = new ModelCandidate(request);
 
 					candidate.save(update, {
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
 						success : function(){
 							console.log("Candidate successfully marked as archived...");
 							Backbone.history.loadUrl();

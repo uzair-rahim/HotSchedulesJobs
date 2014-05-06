@@ -90,9 +90,6 @@ define([
 				var model = new ModelJob();				
 					model.save(job,{
 						type : "POST",
-						headers : {
-							'token' : Utils.GetUserSession().brushfireToken
-						},
 						success : function(){
 							console.log("Job successfully saved");
 							App.router.controller.jobs();
@@ -210,9 +207,6 @@ define([
 					var model = new ModelJob();				
 						model.save(update,{
 							type : "PUT",
-							headers : {
-								'token' : Utils.GetUserSession().brushfireToken
-							},
 							success : function(){
 								console.log("Job successfully saved");
 								App.router.controller.jobs();
@@ -320,9 +314,6 @@ define([
 					var candidate = new ModelCandidate(request);
 
 						candidate.save(update, {
-							headers : {
-								"token" : Utils.GetUserSession().brushfireToken
-							},
 							success : function(){
 								console.log("Candidate successfully marked as seen...");
 
@@ -381,9 +372,6 @@ define([
 				var candidate = new ModelCandidate(request);
 
 					candidate.save(update, {
-						headers : {
-							"token" : Utils.GetUserSession().brushfireToken
-						},
 						success : function(){
 							console.log("Candidate successfully marked as archived...");
 							App.router.controller.jobs();

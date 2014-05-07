@@ -18,6 +18,7 @@ define([
 				"candidates"			: "candidates",
 				"candidates/job/:guid"	: "candidatesByJob",
 				"profile/:id/:tab"		: "profile",
+				"connections/:id"		: "connections",
 				"network"				: "network",
 				"messages"				: "messages",
 				"settings"				: "settings",

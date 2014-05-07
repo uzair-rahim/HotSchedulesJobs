@@ -14,6 +14,7 @@ define([
 		"scripts/views/view-jobs",
 		"scripts/views/view-candidates",
 		"scripts/views/view-profile",
+		"scripts/views/view-connections",
 		"scripts/views/view-network",
 		"scripts/views/view-messages",
 		"scripts/views/view-settings",
@@ -21,7 +22,7 @@ define([
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -395,6 +396,25 @@ define([
 				}else{
 					App.router.navigate("login", true);
 				}
+			},
+
+			connections : function(id){
+				
+				var that = this;
+
+				if(Utils.CheckSession()){
+					App.pushTrail("Shared Connections");
+
+					this.removeBackground();
+					this.setLayout();
+					this.setHeader("navigation");
+
+					var view = new ViewConnections();
+					that.layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
+
 			},
 
 			logout : function(){

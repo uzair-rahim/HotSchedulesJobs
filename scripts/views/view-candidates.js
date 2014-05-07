@@ -20,7 +20,8 @@ define([
 			"click .view-profile"		: "profile",
 			"click .candidate-select"	: "candidateSelect",
 			"click .candidate-message"	: "candidateMessage",
-			"click .candidate-archive"	: "candidateArchive"
+			"click .candidate-archive"	: "candidateArchive",
+			"click .candidate-network"	: "candidateNetwork"
 		},
 
 		initialize : function(){
@@ -140,6 +141,11 @@ define([
 
 			event.stopPropagation();
 			
+		},
+	
+		candidateNetwork : function(event){
+			App.router.navigate("connections/23", true);
+			event.stopPropagation();
 		},
 
 		serializeData : function(){

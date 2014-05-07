@@ -16,7 +16,8 @@ define([
 		events : {
 			"click .view-profile"		: "profile",
 			"click .candidate-select"	: "networkSelect",
-			"click .candidate-message"	: "networkMessage"
+			"click .candidate-message"	: "networkMessage",
+			"click .candidate-network"	: "networkConnections"
 		},
 
 		initialize : function(){
@@ -35,6 +36,11 @@ define([
 
 		networkMessage : function(event){
 			alert("Send Message");
+			event.stopPropagation();
+		},
+
+		networkConnections : function(event){
+			App.router.navigate("connections/23", true);
 			event.stopPropagation();
 		},
 

@@ -21,6 +21,10 @@ require.config({
 	},
 	shim: {
 
+		jqueryui : {
+			deps:["jquery"]
+		},
+
 		jquerycookie : {
 			deps:["jquery"]
 		},

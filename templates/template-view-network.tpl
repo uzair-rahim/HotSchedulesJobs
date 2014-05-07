@@ -24,13 +24,6 @@
 			<div class="candidate-name new">Brittney Smith</div>
 			<div class="candidate-job">Cook @ Roaring Fork</div>
 		</div>
-		<div class="candidate-referral">
-			<div class="date new">Wednesday</div>
-			<div class="referred-by">
-				<div class="picture"><img src="images/profiles/Kim.jpg"/></div>
-				<div class="name">Yuan L.</div>
-			</div>
-		</div>
 		<div class="candidate-message"></div>
 		<div class="candidate-rating five"></div>
 		<div class="candidate-endorse">0</div>
@@ -46,9 +39,6 @@
 			<div class="candidate-name new">Ben Scott</div>
 			<div class="candidate-job">Cook @ Roaring Fork</div>
 		</div>
-		<div class="candidate-referral">
-			<div class="date">3/1/13</div>
-		</div>
 		<div class="candidate-message"></div>
 		<div class="candidate-rating three"></div>
 		<div class="candidate-endorse">0</div>
@@ -63,9 +53,6 @@
 		<div class="candidate-info">
 			<div class="candidate-name new">Christopher Nolan</div>
 			<div class="candidate-job">Cook @ CPK</div>
-		</div>
-		<div class="candidate-referral">
-			<div class="date">3/1/13</div>
 		</div>
 		<div class="candidate-message"></div>
 		<div class="candidate-rating one"></div>

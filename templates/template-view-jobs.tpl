@@ -15,7 +15,7 @@
 		<div class="input-container">
 			<label>Position</label>
 			<div id="new-position" class="custom-select position" data-index="0" data-value="{{jobs.[0].jobName}}">
-				<button class="custom-select-button">{{jobs.[0].jobName}}</button>
+				<button class="custom-select-button">{{jobtypes.[0].name}}</button>
 				<ul class="custom-select-list">
 					{{#each jobtypes}}
 						<li id="{{guid}}">{{name}}</li>

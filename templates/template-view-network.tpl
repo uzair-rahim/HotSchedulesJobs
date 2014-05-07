@@ -25,7 +25,6 @@
 			<div class="candidate-job">Cook @ Roaring Fork</div>
 		</div>
 		<div class="candidate-message"></div>
-		<div class="candidate-rating five"></div>
 		<div class="candidate-endorse">0</div>
 		<div class="candidate-network"><span>77</span> / 500</div>
 	</li>
@@ -40,7 +39,6 @@
 			<div class="candidate-job">Cook @ Roaring Fork</div>
 		</div>
 		<div class="candidate-message"></div>
-		<div class="candidate-rating three"></div>
 		<div class="candidate-endorse">0</div>
 		<div class="candidate-network"><span>77</span> / 500</div>
 	</li>
@@ -55,7 +53,6 @@
 			<div class="candidate-job">Cook @ CPK</div>
 		</div>
 		<div class="candidate-message"></div>
-		<div class="candidate-rating one"></div>
 		<div class="candidate-endorse">0</div>
 		<div class="candidate-network"><span>77</span> / 500</div>
 	</li>

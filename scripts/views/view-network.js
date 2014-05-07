@@ -26,7 +26,6 @@ define([
 
 		profile : function(event){
 			event.stopPropagation();
-			//App.router.navigate("profile/jobs/jobs", true);
 		},
 
 		networkSelect : function(event){

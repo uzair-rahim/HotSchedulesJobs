@@ -4,6 +4,9 @@
 			<li>{{this}}</li>
 		{{/each}}
 	</ul>
+	<ul id="page-actions">
+		<li id="filter"></li>
+	</ul>
 </div>
 
 <div id="toolbar">

@@ -15,13 +15,14 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #breadcrumb li" 		: "back",
-			"click #send-message"		: "sendMessage",
-			"click .view-profile"		: "profile",
-			"click .candidate-select"	: "candidateSelect",
-			"click .candidate-message"	: "candidateMessage",
-			"click .candidate-archive"	: "candidateArchive",
-			"click .candidate-network"	: "candidateNetwork"
+			"click #breadcrumb li" 			: "back",
+			"click #send-message"			: "sendMessage",
+			"click .view-profile"			: "profile",
+			"click .candidate-select"		: "candidateSelect",
+			"click .candidate-message"		: "candidateMessage",
+			"click .candidate-archive"		: "candidateArchive",
+			"click .candidate-unarchive"	: "candidateUnarchive",
+			"click .candidate-network"		: "candidateNetwork"
 		},
 
 		initialize : function(){
@@ -135,6 +136,37 @@ define([
 						},
 						error : function(){
 							console.log("There was an error trying to mark the cadndidates as archived");
+							Utils.ShowToast({ message : "Unexpected error occured"});
+						}
+					});
+
+			event.stopPropagation();
+			
+		},
+
+		candidateUnarchive : function(event){
+
+			var candidate = $(event.target).closest("#archived-candidates-list > li");
+			var job = $(candidate).closest(".view-profile");
+			var request = new Object();
+			var update = new Object();
+
+				request.type = "update";
+				request.jobGuid = $(job).attr("data-job");
+				request.guid = $(candidate).attr("data-guid");
+
+				update.id = $(candidate).attr("data-id");;
+				update.archived = false;
+
+				var candidate = new ModelCandidate(request);
+
+					candidate.save(update, {
+						success : function(){
+							console.log("Candidate successfully marked as unarchived...");
+							Backbone.history.loadUrl();
+						},
+						error : function(){
+							console.log("There was an error trying to mark the cadndidates as unarchived");
 							Utils.ShowToast({ message : "Unexpected error occured"});
 						}
 					});

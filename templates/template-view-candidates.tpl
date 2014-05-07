@@ -85,7 +85,7 @@
 		{{#each jobs}}
 			{{#each candidates}}
 				{{#if_eq archived true}}
-					<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}">
+					<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-job="{{../../guid}}">
 						<input class="candidate-select" type="checkbox"/>
 						<div class="candidate-picture">
 							{{#hasPhoto this.user.photo.url}}

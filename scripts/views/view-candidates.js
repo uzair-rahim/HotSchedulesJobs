@@ -14,9 +14,11 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
+		numberOfCalls : 0,
 		events : {
 			"click #breadcrumb li" 			: "back",
 			"click #send-message"			: "sendMessage",
+			"click #archive-candidates"		: "archiveCandidates",
 			"click .view-profile"			: "profile",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
@@ -178,6 +180,51 @@ define([
 		candidateNetwork : function(event){
 			App.router.navigate("connections/23", true);
 			event.stopPropagation();
+		},
+
+		archiveCandidates : function(){
+			this.numberOfCalls = $(".candidate-select:checked").length;
+			this.bulkArchive();
+		},
+
+		bulkArchive : function(){
+			if(this.numberOfCalls > 0){
+				var that = this;
+				var element = $(".candidate-select[type='checkbox']:checked:eq("+(this.numberOfCalls-1)+")");
+				var job = $(element).closest("#candidates-list");
+
+				var jobGuid = $(job).attr("data-guid");
+				var id =  $(job).attr("data-id");
+				var guid =  $(element).closest(".view-profile").attr("data-guid");
+
+				var request = new Object();
+					request.type = "update";
+					request.jobGuid = jobGuid;
+					request.guid = guid;
+
+				var update = new Object();
+					update.id = id;	
+					update.archived = true;
+
+					console.log(request);
+					console.log(update);
+
+				var candidate = new ModelCandidate(request);
+
+					candidate.save(update, {
+						success : function(){
+							console.log("Candidate successfully marked as archived...");
+							that.numberOfCalls--;
+							that.bulkArchive();
+						},
+						error : function(){
+							console.log("There was an error trying to mark the cadndidates as archived");
+							Utils.ShowToast({ message : "Unexpected error occured"});
+						}
+					});	
+			}else{
+				Backbone.history.loadUrl();
+			}
 		},
 
 		serializeData : function(){

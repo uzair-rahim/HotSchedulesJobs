@@ -14,22 +14,24 @@ define([
 	var ViewJobs = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
+		numberOfCalls : 0,
 		template: Template,
 		events : {
-			"click #add-new-job"		: "addNewJob",
-			"click #cancel-add"			: "cancelAddJob",
-			"click #save-add"			: "saveAddJob",
-			"click #job-list > li"		: "expandJob",
-			"click .edit-job"			: "editJob",
-			"click .save-job"			: "saveJob",
-			"click .cancel-edit"		: "cancelEdit",
-			"click .posted"				: "posted",
-			"click .view-candidates" 	: "candidates",
-			"click .view-profile"		: "profile",
-			"click .candidate-select"	: "candidateSelect",
-			"click .candidate-message"	: "candidateMessage",
-			"click .candidate-archive"	: "candidateArchive",
-			"click .candidate-network"	: "candidateNetwork"
+			"click #add-new-job"			: "addNewJob",
+			"click #cancel-add"				: "cancelAddJob",
+			"click #save-add"				: "saveAddJob",
+			"click #job-list > li"			: "expandJob",
+			"click #archive-candidates"		: "archiveCandidates",
+			"click .edit-job"				: "editJob",
+			"click .save-job"				: "saveJob",
+			"click .cancel-edit"			: "cancelEdit",
+			"click .posted"					: "posted",
+			"click .view-candidates" 		: "candidates",
+			"click .view-profile"			: "profile",
+			"click .candidate-select"		: "candidateSelect",
+			"click .candidate-message"		: "candidateMessage",
+			"click .candidate-archive"		: "candidateArchive",
+			"click .candidate-network"		: "candidateNetwork"
 		},
 
 		initialize : function(){
@@ -38,6 +40,9 @@ define([
 		},
 
 		addNewJob : function(){
+			$(".candidate-select").prop("checked", false);
+			$("#archive-candidates").css("display", "none");
+
 			$("#add-job").addClass("show");
 
 			var jobs = $("#job-list > li");
@@ -119,6 +124,9 @@ define([
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
 			var profile = $(".hourly-profile");
+
+			$(".candidate-select").prop("checked", false);
+			$("#archive-candidates").css("display", "none");
 
 			$(add).removeClass("show");
 
@@ -239,6 +247,10 @@ define([
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
 			var allProfiles = $(li).find(".hourly-profile");
+
+			
+			$(".candidate-select").prop("checked", false);
+			$("#archive-candidates").css("display", "none");
 
 			$(add).removeClass("show");
 
@@ -389,6 +401,49 @@ define([
 		candidateNetwork : function(event){
 			App.router.navigate("connections/23", true);
 			event.stopPropagation();
+		},
+
+		archiveCandidates : function(){
+			this.numberOfCalls = $(".candidate-select:checked").length;
+			this.bulkArchive();
+		},
+
+		bulkArchive : function(){
+			if(this.numberOfCalls > 0){
+				var that = this;
+				var element = $(".candidate-select[type='checkbox']:checked:eq("+(this.numberOfCalls-1)+")");
+				var job = $(element).closest("#job-list > li");
+
+				var jobGuid = $(job).attr("data-guid");
+				var id =  $(job).attr("data-id");
+				var guid =  $(element).closest(".view-profile").attr("data-guid");
+
+				var request = new Object();
+					request.type = "update";
+					request.jobGuid = jobGuid;
+					request.guid = guid;
+
+				var update = new Object();
+					update.id = id;	
+					update.archived = true;
+
+				var candidate = new ModelCandidate(request);
+
+					candidate.save(update, {
+						success : function(){
+							console.log("Candidate successfully marked as archived...");
+							that.numberOfCalls--;
+							that.bulkArchive();
+						},
+						error : function(){
+							console.log("There was an error trying to mark the cadndidates as archived");
+							Utils.ShowToast({ message : "Unexpected error occured"});
+						}
+					});	
+
+			}else{
+				Backbone.history.loadUrl();
+			}
 		},
 
 		serializeData : function(){

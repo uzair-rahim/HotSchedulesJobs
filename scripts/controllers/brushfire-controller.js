@@ -21,8 +21,9 @@ define([
 		"scripts/models/model-jobtypes",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
+		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -409,8 +410,20 @@ define([
 					this.setLayout();
 					this.setHeader("navigation");
 
-					var view = new ViewConnections();
-					that.layout.body.show(view);
+					var user1guid = id;
+					var user2guid = Utils.GetUserSession().guid;
+					
+					var sharedConnections = new CollectionSharedConnections({ guid1 : user1guid, guid2 : user2guid });
+						sharedConnections.fetch({
+							success : function(response){
+								var view = new ViewConnections({model : response.models});
+								that.layout.body.show(view);
+							},
+							error : function(){
+								Utils.ShowToast({ message : "Error fetching shared connections..."});
+							}
+						});
+
 				}else{
 					App.router.navigate("login", true);
 				}

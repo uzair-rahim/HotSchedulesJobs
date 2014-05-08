@@ -399,7 +399,11 @@ define([
 		},
 
 		candidateNetwork : function(event){
-			App.router.navigate("connections/23", true);
+			var candidate = $(event.target).closest(".view-profile");
+			var guid = $(candidate).attr("data-guid");
+
+			App.router.navigate("connections/"+guid, true);
+
 			event.stopPropagation();
 		},
 

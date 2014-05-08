@@ -1049,3 +1049,84 @@ input[type="password"].error:focus{
 	white-space: nowrap;
 }
 
+
+.flyout{
+	position: fixed;
+	display: none;
+	float: left;
+	top: 70px;
+	right: -320px;
+	width: 320px;
+	border: 1px solid #ced2d9;
+	box-shadow: inset 1px 0 0 0 rgba(255,255,255, 0.5);
+	background: #f7f8f8;
+	z-index: 999;
+}
+
+.flyout.show{
+	display: block;
+	right: 0px;
+}
+
+.flyout h1{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 10px;
+	font-size: 14px;
+	line-height: 14px;
+	color: #444444;
+}
+
+.flyout a.clear-all{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 4px 10px 10px 10px;
+}
+
+.flyout > .filter-section{
+	display: block;
+	float: left;
+	width: 100%;
+	clear: both;
+	border-bottom: 1px solid #ced2d9;
+	padding: 0 0 10px 0;
+	box-shadow: 0 1px #ffffff;
+}
+
+.flyout > .filter-section > label{
+	float: left;
+	clear: both;
+	margin: 10px;
+}
+
+.flyout > .filter-section .checkbox-group{
+	display: block;
+	float: left;
+	clear: both;
+}
+
+.flyout > .filter-section .checkbox-group li{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 2px 10px;
+}
+
+.flyout > .filter-section .checkbox-group label{
+	text-transform: capitalize;
+	margin: 0 4px;
+	font-weight: normal;
+}
+
+.flyout > .button-group{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 10px;
+}
+
+.flyout > .button-group button{
+	margin: 0 10px 0 0;
+}

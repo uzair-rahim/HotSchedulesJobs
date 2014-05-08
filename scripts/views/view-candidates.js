@@ -19,6 +19,10 @@ define([
 			"click #breadcrumb li" 			: "back",
 			"click #send-message"			: "sendMessage",
 			"click #archive-candidates"		: "archiveCandidates",
+			"click #filter"					: "showFilter",
+			"click #cancel-filter"			: "hideFilter",
+			"click #search-filter"			: "searchFilter",
+			"click #clear"					: "clearAllFilter",
 			"click .view-profile"			: "profile",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
@@ -30,6 +34,12 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Candidates view initialized...");
+		},
+
+		onShow : function(){
+			if(this.options.mode === "child"){
+				$("#filter").hide();
+			}
 		},
 
 		back : function(event){
@@ -225,6 +235,75 @@ define([
 			}else{
 				Backbone.history.loadUrl();
 			}
+		},
+
+		showFilter : function(){
+			var flyout = $("#filter-flyout");
+			var isFlyoutVisible = $(flyout).hasClass("show");
+
+			if(isFlyoutVisible){
+				this.hideFilter();
+			}else{
+				$(flyout).addClass("show");
+			}
+
+		},
+
+		hideFilter : function(){
+			var flyout = $("#filter-flyout");
+			$(flyout).removeClass("show");
+		},
+
+		searchFilter : function(){
+
+			var flyout = $("#filter-flyout");
+			var checkboxes = $(flyout).find(".filter-section input[type='checkbox']:checked");
+			var archivedCheckbox = $(flyout).find("#archived-candidates:checked");
+			var isCheckboxSelected = $(checkboxes).length > 0;
+			var isArchivedCandidatesSelected = archivedCheckbox.length > 0;
+
+			var candidatesList = $(".candidates-list-container .candidate-section");
+			var archivedCandidatesList = $(".archived-candidates-list-container");			
+
+			if(isCheckboxSelected){
+				$(document).find(candidatesList).hide();
+				$(document).find(archivedCandidatesList).hide();
+
+				$(checkboxes).each(function(){
+					var id = $(this).attr("id");
+					console.log(id)
+					$(".candidate-section[id='"+id+"']").show();
+				});
+
+			}else{
+				$(".candidate-section").show();
+			}
+
+			if(isArchivedCandidatesSelected){
+				$(archivedCandidatesList).show();
+			}
+
+			//	if($(".checkbox-group li input[type='checkbox']:checked").length > 0){
+			//		$(document).find(".candidates-list-container .candidates-section").hide();
+			//		$(".checkbox-group li input[type='checkbox']:checked").each(function(){	
+			//			var id = $(this).attr("id");
+			//			$(document).find(".candidates-list-container .candidates-section[data-jobtype='"+id+"']").show();
+			//		});
+			//	}else{
+			//		$(document).find(".candidates-list-container .candidates-section").show();
+			//	}
+			//
+			//	if($("#archived-candidates:checked").length > 0){
+			//		$("#archived-candidates-section").show();
+			//	}
+			//
+			//	this.showHideFilter();
+
+			this.hideFilter();
+		},
+
+		clearAllFilter : function(){
+			$(".filter-section .checkbox-group input").prop("checked", false);
 		},
 
 		serializeData : function(){

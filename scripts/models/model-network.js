@@ -3,10 +3,10 @@ define([
 	"utils"
 	],
 	function(Backbone, Utils){
-		var SharedConnections = Backbone.Model.extend({
+		var Network = Backbone.Model.extend({
 
 			urlRoot : function(){
-				return Utils.GetURL("/services/rest/network/shared");
+				return Utils.GetURL("/services/rest/network/");
 			},
 			
 			url : function(){
@@ -20,6 +20,6 @@ define([
 
 		});
 
-		return SharedConnections;
+		return Network;
 	}
 );

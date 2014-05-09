@@ -6,8 +6,8 @@ define([
 	function(Backbone, Utils, ModelNetwork){
 	'use strict';
 
-	var SharedConnections = Backbone.Collection.extend({
-		model : ModelNetwork,
+	var Network = Backbone.Collection.extend({
+		model : ModelSharedConnections,
 
 		urlRoot : function(){
 			return Utils.GetURL("/services/rest/network/shared");
@@ -27,7 +27,7 @@ define([
 
 	});
 
-	return SharedConnections;
+	return Network;
 
 	}
 );

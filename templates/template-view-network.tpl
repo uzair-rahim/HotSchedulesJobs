@@ -26,7 +26,7 @@
 		</div>
 		<div class="candidate-message"></div>
 		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
+		<div class="candidate-network"><span>0</span> / 0</div>
 	</li>
 
 	<li class="view-profile">
@@ -40,7 +40,7 @@
 		</div>
 		<div class="candidate-message"></div>
 		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
+		<div class="candidate-network"><span>0</span> / 0</div>
 	</li>
 
 	<li class="view-profile">
@@ -54,6 +54,6 @@
 		</div>
 		<div class="candidate-message"></div>
 		<div class="candidate-endorse">0</div>
-		<div class="candidate-network"><span>77</span> / 500</div>
+		<div class="candidate-network"><span>0</span> / 0</div>
 	</li>
 </ul>

@@ -7,22 +7,20 @@ define([
 	'use strict';
 
 	var Network = Backbone.Collection.extend({
-		model : ModelSharedConnections,
+		model : ModelNetwork,
 
 		urlRoot : function(){
-			return Utils.GetURL("/services/rest/network/shared");
+			return Utils.GetURL("/services/rest/network");
 		},
 
 		url : function(){
-			var url = this.urlRoot() + "?user1Guid="+this.guid1+"&user2Guid="+this.guid2;
-			console.log(url);
+			var url = this.urlRoot() + "/"+this.guid;
 			return url;
 		},
 
 		initialize : function(options){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
-			this.guid1 = options.guid1;
-			this.guid2 = options.guid2;
+			this.guid = options.guid;
 		}
 
 	});

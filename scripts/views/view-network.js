@@ -14,10 +14,15 @@ define([
 		className : "content",
 		template: Template,
 		events : {
+			"click #filter"				: "showFilter",
+			"click #cancel-filter"		: "hideFilter",
+			"click #search-filter"		: "searchFilter",
+			"click #clear"				: "clearAllFilter",
 			"click .view-profile"		: "profile",
 			"click .candidate-select"	: "networkSelect",
 			"click .candidate-message"	: "networkMessage",
-			"click .candidate-network"	: "networkConnections"
+			"click .candidate-network"	: "networkConnections",
+
 		},
 
 		initialize : function(){
@@ -48,10 +53,41 @@ define([
 			event.stopPropagation();
 		},
 
+		showFilter : function(){
+			var flyout = $("#filter-flyout");
+			var isFlyoutVisible = $(flyout).hasClass("show");
+
+			if(isFlyoutVisible){
+				this.hideFilter();
+			}else{
+				$(flyout).addClass("show");
+			}
+
+		},
+
+		hideFilter : function(){
+			var flyout = $("#filter-flyout");
+			$(flyout).removeClass("show");
+		},
+
+		searchFilter : function(){
+			var flyout = $("#filter-flyout");
+			this.hideFilter();
+		},
+
+		clearAllFilter : function(){
+			$(".filter-section .checkbox-group input").prop("checked", false);
+		},
+
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.network = this.model.network;
+				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
+
+				console.log(jsonObject);
+
 			return jsonObject;
 		}
 		

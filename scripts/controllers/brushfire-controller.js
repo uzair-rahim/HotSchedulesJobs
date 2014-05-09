@@ -21,9 +21,10 @@ define([
 		"scripts/models/model-jobtypes",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
+		"scripts/collections/collection-network",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -306,12 +307,46 @@ define([
 					App.clearTrail();
 					App.pushTrail("network");
 
-					this.removeBackground();
-					this.setLayout();
-					this.setHeader("navigation");
+					
 
-					var view = new ViewNetwork();
-					that.layout.body.show(view);
+					var userGuid = Utils.GetUserSession().guid;
+					var jobtypes = new ModelJobTypes();
+					var network = new CollectionNetwork({guid : userGuid});
+					var models = new Object();
+
+
+					$.when(
+
+						jobtypes.fetch({
+							success : function(jobtypesResponse){
+								console.log("Job Types fetched successfully...");
+								models.jobtypes = jobtypesResponse.attributes;
+							},
+							error : function(){
+								console.log("Error fetching Job Types...");
+								Utils.ShowToast({ message : "Error fetching Job Types..."});
+							}
+						}),
+
+						network.fetch({
+							success : function(response){
+								models.network = response.models;
+							},
+							error : function(){
+								Utils.ShowToast({ message : "Error fetching network..."});
+							}
+						})
+
+					).then(function(){
+						that.removeBackground();
+						that.setLayout();
+						that.setHeader("navigation");
+
+						var view = new ViewNetwork({model : models});
+							that.layout.body.show(view);
+					});
+
+
 				}else{
 					App.router.navigate("login", true);
 				}

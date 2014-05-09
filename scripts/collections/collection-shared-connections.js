@@ -15,7 +15,6 @@ define([
 
 		url : function(){
 			var url = this.urlRoot() + "?user1Guid="+this.guid1+"&user2Guid="+this.guid2;
-			console.log(url);
 			return url;
 		},
 

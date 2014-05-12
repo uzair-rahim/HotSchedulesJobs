@@ -3,10 +3,10 @@ define([
 	"utils"
 	],
 	function(Backbone, Utils){
-		var Network = Backbone.Model.extend({
+		var Follower = Backbone.Model.extend({
 
 			urlRoot : function(){
-				return Utils.GetURL("/services/rest/network/");
+				return Utils.GetURL("/services/rest/employer/");
 			},
 			
 			url : function(){
@@ -15,11 +15,11 @@ define([
 			},
 
 			initialize : function(){
-				console.log("Network model initialized...");
+				console.log("Follower model initialized...");
 			}
 
 		});
 
-		return Network;
+		return Follower;
 	}
 );

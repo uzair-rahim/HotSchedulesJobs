@@ -22,9 +22,10 @@ define([
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
 		"scripts/collections/collection-network",
+		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -307,11 +308,10 @@ define([
 					App.clearTrail();
 					App.pushTrail("network");
 
-					
 
-					var userGuid = Utils.GetUserSession().guid;
+					var userGuid = Utils.GetUserSession().employerIds[0];
 					var jobtypes = new ModelJobTypes();
-					var network = new CollectionNetwork({guid : userGuid});
+					var followers = new CollectionFollowers({guid : userGuid});
 					var models = new Object();
 
 
@@ -328,12 +328,12 @@ define([
 							}
 						}),
 
-						network.fetch({
+						followers.fetch({
 							success : function(response){
-								models.network = response.models;
+								models.followers = response.models;
 							},
 							error : function(){
-								Utils.ShowToast({ message : "Error fetching network..."});
+								Utils.ShowToast({ message : "Error fetching followers..."});
 							}
 						})
 

@@ -31,6 +31,27 @@ define([
 		},
 
 		profile : function(event){
+			
+			var item = $(event.target).closest("#candidates-list > li");
+			var allItems = $("#candidates-list > li");
+			var profile = $(item).find(".hourly-profile");
+			var isProfileExpanded = $(profile).hasClass("show");
+			var allProfiles = $(".hourly-profile");
+
+			$(allItems).removeClass("expanded");
+			$(allItems).addClass("faded");
+			$(allProfiles).removeClass("show");
+
+			if(!isProfileExpanded){
+				$(item).addClass("expanded");	
+				$(item).removeClass("faded");	
+				$(profile).addClass("show");
+			}else{
+				$(item).removeClass("expanded");
+				$(allItems).removeClass("faded");	
+				$(allProfiles).removeClass("show");
+			}
+
 			event.stopPropagation();
 		},
 
@@ -81,7 +102,7 @@ define([
 
 		serializeData : function(){
 			var jsonObject = new Object();
-				jsonObject.network = this.model.network;
+				jsonObject.followers = this.model.followers;
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();

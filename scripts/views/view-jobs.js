@@ -6,15 +6,17 @@ define([
 		"marionette",
 		"hbs!templates/template-view-jobs",
 		"scripts/models/model-job",
-		"scripts/models/model-candidate"
+		"scripts/models/model-candidate",
+		"scripts/models/model-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelJob, ModelCandidate){
+	function($, Cookie, App, Utils, Marionette, Template, ModelJob, ModelCandidate, ModelConnections){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
 		numberOfCalls : 0,
+		numberOfJobs : 0,
 		template: Template,
 		events : {
 			"click #add-new-job"			: "addNewJob",
@@ -37,6 +39,32 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Jobs view initialized...");
+		},
+
+		onShow : function(){
+			this.numberOfJobs = this.model.jobs.length;
+			this.getSharedConnections();
+		},
+
+		getSharedConnections : function(){
+
+			if(this.numberOfJobs > 0){
+				var that = this;
+				var index = this.numberOfJobs-1;
+				var connections = new ModelConnections({jobGUID : this.model.jobs[index].guid, userGUID : Utils.GetUserSession().guid});
+				connections.fetch({
+					success : function(){
+						console.log("Shared connections fetched successfully...");
+						that.numberOfJobs--;
+						that.getSharedConnections();
+					},
+					error : function(){
+						console.log("There was an error trying to fetch shared connections");
+						Utils.ShowToast({ message : "Error fetching shared connections..."});
+					}
+				});
+			}
+
 		},
 
 		addNewJob : function(){

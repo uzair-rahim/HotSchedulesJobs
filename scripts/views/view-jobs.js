@@ -324,9 +324,9 @@ define([
 		},
 
 		candidates : function(event){
-			event.stopPropagation();
 			var guid = $(event.target).attr("id");
 			App.router.navigate("candidates/job/"+guid, true);
+			event.stopPropagation();
 		},
 
 		profile : function(event){

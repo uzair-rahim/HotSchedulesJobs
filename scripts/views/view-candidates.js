@@ -332,6 +332,10 @@ define([
 				$(archivedCandidatesList).show();
 			}
 
+			if(!isCheckboxSelected && !isArchivedCandidatesSelected){
+				$(archivedCandidatesList).show();
+			}
+
 			this.hideFilter();
 		},
 

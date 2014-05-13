@@ -39,11 +39,14 @@ define([
 		},
 
 		onShow : function(){
+			this.numberOfJobs = this.model.jobs.length;
+
 			if(this.options.mode === "child"){
 				$("#filter").hide();
+				this.numberOfJobs = 1;
 			}
 
-			this.numberOfJobs = this.model.jobs.length;
+			
 			this.getSharedConnections();
 		},
 
@@ -61,7 +64,13 @@ define([
 			if(this.numberOfJobs > 0){
 				var that = this;
 				var index = this.numberOfJobs-1;
-				var job = this.model.jobs[index].guid
+				var job;
+
+				if(this.options.mode === "child"){
+					job = this.model.jobs.jobs.guid;
+				}else{
+					job = this.model.jobs[index].guid;					
+				}
 
 				var connections = new CollectionConnections({jobGUID : job, userGUID : Utils.GetUserSession().guid});
 				connections.fetch({
@@ -233,10 +242,13 @@ define([
 		},
 	
 		candidateNetwork : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var guid = $(candidate).attr("data-guid");
+			var count = $(event.target).find("span").text();
 
-			App.router.navigate("connections/"+guid, true);
+			if(count > 0){
+				var candidate = $(event.target).closest(".view-profile");
+				var guid = $(candidate).attr("data-guid");
+				App.router.navigate("connections/"+guid, true);
+			}
 
 			event.stopPropagation();
 		},
@@ -264,9 +276,6 @@ define([
 				var update = new Object();
 					update.id = id;	
 					update.archived = true;
-
-					console.log(request);
-					console.log(update);
 
 				var candidate = new ModelCandidate(request);
 
@@ -344,10 +353,15 @@ define([
 		},
 
 		serializeData : function(){
+			var mode = false;
+
+			if(this.options.mode === "child"){ mode = true; }
+
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.jobs = this.model.jobs;
+				jsonObject.sub = mode;
 				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;
 		}

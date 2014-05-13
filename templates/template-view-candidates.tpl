@@ -112,9 +112,9 @@
 </div>
 
 
-{{#anyArchivedCandidates jobs}}
+{{#anyArchivedCandidates jobs sub}}
 	<div class="archived-candidates-list-container">
-		<div class="grid-list-head">Archived ({{totalArchivedCandidates jobs}})</div>
+		<div class="grid-list-head">Archived ({{totalArchivedCandidates jobs sub}})</div>
 		<ul id="archived-candidates-list" class="grid-list">
 			{{#each jobs}}
 				{{#each candidates}}

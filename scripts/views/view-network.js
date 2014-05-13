@@ -66,10 +66,13 @@ define([
 		},
 
 		networkConnections : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var guid = $(candidate).attr("data-guid");
+			var count = $(event.target).find("span").text();
 
-			App.router.navigate("connections/"+guid, true);
+			if(count > 0){
+				var candidate = $(event.target).closest(".view-profile");
+				var guid = $(candidate).attr("data-guid");
+				App.router.navigate("connections/"+guid, true);
+			}
 
 			event.stopPropagation();
 		},

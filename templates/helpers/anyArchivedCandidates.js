@@ -2,13 +2,26 @@ define([
 	"Handlebars"
 ],
 	function (Handlebars){
-		function anyArchivedCandidates(context, options){
+		function anyArchivedCandidates(context, sub, options){
 			
 			var archived = false;
 			var jobs = context;
+			var length = jobs.length
 
-			for(var i = 0; i < jobs.length; i++){
-				var candidates = jobs[i].candidates;
+			if(sub){
+				length = jobs.jobs.candidates.length
+			}
+
+			for(var i = 0; i < length; i++){
+
+				var candidates;
+
+				if(!sub){
+					candidates = jobs[i].candidates;
+				}else{
+					candidates = jobs.jobs.candidates;
+				}
+
 				for(var j = 0; j < candidates.length; j++){
 					if(candidates[j].archived){
 						return options.fn(this);

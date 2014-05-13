@@ -5,9 +5,10 @@ define([
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-candidates",
-		"scripts/models/model-candidate"
+		"scripts/models/model-candidate",
+		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelCandidate){
+	function($, Cookie, App, Utils, Marionette, Template, ModelCandidate, CollectionConnections){
 	"use strict";
 
 	var ViewCandidates = Marionette.ItemView.extend({
@@ -15,6 +16,7 @@ define([
 		className : "content",
 		template: Template,
 		numberOfCalls : 0,
+		numberOfJobs : 0,
 		events : {
 			"click #breadcrumb li" 			: "back",
 			"click #send-message"			: "sendMessage",
@@ -40,6 +42,9 @@ define([
 			if(this.options.mode === "child"){
 				$("#filter").hide();
 			}
+
+			this.numberOfJobs = this.model.jobs.length;
+			this.getSharedConnections();
 		},
 
 		back : function(event){
@@ -49,6 +54,46 @@ define([
 			if(goBack !== 0){
 				window.history.go(goBack);
 			}
+		},
+
+		getSharedConnections : function(){
+
+			if(this.numberOfJobs > 0){
+				var that = this;
+				var index = this.numberOfJobs-1;
+				var job = this.model.jobs[index].guid
+
+				var connections = new CollectionConnections({jobGUID : job, userGUID : Utils.GetUserSession().guid});
+				connections.fetch({
+					success : function(response){
+						console.log("Shared connections fetched successfully...");
+						for(var i = 0; i < response.length; i++){
+
+							var candidate = response.models[i].attributes.candidateGuid;
+							var total = response.models[i].attributes.totalConnections;
+							var shared = response.models[i].attributes.sharedConnections.length;
+							
+							var element = $("#candidates-list[data-guid='"+job+"'] li[data-guid='"+candidate+"'] .candidate-network");
+							var archived = $("#archived-candidates-list li[data-guid='"+candidate+"'] .candidate-network");
+
+							$(element).addClass("has-connections");
+							$(element).html("<span>"+shared+"</span> / "+total);
+
+							$(archived).addClass("has-connections");
+							$(archived).html("<span>"+shared+"</span> / "+total);
+
+						}
+
+						that.numberOfJobs--;
+						that.getSharedConnections();
+					},
+					error : function(){
+						console.log("There was an error trying to fetch shared connections");
+						Utils.ShowToast({ message : "Error fetching shared connections..."});
+					}
+				});
+			}
+
 		},
 
 		sendMessage : function(){

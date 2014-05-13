@@ -7,9 +7,9 @@ define([
 		"hbs!templates/template-view-jobs",
 		"scripts/models/model-job",
 		"scripts/models/model-candidate",
-		"scripts/models/model-connections"
+		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelJob, ModelCandidate, ModelConnections){
+	function($, Cookie, App, Utils, Marionette, Template, ModelJob, ModelCandidate, CollectionConnections){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -51,10 +51,15 @@ define([
 			if(this.numberOfJobs > 0){
 				var that = this;
 				var index = this.numberOfJobs-1;
-				var connections = new ModelConnections({jobGUID : this.model.jobs[index].guid, userGUID : Utils.GetUserSession().guid});
+				var jobguid = this.model.jobs[index].guid
+
+				var connections = new CollectionConnections({jobGUID : jobguid, userGUID : Utils.GetUserSession().guid});
 				connections.fetch({
-					success : function(){
+					success : function(response){
 						console.log("Shared connections fetched successfully...");
+						console.log(response);
+						//$("#"+jobguid).find("#"+response)
+
 						that.numberOfJobs--;
 						that.getSharedConnections();
 					},

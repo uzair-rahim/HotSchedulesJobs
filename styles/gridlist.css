@@ -669,15 +669,24 @@ ul.grid-list > li .candidate-network{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	background-image: url("../images/icon-network.png");
+	background-image: url("../images/icon-network-gray.png");
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: 40px auto;
 }
 
+ul.grid-list > li .candidate-network.has-connections{
+	background-image: url("../images/icon-network.png");
+}
+
 ul.grid-list > li .candidate-network span{
 	font-weight: bold;
 	color: #a9a9a9;
+}
+
+ul.grid-list > li .candidate-network.has-connections,
+ul.grid-list > li .candidate-network.has-connections span{
+	color: #2d3c4b;
 }
 
 @media screen and (max-width: 500px){

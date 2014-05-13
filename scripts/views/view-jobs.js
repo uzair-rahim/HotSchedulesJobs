@@ -51,14 +51,23 @@ define([
 			if(this.numberOfJobs > 0){
 				var that = this;
 				var index = this.numberOfJobs-1;
-				var jobguid = this.model.jobs[index].guid
+				var job = this.model.jobs[index].guid
 
-				var connections = new CollectionConnections({jobGUID : jobguid, userGUID : Utils.GetUserSession().guid});
+				var connections = new CollectionConnections({jobGUID : job, userGUID : Utils.GetUserSession().guid});
 				connections.fetch({
 					success : function(response){
 						console.log("Shared connections fetched successfully...");
-						console.log(response);
-						//$("#"+jobguid).find("#"+response)
+						for(var i = 0; i < response.length; i++){
+
+							var candidate = response.models[i].attributes.candidateGuid;
+							var total = response.models[i].attributes.totalConnections;
+							var shared = response.models[i].attributes.sharedConnections.length;
+							
+							var element = $("#job-list li[data-guid='"+job+"'] li[data-guid='"+candidate+"'] .candidate-network");
+							$(element).addClass("has-connections");
+							$(element).html("<span>"+shared+"</span> / "+total);
+
+						}
 
 						that.numberOfJobs--;
 						that.getSharedConnections();
@@ -141,7 +150,6 @@ define([
 
 			}
 
-			
 
 		},
 
@@ -432,10 +440,14 @@ define([
 		},
 
 		candidateNetwork : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var guid = $(candidate).attr("data-guid");
 
-			App.router.navigate("connections/"+guid, true);
+			var count = $(event.target).find("span").text();
+
+			if(count > 0){
+				var candidate = $(event.target).closest(".view-profile");
+				var guid = $(candidate).attr("data-guid");
+				App.router.navigate("connections/"+guid, true);
+			}
 
 			event.stopPropagation();
 		},

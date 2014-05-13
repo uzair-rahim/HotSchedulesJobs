@@ -6,7 +6,7 @@ define([
 		var Network = Backbone.Model.extend({
 
 			urlRoot : function(){
-				return Utils.GetURL("/services/rest/network/");
+				return Utils.GetURL("/services/rest/network");
 			},
 			
 			url : function(){

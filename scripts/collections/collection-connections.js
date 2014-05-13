@@ -21,7 +21,7 @@ define([
 		initialize : function(options){
 			this.jobGUID = options.jobGUID;
 			this.userGUID = options.userGUID;
-			console.log("Connections model initialized...");
+			console.log("Connections collection initialized...");
 		}
 
 	});

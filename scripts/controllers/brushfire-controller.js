@@ -22,10 +22,11 @@ define([
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
 		"scripts/collections/collection-network",
+		"scripts/collections/collection-employees",
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -311,12 +312,12 @@ define([
 
 					var userGuid = Utils.GetUserSession().employerIds[0];
 					var jobtypes = new ModelJobTypes();
+					var employees = new CollectionEmployees({guid : userGuid});
 					var followers = new CollectionFollowers({guid : userGuid});
 					var models = new Object();
 
 
 					$.when(
-
 						jobtypes.fetch({
 							success : function(jobtypesResponse){
 								console.log("Job Types fetched successfully...");
@@ -325,6 +326,15 @@ define([
 							error : function(){
 								console.log("Error fetching Job Types...");
 								Utils.ShowToast({ message : "Error fetching Job Types..."});
+							}
+						}),
+
+						employees.fetch({
+							success : function(response){
+								models.employees = response.models;
+							},
+							error : function(){
+								Utils.ShowToast({ message : "Error fetching employees..."});
 							}
 						}),
 

@@ -105,12 +105,11 @@ define([
 
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.employees = this.model.employees;
 				jsonObject.followers = this.model.followers;
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
-
-				console.log(jsonObject);
 
 			return jsonObject;
 		}

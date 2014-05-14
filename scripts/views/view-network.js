@@ -96,6 +96,33 @@ define([
 
 		searchFilter : function(){
 			var flyout = $("#filter-flyout");
+			var checkboxes = $(flyout).find(".filter-section input[type='checkbox']:checked");
+			var employeesCheckbox = $(flyout).find("#current-employees:checked");
+			var followersCheckbox = $(flyout).find("#business-followers:checked");
+			var isCheckboxSelected = $(checkboxes).length > 0;
+			var isEmployeesCheckboxSelected = employeesCheckbox.length > 0;
+			var isFollowersCheckboxSelected = followersCheckbox.length > 0;
+
+			var currentEmployees = $("#employees-list-container");
+			var businessFollowers = $("#followers-list-container");
+
+			$(currentEmployees).hide();
+			$(businessFollowers).hide();
+
+			if(isEmployeesCheckboxSelected){
+				$(currentEmployees).show();
+			}
+
+			if(isFollowersCheckboxSelected){
+				$(businessFollowers).show();
+			}
+
+			if(!isEmployeesCheckboxSelected && !isFollowersCheckboxSelected){
+				$(currentEmployees).show();
+				$(businessFollowers).show();
+			}
+
+
 			this.hideFilter();
 		},
 

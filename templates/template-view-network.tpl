@@ -30,12 +30,12 @@
 	<div class="filter-section">
 		<ul class="checkbox-group" style="margin-top:6px;">
 			<li>
-				<input id="archived-candidates" type="checkbox"/>
-				<label for="archived-candidates">Current Employees</label>		
+				<input id="current-employees" type="checkbox"/>
+				<label for="current-employees">Current Employees</label>		
 			</li>
 			<li>
-				<input id="archived-candidates" type="checkbox"/>
-				<label for="archived-candidates">People Following Your Business</label>		
+				<input id="business-followers" type="checkbox"/>
+				<label for="business-followers">People Following Your Business</label>		
 			</li>
 		</ul>
 	</div>
@@ -46,8 +46,9 @@
 </div>
 
 {{#if_gt employees.length 0}}
+<div id="employees-list-container">
 	<div class="grid-list-head">Current Employees ({{employees.length}})</div>
-	<ul id="candidates-list" class="grid-list">
+	<ul id="employees-list" class="grid-list">
 		{{#each employees}}
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
@@ -95,12 +96,14 @@
 			</li>
 		{{/each}}
 	</ul>
+</div>	
 {{/if_gt}}
 
 
 {{#if_gt followers.length 0}}
+<div id="followers-list-container">
 	<div class="grid-list-head">People Following Your Business ({{followers.length}})</div>
-	<ul id="candidates-list" class="grid-list">
+	<ul id="followers-list" class="grid-list">
 		{{#each followers}}
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
@@ -148,4 +151,5 @@
 			</li>
 		{{/each}}
 	</ul>
+</div>
 {{/if_gt}}

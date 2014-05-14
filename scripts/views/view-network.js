@@ -32,8 +32,8 @@ define([
 
 		profile : function(event){
 			
-			var item = $(event.target).closest("#candidates-list > li");
-			var allItems = $("#candidates-list > li");
+			var item = $(event.target).closest(".grid-list.top > li");
+			var allItems = $(".grid-list.top > li");
 			var profile = $(item).find(".hourly-profile");
 			var isProfileExpanded = $(profile).hasClass("show");
 			var allProfiles = $(".hourly-profile");

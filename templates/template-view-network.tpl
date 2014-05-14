@@ -48,13 +48,13 @@
 {{#if_gt employees.length 0}}
 <div id="employees-list-container">
 	<div class="grid-list-head">Current Employees ({{employees.length}})</div>
-	<ul id="employees-list" class="grid-list">
+	<ul id="employees-list" class="grid-list top">
 		{{#each employees}}
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.attributes.photo}}
-						<img src="{{this.attributes.photo}}"/>
+						<img src="{{this.attributes.photo.url}}"/>
 					{{/hasPhoto}}
 				</div>
 				<div class="candidate-info">
@@ -63,7 +63,7 @@
 				</div>
 				<div class="candidate-message"></div>
 				<div class="candidate-endorse">0</div>
-				<div class="candidate-network"><span>0</span> / 0</div>
+				<!--<div class="candidate-network"><span>0</span> / 0</div>-->
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>
@@ -103,13 +103,13 @@
 {{#if_gt followers.length 0}}
 <div id="followers-list-container">
 	<div class="grid-list-head">People Following Your Business ({{followers.length}})</div>
-	<ul id="followers-list" class="grid-list">
+	<ul id="followers-list" class="grid-list top">
 		{{#each followers}}
 			<li class="view-profile">
 				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.attributes.photo}}
-						<img src="{{this.attributes.photo}}"/>
+						<img src="{{this.attributes.photo.url}}"/>
 					{{/hasPhoto}}
 				</div>
 				<div class="candidate-info">
@@ -118,7 +118,7 @@
 				</div>
 				<div class="candidate-message"></div>
 				<div class="candidate-endorse">0</div>
-				<div class="candidate-network"><span>0</span> / 0</div>
+				<!--<div class="candidate-network"><span>0</span> / 0</div>-->
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>

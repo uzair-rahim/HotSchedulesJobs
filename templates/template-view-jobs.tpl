@@ -88,7 +88,7 @@
 				<ul id="candidates-list" class="grid-list sub">
 					{{#each this.candidates}}
 						{{#if_eq this.archived false}}
-							<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}">
+							<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}">
 								<input class="candidate-select" type="checkbox"/>
 								<div class="candidate-picture">
 									{{#hasPhoto this.user.photo.url}}

@@ -158,7 +158,7 @@ define([
 					var that = this;
 
 					App.clearTrail();
-					App.pushTrail("jobs");
+					App.pushTrail(App.Language.jobs);
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
@@ -208,7 +208,7 @@ define([
 					var that = this;
 
 					App.clearTrail();
-					App.pushTrail("candidates");
+					App.pushTrail(App.Language.candidates);
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs();
@@ -256,8 +256,8 @@ define([
 
 				if(Utils.CheckSession()){
 					App.clearTrail();
-					App.pushTrail("jobs");
-					App.pushTrail("candidates");
+					App.pushTrail(App.Language.jobs);
+					App.pushTrail(App.Language.candidates);
 
 					var jobtypes = new ModelJobTypes();
 					var jobs = new CollectionJobs({guid : id});
@@ -307,7 +307,7 @@ define([
 
 				if(Utils.CheckSession()){
 					App.clearTrail();
-					App.pushTrail("network");
+					App.pushTrail(App.Language.network);
 
 
 					var userGuid = Utils.GetUserSession().employerIds[0];
@@ -368,7 +368,7 @@ define([
 
 				if(Utils.CheckSession()){
 					App.clearTrail();
-					App.pushTrail("messages");
+					App.pushTrail(App.Language.messages);
 
 					this.removeBackground();
 					this.setLayout();
@@ -387,7 +387,7 @@ define([
 
 				if(Utils.CheckSession()){
 					App.clearTrail();
-					App.pushTrail("settings");
+					App.pushTrail(App.Language.settings);
 
 					this.removeBackground();
 					this.setLayout();
@@ -431,7 +431,7 @@ define([
 				var that = this;
 
 				if(Utils.CheckSession()){
-					App.pushTrail("profile");
+					App.pushTrail(App.Language.profile);
 
 					this.removeBackground();
 					this.setLayout();
@@ -449,7 +449,7 @@ define([
 				var that = this;
 
 				if(Utils.CheckSession()){
-					App.pushTrail("Shared Connections");
+					App.pushTrail(App.Language.sharedConnections);
 
 					this.removeBackground();
 					this.setLayout();
@@ -457,17 +457,26 @@ define([
 
 					var user1guid = id;
 					var user2guid = Utils.GetUserSession().guid;
+					var models = new Object();
 					
 					var sharedConnections = new CollectionSharedConnections({ guid1 : user1guid, guid2 : user2guid });
+
+					$.when(
 						sharedConnections.fetch({
 							success : function(response){
-								var view = new ViewConnections({model : response.models});
-								that.layout.body.show(view);
+								models = response.models;
 							},
 							error : function(){
 								Utils.ShowToast({ message : "Error fetching shared connections..."});
 							}
-						});
+						})
+
+					).then(function(){
+						var view = new ViewConnections({model : models});
+							that.layout.body.show(view);
+
+					});
+						
 
 				}else{
 					App.router.navigate("login", true);

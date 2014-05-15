@@ -33,8 +33,12 @@ define([
 		
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.connections = this.model;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
+
+				console.log(jsonObject);
+
 			return jsonObject;
 		}
 		

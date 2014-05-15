@@ -445,7 +445,7 @@ define([
 
 			if(count > 0){
 				var candidate = $(event.target).closest(".view-profile");
-				var guid = $(candidate).attr("data-guid");
+				var guid = $(candidate).attr("data-user");
 				App.router.navigate("connections/"+guid, true);
 			}
 

@@ -117,7 +117,7 @@ define([
 				$(businessFollowers).show();
 			}
 
-			if(!isEmployeesCheckboxSelected && !isFollowersCheckboxSelected){
+			if(!isCheckboxSelected && !isEmployeesCheckboxSelected && !isFollowersCheckboxSelected){
 				$(currentEmployees).show();
 				$(businessFollowers).show();
 			}

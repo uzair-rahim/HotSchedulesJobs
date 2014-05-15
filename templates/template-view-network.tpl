@@ -59,7 +59,7 @@
 				</div>
 				<div class="candidate-info">
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
-					<div class="candidate-job">Not Available</div>
+					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
 				<div class="candidate-message"></div>
 				<div class="candidate-endorse">0</div>
@@ -114,7 +114,7 @@
 				</div>
 				<div class="candidate-info">
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
-					<div class="candidate-job">Not Available</div>
+					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].name}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
 				<div class="candidate-message"></div>
 				<div class="candidate-endorse">0</div>

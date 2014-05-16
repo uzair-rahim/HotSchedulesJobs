@@ -25,10 +25,6 @@
 					<label for="{{guid}}">{{name}}</label>
 				</li>
 			{{/each}}
-			<li>
-					<input id="cashier" type="checkbox"/>
-					<label for="cashier">Cashier</label>
-				</li>
 		</ul>
 	</div>
 	<div class="button-group">

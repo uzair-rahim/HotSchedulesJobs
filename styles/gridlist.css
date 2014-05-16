@@ -480,6 +480,7 @@ ul.grid-list > li .candidate-info .candidate-job{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	text-transform: capitalize;
 }
 
 @media screen and (max-width: 800px){

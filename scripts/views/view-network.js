@@ -28,6 +28,18 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Network view initialized...");
+
+			// NEW selector
+			$.expr[':'].Contains = function(a, i, m) {
+			  return jQuery(a).text().toUpperCase()
+			      .indexOf(m[3].toUpperCase()) >= 0;
+			};
+
+			// OVERWRITES old selecor
+			$.expr[':'].contains = function(a, i, m) {
+			  return jQuery(a).text().toUpperCase()
+			      .indexOf(m[3].toUpperCase()) >= 0;
+			};			
 		},
 
 		profile : function(event){
@@ -113,10 +125,8 @@ define([
 
 				$(checkboxes).each(function(){
 					var jobname = $(this).next().text();
-						jobname = jobname.charAt(0).toUpperCase() + jobname.slice(1);
-
-						$(employeesList).find(".candidate-job:contains('"+jobname+"')").closest(".view-profile").show();
-						$(followersList).find(".candidate-job:contains('"+jobname+"')").closest(".view-profile").show();
+						$(employeesList).find(".candidate-job:Contains('"+jobname+"')").closest(".view-profile").show();
+						$(followersList).find(".candidate-job:Contains('"+jobname+"')").closest(".view-profile").show();
 				});
 
 			}

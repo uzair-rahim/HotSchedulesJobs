@@ -97,31 +97,32 @@ define([
 		searchFilter : function(){
 			var flyout = $("#filter-flyout");
 			var checkboxes = $(flyout).find(".filter-section input[type='checkbox']:checked");
-			var employeesCheckbox = $(flyout).find("#current-employees:checked");
-			var followersCheckbox = $(flyout).find("#business-followers:checked");
+
+			var employeesList = $("#employees-list");
+			var followersList = $("#followers-list");
+
 			var isCheckboxSelected = $(checkboxes).length > 0;
-			var isEmployeesCheckboxSelected = employeesCheckbox.length > 0;
-			var isFollowersCheckboxSelected = followersCheckbox.length > 0;
 
-			var currentEmployees = $("#employees-list-container");
-			var businessFollowers = $("#followers-list-container");
+			if(!isCheckboxSelected){
+				$(employeesList).find(".view-profile").show();
+				$(followersList).find(".view-profile").show();
+			}else{
 
-			$(currentEmployees).hide();
-			$(businessFollowers).hide();
+				$(employeesList).find(".view-profile").hide();
+				$(followersList).find(".view-profile").hide();
 
-			if(isEmployeesCheckboxSelected){
-				$(currentEmployees).show();
+				$(checkboxes).each(function(){
+					var jobname = $(this).next().text();
+						jobname = jobname.charAt(0).toUpperCase() + jobname.slice(1);
+
+						$(employeesList).find(".candidate-job:contains('"+jobname+"')").closest(".view-profile").show();
+						$(followersList).find(".candidate-job:contains('"+jobname+"')").closest(".view-profile").show();
+				});
+
 			}
 
-			if(isFollowersCheckboxSelected){
-				$(businessFollowers).show();
-			}
-
-			if(!isCheckboxSelected && !isEmployeesCheckboxSelected && !isFollowersCheckboxSelected){
-				$(currentEmployees).show();
-				$(businessFollowers).show();
-			}
-
+			$(employeesList).prev().text("Current Employees ("+$(employeesList).find(".view-profile:visible").length+")");
+			$(followersList).prev().text("People Following Your Business ("+$(followersList).find(".view-profile:visible").length+")");
 
 			this.hideFilter();
 		},

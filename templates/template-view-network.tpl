@@ -25,18 +25,10 @@
 					<label for="{{guid}}">{{name}}</label>
 				</li>
 			{{/each}}
-		</ul>
-	</div>
-	<div class="filter-section">
-		<ul class="checkbox-group" style="margin-top:6px;">
 			<li>
-				<input id="current-employees" type="checkbox"/>
-				<label for="current-employees">Current Employees</label>		
-			</li>
-			<li>
-				<input id="business-followers" type="checkbox"/>
-				<label for="business-followers">People Following Your Business</label>		
-			</li>
+					<input id="cashier" type="checkbox"/>
+					<label for="cashier">Cashier</label>
+				</li>
 		</ul>
 	</div>
 	<div class="button-group">

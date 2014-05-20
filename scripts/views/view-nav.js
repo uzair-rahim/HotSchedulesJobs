@@ -14,13 +14,15 @@ define([
 		className : "navigation",
 		template: Template,
 		events : {
-			"click #nav-button" : "showMenu",
-			"click #jobs" 		: "jobs",
-			"click #candidates" : "candidates",
-			"click #network" 	: "network",
-			"click #messages" 	: "messages",
-			"click #settings" 	: "settings",
-			"click #logout" 	: "logout"
+			"click #nav-button" 		: "showMenu",
+			"click #jobs" 				: "jobs",
+			"click #candidates" 		: "candidates",
+			"click #network" 			: "network",
+			"click #messages" 			: "messages",
+			"click #settings" 			: "settings",
+			"click #account-settings" 	: "accountSettings",
+			"click #profile-settings" 	: "profileSettings",
+			"click #logout" 			: "logout"
 		},
 
 		initialize : function(){
@@ -41,6 +43,10 @@ define([
 				var windowWidth = $(window).width();
 				if(element !== "nav-button" && windowWidth <= 600){
 					$("#nav-menu").css("display", "none");
+				}
+
+				if(element !== "settings"){
+					$("#settings-flyout").css("display", "none");
 				}
 			});
 
@@ -75,7 +81,21 @@ define([
 		},
 
 		settings : function(){
-			this.route("settings");
+			var settings = $("#settings-flyout");
+			var isVisible = $(settings).css("display") == "block"
+			if(isVisible){
+				$(settings).hide();
+			}else{
+				$(settings).show();
+			}
+		},
+
+		accountSettings : function(){
+			this.route("accountSettings");
+		},
+
+		profileSettings : function(){
+			this.route("profileSettings");
 		},
 
 		logout : function(){

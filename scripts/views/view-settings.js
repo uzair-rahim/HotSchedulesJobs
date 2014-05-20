@@ -14,7 +14,7 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #logout" : "logout"
+
 		},
 
 		initialize : function(){
@@ -22,16 +22,11 @@ define([
 			console.log("Settings view initialized...");
 		},
 
-		logout : function(){
-			App.router.navigate("logout", true);
-		},
-
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.employerProfile = this.model;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
-				console.log(jsonObject);
 			return jsonObject;
 		}
 		

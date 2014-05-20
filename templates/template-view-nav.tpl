@@ -9,3 +9,8 @@
 	<li id="messages"></li>
 	<li id="settings"></li>
 </ul>
+<ul id="settings-flyout" class="nav-flyout">
+	<li id="account-settings">Account Settings</li>
+	<li id="profile-settings">Profile Settings</li>
+	<li id="logout">Logout</li>
+</ul>

@@ -3,11 +3,10 @@ define([
 		"jquerycookie",
 		"app",
 		"utils",
-		"backbone",
 		"marionette",
 		"hbs!templates/template-view-profile"
 	],
-	function($, Cookie, App, Utils, Backbone, Marionette, Template){
+	function($, Cookie, App, Utils, Marionette, Template){
 	"use strict";
 
 	var ViewProfile = Marionette.ItemView.extend({

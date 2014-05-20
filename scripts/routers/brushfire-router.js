@@ -21,7 +21,8 @@ define([
 				"connections/:id"		: "connections",
 				"network"				: "network",
 				"messages"				: "messages",
-				"settings"				: "settings",
+				"accountSettings"		: "accountSettings",
+				"profileSettings"		: "profileSettings",
 				"logout"				: "logout"
 			}
 

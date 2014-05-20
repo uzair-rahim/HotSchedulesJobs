@@ -18,6 +18,7 @@ define([
 		"scripts/views/view-network",
 		"scripts/views/view-messages",
 		"scripts/views/view-settings",
+		"scripts/views/view-employer-profile",
 		"scripts/models/model-jobtypes",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
@@ -26,7 +27,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -381,13 +382,32 @@ define([
 				}
 			},
 
-			settings : function(){
+			accountSettings : function(){
 
 				var that = this;
 
 				if(Utils.CheckSession()){
 					App.clearTrail();
-					App.pushTrail(App.Language.settings);
+					App.pushTrail("Account Settings");
+
+					this.removeBackground();
+					this.setLayout();
+					this.setHeader("navigation");
+
+					var view = new ViewSettings();
+					that.layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
+			},
+
+			profileSettings : function(){
+
+				var that = this;
+
+				if(Utils.CheckSession()){
+					App.clearTrail();
+					App.pushTrail("Profile Settings");
 
 					this.removeBackground();
 					this.setLayout();
@@ -405,7 +425,7 @@ define([
 									var modelProfiles = response.models;
 									var modelProfile = response.models[0].attributes;
 
-									var view = new ViewSettings({model : modelProfile});
+									var view = new ViewEmployerProfile({model : modelProfile});
 									that.layout.body.show(view);
 
 								},
@@ -416,7 +436,7 @@ define([
 					
 
 					}else{
-						var view = new ViewSettings();
+						var view = new ViewEmployerProfile();
 							that.layout.body.show(view);
 					}
 

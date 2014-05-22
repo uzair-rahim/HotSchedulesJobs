@@ -20,6 +20,7 @@ define([
 		"scripts/views/view-settings",
 		"scripts/views/view-employer-profile",
 		"scripts/models/model-jobtypes",
+		"scripts/models/model-employer-ppa",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
 		"scripts/collections/collection-network",
@@ -27,7 +28,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ModelJobTypes, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ModelJobTypes, ModelEmployerPPA, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -418,22 +419,37 @@ define([
 
 					if(employerGUIDs.length != 0){
 
+						var employerPPA = new ModelEmployerPPA();
 						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[0]});
+						var models = new Object();
+
+						$.when(
+							employerPPA.fetch({
+								success : function(response){
+									models.ppa = response.attributes;
+								},
+								error : function(){
+									console.log("Error fetching employer ppa...")
+									Utils.ShowToast({ message : "Error fetching employer ppa..."});
+								}
+
+							}),
 
 							employerProfiles.fetch({
 								success : function(response){
 									var modelProfiles = response.models;
-									var modelProfile = response.models[0].attributes;
-
-									var view = new ViewEmployerProfile({model : modelProfile});
-									that.layout.body.show(view);
-
+										models.profile = response.models[0].attributes;
 								},
 								error : function(){
 									console.log("Error fetching employer profiles...")
+									Utils.ShowToast({ message : "Error fetching employer profiles..."});
 								}
-							});
-					
+							})
+
+						).then(function(){
+							var view = new ViewEmployerProfile({model : models});
+							that.layout.body.show(view);
+						});
 
 					}else{
 						var view = new ViewEmployerProfile();

@@ -112,13 +112,12 @@
 		</div>
 		<div class="field-container">
 			<label>Price Per Person</label>
-			<div class="custom-select" data-index="0" data-value="1">
-				<button class="custom-select-button">$$ ($11-$30)</button>
+			<div id="ppa" class="custom-select" data-index="{{employerProfile.ppa}}" data-value="{{getEmployerPPA employerPPA employerProfile.ppa}}">
+				<button class="custom-select-button">{{getEmployerPPA employerPPA employerProfile.ppa}}</button>
 				<ul class="custom-select-list">
-					<li>$ (Under $10)</li>
-					<li>$$ ($11-$30)</li>
-					<li>$$$ ($31-$60)</li>
-					<li>$$$$ (Over $60)</li>
+				{{#each employerPPA}}
+					<li>{{this.label}}</li>
+				{{/each}}
 				</ul>
 			</div>
 		</div>

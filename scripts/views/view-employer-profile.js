@@ -143,15 +143,16 @@ define([
 
 			}else{
 				var employer = new Object();
-					employer.id = this.model.id;
-					employer.guid = this.model.guid;
+					employer.id = this.model.profile.id;
+					employer.guid = this.model.profile.guid;
 					employer.name = $("#name").val();
 					employer.url = $("#website").val();
 					employer.phone = $("#phone").val();
+					employer.ppa = $("#ppa").attr("data-index");
 
 				var address = new Object();	
 				
-					address.id = this.model.location.id;
+					address.id = this.model.profile.location.id;
 					address.address1 = $("#street").val();	
 					address.city = $("#city").val();
 					address.state = $("#state").text();
@@ -169,7 +170,7 @@ define([
 						},
 						error : function(){
 							console.log("Error saving employer profile...");
-							Utils.ShowToast({ message : "Error employer profile..."});
+							Utils.ShowToast({ message : "Error saving employer profile..."});
 						}
 					});
 
@@ -179,7 +180,8 @@ define([
 
 		serializeData : function(){
 			var jsonObject = new Object();
-				jsonObject.employerProfile = this.model;
+				jsonObject.employerPPA = this.model.ppa;
+				jsonObject.employerProfile = this.model.profile;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
 			return jsonObject;

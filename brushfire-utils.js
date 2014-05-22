@@ -135,6 +135,50 @@ define([
 				}, 4000);
 			},
 
+			ShowAlert : function(options){
+				defaults = {
+					primary : false,
+					primaryType : "",
+					secondaryType : "",
+					primaryText : "OK",
+					secondaryText : "Cancel",
+					title : "Warning",
+					message : "Are you sure?"
+				}
+
+				if(typeof options === "undefined"){
+					options = defaults;
+				}else{
+					for(var key in defaults){
+						if(typeof(options[key]) === "undefined"){
+							options[key] = defaults[key];
+						}
+					}
+				}
+
+				var alert = $(document).find("#app-alert");
+
+				$(alert).addClass("show");
+				$(alert).find(".alert-title").text(options.title);
+				$(alert).find(".alert-message").text(options.message);
+
+				if(!options.primary){
+					$(alert).find(".alert-action #primary-action").hide();
+				}else{
+					$(alert).find(".alert-action #primary-action").show();
+					$(alert).find(".alert-action #primary-action").text(options.primaryText).addClass(options.primaryType);
+				}
+
+				$(alert).find(".alert-action #secondary-action").text(options.secondaryText).addClass(options.secondaryType);
+
+				$(document).find("#app-modal").addClass("show");
+			},
+
+			HideAlert : function(){
+				$(document).find("#app-alert").removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
+			},
+
 			// Show loading animation
 			ShowLoadingAnimation : function(){
 				$(document).find("#app-modal").addClass("show");

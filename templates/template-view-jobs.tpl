@@ -7,7 +7,7 @@
 </div>
 <div id="toolbar">
 	<button id="add-new-job" class="primary">Add New Job</button>
-	<button id="archive-candidates">Archive Candidates</button>
+	<button id="archive-candidates">{{language.archiveCandidates}}</button>
 </div>
 
 <div id="add-job" class="add-job">

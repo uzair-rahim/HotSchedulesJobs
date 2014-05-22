@@ -32,6 +32,26 @@ button.primary:hover{
 	background-color: #2d81bd;
 }
 
+button.destroy{
+	color: #ffffff;
+	border: 1px solid #a23131;
+	background-color: #b93c3c;
+}
+
+button.destroy:hover{
+	background-color: #981e1e;
+}
+
+button.create{
+	color: #ffffff;
+	border: 1px solid #64a043;
+	background-color: #6cbc40;
+}
+
+button.create:hover{
+	background-color: #49981e;
+}
+
 label{
 	font-weight: bold;
 	color: #626970;
@@ -769,6 +789,79 @@ input[type="password"].error:focus{
 
 
 
+#app-alert{
+	position: absolute;
+	display: none;
+	float: left;
+	width: 390px;
+	height: 300px;
+	left: 50%;
+	top: 50%;
+	border-radius: 2px;
+	margin: -150px 0 0 -195px;
+	background-color: #28292a;
+	z-index: 99999;
+}
+
+@media screen and (max-width: 640px){
+	#app-alert{
+		width: 300px;
+		margin: -150px 0 0 -150px;
+	}
+}
+
+#app-alert.show{
+	display: block;
+}
+
+#app-alert .alert-icon{
+	display: block;
+	float: left;
+	width: 100%;
+	height: 80px;
+	margin: 20px 0;
+	background-image: url("../images/icon-alert.png");
+	background-size: 80px auto;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#app-alert .alert-title{
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bolder;
+	line-height: 44px;
+	text-shadow: 0 1px 0 #000000;
+}
+
+#app-alert .alert-message{
+	display: block;
+	float: left;
+	width: calc(100% - 20px);
+	margin: 0 0 40px 10px;
+	text-align: center;
+	color: #ffffff;
+	font-size: 12px;
+	line-height: 14px;
+	text-shadow: 0 1px 0 #000000;
+
+}
+
+#app-alert .alert-action{
+	display: block;
+	float: left;
+	width: 100%;
+}
+
+#app-alert .alert-action button{
+	width: calc(100% - 40px);
+	margin: 5px 0 0 20px;
+}
+
 
 #app-modal{
 	position: absolute;
@@ -1153,6 +1246,10 @@ input[type="password"].error:focus{
 }
 
 
+#logo-file{
+	position: absolute;
+	left: -200px;
+}
 
 .profile-info{
 	display: block;

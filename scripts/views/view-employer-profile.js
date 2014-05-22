@@ -16,16 +16,87 @@ define([
 		template: Template,
 		events : {
 			"click #save-settings"	: "saveSettings",
-			"click #upload-logo"	: "uploadLogo"
+			"click #upload-logo"	: "uploadLogo",
+			"click #remove-logo"	: "removeLogo",
+			"change #logo-file"		: "startLogoUpload"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Employer profile view initialized...");
+			this.listenTo(App, "alertPrimaryAction", this.completeRemoveLogo);
+			this.listenTo(App, "alertSecondaryAction", this.cancelRemoveLogo);
 		},
 
 		uploadLogo : function(){
-			console.log("upload");
+			$("#logo-file").click();
+		},
+
+		startLogoUpload : function(){
+			var _URL = window.URL || window.webkitURL;
+			var file = document.getElementById("logo-file");
+			var logo = file.files[0];
+
+			console.log(file.files);
+
+			if(file.files.length !== 0){
+
+				var size = file.files[0].size;
+
+				if(size > 1048576){
+					Utils.ShowAlert({ title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 1MB?", primary : false, secondaryText : "Ok" });
+				}else{
+					var image = new Image();
+						image.src = _URL.createObjectURL(logo);
+						image.onload = function(){
+							var imageWidth = this.width;
+							var imageHeight = this.height;
+							
+							var logoImage = $("#logo");
+							var logoWidth = "85px";
+							var logoHeight = "85px";
+
+							if(imageWidth > imageHeight){
+								logoWidth = "auto"; 
+							}else if(imageWidth < imageHeight){
+								logoHeight = "auto";
+							}
+							
+							console.log(imageWidth + " x " + imageHeight + " " + size + " bytes");
+
+
+
+							if($(logoImage).length > 0){
+								$(logoImage).attr("src", image.src);
+							}else{
+								$(".logo-container .logo").append("<img id='logo' src='"+image.src+"'/>");
+							}
+
+							$(".logo-container .logo img").css({"width" : logoWidth, "height" : logoHeight});
+
+
+						}
+	
+				}
+
+			}
+
+			
+		},
+
+		removeLogo : function(){
+			Utils.ShowAlert({primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Logo", message : "Are you sure you wan't to remove the logo?" });
+		},
+
+		completeRemoveLogo : function(){
+			$(".logo-container .logo").html("");
+			Utils.HideAlert();
+			$("#logo-action .custom-select-button").text("Update Logo");
+		},
+
+		cancelRemoveLogo : function(){
+			Utils.HideAlert();
+			$("#logo-action .custom-select-button").text("Update Logo");
 		},
 
 		saveSettings : function(){
@@ -37,8 +108,7 @@ define([
 				"#street"		: "alphanumeric",
 				"#city"			: "alpha",
 				"#zip"			: "zip",
-				"#phone"		: "alphanumeric",
-				"#website"		: "alphanumeric"
+				"#phone"		: "alphanumeric"
 			});
 
 			if(!vldtRegister){
@@ -63,9 +133,6 @@ define([
 								Utils.ShowToast({message : "There are errors in the form..."});
 							break;
 							case "#phone":
-								Utils.ShowToast({message : "There are errors in the form..."});
-							break;
-							case "#website":
 								Utils.ShowToast({message : "There are errors in the form..."});
 							break;
 						}

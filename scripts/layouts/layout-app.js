@@ -18,12 +18,21 @@ define([
 			},
 			
 			events : {
-				
+				"click #primary-action" : "primaryAction",
+				"click #secondary-action" : "secondaryAction"
 			},
 
 			initialize : function(){
 				_.bindAll.apply(_, [this].concat(_.functions(this)));
 				console.log("App layout initialized...");
+			},
+
+			primaryAction : function(){
+				App.trigger("alertPrimaryAction");
+			},
+
+			secondaryAction : function(){
+				App.trigger("alertSecondaryAction");
 			},
 			
 			serializeData : function(){

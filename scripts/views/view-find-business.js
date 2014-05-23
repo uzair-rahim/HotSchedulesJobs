@@ -102,7 +102,8 @@ define([
 			businessObject.location.zip 		= $(business).find("input[name='zip']").val();
 			businessObject.location.sourceId 	= $(business).find("input[name='id']").val();
 			businessObject.location.country 	= $(business).find("input[name='country']").val();
-			businessObject.externalIds			= [{"type" : 1, "externalId" : $(business).find("input[name='id']").val()}];
+			// Hardwired type 2 corresponds to EmployerIDType.YELP
+			businessObject.externalIds			= [{"type" : 2, "externalId" : $(business).find("input[name='id']").val()}];
 			
 			var modelBusiness = new ModelBusiness();	
 				modelBusiness.save(businessObject, {

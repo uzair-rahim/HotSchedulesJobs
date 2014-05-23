@@ -121,7 +121,14 @@
 				</ul>
 			</div>
 		</div>
-		<div class="foot">+ Add "About" Section</div>
+		{{#isNotNull employerProfile.about}}
+			<div class="field-container about">
+				<label>About</label>
+				<textarea id="about">{{employerProfile.about}}</textarea>
+			</div>
+		{{else}}
+			<div id="add-about" class="foot">+ Add "About" Section</div>
+		{{/isNotNull}}
 	</div>
 </div>
 

@@ -1309,6 +1309,10 @@ input[type="password"].error:focus{
 	margin: 0 0 10px 0; 
 }
 
+.profile-info .employer-profile-container .field-container.about{
+	height: 90px;
+}
+
 .profile-info .employer-profile-container .field-container.small{
 	clear: none;
 	width: 60px;
@@ -1329,14 +1333,24 @@ input[type="password"].error:focus{
 
 .profile-info .employer-profile-container .field-container label{
 	display: block;
+	float: left;
 	clear: both;
 	margin: 0 0 5px 0;
 }
 
 .profile-info .employer-profile-container .field-container input[type="text"]{
 	display: block;
+	float: left;
 	clear: both;
 	width: calc(100% - 30px);
+}
+
+.profile-info .employer-profile-container .field-container textarea{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 30px);
+	height: 50px;
 }
 
 .profile-info .employer-profile-container > .foot{
@@ -1460,9 +1474,10 @@ input[type="password"].error:focus{
 		clear: right;
 	}
 
-	.profile-info .employer-profile-container .field-container input[type="text"]{
-	width: calc(100% - 15px);
-}
+	.profile-info .employer-profile-container .field-container input[type="text"],
+	.profile-info .employer-profile-container .field-container textarea{
+		width: calc(100% - 15px);
+	}
 
 }
 

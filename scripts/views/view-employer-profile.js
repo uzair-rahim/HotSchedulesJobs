@@ -18,7 +18,8 @@ define([
 			"click #save-settings"	: "saveSettings",
 			"click #upload-logo"	: "uploadLogo",
 			"click #remove-logo"	: "removeLogo",
-			"change #logo-file"		: "startLogoUpload"
+			"click #add-about"		: "addAbout",
+			"change #logo-file"		: "startLogoUpload",
 		},
 
 		initialize : function(){
@@ -150,6 +151,14 @@ define([
 					employer.phone = $("#phone").val();
 					employer.ppa = $("#ppa").attr("data-index");
 
+				var about = $("#about").val();
+
+					if(about === "" || typeof(about) === "undefined"){
+						about = null;
+					}	
+					
+					employer.about = about;
+
 				var address = new Object();	
 				
 					address.id = this.model.profile.location.id;
@@ -176,6 +185,11 @@ define([
 
 			}
 
+		},
+
+		addAbout : function(event){
+			$(event.target).hide();
+			$(".employer-profile-container").append('<div class="field-container about"><label>About</label><textarea id="about"></textarea></div>');
 		},
 
 		serializeData : function(){

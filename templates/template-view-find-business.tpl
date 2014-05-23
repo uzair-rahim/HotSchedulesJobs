@@ -117,9 +117,11 @@
 	}
 	.panel .foot .left:before{
 		content: "Can't find your business? Add Now";
+		content: "";
 	}
 	.panel .foot .right:before{
 		content: "Skip";
+		content: "";
 	}
 	.panel .foot a:hover{
 		color: #555555;
@@ -314,6 +316,7 @@
 										</div>
 									</li>
 								{{/each}}
+								<!--
 								<li>
 									<div class="info">
 										<div class="line1">Jimmy's John</div>
@@ -323,6 +326,7 @@
 										<a id="" class="already-claimed">Already Claimed</a>
 									</div>
 								</li>
+								-->
 							{{else}}
 								<li class="no-result">
 									<div class="info">

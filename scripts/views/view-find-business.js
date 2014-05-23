@@ -119,8 +119,8 @@ define([
 		},
 
 		cancel : function(){
-			console.log("Cancel...");
-			App.router.navigate("logout", true);
+			//console.log("Cancel...");
+			//App.router.navigate("logout", true);
 		},
 		
 		serializeData : function(){

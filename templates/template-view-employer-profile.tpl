@@ -150,7 +150,7 @@
 					<button class="custom-select-button">Admin</button>
 					<ul class="custom-select-list">
 						<li>Admin</li>
-						<li id="{{guid}}">Remove</li>
+						<li id="{{guid}}" class="remove-admin">Remove</li>
 					</ul>
 				</div>
 			</div>

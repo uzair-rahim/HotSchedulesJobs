@@ -137,6 +137,7 @@ define([
 
 			ShowAlert : function(options){
 				defaults = {
+					listener : "",
 					primary : false,
 					primaryType : "",
 					secondaryType : "",
@@ -159,6 +160,7 @@ define([
 				var alert = $(document).find("#app-alert");
 
 				$(alert).addClass("show");
+				$(alert).attr("data-listener", options.listener);
 				$(alert).find(".alert-title").text(options.title);
 				$(alert).find(".alert-message").text(options.message);
 

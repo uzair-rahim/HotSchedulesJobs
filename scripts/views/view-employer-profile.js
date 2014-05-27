@@ -22,14 +22,15 @@ define([
 			"click #add-about"		: "addAbout",
 			"click #add-admin"		: "addAdmin",
 			"click #make-admin"		: "makeAdmin",
+			"click .remove-admin"	: "removeAdmin",
 			"change #logo-file"		: "startLogoUpload",
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Employer profile view initialized...");
-			this.listenTo(App, "alertPrimaryAction", this.completeRemoveLogo);
-			this.listenTo(App, "alertSecondaryAction", this.cancelRemoveLogo);
+			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
+			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
 		},
 
 		uploadLogo : function(){
@@ -89,18 +90,52 @@ define([
 		},
 
 		removeLogo : function(){
-			Utils.ShowAlert({primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Logo", message : "Are you sure you wan't to remove the logo?" });
+			Utils.ShowAlert({listener : "logo", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Logo", message : "Are you sure you wan't to remove the logo?" });
+		},
+
+		alertPrimaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "logo":
+					this.completeRemoveLogo();
+				break;
+				case "admin":
+					this.completeRemoveAdmin();
+				break;
+			}
+		},
+
+		alertSecondaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "logo":
+					this.cancelRemoveLogo();
+				break;
+				case "admin":
+					this.cancelRemoveAdmin();
+				break;
+			}
 		},
 
 		completeRemoveLogo : function(){
-			$(".logo-container .logo").html("");
 			Utils.HideAlert();
+			$(".logo-container .logo").html("");
 			$("#logo-action .custom-select-button").text("Update Logo");
 		},
 
 		cancelRemoveLogo : function(){
 			Utils.HideAlert();
 			$("#logo-action .custom-select-button").text("Update Logo");
+		},
+
+		completeRemoveAdmin : function(){
+			Utils.HideAlert();
+			$(".admin-container .custom-select-button").text("Admin");
+		},
+
+		cancelRemoveAdmin : function(){
+			Utils.HideAlert();
+			$(".admin-container .custom-select-button").text("Admin");
 		},
 
 		saveSettings : function(){
@@ -217,6 +252,11 @@ define([
 				}
 			});
 
+		},
+
+		removeAdmin : function(event){
+			var guid = $(event.target).attr("id");
+			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
 		},
 
 		serializeData : function(){

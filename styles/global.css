@@ -942,7 +942,11 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	margin: 0 10px 0 0;
-	width: 80px;
+	width: 75px;
+}
+
+.add-job .job-details .input-container.position{
+	width: 120px;
 }
 
 .add-job .job-details .input-container label{
@@ -969,11 +973,18 @@ input[type="password"].error:focus{
 .add-job .job-details .input-container .custom-select{
 	display: block;
 	float: left;
+	clear: both;
 	margin: 2px 0 0 0;
 }
 
 .add-job .job-details .input-container .custom-select button{
 	max-width: 80px;
+}
+
+.add-job .job-details .input-container.position .custom-select button{
+	width: 120px;
+	max-width: 120px;
+	text-align: left;
 }
 
 .add-job .job-details .input-container .wage{

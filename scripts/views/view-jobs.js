@@ -108,7 +108,7 @@ define([
 
 			var wage = $("#new-wage").val();
 
-			if(wage === "" || isNaN(wage)){
+			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
 			}else{
 				var job = new Object();	
@@ -221,7 +221,7 @@ define([
 
 			var wage = $(item).find(".wage").val();
 
-			if(wage === "" || isNaN(wage)){
+			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
 			}else{
 

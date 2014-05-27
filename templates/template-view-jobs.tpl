@@ -12,7 +12,7 @@
 
 <div id="add-job" class="add-job">
 	<div class="job-details">
-		<div class="input-container">
+		<div class="input-container position">
 			<label>Position</label>
 			<div id="new-position" class="custom-select position" data-index="0" data-value="{{jobs.[0].jobName}}">
 				<button class="custom-select-button">{{jobtypes.[0].name}}</button>
@@ -151,7 +151,7 @@
 			{{/if_not_eq}}
 			<div class="edit-mode">
 				<div class="job-details">
-					<div class="input-container">
+					<div class="input-container position">
 						<label>Position</label>
 						<div class="custom-select position" data-index="0" data-value="{{jobName}}">
 							<button class="custom-select-button">{{jobName}}</button>

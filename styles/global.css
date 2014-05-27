@@ -1385,6 +1385,11 @@ input[type="password"].error:focus{
 	margin: 10px 10px;
 }
 
+.admin-container.add{
+	display: none;
+	width: 280px;
+}
+
 .admin-container .picture{
 	display: block;
 	float: left;
@@ -1418,6 +1423,25 @@ input[type="password"].error:focus{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+.admin-container .actions > .email{
+	display: block;
+	float: left;
+	margin: 10px 0 5px 2px;
+	width: 175px;
+	overflow: hidden;
+}
+
+
+.admin-container .actions > .email input{
+	width: calc(100% - 20px);
+}
+
+.admin-container .actions > button{
+	float: left;
+	clear: both;
+	margin-left: 1px;
 }
 
 @media screen and (max-width: 1010px){

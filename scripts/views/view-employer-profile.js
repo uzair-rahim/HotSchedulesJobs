@@ -19,6 +19,8 @@ define([
 			"click #upload-logo"	: "uploadLogo",
 			"click #remove-logo"	: "removeLogo",
 			"click #add-about"		: "addAbout",
+			"click #add-admin"		: "addAdmin",
+			"click #make-admin"		: "makeAdmin",
 			"change #logo-file"		: "startLogoUpload",
 		},
 
@@ -109,7 +111,7 @@ define([
 				"#street"		: "alphanumeric",
 				"#city"			: "alpha",
 				"#zip"			: "zip",
-				"#phone"		: "alphanumeric"
+				"#phone"		: "phone"
 			});
 
 			if(!vldtRegister){
@@ -190,6 +192,15 @@ define([
 		addAbout : function(event){
 			$(event.target).hide();
 			$(".employer-profile-container").append('<div class="field-container about"><label>About</label><textarea id="about"></textarea></div>');
+		},
+
+		addAdmin : function(event){
+			$("#add-admin").hide();
+			$("#add-admin-container").show();
+		},
+
+		makeAdmin : function(){
+
 		},
 
 		serializeData : function(){

@@ -136,18 +136,29 @@
 	<div class="settings-heading">Profile Admins</div>
 	{{#each employerProfile.admins}}
 		<div class="admin-container">
-			<div class="picture"></div>
+			<div class="picture">
+				{{#hasPhoto user.photo}}
+					<img src="{{user.photo}}"/>
+				{{/hasPhoto}}
+			</div>
 			<div class="actions">
 				<div class="name">{{user.firstname}} {{user.lastname}}</div>
 				<div class="custom-select" data-index="0" data-value="Admin">
 					<button class="custom-select-button">Admin</button>
 					<ul class="custom-select-list">
 						<li>Admin</li>
-						<li>Remove</li>
+						<li id="{{guid}}">Remove</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	{{/each}}
-	<div class="foot">+ Add New Admin</div>
+	<div id="add-admin-container" class="admin-container add">
+		<div class="picture"></div>
+		<div class="actions">
+			<div class="email"><input type="email" id="admin-email" placeholder="Enter Email Address"/></div>
+			<button id="make-admin">Make Admin</button>
+		</div>
+	</div>
+	<div id="add-admin" class="foot">+ Add New Admin</div>
 </div>

@@ -164,7 +164,8 @@ define([
 				var address = new Object();	
 				
 					address.id = this.model.profile.location.id;
-					address.address1 = $("#street").val();	
+					address.address1 = $("#street").val();
+					address.address2 = $("#street2").val();	
 					address.city = $("#city").val();
 					address.state = $("#state").text();
 					address.zip = $("#zip").val();

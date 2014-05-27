@@ -32,9 +32,10 @@
 			<label>Restaurant Name</label>
 			<input type="text" id="name" value="{{employerProfile.name}}"/>
 		</div>
-		<div class="field-container">
+		<div class="field-container address">
 			<label>Street</label>
 			<input type="text" id="street" value="{{employerProfile.location.address1}}"/>
+			<input type="text" id="street2" value="{{employerProfile.location.address2}}"/>
 		</div>
 		<div class="field-container one-third">
 			<label>City</label>
@@ -52,6 +53,7 @@
 					<li>CA</li>
 					<li>CO</li>
 					<li>CT</li>
+					<li>D.C.</li>
 					<li>DE</li>
 					<li>FL</li>
 					<li>GE</li>
@@ -95,6 +97,7 @@
 					<li>WV</li>
 					<li>WI</li>
 					<li>WY</li>
+					<li>Unknown</li>
 				</ul>
 			</div>
 		</div>

@@ -1309,6 +1309,10 @@ input[type="password"].error:focus{
 	margin: 0 0 10px 0; 
 }
 
+.profile-info .employer-profile-container .field-container.address{
+	height: 85px;
+}
+
 .profile-info .employer-profile-container .field-container.about{
 	height: 90px;
 }

@@ -5,9 +5,10 @@ define([
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-employer-profile",
-		"scripts/models/model-employer-profile"
+		"scripts/models/model-employer-profile",
+		"scripts/models/model-new-employer-admin",
 	],
-	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile){
+	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile, NewAdmin){
 	"use strict";
 
 	var ViewEmployerProfile = Marionette.ItemView.extend({
@@ -201,6 +202,20 @@ define([
 		},
 
 		makeAdmin : function(){
+			var employerGUIDs = Utils.GetUserSession().employerIds;
+			var newAdmin = new NewAdmin({guid : employerGUIDs[0]});
+
+			var admin = {"email" : "uzair@email.com"}
+
+			newAdmin.save(admin, {
+				success : function(response){
+					console.log(response);
+				},
+				error : function(){
+					console.log("Error adding admin to employer...");
+					Utils.ShowToast({ message : "Error adding admin to employer..."});
+				}
+			});
 
 		},
 

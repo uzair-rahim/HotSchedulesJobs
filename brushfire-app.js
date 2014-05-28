@@ -28,6 +28,7 @@ define([
 			console.log("Brushfire before initialized...");
 			App.getLanguagePack();
 			Utils.InitCustomSelect();
+			Utils.InitMaxTextAreaLength();
 		});
 
 		// Add initializer to the App

@@ -189,7 +189,16 @@ define([
 			// Hide loading animation
 			HideLoadingAnimation : function(){
 				$(document).find("#app-modal").removeClass("show");
-			}
+			},
+
+			InitMaxTextAreaLength : function(){
+				var maxlength = 512;
+				$(document.body).delegate("textarea", "keyup", function(){
+					if ($(this).val().length > maxlength) {  
+            			$(this).val($(this).val().substring(0, maxlength));  
+        			} 
+				});
+			},
 			
 		});
 

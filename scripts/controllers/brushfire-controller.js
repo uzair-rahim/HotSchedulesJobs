@@ -11,6 +11,7 @@ define([
 		"scripts/views/view-account-verification",
 		"scripts/views/view-head",
 		"scripts/views/view-nav",
+		"scripts/views/view-support-nav",
 		"scripts/views/view-jobs",
 		"scripts/views/view-candidates",
 		"scripts/views/view-profile",
@@ -19,6 +20,7 @@ define([
 		"scripts/views/view-messages",
 		"scripts/views/view-settings",
 		"scripts/views/view-employer-profile",
+		"scripts/views/view-support",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer-ppa",
 		"scripts/collections/collection-jobs",
@@ -28,7 +30,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ModelJobTypes, ModelEmployerPPA, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -69,6 +71,10 @@ define([
 							var nav = new ViewNav();
 							this.layout.head.show(nav);
 						}
+					break;
+					case "support" :
+						var nav = new ViewSupportNav();
+						this.layout.head.show(nav);
 					break;
 				}				
 			},
@@ -518,6 +524,22 @@ define([
 					App.router.navigate("login", true);
 				}
 
+			},
+
+			support : function(){
+				var that = this;
+
+				if(Utils.CheckSession()){
+					this.removeBackground();
+					this.setLayout();
+					this.setHeader("support");
+
+					var view = new ViewSupport();
+					that.layout.body.show(view);
+
+				}else{
+					App.router.navigate("login", true);
+				}
 			},
 
 			logout : function(){

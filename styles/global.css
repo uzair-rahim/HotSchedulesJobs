@@ -634,6 +634,15 @@ input[type="password"].error:focus{
 	color: #ffffff;
 }
 
+#nav-heading{
+	display: block;
+	float: left;
+	margin: 0 0 0 5px;
+	line-height: 40px;
+	color: #ffffff;
+	font-size: 14px;
+}
+
 
 #app-body{
 	display: block;
@@ -1325,13 +1334,19 @@ input[type="password"].error:focus{
 }
 
 .profile-info .employer-profile-container .field-container.about{
-	height: 90px;
+	height: 100px;
 }
 
 .profile-info .employer-profile-container .field-container.small{
 	clear: none;
-	width: 60px;
+	width: 95px;
 	margin: 0 0 10px 0; 
+}
+
+.profile-info .employer-profile-container .field-container.small .custom-select button{
+	width: 85px;
+	text-align: left;
+	margin-top: 2px;
 }
 
 .profile-info .employer-profile-container .field-container.one-third{
@@ -1509,7 +1524,7 @@ input[type="password"].error:focus{
 	}
 
 	.profile-info .employer-profile-container .field-container.zip{
-		width: calc(100% - 60px);
+		width: calc(100% - 95px);
 		clear: right;
 	}
 

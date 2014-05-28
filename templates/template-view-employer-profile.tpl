@@ -127,7 +127,7 @@
 		{{#isNotNull employerProfile.about}}
 			<div class="field-container about">
 				<label>About</label>
-				<textarea id="about">{{employerProfile.about}}</textarea>
+				<textarea id="about" maxlength="512">{{employerProfile.about}}</textarea>
 			</div>
 		{{else}}
 			<div id="add-about" class="foot">+ Add "About" Section</div>

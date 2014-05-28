@@ -23,7 +23,8 @@ define([
 				"messages"				: "messages",
 				"accountSettings"		: "accountSettings",
 				"profileSettings"		: "profileSettings",
-				"logout"				: "logout"
+				"logout"				: "logout",
+				"support"				: "support"
 			}
 
 		});

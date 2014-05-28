@@ -22,7 +22,7 @@
 					<div class="employer">@ {{attributes.employer.name}}</div>
 					<div class="email">{{attributes.user.email}}</div>
 				</div>
-				<button class="destroy" id="{{attributes.admin.id}}" data-guid="{{attributes.admin.guid}}" data-employer="{{attributes.employer.guid}}">Delete</button>
+				<button class="destroy" id="{{attributes.admin.id}}" data-guid="{{attributes.admin.guid}}" data-employer="{{attributes.employer.guid}}">Remove</button>
 			</li>
 		{{/each}}
 	{{/if_eq}}

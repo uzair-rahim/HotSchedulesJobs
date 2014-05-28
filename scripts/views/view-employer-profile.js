@@ -262,6 +262,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.employerPPA = this.model.ppa;
+				jsonObject.employerRating = this.model.rating;
 				jsonObject.employerProfile = this.model.profile;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();

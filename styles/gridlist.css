@@ -796,3 +796,69 @@ ul.grid-list > li .candidate-rating.one{
 .wage-type button.custom-select-button:first-letter{
 	text-transform: capitalize;
 }
+
+
+
+/* SUPPORT STYLES */
+ul.grid-list.support > li input[type="radio"]{
+	display: block;
+	float: left;
+	margin: 20px 10px;
+}
+
+ul.grid-list.support > li .photo{
+	display: block;
+	float: left;
+	clear: none;
+	width: 38px;
+	height: 38px;
+	margin: 5px 5px 0 0;
+	border-radius: 20px;
+	background-color: #fafbfc;
+	border: 1px solid #e5e5e5;
+	background-image: url("../images/default-avatar.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 38px auto;
+	overflow: hidden;
+}
+
+ul.grid-list.support > li .info{
+	display: block;
+	float: left;
+}
+
+ul.grid-list.support > li .info .name{
+	display: block;
+	float: left;
+	font-weight: bold;
+	font-size: 14px;
+	margin: 8px 0 2px 4px;
+}
+
+ul.grid-list.support > li .info .employer{
+	display: block;
+	float: left;
+	color: #999999;
+	font-size: 14px;
+	margin: 8px 0 2px 4px;
+}
+
+ul.grid-list.support > li .info .email{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 4px;
+}
+
+ul.grid-list.support > li button{
+	display: block;
+	float: right;
+	margin: 10px;
+}
+
+ul.grid-list.support > li.no-result{
+	line-height: 50px;
+	text-indent: 20px;
+	font-weight: bold;
+}

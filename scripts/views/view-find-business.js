@@ -128,8 +128,6 @@ define([
 			var jsonObject = new Object();
 				jsonObject.businesses = this.model;
 				jsonObject.language = App.Language;
-
-				console.log(jsonObject);
 			return jsonObject;
 		}
 		

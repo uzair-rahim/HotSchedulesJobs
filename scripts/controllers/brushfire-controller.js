@@ -23,6 +23,7 @@ define([
 		"scripts/views/view-support",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer-ppa",
+		"scripts/models/model-employer-yelp-rating",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-employer-profile",
 		"scripts/collections/collection-network",
@@ -30,7 +31,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -426,6 +427,7 @@ define([
 					if(employerGUIDs.length != 0){
 
 						var employerPPA = new ModelEmployerPPA();
+						var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUIDs[0]});
 						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[0]});
 						var models = new Object();
 
@@ -437,6 +439,17 @@ define([
 								error : function(){
 									console.log("Error fetching employer ppa...")
 									Utils.ShowToast({ message : "Error fetching employer ppa..."});
+								}
+
+							}),
+
+							employerYelpRating.fetch({
+								success : function(response){
+									models.rating = response.attributes;
+								},
+								error : function(){
+									console.log("Error fetching employer yelp rating...")
+									Utils.ShowToast({ message : "Error fetching employer yelp rating..."});
 								}
 
 							}),

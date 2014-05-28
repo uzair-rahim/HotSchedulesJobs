@@ -133,6 +133,11 @@
 			<div id="add-about" class="foot">+ Add "About" Section</div>
 		{{/isNotNull}}
 	</div>
+	{{#if_not_eq employerRating.rating undefined}}
+		<div class="yelp-rating">
+			<img src="{{employerRating.ratingImgUrlSmall}}"/>
+		</div>
+	{{/if_not_eq}}
 </div>
 
 <div class="profile-admins">

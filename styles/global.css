@@ -1391,6 +1391,24 @@ input[type="password"].error:focus{
 	color: #36679a;
 }
 
+.profile-info .yelp-rating{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 20px;
+	width: 200px;
+	height: 20px;
+	background-image: url("../images/logo-yelp.png");
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: auto 20px;
+	overflow: hidden;
+}
+
+.profile-info .yelp-rating img{
+	margin: 6px 0 0 44px;
+}
+
 .profile-admins{
 	display: block;
 	float: left;

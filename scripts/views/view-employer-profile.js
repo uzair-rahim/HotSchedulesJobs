@@ -7,14 +7,17 @@ define([
 		"hbs!templates/template-view-employer-profile",
 		"scripts/models/model-employer-profile",
 		"scripts/models/model-new-employer-admin",
+		"scripts/models/model-delete-admin"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile, NewAdmin){
+	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile, NewAdmin, DeleteAdmin){
 	"use strict";
 
 	var ViewEmployerProfile = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
 		template: Template,
+		adminGUID : null,
+		adminID : null,
 		events : {
 			"click #save-settings"	: "saveSettings",
 			"click #upload-logo"	: "uploadLogo",
@@ -130,7 +133,20 @@ define([
 
 		completeRemoveAdmin : function(){
 			Utils.HideAlert();
-			$(".admin-container .custom-select-button").text("Admin");
+
+			var employerGUIDs = Utils.GetUserSession().employerIds;
+			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUIDs[0], admin : this.adminGUID});
+
+				deleteAdmin.destroy({
+					dataType : "text",
+					success : function(response){
+						App.router.controller.profileSettings();
+					},
+					error : function(){
+						console.log("Error removing admin...");
+						Utils.ShowToast({ message : "Error removing admin..."});
+					}
+				});
 		},
 
 		cancelRemoveAdmin : function(){
@@ -240,7 +256,7 @@ define([
 			var employerGUIDs = Utils.GetUserSession().employerIds;
 			var newAdmin = new NewAdmin({guid : employerGUIDs[0]});
 
-			var admin = {"email" : "uzair@email.com"}
+			var admin = {"email" : "uzair.rahim@hotschedules.com"}
 
 			newAdmin.save(admin, {
 				success : function(response){
@@ -255,7 +271,10 @@ define([
 		},
 
 		removeAdmin : function(event){
-			var guid = $(event.target).attr("id");
+			var id = $(event.target).attr("id");
+			var guid = $(event.target).attr("data-guid");
+			this.adminID = id;
+			this.adminGUID = guid;
 			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
 		},
 

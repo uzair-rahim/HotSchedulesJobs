@@ -135,7 +135,9 @@
 	</div>
 	{{#if_not_eq employerRating.rating undefined}}
 		<div class="yelp-rating">
-			<img src="{{employerRating.ratingImgUrlSmall}}"/>
+			<a href="{{employerRating.url}}" target="_blank">
+				<img src="{{employerRating.ratingImgUrlSmall}}"/>
+			</a>
 		</div>
 	{{/if_not_eq}}
 </div>
@@ -155,7 +157,7 @@
 					<button class="custom-select-button">Admin</button>
 					<ul class="custom-select-list">
 						<li>Admin</li>
-						<li id="{{guid}}" class="remove-admin">Remove</li>
+						<li id="{{id}}" data-guid="{{guid}}" class="remove-admin">Remove</li>
 					</ul>
 				</div>
 			</div>

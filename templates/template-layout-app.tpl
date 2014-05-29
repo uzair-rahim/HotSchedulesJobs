@@ -3,7 +3,6 @@
 <div id="app-body"></div>
 <div id="app-toast"></div>
 <div id="app-alert">
-	<div class="alert-icon"></div>
 	<div class="alert-title">Alert Title</div>
 	<div class="alert-message">Alert message goes here</div>
 	<div class="alert-action">

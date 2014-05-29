@@ -52,7 +52,7 @@ define([
 				var size = file.files[0].size;
 
 				if(size > 1048576){
-					Utils.ShowAlert({ title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 1MB?", primary : false, secondaryText : "Ok" });
+					Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 1MB?", primary : false, secondaryText : "Ok" });
 				}else{
 					var image = new Image();
 						image.src = _URL.createObjectURL(logo);
@@ -255,8 +255,9 @@ define([
 		makeAdmin : function(){
 			var employerGUIDs = Utils.GetUserSession().employerIds;
 			var newAdmin = new NewAdmin({guid : employerGUIDs[0]});
+			var email = $("#admin-email").val();
 
-			var admin = {"email" : "uzair.rahim@hotschedules.com"}
+			var admin = {"email" : email}
 
 			newAdmin.save(admin, {
 				success : function(response){

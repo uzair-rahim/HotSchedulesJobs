@@ -43,14 +43,23 @@ define([
 							user.lastname = response.attributes.lastname;
 							user.employerIds = response.attributes.employerIds;
 
-							Utils.CreateUserSession(user);
-
-							if(user.employerIds.length > 0){
-								App.router.navigate("jobs", true);
+							if(response.attributes.roles.length > 0){
+								user.role = response.attributes.roles[0].role;
 							}else{
-								App.router.navigate("addBusiness", true);
+								user.role = "user";
 							}
 
+							Utils.CreateUserSession(user);
+
+							if(user.role === "support"){
+								App.router.navigate("support", true);
+							}else{
+								if(user.employerIds.length > 0){
+									App.router.navigate("jobs", true);
+								}else{
+									App.router.navigate("addBusiness", true);
+								}
+							}
 					},
 
 					error : function(){

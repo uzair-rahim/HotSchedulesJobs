@@ -28,7 +28,8 @@ define([
 					firstname		: "",
 					lastname		: "",
 					guid			: "",
-					employerIds		: ""
+					employerIds		: "",
+					role			: "user"
 				}
 
 				for(var key in defaults){
@@ -166,6 +167,7 @@ define([
 
 				if(!options.primary){
 					$(alert).find(".alert-action #primary-action").hide();
+					$(alert).find(".alert-action").addClass("single");
 				}else{
 					$(alert).find(".alert-action #primary-action").show();
 					$(alert).find(".alert-action #primary-action").text(options.primaryText).addClass(options.primaryType);
@@ -178,6 +180,7 @@ define([
 
 			HideAlert : function(){
 				$(document).find("#app-alert").removeClass("show");
+				$(document).find("#app-alert .alert-action").removeClass("single");
 				$(document).find("#app-modal").removeClass("show");
 			},
 

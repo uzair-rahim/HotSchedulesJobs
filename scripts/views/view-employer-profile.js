@@ -7,15 +7,17 @@ define([
 		"hbs!templates/template-view-employer-profile",
 		"scripts/models/model-employer-profile",
 		"scripts/models/model-new-employer-admin",
-		"scripts/models/model-delete-admin"
+		"scripts/models/model-delete-admin",
+		"scripts/models/model-employer-logo"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile, NewAdmin, DeleteAdmin){
+	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile, NewAdmin, DeleteAdmin, EmployerLogo){
 	"use strict";
 
 	var ViewEmployerProfile = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
 		template: Template,
+		adminUserGUID : null,
 		adminGUID : null,
 		adminID : null,
 		events : {
@@ -40,56 +42,31 @@ define([
 			$("#logo-file").click();
 		},
 
-		startLogoUpload : function(){
-			var _URL = window.URL || window.webkitURL;
-			var file = document.getElementById("logo-file");
-			var logo = file.files[0];
+		startLogoUpload : function(event){
 
-			console.log(file.files);
+			event.preventDefault();
 
-			if(file.files.length !== 0){
+			var file = event.currentTarget.files[0];
+			var reader = new FileReader();
 
-				var size = file.files[0].size;
-
-				if(size > 1048576){
-					Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 1MB?", primary : false, secondaryText : "Ok" });
-				}else{
-					var image = new Image();
-						image.src = _URL.createObjectURL(logo);
-						image.onload = function(){
-							var imageWidth = this.width;
-							var imageHeight = this.height;
-							
-							var logoImage = $("#logo");
-							var logoWidth = "85px";
-							var logoHeight = "85px";
-
-							if(imageWidth > imageHeight){
-								logoWidth = "auto"; 
-							}else if(imageWidth < imageHeight){
-								logoHeight = "auto";
-							}
-							
-							console.log(imageWidth + " x " + imageHeight + " " + size + " bytes");
-
-
-
-							if($(logoImage).length > 0){
-								$(logoImage).attr("src", image.src);
-							}else{
-								$(".logo-container .logo").append("<img id='logo' src='"+image.src+"'/>");
-							}
-
-							$(".logo-container .logo img").css({"width" : logoWidth, "height" : logoHeight});
-
-
-						}
-	
-				}
-
+			reader.onload = function(e){
+				var employerGUIDs = Utils.GetUserSession().employerIds;
+				var logo = new EmployerLogo({guid : employerGUIDs[0]});
+					logo.unset("guid");
+					logo.set({file : e.target.result});
+					console.log(logo);
+					logo.save({
+						success : function(){
+					
+					},
+						error : function(){
+							console.log("Error uploading logo...");
+							Utils.ShowToast({ message : "Error uploading logo..."});
+					}
+				});
 			}
 
-			
+			reader.readAsDataURL(file);
 		},
 
 		removeLogo : function(){
@@ -121,9 +98,31 @@ define([
 		},
 
 		completeRemoveLogo : function(){
-			Utils.HideAlert();
-			$(".logo-container .logo").html("");
-			$("#logo-action .custom-select-button").text("Update Logo");
+
+			var logoImage = $("#logo");
+
+			if($(logoImage).length > 0){
+				
+				var employerGUIDs = Utils.GetUserSession().employerIds;
+				var logo = new EmployerLogo({id : 0, guid : employerGUIDs[0]});
+
+				logo.destroy({
+					dataType : "text",
+					success : function(){
+						Utils.HideAlert();
+						$(".logo-container .logo").html("");
+						$("#logo-action .custom-select-button").text("Update Logo");
+					},
+					error : function(){
+						console.log("Error removing admin...");
+						Utils.ShowToast({ message : "Error removing logo..."});
+					}
+				})
+
+			}else{
+				Utils.HideAlert();
+			}
+
 		},
 
 		cancelRemoveLogo : function(){
@@ -134,13 +133,22 @@ define([
 		completeRemoveAdmin : function(){
 			Utils.HideAlert();
 
-			var employerGUIDs = Utils.GetUserSession().employerIds;
-			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUIDs[0], admin : this.adminGUID});
+			var that = this;
 
+			var employerGUIDs = Utils.GetUserSession().employerIds;
+			var userGUID = Utils.GetUserSession().guid;
+			var self = this.adminUserGUID == userGUID;
+			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUIDs[0], admin : this.adminGUID});
+		
 				deleteAdmin.destroy({
 					dataType : "text",
 					success : function(response){
-						App.router.controller.profileSettings();
+						if(self){
+							App.router.controller.logout();
+						}else{
+							App.router.controller.profileSettings();
+						}
+						
 					},
 					error : function(){
 						console.log("Error removing admin...");
@@ -253,29 +261,58 @@ define([
 		},
 
 		makeAdmin : function(){
-			var employerGUIDs = Utils.GetUserSession().employerIds;
-			var newAdmin = new NewAdmin({guid : employerGUIDs[0]});
-			var email = $("#admin-email").val();
 
-			var admin = {"email" : email}
+			$("input").removeClass("error");
 
-			newAdmin.save(admin, {
-				success : function(response){
-					console.log(response);
-				},
-				error : function(){
-					console.log("Error adding admin to employer...");
-					Utils.ShowToast({ message : "Error adding admin to employer..."});
-				}
+			var vldtAdmin = vldt.validate({
+				"#admin-email" 	: "email"
 			});
+
+			if(!vldtAdmin){
+				var errors = vldt.getErrors();
+				console.log(vldt.getErrors());
+
+				for(var key in errors){
+					if(errors[key] === false){
+						$(key).addClass("error");
+						switch(key){
+							case "#admin-email":
+								Utils.ShowToast({ message : "Invalid Email Address"});
+							break;
+						}
+					}
+				}
+
+				return false;
+
+			}else{
+				var employerGUIDs = Utils.GetUserSession().employerIds;
+				var newAdmin = new NewAdmin({guid : employerGUIDs[0]});
+					newAdmin.unset("guid");
+				var email = $("#admin-email").val();
+
+				var admin = {"email" : email}
+
+				newAdmin.save(admin, {
+					success : function(response){
+						App.router.controller.profileSettings();
+					},
+					error : function(){
+						console.log("Error adding admin to employer...");
+						Utils.ShowToast({ message : "Error adding admin to employer..."});
+					}
+				});	
+			}
 
 		},
 
 		removeAdmin : function(event){
 			var id = $(event.target).attr("id");
 			var guid = $(event.target).attr("data-guid");
+			var userGuid = $(event.target).attr("data-user");
 			this.adminID = id;
 			this.adminGUID = guid;
+			this.adminUserGUID = userGuid;
 			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
 		},
 

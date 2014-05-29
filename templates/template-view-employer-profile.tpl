@@ -15,8 +15,8 @@
 	<div class="employer-profile-container">
 		<div class="logo-container">
 			<div class="logo">
-				{{#hasPhoto employerProfile.logoURL}}
-					<img id="logo" src="{{employerProfile.logoURL}}"/>
+				{{#hasPhoto employerProfile.logo}}
+					<img id="logo" src="{{employerProfile.logo.url}}"/>
 				{{/hasPhoto}}
 			</div>
 			<div id="logo-action" class="custom-select" data-index="0" data-value="0">
@@ -26,7 +26,9 @@
 					<li id="remove-logo">Remove Logo</li>
 				</ul>
 			</div>
-			<input type="file" id="logo-file" accept="image/jpg,image/jpeg,image/gif"/>
+			<form enctype="multipart/form-data">
+				<input type="file" id="logo-file" name="file" accept="image/jpg,image/jpeg,image/gif"/>
+			</form>
 		</div>
 		<div class="field-container">
 			<label>Restaurant Name</label>
@@ -157,7 +159,7 @@
 					<button class="custom-select-button">Admin</button>
 					<ul class="custom-select-list">
 						<li>Admin</li>
-						<li id="{{id}}" data-guid="{{guid}}" class="remove-admin">Remove</li>
+						<li id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" class="remove-admin">Remove</li>
 					</ul>
 				</div>
 			</div>

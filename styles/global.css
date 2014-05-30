@@ -1450,6 +1450,12 @@ input[type="password"].error:focus{
 	overflow: hidden;
 }
 
+.admin-container .picture img{
+	width: 80px;
+	height: 80px;
+}
+
+
 .admin-container .actions{
 	display: block;
 	float: left;

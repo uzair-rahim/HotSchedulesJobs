@@ -42,31 +42,49 @@ define([
 			$("#logo-file").click();
 		},
 
-		startLogoUpload : function(event){
+		startLogoUpload : function(event){//4194304
 
-			event.preventDefault();
+			var employerGUIDs = Utils.GetUserSession().employerIds;
+			var guid = employerGUIDs[0];
 
-			var file = event.currentTarget.files[0];
-			var reader = new FileReader();
+			var logo = $("#logo-file")[0].files[0];
 
-			reader.onload = function(e){
-				var employerGUIDs = Utils.GetUserSession().employerIds;
-				var logo = new EmployerLogo({guid : employerGUIDs[0]});
-					logo.unset("guid");
-					logo.set({file : e.target.result});
-					console.log(logo);
-					logo.save({
-						success : function(){
-					
-					},
-						error : function(){
-							console.log("Error uploading logo...");
-							Utils.ShowToast({ message : "Error uploading logo..."});
-					}
-				});
+			if(logo.size > 4194304){
+				Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 4MB?", primary : false, secondaryText : "Ok" });
+			}else{
+				var data = new FormData();
+					data.append("file", logo);
+
+				var restURL = Utils.GetURL("/services/rest/employer/logo/");
+
+				$.ajax({
+					url : restURL+guid,
+					data : data,
+					type : "POST",
+					contentType: false,
+	    			processData: false,
+	    			success : function(response){
+
+	    				var _URL = window.URL || window.webkitURL;
+
+	    				var image = new Image();
+	    					image.src = _URL.createObjectURL(logo);
+
+	    				var logoImage = $("#logo");
+
+	    				if($(logoImage).length > 0){
+							$(logoImage).attr("src", image.src);
+						}else{
+							$(".logo-container .logo").append("<img id='logo' src='"+image.src+"'/>");
+						}
+	    			},
+	    			error : function(){
+	    				console.log("Error uploading logo...");
+						Utils.ShowToast({ message : "Error uploading logo..."});
+	    			}
+				});	
 			}
 
-			reader.readAsDataURL(file);
 		},
 
 		removeLogo : function(){
@@ -99,6 +117,8 @@ define([
 
 		completeRemoveLogo : function(){
 
+			Utils.HideAlert();
+
 			var logoImage = $("#logo");
 
 			if($(logoImage).length > 0){
@@ -109,7 +129,6 @@ define([
 				logo.destroy({
 					dataType : "text",
 					success : function(){
-						Utils.HideAlert();
 						$(".logo-container .logo").html("");
 						$("#logo-action .custom-select-button").text("Update Logo");
 					},
@@ -120,7 +139,8 @@ define([
 				})
 
 			}else{
-				Utils.HideAlert();
+				$(".logo-container .logo").html("");
+				$("#logo-action .custom-select-button").text("Update Logo");
 			}
 
 		},

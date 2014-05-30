@@ -26,7 +26,7 @@
 					<li id="remove-logo">Remove Logo</li>
 				</ul>
 			</div>
-			<form enctype="multipart/form-data">
+			<form enctype="multipart/form-data" data-remote="true">
 				<input type="file" id="logo-file" name="file" accept="image/jpg,image/jpeg,image/gif"/>
 			</form>
 		</div>

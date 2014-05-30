@@ -50,7 +50,7 @@ define([
 			var logo = $("#logo-file")[0].files[0];
 
 			if(logo.size > 4194304){
-				Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 4MB?", primary : false, secondaryText : "Ok" });
+				Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 4MB", primary : false, secondaryText : "Ok" });
 			}else{
 				var data = new FormData();
 					data.append("file", logo);
@@ -187,7 +187,7 @@ define([
 			$("input").removeClass("error");
 
 			var vldtRegister = vldt.validate({
-				"#name"			: "alpha",
+				"#name"			: "alphanumeric",
 				"#street"		: "alphanumeric",
 				"#city"			: "alpha",
 				"#zip"			: "zip",

@@ -149,8 +149,8 @@
 	{{#each employerProfile.admins}}
 		<div class="admin-container">
 			<div class="picture">
-				{{#hasPhoto user.photo}}
-					<img src="{{user.photo}}"/>
+				{{#hasPhoto this.user.photo.url}}
+					<img src="{{this.user.photo.url}}"/>
 				{{/hasPhoto}}
 			</div>
 			<div class="actions">

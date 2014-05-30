@@ -15,13 +15,20 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #search-button"	: "search",
-			"click #clear-search"	: "clearSearch"
+			"click #search-button"	: "search"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Support view initialized...");
+		},
+
+		onShow : function(){
+			$("#search-field").keyup(function(event){
+				if(event.keyCode == 13){
+					$("#search-button").click();
+				}
+			});
 		},
 
 		search : function(){

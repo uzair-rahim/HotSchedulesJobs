@@ -26,6 +26,14 @@ define([
 			console.log("Login view initialized...");
 		},
 
+		onShow : function(){
+			$("#emailaddress, #password").keyup(function(event){
+				if(event.keyCode == 13){
+					$("#login").click();
+				}
+			});
+		},
+
 		login : function(){
 			console.log("Login...");
 

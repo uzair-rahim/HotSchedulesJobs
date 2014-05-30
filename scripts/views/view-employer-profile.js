@@ -42,7 +42,7 @@ define([
 			$("#logo-file").click();
 		},
 
-		startLogoUpload : function(event){//4194304
+		startLogoUpload : function(event){
 
 			var employerGUIDs = Utils.GetUserSession().employerIds;
 			var guid = employerGUIDs[0];

@@ -97,7 +97,7 @@
 								</div>
 								<div class="candidate-info">
 									<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
-									<div class="candidate-job">Not Available</div>
+									<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 								</div>
 								<div class="candidate-referral">
 									<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>

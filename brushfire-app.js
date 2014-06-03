@@ -77,8 +77,13 @@ define([
 
 		// AJAX Error
 		// The method is called when the first AJAX requests complete with an error
-		$(document).ajaxError(function(){
+		$(document).ajaxError(function(event, request, settings){
 			console.log("ajaxError...");
+			switch(request.status){
+				case 401 : 
+					App.router.navigate("logout", true);
+				break;	
+			}
 		});
 
 		// AJAX Send

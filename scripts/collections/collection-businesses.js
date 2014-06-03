@@ -14,7 +14,7 @@ define([
 		},
 
 		url : function(){
-			var url = this.urlRoot() + "/"+this.name+"/"+this.address+"/5";
+			var url = this.urlRoot() + "/"+this.name+"/"+this.address+"/20";
 			return url;
 		},
 

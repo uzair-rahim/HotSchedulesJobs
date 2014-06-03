@@ -65,7 +65,7 @@ define([
 								if(user.employerIds.length > 0){
 									App.router.navigate("jobs", true);
 								}else{
-									App.router.navigate("addBusiness", true);
+									App.router.navigate("findBusiness", true);
 								}
 							}
 					},

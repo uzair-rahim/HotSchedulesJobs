@@ -81,6 +81,10 @@ define([
 
 		},
 
+		getReferralsForCandidates : function(){
+
+		},
+
 		addNewJob : function(){
 			$(".candidate-select").prop("checked", false);
 			$("#archive-candidates").css("display", "none");

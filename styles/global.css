@@ -1294,7 +1294,7 @@ input[type="password"].error:focus{
 .profile-info{
 	display: block;
 	float: left;
-	width: 505px;
+	width: 404px;
 	border-right: 1px dotted #dcdcdc;
 }
 
@@ -1377,7 +1377,7 @@ input[type="password"].error:focus{
 
 .profile-info .employer-profile-container .field-container.two-third{
 	clear: none;
-	width: 340px;
+	width: 237px;
 	margin: 0 0 10px 0; 
 }
 
@@ -1432,7 +1432,7 @@ input[type="password"].error:focus{
 .profile-admins{
 	display: block;
 	float: left;
-	width: 495px;
+	width: 600px;
 	margin: 0 0 0 10px;
 	border-bottom: 1px dotted #dcdcdc;
 }
@@ -1448,7 +1448,7 @@ input[type="password"].error:focus{
 .admin-container{
 	display: block;
 	float: left;
-	width: 200px;
+	width: 280px;
 	height: 80px;
 	margin: 10px 10px;
 }
@@ -1490,7 +1490,7 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	margin: 14px 0 5px 2px;
-	width: 95px;
+	width: 175px;
 	font-size: 14px;
 	font-weight: bolder;
 	color: #2f3b4b;

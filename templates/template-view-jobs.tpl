@@ -86,7 +86,10 @@
 						<li>Posted</li>
 						<li>Unposted</li>
 						<li>Delete</li>
+						<li class="divider"></li>
 						<li>Copy Job Link</li>
+						<li class="disabled">Share with Employees</li>
+						<li class="disabled">Share with Followers</li>
 					</ul>
 				</div>
 				<button class="edit-job">Edit</button>

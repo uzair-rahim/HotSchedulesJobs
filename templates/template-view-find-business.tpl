@@ -276,7 +276,7 @@
 			<div class="head">Find Your Business</div>
 			<div class="body">
 				<div class="full">
-					<p>Is your business already on Brushfire? Search now. Or create a new page if we don’t have it.</p>
+					<p>Is your business already on HotSchedules Post? Search now. Or create a new page if we don’t have it.</p>
 					<div class="field-container floating">
 						<label for="name">Business Name</label>
 						<input type="text" placeholder="Business Name" id="name"/>
@@ -291,7 +291,7 @@
 				</div>
 				{{#if_not_eq businesses undefined}}
 					<div class="full search-result">
-						<p>Business Matches for <span class="name"></span> near <span class="address"></span></p>
+						<p>Search Results</p>
 						<ul class="business-search-result">
 							{{#if_gt businesses.length 0}}
 								{{#each businesses}}

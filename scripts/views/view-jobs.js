@@ -27,7 +27,7 @@ define([
 			"click .edit-job"				: "editJob",
 			"click .save-job"				: "saveJob",
 			"click .cancel-edit"			: "cancelEdit",
-			"click .posted"					: "posted",
+			"click .job-status"				: "jobStatus",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .candidate-select"		: "candidateSelect",
@@ -272,8 +272,7 @@ define([
 			event.stopPropagation();
 		},
 
-		posted : function(event){
-			alert("Posted");
+		jobStatus : function(event){
 			event.stopPropagation();
 		},
 

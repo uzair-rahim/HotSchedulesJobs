@@ -79,8 +79,16 @@
 			</div>
 			<div class="share-info">0 shares</div>
 			<div class="posted-info {{hasNewCandidates this}}">Created {{dateConverter created}}</div>
-			<div class="job-actions">
-				<button class="posted">Posted</button>
+			<div class="job-actions">				
+				<div class="custom-select" data-index="0" data-value="Posted">
+					<button class="custom-select-button job-status">Posted</button>
+					<ul class="custom-select-list">
+						<li>Post</li>
+						<li>Hide</li>
+						<li>Delete</li>
+						<li>Copy Job Link</li>
+					</ul>
+				</div>
 				<button class="edit-job">Edit</button>
 			</div>
 			<div class="count {{hasNewCandidates this}}">{{this.candidates.length}}</div>

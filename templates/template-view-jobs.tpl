@@ -82,9 +82,9 @@
 			<div class="job-actions">				
 				<div class="custom-select" data-index="0" data-value="Posted">
 					<button class="custom-select-button job-status">Posted</button>
-					<ul class="custom-select-list">
-						<li>Post</li>
-						<li>Hide</li>
+					<ul class="custom-select-list job-status">
+						<li>Posted</li>
+						<li>Unposted</li>
 						<li>Delete</li>
 						<li>Copy Job Link</li>
 					</ul>
@@ -105,7 +105,7 @@
 								</div>
 								<div class="candidate-info">
 									<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
-									<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
+									<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 								</div>
 								<div class="candidate-referral">
 									<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>

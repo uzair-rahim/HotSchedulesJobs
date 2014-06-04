@@ -168,7 +168,13 @@ input[type="password"].error:focus{
 	border-radius: 3px;
 	border: 1px solid #d0d4da;
 	background-color: #f4f6f7;
+	box-shadow: 0px 4px 10px 0 rgba(0,0,0,0.1);
 	z-index: 999;
+}
+
+.custom-select ul.job-status{
+	position: absolute;
+	margin: 34px 0 0 49px;
 }
 
 .custom-select ul.show{

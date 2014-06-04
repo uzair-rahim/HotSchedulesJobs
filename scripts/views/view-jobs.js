@@ -27,7 +27,7 @@ define([
 			"click .edit-job"				: "editJob",
 			"click .save-job"				: "saveJob",
 			"click .cancel-edit"			: "cancelEdit",
-			"click .job-status"				: "jobStatus",
+			"click button.job-status"		: "jobStatus",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .candidate-select"		: "candidateSelect",
@@ -273,6 +273,17 @@ define([
 		},
 
 		jobStatus : function(event){
+			$(".custom-select-list").removeClass("show");
+
+			$(".custom-select-list.job-status").click(function(evt){
+				$(".custom-select-list").removeClass("show");
+				evt.stopPropagation();
+			});
+
+			var list = $(event.target).next();
+			$(list).addClass("show");
+
+
 			event.stopPropagation();
 		},
 

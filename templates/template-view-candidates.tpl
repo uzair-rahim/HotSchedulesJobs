@@ -45,7 +45,7 @@
 <div class="candidates-list-container">
 	{{#each jobs}}
 		<div class="candidate-section" id="{{jobType.guid}}">
-			{{#if_gt candidates.length 0}}
+			{{#hasUnarchivedCandidates this}}
 				<div class="grid-list-head">{{jobName}} ({{totalUnarchivedCandidatesByJob this}})</div>
 				<ul id="candidates-list" class="grid-list" data-id="{{id}}" data-guid="{{guid}}">
 				{{#each candidates}}
@@ -106,7 +106,7 @@
 					{{/if_eq}}
 				{{/each}}
 				</ul>
-			{{/if_gt}}
+			{{/hasUnarchivedCandidates}}
 		</div>
 	{{/each}}
 </div>

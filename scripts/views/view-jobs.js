@@ -28,7 +28,12 @@ define([
 			"click .save-job"				: "saveJob",
 			"click .cancel-edit"			: "cancelEdit",
 			"click button.job-status"		: "jobStatus",
-			"click .copyTinyURL"			: "copyTinyURL",
+			"click .post-job"				: "postJob",
+			"click .unpost-job"				: "unpostJob",
+			"click .delete-job"				: "deleteJob",
+			"click .copy-tiny-url"			: "copyTinyURL",
+			"click .share-with-employees"	: "shareJobWithEmployees",
+			"click .share-with-followers"	: "shareJobWithFollowers",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .candidate-select"		: "candidateSelect",
@@ -498,9 +503,8 @@ define([
 		jobStatus : function(event){
 			$(".custom-select-list").removeClass("show");
 
-			$(".custom-select-list.job-status").click(function(evt){
+			$(".custom-select-list.job-status").click(function(){
 				$(".custom-select-list").removeClass("show");
-				evt.stopPropagation();
 			});
 
 			var list = $(event.target).next();
@@ -510,9 +514,53 @@ define([
 			event.stopPropagation();
 		},
 
+		postJob : function(event){
+			var item = $(event.target);
+			event.stopPropagation();
+		},
+
+		unpostJob : function(event){
+			var item = $(event.target);
+			event.stopPropagation();
+		},
+
+		deleteJob : function(event){
+			var item = $(event.target);
+			event.stopPropagation();
+		},
+
 		copyTinyURL : function(event){
 			var item = $(event.target);
-			var url = $(item).data("url");			
+			var isDisabled = $(item).hasClass("disabled")
+
+			if(!isDisabled){
+				var url = $(item).data("url");
+				Utils.ShowToast({ type : "success", message : "Link copied to clipboard"});
+			}
+
+			event.stopPropagation();
+		},
+
+		shareJobWithEmployees : function(event){
+			var item = $(event.target);
+			var isDisabled = $(item).hasClass("disabled")
+
+			if(!isDisabled){
+				
+			}
+
+			event.stopPropagation();
+		},
+
+		shareJobWithFollowers : function(event){
+			var item = $(event.target);
+			var isDisabled = $(item).hasClass("disabled")
+
+			if(!isDisabled){
+				
+			}
+
+			event.stopPropagation();
 		},
 
 		serializeData : function(){

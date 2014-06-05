@@ -83,17 +83,17 @@
 				<div class="custom-select" data-index="0" data-value="Posted">
 					<button class="custom-select-button job-status">Posted</button>
 					<ul class="custom-select-list job-status">
-						<li>Posted</li>
-						<li>Unposted</li>
-						<li>Delete</li>
+						<li class="post-job">Posted</li>
+						<li class="unpost-job">Unposted</li>
+						<li class="delete-job">Delete</li>
 						<li class="divider"></li>
 						{{#isNotNull tinyurl}}
-							<li class="copyTinyURL" data-url="{{tinyurl}}">Copy Job Link</li>
+							<li class="copy-tiny-url" data-url="{{tinyurl}}">Copy Job Link</li>
 						{{else}}
-							<li class="disabled">Copy Job Link</li>
+							<li class="copy-tiny-url disabled">Copy Job Link</li>
 						{{/isNotNull}}
-						<li class="disabled">Share with Employees</li>
-						<li class="disabled">Share with Followers</li>
+						<li class="share-with-employees disabled">Share with Employees</li>
+						<li class="share-with-followers disabled">Share with Followers</li>
 					</ul>
 				</div>
 				<button class="edit-job">Edit</button>

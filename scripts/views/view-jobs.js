@@ -32,6 +32,7 @@ define([
 			"click .unpost-job"				: "unpostJob",
 			"click .delete-job"				: "deleteJob",
 			"click .copy-tiny-url"			: "copyTinyURL",
+			"click #close-copy-link"		: "closeTinyURL",
 			"click .share-with-employees"	: "shareJobWithEmployees",
 			"click .share-with-followers"	: "shareJobWithFollowers",
 			"click .view-candidates" 		: "candidates",
@@ -535,10 +536,19 @@ define([
 
 			if(!isDisabled){
 				var url = $(item).data("url");
-				Utils.ShowToast({ type : "success", message : "Link copied to clipboard"});
+				var alert = $("#app-alert.copy-link-alert");
+				$(alert).find(".jobURL").val(url);
+				$(alert).addClass("show");
+				$(document).find("#app-modal").addClass("show");
 			}
 
 			event.stopPropagation();
+		},
+
+		closeTinyURL : function(){
+			var alert = $("#app-alert.copy-link-alert");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
 		},
 
 		shareJobWithEmployees : function(event){

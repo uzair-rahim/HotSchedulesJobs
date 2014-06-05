@@ -864,6 +864,22 @@ input[type="password"].error:focus{
 	line-height: 14px;
 }
 
+#app-alert .alert-body{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 10px 0;
+	width: calc(100% - 20px);
+}
+
+#app-alert .alert-body input.jobURL{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 23px);
+	margin: 0 13px;
+}
+
 #app-alert .alert-action{
 	display: block;
 	float: left;
@@ -877,7 +893,9 @@ input[type="password"].error:focus{
 }
 
 #app-alert .alert-action.single button{
-	margin: 5px 0 0 92px;
+	width: calc(100% - 23px);
+	margin: 0 12px;
+	
 }
 
 @media screen and (max-width: 640px){
@@ -887,7 +905,7 @@ input[type="password"].error:focus{
 	}
 
 	#app-alert .alert-action.single button{
-		margin: 5px 0 0 84px;
+		
 	}
 }
 

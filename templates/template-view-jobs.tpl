@@ -1,3 +1,14 @@
+<div id="app-alert" class="copy-link-alert">
+	<div class="alert-title">Copy Link</div>
+	<div class="alert-message">Select the link below and copy it</div>
+	<div class="alert-body">
+		<input type="text" class="jobURL" value=""/>
+	</div>
+	<div class="alert-action single">
+		<button id="close-copy-link">Close</button>
+	</div>
+</div>
+
 <div id="sub-nav">
 	<ul id="breadcrumb">
 		{{#each breadcrumb}}

@@ -28,6 +28,7 @@ define([
 			"click .save-job"				: "saveJob",
 			"click .cancel-edit"			: "cancelEdit",
 			"click button.job-status"		: "jobStatus",
+			"click .copyTinyURL"			: "copyTinyURL",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .candidate-select"		: "candidateSelect",
@@ -276,21 +277,6 @@ define([
 			event.stopPropagation();
 		},
 
-		jobStatus : function(event){
-			$(".custom-select-list").removeClass("show");
-
-			$(".custom-select-list.job-status").click(function(evt){
-				$(".custom-select-list").removeClass("show");
-				evt.stopPropagation();
-			});
-
-			var list = $(event.target).next();
-			$(list).addClass("show");
-
-
-			event.stopPropagation();
-		},
-
 		expandJob : function(event){
 			var add = $("#add-job");
 			var isAddJobExpanded = $("#add-job").hasClass("show");
@@ -507,6 +493,26 @@ define([
 			}else{
 				Backbone.history.loadUrl();
 			}
+		},
+
+		jobStatus : function(event){
+			$(".custom-select-list").removeClass("show");
+
+			$(".custom-select-list.job-status").click(function(evt){
+				$(".custom-select-list").removeClass("show");
+				evt.stopPropagation();
+			});
+
+			var list = $(event.target).next();
+			$(list).addClass("show");
+
+
+			event.stopPropagation();
+		},
+
+		copyTinyURL : function(event){
+			var item = $(event.target);
+			var url = $(item).data("url");			
 		},
 
 		serializeData : function(){

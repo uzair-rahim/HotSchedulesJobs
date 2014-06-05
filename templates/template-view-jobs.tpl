@@ -87,7 +87,11 @@
 						<li>Unposted</li>
 						<li>Delete</li>
 						<li class="divider"></li>
-						<li>Copy Job Link</li>
+						{{#isNotNull tinyurl}}
+							<li class="copyTinyURL" data-url="{{tinyurl}}">Copy Job Link</li>
+						{{else}}
+							<li class="disabled">Copy Job Link</li>
+						{{/isNotNull}}
 						<li class="disabled">Share with Employees</li>
 						<li class="disabled">Share with Followers</li>
 					</ul>

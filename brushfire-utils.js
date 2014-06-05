@@ -11,7 +11,7 @@ define([
 			// Get URL
 			GetURL : function(url){
 				//return this.CONTEXT + url;
-				return "../brushfire" + url;
+				return "../services" + url;
 			},
 
 			// Check user session

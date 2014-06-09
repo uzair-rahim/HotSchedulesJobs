@@ -15,6 +15,7 @@ define([
 				"addBusiness"			: "addBusiness",
 				"accountVerification"	: "accountVerification",
 				"jobs"					: "jobs",
+				"job/:id"				: "job",
 				"candidates"			: "candidates",
 				"candidates/job/:guid"	: "candidatesByJob",
 				"profile/:id/:tab"		: "profile",

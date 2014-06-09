@@ -202,6 +202,17 @@ define([
         			} 
 				});
 			},
+
+			// Standalone Job Utility
+			InitStandaloneJob : function(){
+				$(document).find("#app-modal").remove();
+				$(document).find("#app-toast").remove();
+				$(document).find("#app-alert").remove();
+
+				$(document).find("#app-head").html("");
+				$(document).find("#app-body .content").html("");
+
+			},
 			
 		});
 

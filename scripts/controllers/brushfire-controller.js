@@ -13,6 +13,7 @@ define([
 		"scripts/views/view-nav",
 		"scripts/views/view-support-nav",
 		"scripts/views/view-jobs",
+		"scripts/views/view-job",
 		"scripts/views/view-candidates",
 		"scripts/views/view-profile",
 		"scripts/views/view-connections",
@@ -31,7 +32,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewJob, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -208,6 +209,21 @@ define([
 				}
 
 				
+			},
+
+			//Standalone job page
+			job : function(id){
+				console.log(id);
+
+				this.setLayout();
+				this.setBackground();
+				Utils.InitStandaloneJob();
+
+				var view = new ViewJob();
+				
+				this.layout.body.show(view);
+
+
 			},
 
 			candidates : function(){

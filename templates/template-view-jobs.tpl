@@ -9,6 +9,20 @@
 	</div>
 </div>
 
+<div id="app-alert" class="referral-list">
+	<div class="alert-title">Candidate's Referrals</div>
+	<div class="alert-segmented-control">
+		<div id="segmented-referrals" class="tab left selected">Referrals</div>
+		<div id="segmented-pending" class="tab right">Pending</div>
+	</div>
+	<div class="alert-body">
+		<div class="list"></div>
+	</div>
+	<div class="alert-action single">
+		<button id="close-referral-list">Close</button>
+	</div>
+</div>
+
 <div id="sub-nav">
 	<ul id="breadcrumb">
 		{{#each breadcrumb}}

@@ -37,6 +37,8 @@ define([
 			"click .share-with-followers"	: "shareJobWithFollowers",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
+			"click .candidate-referral"		: "candidateReferral",
+			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
 			"click .candidate-archive"		: "candidateArchive",
@@ -51,6 +53,7 @@ define([
 		onShow : function(){
 			this.numberOfJobs = this.model.jobs.length;
 			this.getSharedConnections();
+			this.getReferralsForCandidates();
 		},
 
 		getSharedConnections : function(){
@@ -89,7 +92,41 @@ define([
 		},
 
 		getReferralsForCandidates : function(){
+			if(this.numberOfJobs > 0){
+				var candidatesList = $("#candidates-list");
+				var candidate = $(candidatesList).find("li.view-profile");
+				
+				$(candidate).each(function(){
+					var that = this;
+					var jobGUID = $(this).closest("#job-list > li").data("guid");
+					var userGUID = $(this).data("user");
 
+					var restURL = Utils.GetURL("/services/rest/referral/?");
+
+					$.ajax({
+						url : restURL + "jobPostingGuid=" + jobGUID + "&userGuid=" + userGUID,
+						type : "GET",
+		    			success : function(response){
+		    				console.log(response)
+		    				if(response.length > 0){
+		    					var referral = $(that).find(".candidate-referral");
+		    					if(response.length > 1){
+		    						$(referral).find(".referred-by .name").text(response.length + " referrals");
+		    					}else{
+		    						$(referral).find(".referred-by .name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
+		    						$(referral).find(".referred-by .picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+		    					}
+								
+		    				}
+		    			},
+		    			error : function(){
+		    				console.log("Error fetching referrals...");
+							Utils.ShowToast({ message : "Error fetching referrals..."});
+		    			}
+					});
+
+				});
+			}
 		},
 
 		addNewJob : function(){
@@ -571,6 +608,35 @@ define([
 			}
 
 			event.stopPropagation();
+		},
+
+		candidateReferral : function(event){
+			var candidate = $(event.target).closest(".view-profile");
+			var name = $(candidate).find(".candidate-info .candidate-name").text();
+				name = name.split(" ").slice(0, -1).join(' ') + "'s";
+
+			var alert = $("#app-alert.referral-list");
+				$(alert).find(".alert-title").text(name + " Referrals");
+
+			var alertWidth = $(alert).width();	
+			var alertHeight = $(alert).height();
+			var windowWidth = $(window).width();
+			var windowHeight = $(window).height();
+
+				$(alert).css("margin-top", "0");
+
+				$(alert).css("top", windowHeight/2 - alertHeight/2);
+				$(alert).addClass("show");
+
+				$(document).find("#app-modal").addClass("show");
+
+			event.stopPropagation();
+		},
+
+		closeCandidateReferral : function(event){
+			var alert = $("#app-alert.referral-list");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
 		},
 
 		serializeData : function(){

@@ -48,6 +48,26 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Jobs view initialized...");
+			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
+			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
+		},
+
+		alertPrimaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "delete":
+					this.completeDeleteJob();
+				break;
+			}
+		},
+
+		alertSecondaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "delete":
+					this.cancelDeleteJob();
+				break;
+			}
 		},
 
 		onShow : function(){
@@ -107,7 +127,6 @@ define([
 						url : restURL + "jobPostingGuid=" + jobGUID + "&userGuid=" + userGUID,
 						type : "GET",
 		    			success : function(response){
-		    				console.log(response)
 		    				if(response.length > 0){
 		    					var referral = $(that).find(".candidate-referral");
 		    					if(response.length > 1){
@@ -554,17 +573,53 @@ define([
 
 		postJob : function(event){
 			var item = $(event.target);
+			var job = $(item).closest("#job-list.grid-list > li").data("guid");
+			this.updateJobStatus(job,"post");
 			event.stopPropagation();
 		},
 
 		unpostJob : function(event){
 			var item = $(event.target);
+			var job = $(item).closest("#job-list.grid-list > li").data("guid");
+			this.updateJobStatus(job,"unpost");
 			event.stopPropagation();
 		},
 
 		deleteJob : function(event){
 			var item = $(event.target);
+			var job = $(item).closest("#job-list.grid-list > li").data("guid");
+			Utils.ShowAlert({listener : "delete", primary : true, primaryType : "destroy", primaryText : "Delete", title : "Delete Job", message : "Are you sure you wan't to delete this job?" });
 			event.stopPropagation();
+		},
+
+		cancelDeleteJob : function(){
+			Utils.HideAlert();
+		},
+
+		completeDeleteJob : function(){
+			Utils.HideAlert();
+		},
+
+		updateJobStatus : function(jobGUID, type){
+			var restURL = Utils.GetURL("/services/rest/job/");
+
+			var status = 0;
+
+			if(type == "unpost"){
+				status = 1
+			}
+							
+			$.ajax({
+				url : restURL + jobGUID + "/status/"+status,
+				type : "PUT",
+				success : function(response){
+					App.router.controller.jobs();
+				},
+				error : function(){
+					console.log("Error update job status...");
+					Utils.ShowToast({ message : "Error update job status..."});
+				}
+			});
 		},
 
 		copyTinyURL : function(event){
@@ -573,7 +628,7 @@ define([
 
 			if(!isDisabled){
 				var url = $(item).data("url");
-				var alert = $("#app-alert.copy-link-alert");
+				var alert = $("#app-alert-tinyurl");
 				$(alert).find(".jobURL").val(url);
 				$(alert).addClass("show");
 				$(document).find("#app-modal").addClass("show");
@@ -583,7 +638,7 @@ define([
 		},
 
 		closeTinyURL : function(){
-			var alert = $("#app-alert.copy-link-alert");
+			var alert = $("#app-alert-tinyurl");
 				$(alert).removeClass("show");
 				$(document).find("#app-modal").removeClass("show");
 		},
@@ -615,7 +670,7 @@ define([
 			var name = $(candidate).find(".candidate-info .candidate-name").text();
 				name = name.split(" ").slice(0, -1).join(' ') + "'s";
 
-			var alert = $("#app-alert.referral-list");
+			var alert = $("#app-alert-referral");
 				$(alert).find(".alert-title").text(name + " Referrals");
 
 			var alertWidth = $(alert).width();	
@@ -634,7 +689,7 @@ define([
 		},
 
 		closeCandidateReferral : function(event){
-			var alert = $("#app-alert.referral-list");
+			var alert = $("#app-alert-referral");
 				$(alert).removeClass("show");
 				$(document).find("#app-modal").removeClass("show");
 		},

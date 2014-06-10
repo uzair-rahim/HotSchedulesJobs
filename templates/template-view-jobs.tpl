@@ -1,4 +1,4 @@
-<div id="app-alert" class="copy-link-alert">
+<div id="app-alert-tinyurl" class="app-alert">
 	<div class="alert-title">Copy Link</div>
 	<div class="alert-message">Select the link below and copy it</div>
 	<div class="alert-body">
@@ -9,7 +9,7 @@
 	</div>
 </div>
 
-<div id="app-alert" class="referral-list">
+<div id="app-alert-referral" class="app-alert referral-list">
 	<div class="alert-title">Candidate's Referrals</div>
 	<div class="alert-segmented-control">
 		<div id="segmented-referrals" class="tab left selected">Referrals</div>
@@ -105,18 +105,25 @@
 			<div class="share-info">0 shares</div>
 			<div class="posted-info {{hasNewCandidates this}}">Created {{dateConverter created}}</div>
 			<div class="job-actions">				
-				<div class="custom-select" data-index="0" data-value="Posted">
-					<button class="custom-select-button job-status">Posted</button>
+				<div class="custom-select" data-index="0" data-value="{{status}}">
+					<button class="custom-select-button job-status">{{#isNotNull status}}{{status}}{{else}}Unposted{{/isNotNull}}</button>
 					<ul class="custom-select-list job-status">
 						<li class="post-job">Posted</li>
 						<li class="unpost-job">Unposted</li>
 						<li class="delete-job">Delete</li>
 						<li class="divider"></li>
-						{{#isNotNull tinyurl}}
-							<li class="copy-tiny-url" data-url="{{tinyurl}}">Copy Job Link</li>
+
+						{{#if_not_eq status "UNPOSTED"}}
+							{{#isNotNull tinyurl}}
+								<li class="copy-tiny-url" data-url="{{tinyurl}}">Copy Job Link</li>
+							{{else}}
+								<li class="copy-tiny-url disabled">Copy Job Link</li>
+							{{/isNotNull}}
 						{{else}}
 							<li class="copy-tiny-url disabled">Copy Job Link</li>
-						{{/isNotNull}}
+						{{/if_not_eq}}
+
+						
 						<li class="share-with-employees disabled">Share with Employees</li>
 						<li class="share-with-followers disabled">Share with Followers</li>
 					</ul>

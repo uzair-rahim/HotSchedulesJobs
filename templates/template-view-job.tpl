@@ -18,5 +18,13 @@
 			<div id="app-store"></div>
 		</div>
 	</div>
-	<div id="job-footer"></div>
+	<div id="job-footer">
+		<div id="hsp-logo"></div>
+		<div id="footer-links">
+			<a href="#">Learn More</a>
+			<a>|</a>
+			<a href="#">Other Great Products</a>
+			<a>&copy; 1999 - 2014 Red Book Connect LLC. All rights reserved.</a>	
+		</div>
+	</div>
 </div>

@@ -24,6 +24,7 @@ define([
 
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.job = this.model;
 				jsonObject.language = App.Language;
 			return jsonObject;
 		}

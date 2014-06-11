@@ -213,6 +213,18 @@ define([
 				$(document).find("#app-body .content").html("");
 
 			},
+
+			// Get Standalone Job GUID
+			GetStandaloneJobGUID : function(){
+				console.log("Getting Standalone Job GUID...");
+
+				var StandaloneJobGUID = $.cookie("job-posting-guid");
+				if(StandaloneJobGUID !== undefined){
+					return StandaloneJobGUID;
+				}else{
+					return false;
+				}
+			},
 			
 		});
 

@@ -15,6 +15,7 @@ define([
 	var ViewJobs = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
+		jobGUID : null,
 		numberOfCalls : 0,
 		numberOfJobs : 0,
 		template: Template,
@@ -588,6 +589,7 @@ define([
 		deleteJob : function(event){
 			var item = $(event.target);
 			var job = $(item).closest("#job-list.grid-list > li").data("guid");
+			this.jobGUID = job;
 			Utils.ShowAlert({listener : "delete", primary : true, primaryType : "destroy", primaryText : "Delete", title : "Delete Job", message : "Are you sure you wan't to delete this job?" });
 			event.stopPropagation();
 		},
@@ -597,7 +599,23 @@ define([
 		},
 
 		completeDeleteJob : function(){
+
 			Utils.HideAlert();
+
+			var restURL = Utils.GetURL("/services/rest/job/");
+
+			$.ajax({
+				url : restURL + this.jobGUID,
+				type : "DELETE",
+				dataType : "text",
+				success : function(){
+					App.router.controller.jobs();
+				},
+				error : function(){
+					console.log("Error deleting job...");
+					Utils.ShowToast({ message : "Error deleting job..."});
+				}
+			});
 		},
 
 		updateJobStatus : function(jobGUID, type){

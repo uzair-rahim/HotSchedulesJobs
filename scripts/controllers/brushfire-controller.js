@@ -84,7 +84,7 @@ define([
 				var app = $(document).find(".app");
 
 				if(!$(app).hasClass("background")){
-					$(app).addClass("background");
+				//	$(app).addClass("background");
 				}
 			},
 

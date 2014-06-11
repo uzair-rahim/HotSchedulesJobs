@@ -27,6 +27,7 @@ define([
 			"click #archive-candidates"		: "archiveCandidates",
 			"click .edit-job"				: "editJob",
 			"click .save-job"				: "saveJob",
+			"click .add-referral-bonus"		: "addReferralBonus",
 			"click .cancel-edit"			: "cancelEdit",
 			"click button.job-status"		: "jobStatus",
 			"click .post-job"				: "postJob",
@@ -175,6 +176,7 @@ define([
 		saveAddJob : function(){
 
 			var wage = $("#new-wage").val();
+			var bonus = $("#new-bonus").val();	
 
 			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
@@ -199,6 +201,11 @@ define([
 					job.jobName = $("#new-position button").text();
 					job.description = $("#new-description").val();
 					job.wage = wage; 
+
+					if(bonus !== ""){
+						job.referralBonus = bonus;
+					}
+
 					job.wageType = $("#new-wage-type .custom-select-button").text().replace("-", "").toUpperCase();
 					job.jobType.guid = $("#new-position .custom-select-list li:contains('"+job.jobName+"')").attr("id");
 
@@ -215,6 +222,7 @@ define([
 							Utils.ShowToast({ message : "Error saving job..."});
 						}
 					});
+
 
 			}
 
@@ -280,6 +288,10 @@ define([
 			event.stopPropagation();
 		},
 
+		addReferralBonus : function(event){
+			var link = $(event.target);
+		},
+
 		saveJob : function(event){
 			console.log("Save job...");
 
@@ -288,6 +300,7 @@ define([
 			var job = this.model.jobs[index];
 
 			var wage = $(item).find(".wage").val();
+			var bonus = $(item).find(".bonus").val();
 
 			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
@@ -303,7 +316,7 @@ define([
 					update.id = job.id;
 					update.guid = job.guid;
 					update.jobName = $(item).find(".position .custom-select-button").text();
-					update.description = $(item).find(".description").val();
+					update.description = $(item).find(".job-description").val();
 					update.wage = wage
 					update.wageType = $(item).find(".wage-type .custom-select-button").text().replace("-", "").toUpperCase();
 
@@ -321,8 +334,12 @@ define([
 
 					update.shifts = [{id : 0}];
 
+					if(bonus !== ""){
+						update.referralBonus = bonus;
+					}
+
 					var that = this;
-					var model = new ModelJob();				
+					var model = new ModelJob();	
 						model.save(update,{
 							type : "PUT",
 							success : function(){

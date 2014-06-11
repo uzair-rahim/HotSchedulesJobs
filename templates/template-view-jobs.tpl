@@ -35,11 +35,11 @@
 	<button id="archive-candidates">{{language.archiveCandidates}}</button>
 </div>
 
-<div id="add-job" class="add-job">
-	<div class="job-details">
+<div id="add-job" class="job-information">
+	<div class="details">
 		<div class="input-container position">
 			<label>Position</label>
-			<div id="new-position" class="custom-select position" data-index="0" data-value="{{jobs.[0].jobName}}">
+			<div id="new-position" class="custom-select" data-index="0" data-value="{{jobtypes.[0].name}}">
 				<button class="custom-select-button">{{jobtypes.[0].name}}</button>
 				<ul class="custom-select-list">
 					{{#each jobtypes}}
@@ -51,7 +51,7 @@
 		<div class="input-container">
 			<label>Wage</label>
 			<div class="dollar">$</div>
-			<input id="new-wage" type="text" class="wage" value=""/>
+			<input id="new-wage" type="number" class="wage" value=""/>
 		</div>
 		<div class="input-container">
 			<label>Frequency</label>
@@ -66,14 +66,17 @@
 				</ul>
 			</div>
 		</div>
+		<div class="input-container description">
+			<label>Description</label>
+			<textarea id="new-description"></textarea>
+		</div>
+		<div class="input-container referral-bonus">
+			<a class="add-referral-bonus">+ Add Referral Bonus</a>
+		</div>
 	</div>
-	<div class="job-description">
-		<label>Description</label>
-		<textarea id="new-description" class="description"></textarea>
-	</div>
-	<div class="add-actions">
+	<div class="actions">
 		<button id="save-add" class="primary">Save</button>
-		<button id="cancel-add">Cancel</button>	
+		<button id="cancel-add">Cancel</button>
 	</div>
 </div>
 
@@ -196,11 +199,11 @@
 					</li>
 				</ul>
 			{{/if_not_eq}}
-			<div class="edit-mode">
-				<div class="job-details">
+			<div class="edit-mode job-information">
+				<div class="details">
 					<div class="input-container position">
 						<label>Position</label>
-						<div class="custom-select position" data-index="0" data-value="{{jobName}}">
+						<div class="custom-select job-position" data-index="0" data-value="{{jobName}}">
 							<button class="custom-select-button">{{jobName}}</button>
 							<ul class="custom-select-list">
 								{{#each ../jobtypes}}
@@ -212,7 +215,7 @@
 					<div class="input-container">
 						<label>Wage</label>
 						<div class="dollar">$</div>
-						<input type="text" class="wage" value="{{wage}}"/>
+						<input type="number" class="wage" value="{{wage}}"/>
 					</div>
 					<div class="input-container">
 						<label>Frequency</label>
@@ -227,12 +230,21 @@
 							</ul>
 						</div>
 					</div>
+					<div class="input-container description">
+						<label>Description</label>
+						<textarea class="job-description">{{description}}</textarea>
+					</div>
+					<div class="input-container referral-bonus">
+						{{#isNotNull referralBonus}}
+							<label>Referral Bonus</label>
+							<div class="dollar">$</div>
+							<input type="number" class="bonus" value="{{referralBonus}}"/>
+						{{else}}
+							<a class="add-referral-bonus">+ Add Referral Bonus</a>
+						{{/isNotNull}}
+					</div>
 				</div>
-				<div class="job-description">
-					<label>Description</label>
-					<textarea class="description">{{description}}</textarea>
-				</div>
-				<div class="edit-actions">
+				<div class="actions">
 					<button class="primary save-job">Save</button>
 					<button class="cancel-edit">Cancel</button>
 				</div>

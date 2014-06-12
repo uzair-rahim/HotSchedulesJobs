@@ -103,7 +103,7 @@ define([
 			businessObject.location.sourceId 	= $(business).find("input[name='id']").val();
 			businessObject.location.country 	= $(business).find("input[name='country']").val();
 			businessObject.currency				= new Object();
-			businessObject.currencyCode			= "USD";
+			businessObject.currency.currencyCode			= "USD";
 			// Hardwired type 2 corresponds to EmployerIDType.YELP
 			businessObject.externalIds			= [{"type" : 2, "externalId" : $(business).find("input[name='id']").val()}];
 			

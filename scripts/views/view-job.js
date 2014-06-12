@@ -14,7 +14,7 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			
+			"click #app-store": "jobPostingMobileAction"
 		},
 
 		initialize : function(){
@@ -27,6 +27,15 @@ define([
 				jsonObject.job = this.model;
 				jsonObject.language = App.Language;
 			return jsonObject;
+		},
+		
+		jobPostingMobileAction : function(){
+	    	setTimeout(function () {
+	    	    window.location = "https://itunes.apple.com/us/app/hotschedules/id294934058";
+	    	}, 2000);
+	    	var jobpostingguid = $.cookie("job-posting-guid");
+	    	var jobpostingempguid = $.cookie("job-posting-emp-guid");
+	    	window.location = "hotschedulespost://?jobpostingguid="+jobpostingguid+"&jobpostingempguid="+jobpostingempguid;
 		}
 		
 	});

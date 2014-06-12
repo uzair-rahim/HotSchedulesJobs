@@ -73,6 +73,11 @@
 		<div class="input-container referral-bonus">
 			<a class="add-referral-bonus">+ Add Referral Bonus</a>
 		</div>
+		<div class="input-container referral-bonus hidden">
+			<label>Referral Bonus</label>
+			<div class="dollar">$</div>
+			<input id="new-bonus" type="number" class="bonus"/>
+		</div> 
 	</div>
 	<div class="actions">
 		<button id="save-add" class="primary">Save</button>
@@ -234,15 +239,22 @@
 						<label>Description</label>
 						<textarea class="job-description">{{description}}</textarea>
 					</div>
-					<div class="input-container referral-bonus">
-						{{#isNotNull referralBonus}}
+					{{#isNotNull referralBonus}}
+						<div class="input-container referral-bonus">
 							<label>Referral Bonus</label>
 							<div class="dollar">$</div>
 							<input type="number" class="bonus" value="{{referralBonus}}"/>
-						{{else}}
+						</div>
+					{{else}}
+						<div class="input-container referral-bonus">
 							<a class="add-referral-bonus">+ Add Referral Bonus</a>
-						{{/isNotNull}}
-					</div>
+						</div>
+						<div class="input-container referral-bonus hidden">
+							<label>Referral Bonus</label>
+							<div class="dollar">$</div>
+							<input type="number" class="bonus" value="{{referralBonus}}"/>
+						</div>
+					{{/isNotNull}}
 				</div>
 				<div class="actions">
 					<button class="primary save-job">Save</button>
@@ -251,4 +263,4 @@
 			</div>
 		</li>
 	{{/each}}
-</ul>
+</ul>				

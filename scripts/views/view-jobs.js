@@ -171,6 +171,8 @@ define([
 
 		cancelAddJob : function(){
 			$("#add-job").removeClass("show");
+			$("#add-job").find(".input-container.referral-bonus:eq(0)").removeClass("hidden");
+			$("#add-job").find(".input-container.referral-bonus:eq(1)").addClass("hidden");
 		},
 
 		saveAddJob : function(){
@@ -280,6 +282,13 @@ define([
 			
 			var all = $("#job-list > li");
 			var allEdits = $("#job-list > li .edit-mode");
+			var item = $(event.target).closest("#job-list > li");
+			var bonus = $(item).find(".edit-mode input.bonus").val();
+
+			if(bonus == ""){
+				$(item).find(".input-container.referral-bonus:eq(0)").removeClass("hidden");
+				$(item).find(".input-container.referral-bonus:eq(1)").addClass("hidden");
+			}
 
 			$(all).removeClass("expanded");
 			$(all).removeClass("faded");
@@ -289,7 +298,10 @@ define([
 		},
 
 		addReferralBonus : function(event){
-			var link = $(event.target);
+			var link = $(event.target).parent()
+				$(link).next().removeClass("hidden");
+				$(link).addClass("hidden");
+				event.stopPropagation();
 		},
 
 		saveJob : function(event){
@@ -334,7 +346,9 @@ define([
 
 					update.shifts = [{id : 0}];
 
-					if(bonus !== ""){
+					if(bonus === "" || bonus === 0){
+						update.referralBonus = null;
+					}else{
 						update.referralBonus = bonus;
 					}
 

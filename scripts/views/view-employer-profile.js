@@ -240,6 +240,8 @@ define([
 					}	
 					
 					employer.about = about;
+					employer.currency = new Object();
+					employer.currency.currencyCode = "USD";
 
 				var address = new Object();	
 				

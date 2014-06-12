@@ -1083,6 +1083,10 @@ input[type="password"].error:focus{
 	width: 120px;
 }
 
+.job-information > .details > .input-container.referral-bonus.hidden{
+	display: none;
+}
+
 .job-information > .details > .input-container > label{
 	display: block;
 	float: left;

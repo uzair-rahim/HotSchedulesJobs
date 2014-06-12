@@ -346,8 +346,8 @@ define([
 
 					update.shifts = [{id : 0}];
 
-					if(bonus === "" || bonus === 0){
-						update.referralBonus = null;
+					if(bonus === ""){
+						update.referralBonus = 0;
 					}else{
 						update.referralBonus = bonus;
 					}

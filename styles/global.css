@@ -1906,6 +1906,11 @@ input[type="password"].error:focus{
 	background-image: url("../images/icon-apple.png");
 }
 
+#job-apps.mobile #google-play,
+#job-apps.mobile #app-store{
+	margin: 0 0 0 216px;
+}
+
 #job-footer{
 	display: block;
 	float: left;
@@ -2053,7 +2058,11 @@ input[type="password"].error:focus{
 
 	#job-apps #app-store{
 		margin: 0;
-		background-image: url("../images/icon-apple.png");
+	}
+
+	#job-apps.mobile #google-play,
+	#job-apps.mobile #app-store{
+		margin: 0 0 0 108px;
 	}
 
 	#job-footer{

@@ -13,8 +13,11 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
+		googePlayURl : "https://play.google.com/store/apps/details?id=com.tdr3.hs.android",
+		appStoreURL : "https://itunes.apple.com/us/app/hotschedules/id294934058?mt=8",
 		events : {
-			"click #app-store": "jobPostingMobileAction"
+			"click #google-play"	: "androidDevice",
+			"click #app-store"		: "iOSDevice"
 		},
 
 		initialize : function(){
@@ -22,20 +25,70 @@ define([
 			console.log("Job view initialized...");
 		},
 
+		onShow : function(){
+			var device = this.detectDevice();
+			switch(device){
+				case "iOS" :
+					$("#google-play").remove();
+					$("#job-apps").addClass("mobile");
+				break;
+
+				case "Android":
+					$("#app-store").remove()
+					$("#job-apps").addClass("mobile");
+				break;
+			}
+		},
+
+		detectDevice : function(){
+			var agent = navigator.userAgent;
+
+			if(agent.match(/Android/i)){
+				return "Android";
+			}else if(agent.match(/iPhone|iPad|iPod/i)){
+				return "iOS";
+			}else if(agent.match(/IEMobile/i)){
+				return "WindowsMobile";
+			}else{
+				return "Unknown";
+			}
+
+		},
+
+		androidDevice : function(){
+			var device = this.detectDevice();
+			if(device === "Android"){
+
+			}else{
+				window.location = this.googePlayURl;
+			}
+		},
+
+		iOSDevice : function(){
+			var device = this.detectDevice();
+			var that = this;
+			if(device === "iOS"){
+				setTimeout(function () {
+	    	    	window.location = that.appStoreURL;
+	    		}, 20);
+	    		
+	    		var jobPostingGUID = $.cookie("job-posting-guid");
+	    		var jobPostingEmployerGUID = $.cookie("job-posting-emp-guid");
+
+	    		var appURL = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
+	    		
+	    		window.location = appURL;
+
+			}else{
+				window.location = this.appStoreURL;
+			}
+		},
+
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.job = this.model;
 				jsonObject.language = App.Language;
 			return jsonObject;
-		},
-		
-		jobPostingMobileAction : function(){
-	    	setTimeout(function () {
-	    	    window.location = "https://itunes.apple.com/us/app/hotschedules/id294934058";
-	    	}, 2000);
-	    	var jobpostingguid = $.cookie("job-posting-guid");
-	    	var jobpostingempguid = $.cookie("job-posting-emp-guid");
-	    	window.location = "hotschedulespost://?jobpostingguid="+jobpostingguid+"&jobpostingempguid="+jobpostingempguid;
 		}
 		
 	});

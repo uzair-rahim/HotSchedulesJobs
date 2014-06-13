@@ -51,7 +51,7 @@
 		<div class="input-container">
 			<label>Wage</label>
 			<div class="dollar">$</div>
-			<input id="new-wage" type="number" class="wage" value=""/>
+			<input id="new-wage" type="text" class="wage" value=""/>
 		</div>
 		<div class="input-container">
 			<label>Frequency</label>
@@ -76,7 +76,7 @@
 		<div class="input-container referral-bonus hidden">
 			<label>Referral Bonus</label>
 			<div class="dollar">$</div>
-			<input id="new-bonus" type="number" class="bonus"/>
+			<input id="new-bonus" type="text" class="bonus"/>
 		</div> 
 	</div>
 	<div class="actions">
@@ -220,7 +220,7 @@
 					<div class="input-container">
 						<label>Wage</label>
 						<div class="dollar">$</div>
-						<input type="number" class="wage" value="{{wage}}"/>
+						<input type="text" class="wage" value="{{wage}}"/>
 					</div>
 					<div class="input-container">
 						<label>Frequency</label>
@@ -243,7 +243,7 @@
 						<div class="input-container referral-bonus">
 							<label>Referral Bonus</label>
 							<div class="dollar">$</div>
-							<input type="number" class="bonus" value="{{referralBonus}}"/>
+							<input type="text" class="bonus" value="{{referralBonus}}"/>
 						</div>
 					{{else}}
 						<div class="input-container referral-bonus">
@@ -252,7 +252,7 @@
 						<div class="input-container referral-bonus hidden">
 							<label>Referral Bonus</label>
 							<div class="dollar">$</div>
-							<input type="number" class="bonus" value="{{referralBonus}}"/>
+							<input type="text" class="bonus" value="{{referralBonus}}"/>
 						</div>
 					{{/isNotNull}}
 				</div>

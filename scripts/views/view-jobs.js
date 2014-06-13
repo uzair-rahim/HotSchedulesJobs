@@ -113,41 +113,52 @@ define([
 
 		},
 
-		getReferralsForCandidates : function(){
-			if(this.numberOfJobs > 0){
-				var candidatesList = $("#candidates-list");
-				var candidate = $(candidatesList).find("li.view-profile");
-				
-				$(candidate).each(function(){
-					var that = this;
-					var jobGUID = $(this).closest("#job-list > li").data("guid");
-					var userGUID = $(this).data("user");
+		getAllCandidates : function(){
 
-					var restURL = Utils.GetURL("/services/rest/referral/?");
+			var list = new Array();
+			var jobs = this.model.jobs;
 
-					$.ajax({
-						url : restURL + "jobPostingGuid=" + jobGUID + "&userGuid=" + userGUID,
-						type : "GET",
-		    			success : function(response){
-		    				if(response.length > 0){
-		    					var referral = $(that).find(".candidate-referral");
-		    					if(response.length > 1){
-		    						$(referral).find(".referred-by .name").text(response.length + " referrals");
-		    					}else{
-		    						$(referral).find(".referred-by .name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
-		    						$(referral).find(".referred-by .picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
-		    					}
-								
-		    				}
-		    			},
-		    			error : function(){
-		    				console.log("Error fetching referrals...");
-							Utils.ShowToast({ message : "Error fetching referrals..."});
-		    			}
-					});
-
-				});
+			for(var job in jobs){
+				for(var index = 0; index < jobs[job].candidates.length; index++){
+					var data = new Object();
+						data.job = jobs[job].guid;
+						data.user = jobs[job].candidates[index].user.guid;
+					list.push(data);
+				}
 			}
+
+			return list;
+			
+		},
+
+		getReferralsForCandidates : function(){
+			var candidates = this.getAllCandidates();
+
+			$.each(candidates, function(){
+				var that = this;
+				var restURL = Utils.GetURL("/services/rest/referral/?jobPostingGuid="+this.job+"&userGuid="+this.user);
+				$.ajax({
+					url : restURL,
+					type : "GET",
+					success : function(response){
+						if(response.length === 1 ){
+							var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
+							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
+		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+						}else if(response.length > 1){
+							var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
+							$(referred).find(".name").text(response.length + " referrals");
+						}else{
+							$("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by").remove();
+						}
+					},
+					error : function(){
+						console.log("Error fetching referrals...");
+						Utils.ShowToast({ message : "Error fetching referrals..."});
+					}
+				});
+			});
+
 		},
 
 		addNewJob : function(){

@@ -39,7 +39,7 @@ define([
 			"click .share-with-followers"	: "shareJobWithFollowers",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
-			"click .candidate-referral"		: "candidateReferral",
+			"click .referred-by"			: "candidateReferral",
 			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",

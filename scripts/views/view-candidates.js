@@ -26,6 +26,8 @@ define([
 			"click #search-filter"			: "searchFilter",
 			"click #clear"					: "clearAllFilter",
 			"click .view-profile"			: "profile",
+			"click .referred-by"			: "candidateReferral",
+			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
 			"click .candidate-archive"		: "candidateArchive",
@@ -48,6 +50,7 @@ define([
 
 			
 			this.getSharedConnections();
+			this.getReferralsForCandidates();
 		},
 
 		back : function(event){
@@ -103,6 +106,82 @@ define([
 				});
 			}
 
+		},
+
+		getAllCandidates : function(){
+
+			var list = new Array();
+			var jobs = this.model.jobs;
+
+			for(var job in jobs){
+				for(var index = 0; index < jobs[job].candidates.length; index++){
+					var data = new Object();
+						data.job = jobs[job].guid;
+						data.user = jobs[job].candidates[index].user.guid;
+					list.push(data);
+				}
+			}
+
+			return list;
+			
+		},
+
+		getReferralsForCandidates : function(){
+			var candidates = this.getAllCandidates();
+
+			$.each(candidates, function(){
+				var that = this;
+				var restURL = Utils.GetURL("/services/rest/referral/?jobPostingGuid="+this.job+"&userGuid="+this.user);
+				$.ajax({
+					url : restURL,
+					type : "GET",
+					success : function(response){
+						var referred = $("#candidates-list[data-guid='"+that.job+"'] > li[data-user='"+that.user+"'] .candidate-referral .referred-by");
+						if(response.length === 1 ){
+							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
+		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+						}else if(response.length > 1){
+							$(referred).find(".name").text(response.length + " referrals");
+						}else{
+							$(referred).remove();
+						}
+					},
+					error : function(){
+						console.log("Error fetching referrals...");
+						Utils.ShowToast({ message : "Error fetching referrals..."});
+					}
+				});
+			});
+
+		},
+
+		candidateReferral : function(event){
+			var candidate = $(event.target).closest(".view-profile");
+			var name = $(candidate).find(".candidate-info .candidate-name").text();
+				name = name.split(" ").slice(0, -1).join(' ') + "'s";
+
+			var alert = $("#app-alert-referral");
+				$(alert).find(".alert-title").text(name + " Referrals");
+
+			var alertWidth = $(alert).width();	
+			var alertHeight = $(alert).height();
+			var windowWidth = $(window).width();
+			var windowHeight = $(window).height();
+
+				$(alert).css("margin-top", "0");
+
+				$(alert).css("top", windowHeight/2 - alertHeight/2);
+				$(alert).addClass("show");
+
+				$(document).find("#app-modal").addClass("show");
+
+			event.stopPropagation();
+		},
+
+		closeCandidateReferral : function(event){
+			var alert = $("#app-alert-referral");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
 		},
 
 		sendMessage : function(){

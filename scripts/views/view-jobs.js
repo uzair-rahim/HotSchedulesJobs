@@ -141,15 +141,14 @@ define([
 					url : restURL,
 					type : "GET",
 					success : function(response){
+						var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
 						if(response.length === 1 ){
-							var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
 							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
 		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
 						}else if(response.length > 1){
-							var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
 							$(referred).find(".name").text(response.length + " referrals");
 						}else{
-							$("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by").remove();
+							$(referred).remove();
 						}
 					},
 					error : function(){

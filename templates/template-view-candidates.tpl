@@ -1,3 +1,17 @@
+<div id="app-alert-referral" class="app-alert referral-list">
+	<div class="alert-title">Candidate's Referrals</div>
+	<div class="alert-segmented-control">
+		<div id="segmented-referrals" class="tab left ">Referrals</div>
+		<div id="segmented-pending" class="tab right unselected">Pending</div>
+	</div>
+	<div class="alert-body">
+		<div class="list"></div>
+	</div>
+	<div class="alert-action single">
+		<button id="close-referral-list">Close</button>
+	</div>
+</div>
+
 <div id="sub-nav">
 	<ul id="breadcrumb">
 		{{#each breadcrumb}}

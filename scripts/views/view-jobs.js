@@ -40,6 +40,8 @@ define([
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .referred-by"			: "candidateReferral",
+			"click #segmented-referrals"	: "showSegmentedReferrals",
+			"click #segmented-pending"		: "showSegmentedPending",
 			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
@@ -729,22 +731,33 @@ define([
 			var name = $(candidate).find(".candidate-info .candidate-name").text();
 				name = name.split(" ").slice(0, -1).join(' ') + "'s";
 
+
+				//Populate referrals list here then...
+
+
 			var alert = $("#app-alert-referral");
 				$(alert).find(".alert-title").text(name + " Referrals");
-
-			var alertWidth = $(alert).width();	
-			var alertHeight = $(alert).height();
-			var windowWidth = $(window).width();
-			var windowHeight = $(window).height();
-
-				$(alert).css("margin-top", "0");
-
-				$(alert).css("top", windowHeight/2 - alertHeight/2);
 				$(alert).addClass("show");
-
 				$(document).find("#app-modal").addClass("show");
 
 			event.stopPropagation();
+		},
+
+		showSegmentedReferrals : function(){
+			$("#pending-segment").hide();
+			$("#referrals-segment").show();
+
+			$("#segmented-referrals").removeClass("unselected");
+			$("#segmented-pending").addClass("unselected");
+		},
+
+		showSegmentedPending : function(){
+			$("#referrals-segment").hide();
+			$("#pending-segment").show();
+
+			$("#segmented-pending").removeClass("unselected");
+			$("#segmented-referrals").addClass("unselected");
+			
 		},
 
 		closeCandidateReferral : function(event){

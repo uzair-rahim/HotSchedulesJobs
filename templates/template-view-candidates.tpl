@@ -1,11 +1,44 @@
 <div id="app-alert-referral" class="app-alert referral-list">
 	<div class="alert-title">Candidate's Referrals</div>
 	<div class="alert-segmented-control">
-		<div id="segmented-referrals" class="tab left ">Referrals</div>
-		<div id="segmented-pending" class="tab right unselected">Pending</div>
+		<div id="segmented-referrals" class="tab left">Referrals <span>(3)</span></div>
+		<div id="segmented-pending" class="tab right unselected">Pending <span>(0)</span></div>
 	</div>
 	<div class="alert-body">
-		<div class="list"></div>
+		<div id="referrals-segment">
+			<ul class="referrals-list">
+				<li>
+					<div class="picture"></div>
+					<div class="info">
+						<div class="name">Monkious Eatalotis</div>
+						<div class="position">Bartender @ Jungle Monkey Cafe</div>
+					</div>
+				</li>
+				<li>
+					<div class="picture"></div>
+					<div class="info">
+						<div class="name">Monkious Eatalotis</div>
+						<div class="position">Bartender @ Jungle Monkey Cafe</div>
+					</div>
+				</li>
+				<li>
+					<div class="picture"></div>
+					<div class="info">
+						<div class="name">Monkious Eatalotis</div>
+						<div class="position">Bartender @ Jungle Monkey Cafe</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="pending-segment">
+			<ul class="referrals-list">
+				<li>
+					<div class="empty">
+						There are no pending requests.
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 	<div class="alert-action single">
 		<button id="close-referral-list">Close</button>

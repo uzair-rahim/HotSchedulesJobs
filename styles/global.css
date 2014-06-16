@@ -843,6 +843,7 @@ input[type="password"].error:focus{
 	border: 1px solid #585c5f;
 	box-shadow: 0px 0px 30px 0 rgba(0,0,0,0.45);
 	z-index: 99999;
+	overflow: hidden;
 }
 
 @media screen and (max-width: 640px){
@@ -925,6 +926,8 @@ input[type="password"].error:focus{
 }
 
 .app-alert.referral-list{
+	height: 326px;
+	margin-top: -163px;
 	border:1px solid #cccccc;
 	box-shadow: 0px 0px 30px 0 rgba(0,0,0,0.25);
 }
@@ -935,7 +938,7 @@ input[type="password"].error:focus{
 	clear: both;
 	width: calc(100% - 40px);
 	height: 30px;
-	margin: 20px;
+	margin: 20px 20px 10px 20px;
 }
 
 .app-alert.referral-list .alert-segmented-control .tab{
@@ -953,6 +956,10 @@ input[type="password"].error:focus{
 	box-shadow: inset 0 4px 10px -3px rgba(0,0,0,0.08), 0 1px 0 0 rgba(255,255,255,0.75);
 }
 
+.app-alert.referral-list .alert-segmented-control .tab span{
+	color: #999999;
+}
+
 .app-alert.referral-list .alert-segmented-control .tab.unselected{
 	background-color: #f4f5f6;
 	box-shadow: inset 0 -4px 10px -3px rgba(0,0,0,0.08), 0 1px 0 0 rgba(255,255,255,0.75);
@@ -966,6 +973,16 @@ input[type="password"].error:focus{
 	border-bottom-right-radius: 0;
 }
 
+@media screen and (max-width: 640px){
+	.app-alert.referral-list .alert-segmented-control .tab{
+		width: 128px;
+	}
+
+	.app-alert.referral-list .alert-segmented-control .tab.left{
+		width: 129px;
+	}
+}
+
 .app-alert.referral-list .alert-segmented-control .tab.right{
 	float: right;
 	border-top-left-radius: 0;
@@ -977,6 +994,10 @@ input[type="password"].error:focus{
 	background-color: #f4f5f6;
 }
 
+.app-alert.referral-list .alert-body{
+	width: 100%;
+}
+
 .app-alert.referral-list .alert-body .list{
 	display: block;
 	float: left;
@@ -986,7 +1007,89 @@ input[type="password"].error:focus{
 	overflow: auto;
 }
 
+#referrals-segment{
+	display: block;
+	float: left;
+	width: 100%;
+	height: 160px;
+	overflow: auto;
+}
 
+#pending-segment{
+	display: none;
+	float: left;
+	width: 100%;
+	height: 160px;
+	overflow: auto;
+}
+
+.app-alert.referral-list ul.referrals-list{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 20px);
+	margin: 0 0 0 10px;
+}
+
+.app-alert.referral-list ul.referrals-list li{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	padding: 5px 0;
+	border-bottom: 1px dotted #dcdcdc;
+}
+
+.app-alert.referral-list ul.referrals-list li .picture{
+	display: block;
+	float: left;
+	width: 40px;
+	height: 40px;
+	background-color: #fafbfc;
+	border: 1px solid #e2e1e3;
+	border-radius: 20px;
+	background-image: url("../images/default-avatar.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 40px auto;
+}
+
+.app-alert.referral-list ul.referrals-list li .info{
+	display: block;
+	float: left;
+}
+
+.app-alert.referral-list ul.referrals-list li .info .name{
+	display: block;
+	float: left;
+	clear: both;
+	width: 240px;
+	margin: 7px 0 0 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #2f3b4b;
+}
+
+.app-alert.referral-list ul.referrals-list li .info .position{
+	display: block;
+	float: left;
+	clear: both;
+	width: 240px;
+	margin: 2px 0 0 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #969ba2;
+}
+
+.app-alert.referral-list ul.referrals-list li .empty{
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+	color: #aaaaaa;
+}
 
 
 

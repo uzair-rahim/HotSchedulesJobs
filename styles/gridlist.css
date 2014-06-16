@@ -252,8 +252,34 @@ ul.grid-list > li .posted-info.new{
 	font-weight: bold;
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 1010px){
 	ul.grid-list > li .posted-info{
+		display: none;
+	}
+}
+
+ul.grid-list > li .bonus-info{
+	display: block;
+	float: left;
+	margin: 5px 0;
+	width: 130px;
+	height: 40px;
+	line-height: 40px;
+	color: #2d3c4b;
+	font-size: 12px;
+	text-indent: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border-right: 1px dotted #bbbbbb;
+}
+
+ul.grid-list > li .bonus-info.new{
+	font-weight: bold;
+}
+
+@media screen and (max-width: 900px){
+	ul.grid-list > li .bonus-info{
 		display: none;
 	}
 }

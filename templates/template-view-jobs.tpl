@@ -65,7 +65,8 @@
 </div>
 <div id="toolbar">
 	<button id="add-new-job" class="primary">Add New Job</button>
-	<button id="archive-candidates">{{language.archiveCandidates}}</button>
+	<button id="send-message" disabled>{{language.sendMessage}}</button>
+	<button id="archive-candidates" disabled>{{language.archiveCandidates}}</button>
 </div>
 
 <div id="add-job" class="job-information">

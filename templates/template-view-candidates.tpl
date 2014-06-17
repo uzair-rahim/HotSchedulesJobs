@@ -56,9 +56,9 @@
 	</ul>
 </div>
 
-<div id="toolbar">
-	<button id="send-message" class="primary">{{language.sendMessage}}</button>
-	<button id="archive-candidates">{{language.archiveCandidates}}</button>
+<div id="toolbar" class="hideable-toolbar">
+	<button id="send-message" class="primary" disabled>{{language.sendMessage}}</button>
+	<button id="archive-candidates" disabled>{{language.archiveCandidates}}</button>
 </div>
 
 <div id="filter-flyout" class="flyout">
@@ -158,7 +158,6 @@
 	{{/each}}
 </div>
 
-
 {{#anyArchivedCandidates jobs sub}}
 	<div class="archived-candidates-list-container">
 		<div class="grid-list-head">{{language.archived}} ({{totalArchivedCandidates jobs sub}})</div>
@@ -167,7 +166,6 @@
 				{{#each candidates}}				
 					{{#if_eq archived true}}
 						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-job="{{../../guid}}">
-							<input class="candidate-select" type="checkbox"/>
 							<div class="candidate-picture">
 								{{#hasPhoto this.user.photo.url}}
 									<img src="{{this.user.photo.url}}"/>

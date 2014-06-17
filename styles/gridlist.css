@@ -12,6 +12,12 @@
 	text-transform: capitalize;
 }
 
+@media screen and (max-width: 510px){
+	.grid-list-head:first-of-type{
+		margin-top: 20px;
+	}
+}
+
 ul.grid-list{
 	display: block;
 	float: left;

@@ -162,9 +162,14 @@ define([
 
 		},
 
-		addNewJob : function(){
+		disableToolbarButtons : function(){
 			$(".candidate-select").prop("checked", false);
-			$("#archive-candidates").css("display", "none");
+			$("#send-message").prop("disabled", true);
+			$("#archive-candidates").prop("disabled", true);
+		},
+
+		addNewJob : function(){
+			this.disableToolbarButtons();
 
 			$("#add-job").addClass("show");
 
@@ -245,6 +250,8 @@ define([
 
 		editJob : function(event){
 
+			this.disableToolbarButtons();
+
 			var add = $("#add-job");
 			var isAddJobExpanded = $("#add-job").hasClass("show");
 			var all = $("#job-list > li");
@@ -255,9 +262,6 @@ define([
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
 			var profile = $(".hourly-profile");
-
-			$(".candidate-select").prop("checked", false);
-			$("#archive-candidates").css("display", "none");
 
 			$(add).removeClass("show");
 
@@ -384,6 +388,9 @@ define([
 		},
 
 		expandJob : function(event){
+
+			this.disableToolbarButtons();
+
 			var add = $("#add-job");
 			var isAddJobExpanded = $("#add-job").hasClass("show");
 			var all = $("#job-list > li");
@@ -394,10 +401,6 @@ define([
 			var edit = $(li).find(".edit-mode");
 			var candidates = $(li).find(".grid-list.sub");
 			var allProfiles = $(li).find(".hourly-profile");
-
-			
-			$(".candidate-select").prop("checked", false);
-			$("#archive-candidates").css("display", "none");
 
 			$(add).removeClass("show");
 
@@ -502,9 +505,11 @@ define([
 		candidateSelect : function(event){
 			var count = $(".candidate-select:checked").length;
 			if(count > 0){
-				$("#archive-candidates").css("display", "block");
+				$("#send-message").prop("disabled",false);
+				$("#archive-candidates").prop("disabled",false);
 			}else{
-				$("#archive-candidates").css("display", "none");
+				$("#send-message").prop("disabled",true);
+				$("#archive-candidates").prop("disabled",true);
 			}
 			event.stopPropagation();
 		},

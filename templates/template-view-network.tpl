@@ -9,8 +9,8 @@
 	</ul>
 </div>
 
-<div id="toolbar">
-	<button id="send-message" class="primary">Send Message</button>
+<div id="toolbar" class="hideable-toolbar">
+	<button id="send-message" class="primary" disabled>Send Message</button>
 </div>
 
 <div id="filter-flyout" class="flyout">

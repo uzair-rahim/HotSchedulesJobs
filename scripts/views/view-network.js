@@ -69,6 +69,11 @@ define([
 
 		networkSelect : function(event){
 			var count = $(".candidate-select:checked").length;
+			if(count > 0){
+				$("#send-message").prop("disabled",false);
+			}else{
+				$("#send-message").prop("disabled",true);
+			}
 			event.stopPropagation();
 		},
 

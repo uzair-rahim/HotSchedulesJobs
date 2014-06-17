@@ -24,6 +24,14 @@ button:hover{
 	background-color: #ededed;
 }
 
+button:disabled{
+	opacity: 0.6;
+}
+
+button:disabled:hover{
+	background-color: #f4f6f7;
+}
+
 button.primary{
 	color: #ffffff;
 	border: 1px solid #0b6f9b;
@@ -32,6 +40,10 @@ button.primary{
 
 button.primary:hover{
 	background-color: #2d81bd;
+}
+
+button.primary:disabled:hover{
+	background-color: #3e92ce;
 }
 
 button.destroy{
@@ -44,6 +56,10 @@ button.destroy:hover{
 	background-color: #981e1e;
 }
 
+button.destroy:disabled:hover{
+	background-color: #b93c3c;
+}
+
 button.create{
 	color: #ffffff;
 	border: 1px solid #64a043;
@@ -52,6 +68,10 @@ button.create{
 
 button.create:hover{
 	background-color: #49981e;
+}
+
+button.create:disabled:hover{
+	background-color: #6cbc40;
 }
 
 label{
@@ -714,7 +734,21 @@ input[type="password"].error:focus{
 }
 
 #toolbar #archive-candidates{
-	display: none;
+	
+}
+
+@media screen and (max-width: 510px){
+	#toolbar #send-message{
+		display: none;
+	}
+
+	#toolbar #archive-candidates{
+		display: none;
+	}
+
+	#toolbar.hideable-toolbar{
+		display: none;
+	}
 }
 
 

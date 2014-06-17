@@ -265,9 +265,11 @@ define([
 		candidateSelect : function(event){
 			var count = $(".candidate-select:checked").length;
 			if(count > 0){
-				$("#archive-candidates").css("display", "block");
+				$("#send-message").prop("disabled",false);
+				$("#archive-candidates").prop("disabled",false);
 			}else{
-				$("#archive-candidates").css("display", "none");
+				$("#send-message").prop("disabled",true);
+				$("#archive-candidates").prop("disabled",true);
 			}
 			event.stopPropagation();
 		},

@@ -28,6 +28,7 @@ define([
 					firstname		: "",
 					lastname		: "",
 					guid			: "",
+					email			: "",
 					employerIds		: "",
 					role			: "user"
 				}

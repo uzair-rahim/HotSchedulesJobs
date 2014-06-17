@@ -16,7 +16,7 @@
 <div class="grid-list-head">Shared Connections ({{connections.length}})</div>
 <ul id="connections-list" class="grid-list">
 	{{#each connections}}
-		<li class="view-profile">
+		<li class="view-profile" data-email="{{this.attributes.email}}">
 			<input class="candidate-select" type="checkbox"/>
 			<div class="candidate-picture">
 				{{#hasPhoto this.attributes.photo.url}}
@@ -28,7 +28,7 @@
 				<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].name}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 			</div>
 			<div class="candidate-message"></div>
-			<div class="candidate-endorse">0</div>
+			<!--<div class="candidate-endorse">0</div>-->
 			<!--<div class="candidate-network"><span>0</span> / 0</div>-->
 			<div class="hourly-profile">
 				<div class="about-section">

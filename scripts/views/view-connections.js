@@ -14,8 +14,11 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #breadcrumb li" 	: "back",
-			"click .view-profile"	: "profile",
+			"click .candidate-select"	: "connectionSelect",
+			"click .candidate-message"	: "connectionMessage",
+			"click #send-message"		: "sendBulkMessage",
+			"click #breadcrumb li" 		: "back",
+			"click .view-profile"		: "profile",
 		},
 
 		initialize : function(){
@@ -34,6 +37,35 @@ define([
 			if(goBack !== 0){
 				window.history.go(goBack);
 			}
+		},
+
+		connectionSelect : function(event){
+			var count = $(".candidate-select:checked").length;
+			if(count > 0){
+				$("#send-message").prop("disabled",false);
+			}else{
+				$("#send-message").prop("disabled",true);
+			}
+			event.stopPropagation();
+		},
+
+		connectionMessage : function(event){
+			var email = $(event.target).closest("li.view-profile").data("email");
+			window.location.href = "mailto:"+email;
+			event.stopPropagation();
+		},
+
+		sendBulkMessage : function(event){
+			var manager = Utils.GetUserSession().email;
+			var addresses = [];
+
+			$(".candidate-select:checked").each(function(){
+				var email = $(this).closest("li.view-profile").data("email");
+				addresses.push(email);
+			});
+
+			var emails = addresses.join(",");
+			window.location.href = "mailto:"+manager+"?bcc="+emails;
 		},
 
 		profile : function(event){

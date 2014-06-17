@@ -4,8 +4,9 @@ var vldt = new function(){
 	this.alphanumeric = /^[A-Za-z0-9]/;
 	this.date = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/
 	this.email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-	this.numeric = /^[0-9]$/;
+	this.numeric = /^[0-9]+$/;
 	this.phone = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+	this.wholenumber = /^\d+$/;
 	this.zip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
 
 	this.valid = false;
@@ -57,6 +58,9 @@ var vldt = new function(){
 				break;
 				case "required" :
 					this.response[keys[i]] = this.isRequired($(keys[i]).val());
+				break;
+				case "wholenumber" :
+					this.response[keys[i]] = this.isWholeNumber($(keys[i]).val());
 				break;
 				case "zip" :
 					this.response[keys[i]] = this.isZip($(keys[i]).val());
@@ -124,6 +128,10 @@ var vldt = new function(){
 
 	this.isRequired = function(val){
 		return val.length > 0;
+	};
+
+	this.isWholeNumber = function(val){
+		return this.wholenumber.test(val);
 	};
 
 	this.isZip = function(val){

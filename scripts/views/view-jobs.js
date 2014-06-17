@@ -45,6 +45,7 @@ define([
 			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
+			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
 			"click .candidate-network"		: "candidateNetwork"
 		},
@@ -195,10 +196,13 @@ define([
 		saveAddJob : function(){
 
 			var wage = $("#new-wage").val();
-			var bonus = $("#new-bonus").val();	
+			var bonus = $("#new-bonus").val();
+			var wholeNumber = /^[0-9]+$/;
 
 			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
+			}else if(bonus !== "" && !wholeNumber.test(bonus)){
+				Utils.ShowToast({message : "Invalid bonus..."});
 			}else{
 				var job = new Object();	
 					job.shifts = new Object();
@@ -242,9 +246,7 @@ define([
 						}
 					});
 
-
 			}
-
 
 		},
 
@@ -330,8 +332,12 @@ define([
 			var wage = $(item).find(".wage").val();
 			var bonus = $(item).find(".bonus").val();
 
+			var wholeNumber = /^[0-9]+$/;
+
 			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
+			}else if(!wholeNumber.test(bonus)){
+				Utils.ShowToast({message : "Invalid bonus..."});
 			}else{
 
 				var update = new Object();
@@ -515,8 +521,22 @@ define([
 		},
 
 		candidateMessage : function(event){
+			var email = $(event.target).closest("li.view-profile").data("email");
+			window.location.href = "mailto:"+email;
 			event.stopPropagation();
-			Utils.ShowToast({ message : "Message sent"});
+		},
+
+		sendBulkMessage : function(event){
+			var manager = Utils.GetUserSession().email;
+			var addresses = [];
+
+			$(".candidate-select:checked").each(function(){
+				var email = $(this).closest("li.view-profile").data("email");
+				addresses.push(email);
+			});
+
+			var emails = addresses.join(",");
+			window.location.href = "mailto:"+manager+"?bcc="+emails;
 		},
 
 		candidateArchive : function(event){

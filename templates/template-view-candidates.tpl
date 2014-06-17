@@ -97,7 +97,7 @@
 				<ul id="candidates-list" class="grid-list" data-id="{{id}}" data-guid="{{guid}}">
 				{{#each candidates}}
 					{{#if_eq archived false}}
-						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}">
+						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" data-email="{{user.email}}">
 							<input class="candidate-select" type="checkbox"/>
 							<div class="candidate-picture">
 								{{#hasPhoto this.user.photo.url}}
@@ -117,8 +117,8 @@
 							</div>
 							<div class="candidate-archive"></div>
 							<div class="candidate-message"></div>
-							<div class="candidate-rating"></div>
-							<div class="candidate-endorse">0</div>
+							<!--<div class="candidate-rating"></div>-->
+							<!--<div class="candidate-endorse">0</div>-->
 							<div class="candidate-network"><span>0</span> / 0</div>
 							<div class="hourly-profile">
 								<div class="about-section">

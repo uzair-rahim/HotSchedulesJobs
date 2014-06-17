@@ -21,6 +21,7 @@ define([
 			"click .view-profile"		: "profile",
 			"click .candidate-select"	: "networkSelect",
 			"click .candidate-message"	: "networkMessage",
+			"click #send-message"		: "sendBulkMessage",
 			"click .candidate-network"	: "networkConnections",
 
 		},
@@ -78,8 +79,22 @@ define([
 		},
 
 		networkMessage : function(event){
-			alert("Send Message");
+			var email = $(event.target).closest("li.view-profile").data("email");
+			window.location.href = "mailto:"+email;
 			event.stopPropagation();
+		},
+
+		sendBulkMessage : function(event){
+			var manager = Utils.GetUserSession().email;
+			var addresses = [];
+
+			$(".candidate-select:checked").each(function(){
+				var email = $(this).closest("li.view-profile").data("email");
+				addresses.push(email);
+			});
+
+			var emails = addresses.join(",");
+			window.location.href = "mailto:"+manager+"?bcc="+emails;
 		},
 
 		networkConnections : function(event){
@@ -153,7 +168,6 @@ define([
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
-
 			return jsonObject;
 		}
 		

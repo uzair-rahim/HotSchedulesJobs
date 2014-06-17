@@ -49,6 +49,7 @@ define([
 							user.guid = response.attributes.guid;
 							user.firstname = response.attributes.firstname;
 							user.lastname = response.attributes.lastname;
+							user.email = response.attributes.email;
 							user.employerIds = response.attributes.employerIds;
 
 							if(response.attributes.roles.length > 0){

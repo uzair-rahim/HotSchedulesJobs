@@ -19,7 +19,6 @@ define([
 		numberOfJobs : 0,
 		events : {
 			"click #breadcrumb li" 			: "back",
-			"click #send-message"			: "sendMessage",
 			"click #archive-candidates"		: "archiveCandidates",
 			"click #filter"					: "showFilter",
 			"click #cancel-filter"			: "hideFilter",
@@ -32,6 +31,7 @@ define([
 			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
+			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
 			"click .candidate-unarchive"	: "candidateUnarchive",
 			"click .candidate-network"		: "candidateNetwork"
@@ -275,8 +275,22 @@ define([
 		},
 
 		candidateMessage : function(event){
-			alert("Send Message");
+			var email = $(event.target).closest("li.view-profile").data("email");
+			window.location.href = "mailto:"+email;
 			event.stopPropagation();
+		},
+
+		sendBulkMessage : function(event){
+			var manager = Utils.GetUserSession().email;
+			var addresses = [];
+
+			$(".candidate-select:checked").each(function(){
+				var email = $(this).closest("li.view-profile").data("email");
+				addresses.push(email);
+			});
+
+			var emails = addresses.join(",");
+			window.location.href = "mailto:"+manager+"?bcc="+emails;
 		},
 
 		candidateArchive : function(event){

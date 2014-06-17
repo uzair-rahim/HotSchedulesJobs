@@ -241,7 +241,7 @@ input[type="password"].error:focus{
 	background-size: 160px 45px;
 }
 
-@media screen and (max-height: 650px){
+@media screen and (max-height: 750px){
 	.rbc-logo{
 		display: none;
 	}
@@ -306,11 +306,11 @@ input[type="password"].error:focus{
 	position: absolute;
 	display: block;
 	float: left;
-	width: 600px;
+	width: 320px;
 	height: 380px;
 	top: 0;
 	left: 50%;
-	margin: 160px 0 0 -300px;
+	margin: 160px 0 0 -160px;
 	overflow: hidden;
 }
 
@@ -401,49 +401,6 @@ input[type="password"].error:focus{
 	color: #ffffff;
 }
 
-.form-container .login-services{
-	display: block;
-	float: left;
-	width: 280px;
-	height: 340px;
-	overflow: hidden;
-	background-color: rgba(0,153,200, 0.9);
-	background-color: rgba(255,170,0, 0.9);
-}
-
-.form-container .login-services button{
-	margin: 5px 30px;
-}
-
-.form-container .login-services button#login-with-facebook{
-	margin-top: 130px;
-	background-color: #578EDF;
-	border: 1px solid #ffffff;
-}
-
-.form-container .login-services button#login-with-facebook:hover{
-	background-color: #406daf;
-}
-
-.form-container .login-services button#login-with-hotschedules{	
-	background-color: #3cb950;
-	border: 1px solid #ffffff;
-}
-
-.form-container .login-services button#login-with-hotschedules:hover{
-	background-color: #30a243;
-}
-
-.form-container .login-services .message{
-	display: block;
-	float: left;
-	width: calc(100% - 60px);
-	margin: 10px 30px;
-	text-align: center;
-	font-style: italic;
-	color: rgba(255,255,255, 0.8);
-}
-
 @media screen and (max-width: 640px){
 	.form-container .login-form{
 		clear: both;
@@ -454,17 +411,6 @@ input[type="password"].error:focus{
 	.form-container .login-form .logo{
 		margin: 10px 30px;
 	}
-
-	.form-container .login-services{
-		clear: both;
-		width: 100%;
-		height: 180px;
-	}
-
-	.form-container .login-services button#login-with-facebook{
-		margin-top: 35px;
-	}
-
 }
 
 .form-container .link{

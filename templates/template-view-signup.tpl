@@ -1,5 +1,3 @@
-
-
 <style type="text/css">
 	#app-content{
 		overflow-y: auto;
@@ -7,7 +5,7 @@
 	.content-wrapper{
 		display: block;
 		width: 100%;
-		max-width: 600px;
+		max-width: 362px;
 		min-width: 320px;
 		height: 100%;
 		margin: auto;
@@ -54,10 +52,9 @@
 	.panel .body .manual{
 		display: block;
 		float: left;
-		width: 62%;
+		width: 100%%;
 		height: 100%;
 		padding: 10px 0;
-		border-right: 1px dotted #cccccc;
 		overflow: hidden;
 	}
 	.panel .body .manual .field-container{
@@ -91,26 +88,6 @@
 	}
 	.panel .body .manual .link-container a:hover{
 		color: #555555;
-	}
-	.panel .body .hotschedules{
-		display: block;
- 		float: left;
-		width: calc(38% - 2px);
-		height: 100%;
-		padding: 20px 0;
-		border-left: 1px dotted #ffffff;
-		overflow: hidden;
-	}
-
-	.panel .body .hotschedules .container{
-		width: 202px;
-		margin: auto;
-		margin-top: 70px;
-		text-align: center;
-	}
-	.panel .body .hotschedules .container label{
-		font-weight: bold;
-		margin: 0 0 5px 0;
 	}
 	.panel .foot{
 		display: block;
@@ -174,6 +151,7 @@
 	}
 </style>
 
+<div class="rbc-logo"></div>
 <div class="content-wrapper">
 	<div class="panel-container">
 		<div class="panel">
@@ -198,12 +176,6 @@
 					</div>
 					<div class="link-container">
 						<button class="primary" id="signup">Sign Up</button>
-					</div>
-				</div>
-				<div class="hotschedules">
-					<div class="container">
-					<label>Or</label>
-						<button class="green" id="signupHS">Sign Up With HotSchedules</button>
 					</div>
 				</div>
 			</div>

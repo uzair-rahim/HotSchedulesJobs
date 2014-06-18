@@ -572,10 +572,10 @@ input[type="password"].error:focus{
 }
 
 #app-help.show {
-    right: 0;
+    right: 0px;
 }
 
-#app-help header {
+#app-help .header {
     background-color: #000000;
     display: block;
     height: 30px;
@@ -588,7 +588,7 @@ input[type="password"].error:focus{
 }
 
 
-#app-help header label {
+#app-help .header label {
     color: #fff;
     display: inline-block;
     float: left;
@@ -596,7 +596,7 @@ input[type="password"].error:focus{
     font-size: 20px;
 }
 
-#app-help header #close-help {
+#app-help .header #close-help {
     float: right;
     height: 30px;
     width: 30px;

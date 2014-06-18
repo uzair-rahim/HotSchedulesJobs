@@ -81,6 +81,11 @@ define([
 			console.log("ajaxError...");
 			switch(request.status){
 				case 401 : 
+					Utils.ShowToast({message : "Access Denied!"});
+					App.router.navigate("logout", true);
+				break;
+				case 500 :
+					Utils.ShowToast({message : "Your session timed out"});
 					App.router.navigate("logout", true);
 				break;	
 			}

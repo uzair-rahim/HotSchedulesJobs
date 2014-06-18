@@ -10,11 +10,11 @@
 		<button id="secondary-action">Cancel</button>
 	</div>
 </div>
-<section id="app-help" class="area-login-help">
-	<header>
+<div id="app-help">
+	<div class="header">
 		<label>Get Help</label>
 		<div id="close-help" class="btn-close"></div>
-	</header>
+	</div>
 	<div id="app-help-content">
 		<h6>Are you a new user?</h6>
 		<p>If you have never logged in to HotSchedules before, please ask your manager for a Welcome Sheet with your login information.</p>
@@ -29,4 +29,4 @@
 		<p><a href="mailto:customercare@redbookconnect.com" id="customercare">customercare@redbookconnect.com</a></p>
 		<p>For additional information go to the <a href="https://hotschedules-redbookconnect.rightanswers.com/portal/public/" id="support">HotSchedules Support Site</a>.</p>
 	</div>
-</section>
+</div>

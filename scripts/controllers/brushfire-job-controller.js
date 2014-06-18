@@ -41,9 +41,9 @@ define([
 							var view = new ViewJob({model : response});
 							layout.body.show(view);
 						},
-						error : function(){
+						error : function(response){
 							console.log("Error fetching job...");
-							Utils.ShowToast({ message : "Error fetching job..."});
+							window.location.href = "index.jsp";
 						}
 					});
 				}

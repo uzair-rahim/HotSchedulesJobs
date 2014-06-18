@@ -17,7 +17,8 @@ define([
 		template: Template,
 		events : {
 			"click #signup"		: "signup",
-			"click #nevermind"	: "nevermind"
+			"click #nevermind"	: "nevermind",
+			"click #help-icon"	: "showHelp"
 		},
 
 		initialize : function(){
@@ -106,6 +107,10 @@ define([
 		nevermind : function(){
 			console.log("Nevermind...");
 			App.router.navigate("login", true);
+		},
+
+		showHelp : function(){
+			Utils.ShowHelp();
 		},
 		
 		serializeData : function(){

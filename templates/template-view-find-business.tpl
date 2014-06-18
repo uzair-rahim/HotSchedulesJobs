@@ -14,7 +14,7 @@
 		display: block;
 		width: 100%;
 		float: left;
-		margin: 50px 0 0 0;
+		margin: 95px 0 0 0;
 	}
 	.panel{
 		display: block;
@@ -245,7 +245,11 @@
 		font-size: 14px;
 	}
 
-	@media screen and (max-width: 600px){
+	@media screen and (max-width: 640px){
+		.panel-container{
+			margin: 20px 0 0 0;
+
+		}
 		.panel .body .full .field-container.floating{
 			width: calc(100% - 40px);
 			margin: 10px 0 0 10px;
@@ -316,17 +320,6 @@
 										</div>
 									</li>
 								{{/each}}
-								<!--
-								<li>
-									<div class="info">
-										<div class="line1">Jimmy's John</div>
-										<div class="line2">601 W Martin Luther King Jr Blvd Austin, TX</div>
-									</div>
-									<div class="action">
-										<a id="" class="already-claimed">Already Claimed</a>
-									</div>
-								</li>
-								-->
 							{{else}}
 								<li class="no-result">
 									<div class="info">
@@ -339,12 +332,7 @@
 					</div>
 				{{/if_not_eq}}
 			</div>
-			<div class="foot">
-			{{#if_not_eq businesses undefined}}
-				<a class="left" id="add-business"></a>
-			{{/if_not_eq}}
-				<a class="right" id="cancel"></a>
-			</div>
+			<div class="foot"></div>
 		</div>
 	</div>
 </div>

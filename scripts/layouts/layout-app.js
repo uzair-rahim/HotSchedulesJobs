@@ -13,13 +13,14 @@ define([
 			className : "app",
 			template : Template,
 			regions : {
-				head  : "#app-head",
+				head : "#app-head",
 				body : "#app-body"
 			},
 			
 			events : {
-				"click #primary-action" : "primaryAction",
-				"click #secondary-action" : "secondaryAction"
+				"click #primary-action"		: "primaryAction",
+				"click #secondary-action"	: "secondaryAction",
+				"click #close-help"			: "closeHelp"
 			},
 
 			initialize : function(){
@@ -33,6 +34,10 @@ define([
 
 			secondaryAction : function(){
 				App.trigger("alertSecondaryAction");
+			},
+
+			closeHelp : function(){
+				Utils.HideHelp();
 			},
 			
 			serializeData : function(){

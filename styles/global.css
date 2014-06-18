@@ -261,7 +261,7 @@ input[type="password"].error:focus{
 	background-size: 160px 45px;
 }
 
-@media screen and (max-height: 750px){
+@media screen and (max-height: 700px){
 	.rbc-logo{
 		display: none;
 	}
@@ -317,7 +317,6 @@ input[type="password"].error:focus{
 	font-weight: lighter;
 	white-space: nowrap;
 	overflow: hidden;
-	background-color: rgba(0,153,205, 0.8);
 	background-color: rgba(255,170,0, 0.8);
 }
 
@@ -330,15 +329,15 @@ input[type="password"].error:focus{
 	height: 380px;
 	top: 0;
 	left: 50%;
-	margin: 160px 0 0 -160px;
+	margin: 150px 0 0 -160px;
 	overflow: hidden;
 }
 
 @media screen and (max-width: 640px){
 	.form-container{
 		width: 300px;
-		height: 500px;
-		margin: 90px 0 0 -150px;
+		height: 390px;
+		margin: 70px 0 0 -150px;
 	}
 }
 
@@ -510,6 +509,151 @@ input[type="password"].error:focus{
 	background-color: #c17804;
 }
 
+
+
+/********************************/
+/*Help Section Start            */
+/********************************/
+
+#help-icon{
+	position: absolute;
+	display: block;
+	float: left;
+	clear: both;
+	top: 560px;
+	left:50%;
+	margin: 0 0 0 -25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: rgba(255,170,0, 0.8);
+	text-align: center;
+	line-height: 42px;
+	color: #ffffff;
+	font-size: 24px;
+	-webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    -ms-transition: all 300ms;
+    transition: all 300ms;
+}
+
+#help-icon:hover{
+	background-color: #e49904;
+}
+
+@media screen and (max-width: 640px){
+	#help-icon{
+		top: 400px;
+	}
+}
+
+
+#app-help {
+	position: absolute;
+	display: block;
+	width: 320px;
+	height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    bottom: 0;
+    right: -320px;
+    text-align: left;
+    color: #fff;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 9999;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    -ms-transition: all 300ms;
+    transition: all 300ms;
+}
+
+#app-help.show {
+    right: 0;
+}
+
+#app-help header {
+    background-color: #000000;
+    display: block;
+    height: 30px;
+    margin: 0;
+    min-width: 320px;
+    position: relative;
+    width: 100%;
+    z-index: auto;
+    padding: 6px 10px 5px 10px;
+}
+
+
+#app-help header label {
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+#app-help header #close-help {
+    float: right;
+    height: 30px;
+    width: 30px;
+    margin: -4px 10px 0 0;
+    text-align: center;
+    background: url("../images/icon-close-help.png") no-repeat scroll 0 10px #000000;
+}
+
+
+#app-help #app-help-content {
+	padding: 15px 24px 15px 24px;
+}
+
+
+#app-help #app-help-content h4 {
+    font-family: 'Roboto',sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+#app-help #app-help-content h6 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: normal;
+    color: #fff;
+}
+
+#app-help #app-help-content p {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	font-weight: lighter;
+	margin: 0 0 15px 0;
+	color: #fff;
+}
+
+#app-help #app-help-content a#contactus {
+  font-size: 12px;
+  color: #fff;
+  margin-top: 30px;
+  display: block;
+}
+
+#app-help #app-help-content a#phone,
+#app-help #app-help-content a#customercare,
+#app-help #app-help-content a#support {
+  color: #fff;
+  text-decoration: none;
+}
+
+/********************************/
+/*Help Section End              */
+/********************************/
+
+
+
 .navigation{
 	display: block;
 	float: left;
@@ -660,7 +804,7 @@ input[type="password"].error:focus{
 	clear: both;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
+	overflow: scroll;
 }
 
 #sub-nav{

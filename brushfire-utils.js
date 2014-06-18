@@ -226,6 +226,23 @@ define([
 					return false;
 				}
 			},
+
+			// Show Help Content
+			ShowHelp : function(){
+				var help = $("#app-help");
+				var isVisible = $(help).hasClass("show")
+				if(isVisible){
+					$(help).removeClass("show");
+				}else{
+					$(help).addClass("show");
+				}
+			},
+
+			// Hide Help Content
+			HideHelp : function(){
+				var help = $("#app-help");
+				$(help).removeClass("show");
+			}
 			
 		});
 

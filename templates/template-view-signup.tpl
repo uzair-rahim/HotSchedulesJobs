@@ -14,7 +14,7 @@
 		display: block;
 		width: 100%;
 		float: left;
-		margin: 50px 0 0 0;
+		margin: 95px 0 0 0;
 	}
 	.panel{
 		display: block;
@@ -125,7 +125,12 @@
 		margin: 0 0 0 10px;
 		float: right;
 	}
-	@media screen and (max-width: 600px){
+	@media screen and (max-width: 640px){
+
+		.panel-container{
+			margin: 20px 0 0 0;
+
+		}
 		.panel .body .manual{
 			width: 100%;
 			border-right: none;
@@ -185,3 +190,4 @@
 		</div>
 	</div>
 </div>
+<div id="help-icon">?</div>

@@ -336,7 +336,7 @@ define([
 
 			if(wage === ""){
 				Utils.ShowToast({message : "Invalid wage..."});
-			}else if(!wholeNumber.test(bonus)){
+			}else if(bonus !== "" && !wholeNumber.test(bonus)){
 				Utils.ShowToast({message : "Invalid bonus..."});
 			}else{
 

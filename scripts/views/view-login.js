@@ -18,7 +18,8 @@ define([
 		events : {
 			"click #login"			 : "login",
 			"click #signup"			 : "signup",
-			"click #forgot-password" : "forgotPassword"
+			"click #forgot-password" : "forgotPassword",
+			"click #help-icon"		 : "showHelp"
 		},
 
 		initialize : function(){
@@ -87,6 +88,10 @@ define([
 		forgotPassword : function(){
 			console.log("Forgot Password...");
 			Utils.ShowToast({message : "Something went seriously wrong..."});
+		},
+
+		showHelp : function(){
+			Utils.ShowHelp();
 		},
 		
 		serializeData : function(){

@@ -32,7 +32,7 @@ define([
 					window.location.href = "index.jsp";
 				}else{
 
-					var restURL = Utils.GetURL("/services/rest/open/jobposting/");
+					var restURL = Utils.GetURL("/services/rest/public/jobposting/");
 
 					$.ajax({
 						url : restURL + jobGUID + "/data",
@@ -41,7 +41,7 @@ define([
 							var view = new ViewJob({model : response});
 							layout.body.show(view);
 						},
-						error : function(response){
+						error : function(){
 							console.log("Error fetching job...");
 							window.location.href = "index.jsp";
 						}

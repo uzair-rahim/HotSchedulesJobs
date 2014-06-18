@@ -629,7 +629,7 @@ input[type="password"].error:focus{
 #app-help #app-help-content p {
 	font-family: 'Roboto', sans-serif;
 	font-size: 12px;
-	font-weight: lighter;
+	font-weight: 400;
 	margin: 0 0 15px 0;
 	color: #fff;
 }

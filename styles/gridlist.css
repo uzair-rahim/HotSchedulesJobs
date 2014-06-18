@@ -243,7 +243,7 @@ ul.grid-list > li .posted-info{
 	display: block;
 	float: left;
 	margin: 5px 0;
-	width: 130px;
+	width: 120px;
 	height: 40px;
 	line-height: 40px;
 	color: #2d3c4b;
@@ -258,7 +258,7 @@ ul.grid-list > li .posted-info.new{
 	font-weight: bold;
 }
 
-@media screen and (max-width: 1010px){
+@media screen and (max-width: 1020px){
 	ul.grid-list > li .posted-info{
 		display: none;
 	}
@@ -294,7 +294,7 @@ ul.grid-list > li .job-actions{
 	display: block;
 	float: right;
 	margin: 5px 0;
-	width: 168px;
+	width: 190px;
 	height: 40px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -305,7 +305,11 @@ ul.grid-list > li .job-actions button{
 	float: right;
 }
 
-@media screen and (max-width: 640px){
+ul.grid-list > li .job-actions button:first-child{
+	width: 100px;
+}
+
+@media screen and (max-width: 660px){
 	ul.grid-list > li .job-actions{
 		width: 70px;
 	}
@@ -313,6 +317,10 @@ ul.grid-list > li .job-actions button{
 	ul.grid-list > li .job-actions button:first-child{
 		display: none;
 	}
+}
+
+ul.grid-list > li .job-actions .custom-select-list.job-status{
+	margin-left: 33px;
 }
 
 ul.grid-list > li .candidate-select{

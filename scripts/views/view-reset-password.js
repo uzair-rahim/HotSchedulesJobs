@@ -15,7 +15,8 @@ define([
 		template: Template,
 		events : {
 			"click #submit"		: "submit",
-			"click #help-icon"	: "showHelp"
+			"click #help-icon"	: "showHelp",
+			"click #return"		: "returnToLogin"
 		},
 
 		initialize : function(){
@@ -33,6 +34,10 @@ define([
 
 		submit : function(){
 			
+		},
+
+		returnToLogin : function(){
+			window.location.href = "index.jsp";
 		},
 
 		showHelp : function(){

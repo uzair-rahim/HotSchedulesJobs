@@ -84,6 +84,10 @@ define([
 					Utils.ShowToast({message : "Your session timed out"});
 					App.router.navigate("logout", true);
 				break;
+				case 403 : 
+					Utils.ShowToast({message : "Access Denied"});
+					App.router.navigate("logout", true);
+				break;
 				case 500 :
 					Utils.ShowToast({message : "Internal Server Error"});
 					App.router.navigate("logout", true);

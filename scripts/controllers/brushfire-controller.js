@@ -5,6 +5,7 @@ define([
 		"marionette",
 		"scripts/layouts/layout-app",
 		"scripts/views/view-login",
+		"scripts/views/view-forgot-password",
 		"scripts/views/view-signup",
 		"scripts/views/view-find-business",
 		"scripts/views/view-add-business",
@@ -31,7 +32,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -111,7 +112,6 @@ define([
 
 			login : function(){
 
-
 				if(Utils.CheckSession()){
 					App.router.navigate("jobs", true);	
 				}else{
@@ -122,6 +122,15 @@ define([
 					var view = new ViewLogin();
 					this.layout.body.show(view);
 				}
+			},
+
+			forgotPassword : function(){
+				this.setLayout();
+				this.setHeader("heading");
+				this.setBackground();
+				
+				var view = new ViewForgotPassword();
+				this.layout.body.show(view);
 			},
 
 			signup : function(){

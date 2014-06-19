@@ -87,7 +87,7 @@ define([
 
 		forgotPassword : function(){
 			console.log("Forgot Password...");
-			Utils.ShowToast({message : "Something went seriously wrong..."});
+			App.router.navigate("forgotPassword", true);
 		},
 
 		showHelp : function(){

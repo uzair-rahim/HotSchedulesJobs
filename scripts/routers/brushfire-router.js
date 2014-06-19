@@ -10,6 +10,7 @@ define([
 			appRoutes : {
 				""						: "session",
 				"login"					: "login",
+				"forgotPassword"		: "forgotPassword",
 				"signup"				: "signup",
 				"findBusiness"			: "findBusiness",
 				"addBusiness"			: "addBusiness",

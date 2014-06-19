@@ -364,6 +364,16 @@ input[type="password"].error:focus{
 	background-size: auto 80px;
 }
 
+.form-container .login-form p{
+	display: block;
+	float: left;
+	clear: both;
+	color: #fff;
+	width: calc(100% - 56px);
+	margin: 0 0 20px 30px;
+	font-size: 14px;
+}
+
 
 .form-container .login-form input[type="email"],
 .form-container .login-form input[type="password"]{
@@ -397,19 +407,19 @@ input[type="password"].error:focus{
     transition: all 300ms;
 }
 
-.form-container .login-form button#login{
+.form-container .login-form button{
 	background-color: #068dba;
 	background-color: #e49904;
 	border: 1px solid #ffffff;
 	font-size: 14px;
 }
 
-.form-container .login-form button#login:hover{
+.form-container .login-form button:hover{
 	background-color: #096d8e;
 	background-color: #c17804;
 }
 
-.form-container .login-form a#forgot-password{
+.form-container .login-form a{
 	display: block;
 	float: left;
 	clear: both;

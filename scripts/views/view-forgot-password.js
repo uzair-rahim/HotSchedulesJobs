@@ -14,14 +14,22 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #submit"	: "submit",
-			"click #return"	: "returnToLogin",
+			"click #submit"		: "submit",
+			"click #return"		: "returnToLogin",
 			"click #help-icon"	: "showHelp"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Forgot Password view initialized...");
+		},
+
+		onShow : function(){
+			$("#emailaddress").keyup(function(event){
+				if(event.keyCode == 13){
+					$("#submit").click();
+				}
+			});
 		},
 
 		submit : function(){
@@ -50,7 +58,22 @@ define([
 				return false;
 			}else{
 				var email = $("#emailaddress").val();
-				Utils.ShowToast({message : "An email is sent with password reset instructions"});
+				var restURL = Utils.GetURL("/services/rest/public/initiateResetPassword/");
+
+				$.ajax({
+					url : restURL + email,
+					type : "PUT",
+					success : function(response){
+						$("#emailaddress").val("");
+						Utils.ShowToast({message : "Email sent with password reset instructions"});
+					},
+					error : function(response){
+						if(response.status === 404){
+							Utils.ShowToast({message : "This email address does not exist in our system"});
+						}	
+					}
+				});
+				
 			}
 		},
 

@@ -11,10 +11,6 @@ define([
 
 		var AppController = Marionette.Controller.extend({
 
-			removeBackground : function(){
-				var app = $(document).find(".app");
-				$(app).removeClass("background");
-			},
 
 			job : function(){
 
@@ -24,9 +20,10 @@ define([
 				var app = $(document).find(".app");
 				$(app).addClass("background");
 
-				Utils.InitStandaloneJob();
+				Utils.ResetLayout();
 
 				var jobGUID = Utils.GetStandaloneJobGUID();
+				console.log(jobGUID);
 
 				if(!jobGUID){
 					window.location.href = "index.jsp";

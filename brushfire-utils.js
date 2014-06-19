@@ -204,8 +204,8 @@ define([
 				});
 			},
 
-			// Standalone Job Utility
-			InitStandaloneJob : function(){
+			// Reset Layout
+			ResetLayout : function(){
 				$(document).find("#app-modal").remove();
 				$(document).find("#app-toast").remove();
 				$(document).find("#app-alert").remove();

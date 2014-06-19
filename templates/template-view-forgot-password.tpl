@@ -1,6 +1,6 @@
 <div class="rbc-logo"></div>
 <div class="form-container">
-	<div class="login-form tall">
+	<div class="login-form">
 		<div class="logo"></div>
 		<p>Please enter your email address below and we'll send you password reset instructions</p>
 		<input type="email" id="emailaddress" value="" placeholder="Email Address"/>

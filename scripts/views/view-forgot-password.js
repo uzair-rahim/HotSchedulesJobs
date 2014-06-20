@@ -49,7 +49,7 @@ define([
 						$(key).addClass("error");
 						switch(key){
 							case "#emailaddress":
-								Utils.ShowToast({message : "Invalid email address"});
+								Utils.ShowToast({message : "Invalid email format"});
 							break;
 						}
 					}
@@ -69,7 +69,8 @@ define([
 					},
 					error : function(response){
 						if(response.status === 404){
-							Utils.ShowToast({message : "This email address does not exist in our system"});
+							Utils.ShowToast({message : "Email sent with password reset instructions"});
+							//Utils.ShowToast({message : "This email address does not exist in our system"});
 						}	
 					}
 				});

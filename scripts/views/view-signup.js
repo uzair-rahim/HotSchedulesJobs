@@ -18,7 +18,8 @@ define([
 		events : {
 			"click #signup"		: "signup",
 			"click #nevermind"	: "nevermind",
-			"click #help-icon"	: "showHelp"
+			"click #help-icon"	: "showHelp",
+			"click .terms span"	: "showTerms"
 		},
 
 		initialize : function(){
@@ -27,72 +28,80 @@ define([
 		},
 
 		signup : function(){
-			console.log("Signup...");
 
-			$("input").removeClass("error");
+			var accept = $("#accept");
+			var isChecked = $(accept).prop("checked");
 
-			var vldtRegister = vldt.validate({
-				"#firstname"	: "alpha",
-				"#lastname"		: "alpha",
-				"#emailaddress"	: "email",
-				"#password"		: "alphanumeric"
-			});
+			if(!isChecked){
+				Utils.ShowToast({message : "You must agree to terms and conditions "});
+			}else{
+				console.log("Signup...");
 
-			if(!vldtRegister){
+				$("input").removeClass("error");
 
-				var errors = vldt.getErrors();
-				console.log(vldt.getErrors());
+				var vldtRegister = vldt.validate({
+					"#firstname"	: "alpha",
+					"#lastname"		: "alpha",
+					"#emailaddress"	: "email",
+					"#password"		: "alphanumeric"
+				});
 
-				for(var key in errors){
-					if(errors[key] === false){
-						$(key).addClass("error");
-						switch(key){
-							case "#firstname":
-								Utils.ShowToast({message : "There are errors in the form..."});
-							break;
-							case "#lastname":
-								Utils.ShowToast({message : "There are errors in the form..."});
-							break;	
-							case "#emailaddress":
-								Utils.ShowToast({message : "There are errors in the form..."});
-							break;
-							case "#password":
-								Utils.ShowToast({message : "There are errors in the form..."});
-							break;
+				if(!vldtRegister){
+
+					var errors = vldt.getErrors();
+					console.log(vldt.getErrors());
+
+					for(var key in errors){
+						if(errors[key] === false){
+							$(key).addClass("error");
+							switch(key){
+								case "#firstname":
+									Utils.ShowToast({message : "There are errors in the form..."});
+								break;
+								case "#lastname":
+									Utils.ShowToast({message : "There are errors in the form..."});
+								break;	
+								case "#emailaddress":
+									Utils.ShowToast({message : "There are errors in the form..."});
+								break;
+								case "#password":
+									Utils.ShowToast({message : "There are errors in the form..."});
+								break;
+							}
 						}
 					}
+
+					return false;
+				}else{
+					
+					var that = this;
+					var model = new ModelUser();
+
+					var user = new Object();
+						user.firstname = $("#firstname").val(),
+						user.lastname = $("#lastname").val(),
+						user.emailaddress = $("#emailaddress").val(),
+						user.password = $("#password").val();
+
+						model.save(user, {
+							success : function(response){
+								var errorCode = response.get("errorCode");
+								if( errorCode === -1){
+									console.log("Email Address already exists...");
+									Utils.ShowToast({message : "Email Address already exists"});
+								}else{
+									console.log("User successfuly registered!");
+									that.createSession(response);
+									App.router.navigate("findBusiness", true);
+								}
+							},
+							error : function(){
+								Utils.ShowToast({message : "Error processing request"});
+							}
+						});
 				}
 
-				return false;
-			}else{
-				
-				var that = this;
-				var model = new ModelUser();
-
-				var user = new Object();
-					user.firstname = $("#firstname").val(),
-					user.lastname = $("#lastname").val(),
-					user.emailaddress = $("#emailaddress").val(),
-					user.password = $("#password").val();
-
-					model.save(user, {
-						success : function(response){
-							var errorCode = response.get("errorCode");
-							if( errorCode === -1){
-								console.log("Email Address already exists...");
-								Utils.ShowToast({message : "Email Address already exists"});
-							}else{
-								console.log("User successfuly registered!");
-								that.createSession(response);
-								App.router.navigate("findBusiness", true);
-							}
-						},
-						error : function(){
-							Utils.ShowToast({message : "Error processing request"});
-						}
-					});
 			}
-
 		},
 
 		createSession : function(response) {
@@ -111,6 +120,11 @@ define([
 
 		showHelp : function(){
 			Utils.ShowHelp();
+		},
+
+		showTerms : function(event){
+			Utils.ShowTermsAndConditions({inApp : false, secondaryButtonText : "Decline"});
+			event.preventDefault();
 		},
 		
 		serializeData : function(){

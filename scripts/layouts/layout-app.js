@@ -20,12 +20,20 @@ define([
 			events : {
 				"click #primary-action"		: "primaryAction",
 				"click #secondary-action"	: "secondaryAction",
-				"click #close-help"			: "closeHelp"
+				"click #close-help"			: "closeHelp",
+				"click #accept-terms"		: "acceptTerms",
+				"click #decline-terms"		: "declineTerms"
 			},
 
 			initialize : function(){
 				_.bindAll.apply(_, [this].concat(_.functions(this)));
 				console.log("App layout initialized...");
+			},
+
+			onRender : function(){
+				$.get("terms.html", function(data){
+					$(".terms-and-conditions").html(data);
+				});
 			},
 
 			primaryAction : function(){
@@ -38,6 +46,16 @@ define([
 
 			closeHelp : function(){
 				Utils.HideHelp();
+			},
+
+			acceptTerms : function(){
+				Utils.HideTermsAndConditions();
+				$(document).find("#accept").prop("checked", true);
+			},
+
+			declineTerms : function(){
+				Utils.HideTermsAndConditions();
+				$(document).find("#accept").prop("checked", false);
 			},
 			
 			serializeData : function(){

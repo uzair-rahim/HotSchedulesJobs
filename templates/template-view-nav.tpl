@@ -12,5 +12,6 @@
 <ul id="settings-flyout" class="nav-flyout">
 	<li id="account-settings">Account Settings</li>
 	<li id="profile-settings">Profile Settings</li>
+	<li id="terms-conditions">Terms and Conditions</li>
 	<li id="logout">Logout</li>
 </ul>

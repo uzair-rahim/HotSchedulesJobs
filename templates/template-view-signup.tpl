@@ -70,6 +70,24 @@
 	.panel .body .manual .field-container label{
 		font-weight: bold;
 	}
+	.panel .body .manual .field-container #accept{
+		float: left;
+		margin: 0 0 0 6px;
+	}
+	.panel .body .manual .field-container label.terms{
+		display: block;
+		float: left;
+		color: #a6a9ad;
+		margin: 0 0 0 6px;
+		font-weight: normal;
+	}
+	.panel .body .manual .field-container label.terms span{
+		text-decoration: underline;
+		color: #a6a9ad;
+	}
+	.panel .body .manual .field-container label.terms span:hover{
+		color: #86898d;
+	}
 	.panel .body .manual .link-container{
 		display: block;
 		float: left;
@@ -187,6 +205,10 @@
 					<div class="field-container">
 						<label for="password">{{language.password}}</label>
 						<input type="password" placeholder="Password" id="password" />
+					</div>
+					<div class="field-container">
+						<input type="checkbox" id="accept"/>
+						<label class="terms" for="accept">I agree to the <span>Terms and Conditions</span></label>
 					</div>
 					<div class="link-container">
 						<button class="primary" id="signup">Sign Up</button>

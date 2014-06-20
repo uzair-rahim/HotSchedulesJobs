@@ -2,12 +2,24 @@
 <div id="app-head"></div>
 <div id="app-body"></div>
 <div id="app-toast"></div>
+<!--General Purpose Alert-->
 <div id="app-alert" class="app-alert">
 	<div class="alert-title">Alert Title</div>
 	<div class="alert-message">Alert message goes here</div>
 	<div class="alert-action">
 		<button id="primary-action">OK</button>
 		<button id="secondary-action">Cancel</button>
+	</div>
+</div>
+<!--Terms and Conditions Alert-->
+<div id="alert-terms-conditions" class="app-alert wide">
+	<div class="alert-title">Terms and Conditions</div>
+	<div class="alert-body">
+		<div class="terms-and-conditions"></div>
+	</div>
+	<div class="alert-action">
+		<button id="accept-terms" class="primary">Accept</button>
+		<button id="decline-terms">Decline</button>
 	</div>
 </div>
 <div id="app-help">

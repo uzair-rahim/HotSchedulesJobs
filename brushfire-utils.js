@@ -242,6 +242,42 @@ define([
 			HideHelp : function(){
 				var help = $("#app-help");
 				$(help).removeClass("show");
+			},
+
+			// Show Terms and Conditions
+			ShowTermsAndConditions : function(options){
+
+				var defaults = {
+					inApp				: false,
+					secondaryButtonText : "Decline" 
+				}
+
+				for(var key in defaults){
+					if(typeof(options[key]) === "undefined"){
+						options[key] = defaults[key];
+					}
+				}
+
+				var alert = $("#alert-terms-conditions");
+				$(alert).addClass("show");
+
+				if(options.inApp){
+					$("#accept-terms").hide();
+					$("#decline-terms").text(options.secondaryButtonText);
+					$(document).find("#alert-terms-conditions .alert-action").addClass("single");
+				}
+
+				$(document).find("#app-modal").addClass("show");
+			},
+
+			// Show Terms and Conditions
+			HideTermsAndConditions : function(){
+				var alert = $("#alert-terms-conditions");
+				$(alert).removeClass("show");
+				$("#accept-terms").show();
+				$("#decline-terms").text("Decline");
+				$(document).find("#alert-terms-conditions .alert-action").removeClass("single");
+				$(document).find("#app-modal").removeClass("show");
 			}
 			
 		});

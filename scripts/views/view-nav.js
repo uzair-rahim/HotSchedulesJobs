@@ -22,6 +22,7 @@ define([
 			"click #settings" 			: "settings",
 			"click #account-settings" 	: "accountSettings",
 			"click #profile-settings" 	: "profileSettings",
+			"click #terms-conditions" 	: "termsAndCondition",
 			"click #logout" 			: "logout"
 		},
 
@@ -96,6 +97,10 @@ define([
 
 		profileSettings : function(){
 			this.route("profileSettings");
+		},
+
+		termsAndCondition : function(){
+			Utils.ShowTermsAndConditions({inApp : true, secondaryButtonText : "OK"});
 		},
 
 		logout : function(){

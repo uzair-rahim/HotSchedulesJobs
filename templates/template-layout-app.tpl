@@ -17,16 +17,14 @@
 	</div>
 	<div id="app-help-content">
 		<h6>Are you a new user?</h6>
-		<p>If you have never logged in to HotSchedules before, please ask your manager for a Welcome Sheet with your login information.</p>
-		<h6>Are you a returning user with an email address in your user profile?</h6>
-		<p>If you have logged in to HotSchedules before and set up your email address in your profile, we can send your username and password. Use Forgot Username or Password links on the login screen.</p>
-		<h6>Are you a returning user without an email address in your user profile?</h6>
-		<p>If you have logged in to HotSchedules before but did not set your email address in your profile, please ask your manager to reset your password and regenerate your Welcome Sheet with your login information.</p>
+		<p>If you have never logged into HotSchedules Post before, please sign up. It’s free!</p>
+		<h6>Are you a Job Seeker?</h6>
+		<p>Sorry! We don’t have a web view for HotSchedules Post, please login through the app on your Android or iPhone. Don’t have the app? Download it here.</p>
 		<h4>Contact us</h4>
-		<h6>By Phone</h6>
-		<p><a href="tel:+1-512-219-1492" id="phone">512-219-1492</a> or <a href="tel:+1-866-753-3853" id="phone">866-753-3853</a><br>Mon - Fri 7:00 AM - 7:00 PM CT<br>Sat - Sun 8:00 AM - 5:00 PM CT<br></p>
 		<h6>By Email</h6>
 		<p><a href="mailto:customercare@redbookconnect.com" id="customercare">customercare@redbookconnect.com</a></p>
+		<h6>By Phone</h6>
+		<p><a href="tel:+1-866-753-3853" id="phone">866-753-3853</a></p>
 		<p>For additional information go to the <a href="https://hotschedules-redbookconnect.rightanswers.com/portal/public/" id="support">HotSchedules Support Site</a>.</p>
 	</div>
 </div>

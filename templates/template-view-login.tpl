@@ -8,5 +8,5 @@
 		<a id="forgot-password">Forgot Password?</a>
 	</div>
 	<div id="signup" class="link">Don't have an account? Sign up free</div>
+	<div id="help-icon">?</div>
 </div>
-<div id="help-icon">?</div>

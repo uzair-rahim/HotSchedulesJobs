@@ -244,6 +244,9 @@
 	#modal-claimed .modal.window p a{
 		font-size: 14px;
 	}
+	#help-icon{
+		margin: 45px 280px;
+	}
 
 	@media screen and (max-width: 640px){
 		.panel-container{
@@ -261,6 +264,9 @@
 		.panel .foot .left:before{
 			content: "Add Business"
 		}
+		#help-icon{
+			margin: 20px 50%;
+		}	
 	}
 	@media screen and (max-width: 520px){
 		.business-search-result li .action a{
@@ -270,6 +276,12 @@
 		.business-search-result li .action button{
 			margin: 0;
 			margin-top: 14px;
+		}
+	}
+
+	@media screen and (max-width: 320px){
+		#help-icon{
+			margin: 20px 140px;
 		}
 	}
 </style>
@@ -335,4 +347,5 @@
 			<div class="foot"></div>
 		</div>
 	</div>
+	<div id="help-icon">?</div>
 </div>

@@ -7,5 +7,5 @@
 		<button id="submit">Send</button>
 		<a id="return">Return to Login</a>
 	</div>
+	<div id="help-icon">?</div>
 </div>
-<div id="help-icon">?</div>

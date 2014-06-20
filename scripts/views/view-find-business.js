@@ -16,9 +16,10 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #find"	: "find",
-			"click #cancel"	: "cancel",
-			"click .claim"	: "claimBusiness",
+			"click #find"		: "find",
+			"click #cancel"		: "cancel",
+			"click .claim"		: "claimBusiness",
+			"click #help-icon"	: "showHelp"
 		},
 
 		initialize : function(){
@@ -124,6 +125,10 @@ define([
 		cancel : function(){
 			//console.log("Cancel...");
 			//App.router.navigate("logout", true);
+		},
+
+		showHelp : function(){
+			Utils.ShowHelp();
 		},
 		
 		serializeData : function(){

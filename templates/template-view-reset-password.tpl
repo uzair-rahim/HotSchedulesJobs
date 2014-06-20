@@ -8,5 +8,5 @@
 		<button id="submit">Save</button>
 		<a id="return">Cancel</a>
 	</div>
+	<div id="help-icon">?</div>
 </div>
-<div id="help-icon">?</div>

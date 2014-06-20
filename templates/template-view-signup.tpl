@@ -125,6 +125,9 @@
 		margin: 0 0 0 10px;
 		float: right;
 	}
+	#help-icon{
+		margin: 45px 161px;
+	}
 	@media screen and (max-width: 640px){
 
 		.panel-container{
@@ -152,6 +155,12 @@
 		#modal-hotschedules .modal.window{
 			margin: 0 10px;
 			width: calc(100% - 40px);
+		}
+	}
+
+	@media screen and (max-width: 320px){
+		#help-icon{
+			margin: 20px 140px;
 		}
 	}
 </style>
@@ -189,5 +198,5 @@
 			</div>
 		</div>
 	</div>
+	<div id="help-icon">?</div>
 </div>
-<div id="help-icon">?</div>

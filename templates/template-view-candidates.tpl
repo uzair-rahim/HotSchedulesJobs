@@ -184,8 +184,8 @@
 							</div>
 							<div class="candidate-unarchive"></div>
 							<div class="candidate-message"></div>
-							<div class="candidate-rating"></div>
-							<div class="candidate-endorse">0</div>
+							<!--<div class="candidate-rating"></div>-->
+							<!--<div class="candidate-endorse">0</div>-->
 							<div class="candidate-network"><span>0</span> / 0</div>
 							<div class="hourly-profile">
 								<div class="about-section">

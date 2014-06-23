@@ -317,7 +317,7 @@
 											<div class="line2">{{this.location.address.[0]}} {{this.location.city}}</div>
 										</div>
 										<div class="action">
-											{{#if_eq this.claimed true}}
+											{{#if_eq this.brushfireClaimed true}}
 												<a class="claimed">Already Claimed</a>
 											{{else}}
 												<button class="claim">Claim</button>

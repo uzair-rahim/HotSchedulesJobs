@@ -93,7 +93,7 @@
 	<div class="grid-list-head">People Following Your Business ({{followers.length}})</div>
 	<ul id="followers-list" class="grid-list top">
 		{{#each followers}}
-			<li class="view-profile">
+			<li class="view-profile" data-email="{{this.attributes.email}}">
 				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.attributes.photo}}

@@ -69,8 +69,8 @@ define([
 					},
 					error : function(response){
 						if(response.status === 404){
+							$("#emailaddress").val("");
 							Utils.ShowToast({message : "Email sent with password reset instructions"});
-							//Utils.ShowToast({message : "This email address does not exist in our system"});
 						}	
 					}
 				});

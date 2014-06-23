@@ -646,13 +646,14 @@ input[type="password"].error:focus{
   color: #fff;
   margin-top: 30px;
   display: block;
+  text-decoration: underline;
 }
 
 #app-help #app-help-content a#phone,
 #app-help #app-help-content a#customercare,
 #app-help #app-help-content a#support {
   color: #fff;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 /********************************/

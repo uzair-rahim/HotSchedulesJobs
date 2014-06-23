@@ -81,7 +81,7 @@ define([
 			console.log("ajaxError...");
 			switch(request.status){
 				case 401 : 
-					Utils.ShowToast({message : "Your session timed out"});
+					Utils.ShowToast({message : "Invalid Credentials"});
 					App.router.navigate("logout", true);
 				break;
 				case 403 : 

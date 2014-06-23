@@ -39,8 +39,24 @@ define([
 
 					search.fetch({
 						success : function(response){
-							that.model = response.models;
-							that.render();
+							var employers = new Array();
+
+							for(var i = 0; i < response.length; i++){
+								var model = response.models[i].toJSON();
+								var admin = model["admin"];
+								var user = model["user"];
+								var employer = model["employer"];
+								var employerGuid = employer.guid;
+								var exists = $.inArray(employerGuid, employers);
+								if(exists === -1){
+									employers.push(employerGuid);
+								}
+							}
+							
+							console.log(employers);
+
+							//that.model = response.models;
+							//that.render();
 						},
 						error : function(){
 							console.log("Error fetching search results...");

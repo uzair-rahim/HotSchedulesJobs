@@ -745,7 +745,8 @@ ul.grid-list.support > li .info .employer{
 	margin: 8px 0 2px 4px;
 }
 
-ul.grid-list.support > li .info .email{
+ul.grid-list.support > li .info .email,
+ul.grid-list.support > li .info .address{
 	display: block;
 	float: left;
 	clear: both;

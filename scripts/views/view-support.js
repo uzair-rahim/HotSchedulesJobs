@@ -45,21 +45,6 @@ define([
 
 					search.fetch({
 						success : function(response){
-							var employersArray = new Array();
-							var employersObject = new Array();
-
-							for(var i = 0; i < response.length; i++){
-								var model = response.models[i].toJSON();
-								var employer = model["employer"];
-								var exists = $.inArray(employer.guid, employersArray);
-
-								if(exists === -1){
-									employersArray.push(employer.guid);
-								}else{
-									
-								}
-							}
-
 							that.model = response.models;
 							that.render();
 						},
@@ -123,7 +108,8 @@ define([
 		
 		serializeData : function(){
 			var jsonObject = new Object();
-				jsonObject.results = this.model;
+				jsonObject.admins = this.model;
+				jsonObject.employers = this.model;
 				jsonObject.language = App.Language;
 			return jsonObject;
 		}

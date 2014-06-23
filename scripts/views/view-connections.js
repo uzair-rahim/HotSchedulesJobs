@@ -66,6 +66,7 @@ define([
 
 			var emails = addresses.join(",");
 			window.location.href = "mailto:"+manager+"?bcc="+emails;
+			$(".candidate-select").prop("checked", false);
 		},
 
 		profile : function(event){

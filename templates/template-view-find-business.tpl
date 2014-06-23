@@ -317,7 +317,11 @@
 											<div class="line2">{{this.location.address.[0]}} {{this.location.city}}</div>
 										</div>
 										<div class="action">
-											<button class="claim">Claim</button>
+											{{#if_eq this.claimed true}}
+												<a class="claimed">Already Claimed</a>
+											{{else}}
+												<button class="claim">Claim</button>
+											{{/if_eq}}
 											<div class="data-yelp">
 												<input type="hidden" name="name" value="{{this.name}}"/>
 												<input type="hidden" name="id" value="{{this.id}}"/>

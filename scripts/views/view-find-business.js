@@ -19,12 +19,33 @@ define([
 			"click #find"		: "find",
 			"click #cancel"		: "cancel",
 			"click .claim"		: "claimBusiness",
+			"click .claimed"	: "alreadyClaimed",
 			"click #help-icon"	: "showHelp"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Find Business view initialized...");
+			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
+			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
+		},
+
+		alertPrimaryAction : function(){
+			//var listener = $("#app-alert").attr("data-listener");
+			//switch(listener){
+			//	case "claimed":
+			//		this.closeClaimedDialog();
+			//	break;
+			//}
+		},
+
+		alertSecondaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "claimed":
+					this.closeClaimedDialog();
+				break;
+			}
 		},
 
 		find : function(){
@@ -120,6 +141,14 @@ define([
 						Utils.ShowToast({message : "There was an error..."});
 					}
 				});
+		},
+
+		alreadyClaimed : function(){
+			Utils.ShowAlert({ listener : "claimed", title : "Already Claimed", message : "This business has already been claimed", primary : false, secondaryText : "Ok" });
+		},
+
+		closeClaimedDialog : function(){
+			Utils.HideAlert();
 		},
 
 		cancel : function(){

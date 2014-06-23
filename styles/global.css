@@ -1680,6 +1680,10 @@ input[type="password"].error:focus{
 	border-bottom: 1px dotted #dcdcdc;
 }
 
+.profile-info .employer-profile-container.no-border{
+	border-bottom: none;
+}
+
 .profile-info .employer-profile-container .logo-container{
 	display: block;
 	float: left;
@@ -1743,6 +1747,12 @@ input[type="password"].error:focus{
 	margin-top: 2px;
 }
 
+.profile-info .employer-profile-container .field-container.one-half{
+	clear: none;
+	width: 191px;
+	margin: 0 0 10px 0; 
+}
+
 .profile-info .employer-profile-container .field-container.one-third{
 	clear: none;
 	width: 143px;
@@ -1762,7 +1772,8 @@ input[type="password"].error:focus{
 	margin: 0 0 5px 0;
 }
 
-.profile-info .employer-profile-container .field-container input[type="text"]{
+.profile-info .employer-profile-container .field-container input[type="text"],
+.profile-info .employer-profile-container .field-container input[type="password"]{
 	display: block;
 	float: left;
 	clear: both;
@@ -1914,6 +1925,10 @@ input[type="password"].error:focus{
 		width: 484px;
 	}
 
+	.profile-info .employer-profile-container .field-container.one-half{
+		width: 241px;
+	}
+
 	.profile-info .employer-profile-container .field-container.one-third{
 		clear: left;
 		width: 143px;
@@ -1928,6 +1943,11 @@ input[type="password"].error:focus{
 @media screen and (max-width: 510px){
 
 	.profile-info .employer-profile-container .field-container{
+		width: calc(100% - 0px);
+	}
+
+	.profile-info .employer-profile-container .field-container.one-half{
+		clear: both;
 		width: calc(100% - 0px);
 	}
 
@@ -1947,6 +1967,7 @@ input[type="password"].error:focus{
 	}
 
 	.profile-info .employer-profile-container .field-container input[type="text"],
+	.profile-info .employer-profile-container .field-container input[type="password"],
 	.profile-info .employer-profile-container .field-container textarea{
 		width: calc(100% - 15px);
 	}

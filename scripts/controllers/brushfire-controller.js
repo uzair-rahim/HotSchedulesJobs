@@ -411,7 +411,14 @@ define([
 					this.setLayout();
 					this.setHeader("navigation");
 
-					var view = new ViewSettings();
+					var session = Utils.GetUserSession();
+					var user = new Object();
+						user.guid = session.guid;
+						user.firstname = session.firstname;
+						user.lastname = session.lastname;
+						user.emailaddress = session.email;
+
+					var view = new ViewSettings({model : user});
 					that.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);

@@ -165,7 +165,7 @@
 			{{#each jobs}}
 				{{#each candidates}}				
 					{{#if_eq archived true}}
-						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-job="{{../../guid}}">
+						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-job="{{../../guid}}" data-email="{{user.email}}">
 							<div class="candidate-picture">
 								{{#hasPhoto this.user.photo.url}}
 									<img src="{{this.user.photo.url}}"/>

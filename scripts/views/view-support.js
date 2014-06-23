@@ -23,7 +23,7 @@ define([
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Support view initialized...");
 
-			$(document.body).delegate(".grid-list.support li button.destroy", "click", this.removeAdmin);
+			$(document.body).delegate(".grid-list.support li button.destroy.admin", "click", this.removeAdmin);
 
 			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
 			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);

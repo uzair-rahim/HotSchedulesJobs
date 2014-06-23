@@ -701,7 +701,8 @@ ul.grid-list.support > li input[type="radio"]{
 	margin: 20px 10px;
 }
 
-ul.grid-list.support > li .photo{
+ul.grid-list.support > li .photo,
+ul.grid-list.support > li .logo{
 	display: block;
 	float: left;
 	clear: none;
@@ -716,6 +717,11 @@ ul.grid-list.support > li .photo{
 	background-position: center;
 	background-size: 38px auto;
 	overflow: hidden;
+}
+
+ul.grid-list.support > li .logo{
+	background-image: url("../images/default-restaurant.png");
+	background-size: 24px auto;
 }
 
 ul.grid-list.support > li .info{

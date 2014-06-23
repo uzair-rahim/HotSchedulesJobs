@@ -50,28 +50,18 @@ define([
 
 							for(var i = 0; i < response.length; i++){
 								var model = response.models[i].toJSON();
-								var admin = model["admin"];
-								var user = model["user"];
 								var employer = model["employer"];
-								var employerGuid = employer.guid;
-								var exists = $.inArray(employerGuid, employersArray);
-								var meh = _.where(model,{employer : employerGuid});
-								console.log(meh);
-								if(exists === -1){
-									var employerObject = new Object();
-										employerObject = employer;
-										employerObject.admin = new Object();
-										employerObject.admin.user = new Object();
+								var exists = $.inArray(employer.guid, employersArray);
 
-									employersArray.push(employerGuid);
-									employersObject.push(employerObject);
+								if(exists === -1){
+									employersArray.push(employer.guid);
+								}else{
+									
 								}
 							}
 
-							console.log(employersObject);
-
-							//that.model = response.models;
-							//that.render();
+							that.model = response.models;
+							that.render();
 						},
 						error : function(){
 							console.log("Error fetching search results...");
@@ -135,7 +125,6 @@ define([
 			var jsonObject = new Object();
 				jsonObject.results = this.model;
 				jsonObject.language = App.Language;
-				console.log(jsonObject);
 			return jsonObject;
 		}
 		

@@ -2401,12 +2401,12 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	clear: both;
-	width: 434px;
+	width: 100%;
 	height: 64px;
-	margin: 20px 0 10px 20px;
+	margin: 20px 0;
 	background-image: url("../images/logo-hsp-color.png");
 	background-repeat: no-repeat;
-	background-position: left;
+	background-position: center;
 	background-size: 434px auto;
 }
 
@@ -2414,26 +2414,27 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	clear: both;
-	width: 500px;
-	height: 190px;
-	margin: 20px;
-	line-height: 190px;
+	width: 100%;
+	height: 170px;
 	color: #f2a412;
-	font-size: 52px;
+	font-size: 40px;
+	line-height: 300px;
 	font-family: "Roboto";
-	text-indent: 220px;
+	text-align: center;
 	font-weight: bold;
 	background-image: url("../images/icon-404-error.png");
 	background-repeat: no-repeat;
-	background-position: left;
-	background-size: 200px auto;
+	background-position: center top;
+	background-size: 120px auto;
 }
 
 .four-o-four h1{
 	display: block;
 	float: left;
 	clear: both;
-	margin: 20px;
+	width: 100%;
+	margin: 20px 0;
+	text-align: center;
 	font-family: "Roboto";
 	font-weight: bold;
 	font-size: 30px;
@@ -2445,7 +2446,9 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	clear: both;
-	margin: 20px;
+	width: 100%;
+	margin: 20px 0;
+	text-align: center;
 	font-family: "Roboto";
 	font-weight: normal;
 	font-size: 18px;
@@ -2464,7 +2467,8 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	clear: both;
-	margin: 0 20px;
+	width: 100%;
+	text-align: center;
 	font-family: "Roboto";
 	font-weight: normal;
 	font-size: 18px;
@@ -2487,50 +2491,49 @@ input[type="password"].error:focus{
 @media screen and (max-width: 650px){
 
 	.four-o-four .logo-hsp{
-		margin: 10px 0 10px 20px;
-		width: 248px;
+		margin: 0 0 10px 0;
 		background-size: 248px auto;
 	}
 
 	.four-o-four .icon-error{
-		width: 248px;
-		height: 95px;
-		margin: 10px 20px;
-		line-height: 95px;
-		color: #f2a412;
-		font-size: 33px;
-		text-indent: 110px;
-		background-size: 100px auto;
+		line-height: 290px;
+		font-size: 30px;
 	}
 
 	.four-o-four h1{
-		margin: 10px 20px 20px 20px;
-		font-size: 24px;
+		margin: 0 0 20px 10px;
+		width: calc(100% - 20px);
+		font-size: 22px;
 		line-height: 24px;
-
 	}
 
 	.four-o-four h2{
-		margin: 0 20px 20px 20px;
-		font-size: 16px;
-		line-height: 16px;
+		margin: 0 0 10px 10px;
+		width: calc(100% - 20px);
+		font-size: 12px;
+		line-height: 14px;
 	}
 
 	.four-o-four h2 a{
-		font-size: 16px;
-		line-height: 16px;
+		font-size: 12px;
+		line-height: 14px;
 	}
 
 	.four-o-four p{
-		margin: 0 20px 20px 20px;
-		font-size: 16px;
-		line-height: 16px;
+		margin: 0 0 20px 10px;
+		width: calc(100% - 20px);
+		font-size: 12px;
+		line-height: 14px;
 	}
 
 	.four-o-four p a{
-		font-size: 16px;
-		line-height: 16px;
-		text-decoration: underline;
-		color: #222222;
+		font-size: 12px;
+		line-height: 14px;
+	}
+
+	.four-o-four p.small{
+		margin: 10px 0 0 10px;
+		font-size: 12px;
 	}
 }
+

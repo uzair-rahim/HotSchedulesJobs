@@ -36,12 +36,12 @@
   <body>
     <div id="brushfire" class="four-o-four">
       <div class="logo-hsp"></div>
-      <!--<div class="icon-error">Whoops!</div>-->
+      <div class="icon-error">Whoops!</div>
       <h1>404: Page Not Found</h1>
-      <p>The page you are looking for might have beenn removed, had its name changed, or temporarily unavailable.</a></p>
+      <p>The page you are looking for might have been removed, had its name changed, or temporarily unavailable.</a></p>
       <p>Double check the URL or head back to the <a href="index.jsp">homepage</a></p>
       <h2>Can't find a solution? Give us a call at <a href="tel:866-763-3852">866-763-3852</a></h2>
-      <p class="small">-The HotSchedules Post Team</p>
+      <p class="small">- The HotSchedules Post Team</p>
     </div>
   </body>
 </html>

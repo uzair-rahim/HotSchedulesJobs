@@ -12,6 +12,7 @@ define([
 	var ViewResetPassword = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
+		userGUID : null,
 		template: Template,
 		events : {
 			"click #submit"		: "submit",
@@ -30,10 +31,51 @@ define([
 					$("#submit").click();
 				}
 			});
+
+			var url = window.location.href;
+			var indexOfID = url.indexOf("?id=");
+			var id = url.substring(indexOfID+4); 
+
+			this.userGUID = id;
+			
 		},
 
 		submit : function(){
-			
+			var password = $("#password").val();
+			var confirm = $("#confirm").val();
+
+			if(password === ""){
+				Utils.ShowToast({message : "New password is required"});
+			}else if(confirm === ""){
+				Utils.ShowToast({message : "Confirm password is required"});
+			}else if(password !== confirm){
+				Utils.ShowToast({message : "Password does not match the confirm password"});
+			}else{
+				var that = this;
+				var restURL = Utils.GetURL("/services/rest/public/resetPassword/");
+
+				$.ajax({
+					url : restURL+that.userGUID+"/"+confirm,
+					type : "PUT",
+					dataType: "text",
+					contentType: false,
+	    			processData: false,
+	    			success : function(response){
+	    				Utils.ShowToast({message : "Password successfully saved"});
+	    				setTimeout(function(){
+							window.location.href = "index.jsp";
+	    				},3000)
+	    			},
+	    			error : function(response){
+	    				console.log(response);
+	    				Utils.ShowToast({message : "Error resetting password"});
+	    				$("#password").val("");
+						$("#confirm").val("");
+	    			}
+				});
+
+			}
+
 		},
 
 		returnToLogin : function(){

@@ -4,7 +4,7 @@
 		<div class="logo"></div>
 		<p>Reset Your Password</p>
 		<input type="password" id="password" value="" placeholder="New Password"/>
-		<input type="password" id="confirmpassword" value="" placeholder="Confirm Password"/>
+		<input type="password" id="confirm" value="" placeholder="Confirm Password"/>
 		<button id="submit">Save</button>
 		<a id="return">Cancel</a>
 	</div>

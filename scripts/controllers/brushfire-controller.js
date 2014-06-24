@@ -60,6 +60,7 @@ define([
 				console.log("Setting header...");
 
 				var currentHead = this.layout.head.currentView.el.className;
+				$("#app-help").show();
 
 				switch(checkFor){
 					case "heading" :
@@ -77,6 +78,7 @@ define([
 					case "support" :
 						var nav = new ViewSupportNav();
 						this.layout.head.show(nav);
+						$("#app-help").hide();
 					break;
 				}				
 			},

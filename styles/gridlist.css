@@ -695,6 +695,33 @@ ul.grid-list > li .candidate-rating.one{
 
 
 /* SUPPORT STYLES */
+
+#search-field{
+	float: left;
+	width: 285px;
+}
+
+#search-button{
+	margin-top: 2px; 
+}
+
+@media screen and (max-width: 410px){
+
+	#search-field{
+		width: calc(100% - 20px);
+	}
+
+	#search-button{
+		margin: 10px 5px; 
+		width: 100%;
+	}
+
+	#toolbar.support{
+		height: 60px;
+	}
+}
+
+
 ul.grid-list.support > li input[type="radio"]{
 	display: block;
 	float: left;
@@ -721,28 +748,35 @@ ul.grid-list.support > li .logo{
 
 ul.grid-list.support > li .logo{
 	background-image: url("../images/default-restaurant.png");
-	background-size: 24px auto;
+	background-size: 28px auto;
 }
 
 ul.grid-list.support > li .info{
 	display: block;
 	float: left;
+	width: calc(100% - 150px);
+	white-space: nowrap;
 }
 
 ul.grid-list.support > li .info .name{
 	display: block;
 	float: left;
-	font-weight: bold;
+	max-width: 40%;
 	font-size: 14px;
 	margin: 8px 0 2px 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 ul.grid-list.support > li .info .employer{
 	display: block;
 	float: left;
+	max-width: 54%;
 	color: #999999;
 	font-size: 14px;
 	margin: 8px 0 2px 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 ul.grid-list.support > li .info .email,
@@ -750,13 +784,39 @@ ul.grid-list.support > li .info .address{
 	display: block;
 	float: left;
 	clear: both;
+	width: 98%;
 	margin: 0 4px;
+	color: #666666;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 ul.grid-list.support > li button{
 	display: block;
 	float: right;
 	margin: 10px;
+}
+
+@media screen and (max-width: 650px){
+	ul.grid-list.support > li .info .name{
+		font-size: 12px;
+		margin-top: 10px;
+	}
+
+	ul.grid-list.support > li .info .employer{
+		font-size: 12px;
+	}
+
+	ul.grid-list.support > li .info .email,
+	ul.grid-list.support > li .info .address{
+		font-size: 12px;
+	}
+
+	ul.grid-list.support > li button{
+		margin: 10px 0px;
+		font-size: 12px;
+		padding: 6px 8px;
+	}
 }
 
 ul.grid-list.support > li.no-result{

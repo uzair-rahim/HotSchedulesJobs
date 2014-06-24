@@ -1,13 +1,13 @@
 <div id="sub-nav"></div>
 
-<div id="toolbar">
-	<input id="search-field" type="text" style="float:left; width: 190px;" placeholder="Search for Users or Stores"/>
+<div id="toolbar" class="support">
+	<input id="search-field" type="text" placeholder="Search for Admins of Employers"/>
 	<button id="search-button" class="primary" style="margin-top:2px;">Search</button>
 </div>
 
 {{#if_not_eq admins undefined}}
 
-	<div class="grid-list-head">Employers</div>
+	<div class="grid-list-head">Employers containing Admins</div>
 	<ul class="grid-list support">
 	{{#if_eq employers.length 0}}
 		<li class="no-result">No Results</li>
@@ -15,15 +15,15 @@
 		{{#each employers}}
 			<li>
 				<div class="logo">
-					{{#hasPhoto attributes.user.logo}}
-						<img src="{{attributes.user.logo}}"/>
-					{{/hasPhoto}}
+					{{#isNotNull logo}}
+						<img src="{{logo.url}}"/>
+					{{/isNotNull}}
 				</div>
 				<div class="info">
-					<div class="name">{{attributes.employer.name}}</div>
-					<div class="address">{{attributes.employer.location.address1}}, {{attributes.employer.location.city}}, {{attributes.employer.location.state}} {{attributes.employer.location.zip}}</div>
+					<div class="name">{{name}}</div>
+					<div class="address">{{location.address1}}, {{location.city}}, {{location.state}} {{location.zip}}</div>
 				</div>
-				<button class="destroy employer" id="{{attributes.employer.id}}" data-guid="{{attributes.employer.guid}}">Remove</button>
+				<button class="destroy employer" id="{{id}}" data-guid="{{guid}}">Remove</button>
 			</li>
 		{{/each}}
 	{{/if_eq}}
@@ -37,16 +37,16 @@
 		{{#each admins}}
 			<li>
 				<div class="photo">
-					{{#hasPhoto attributes.user.photo}}
-						<img src="{{attributes.user.photo}}"/>
-					{{/hasPhoto}}
+					{{#isNotNull user.photo}}
+						<img src="{{user.photo}}"/>
+					{{/isNotNull}}
 				</div>
 				<div class="info">
-					<div class="name">{{attributes.user.firstname}} {{attributes.user.lastname}}</div>
-					<div class="employer">@ {{attributes.employer.name}}</div>
-					<div class="email">{{attributes.user.email}}</div>
+					<div class="name">{{user.firstname}} {{user.lastname}}</div>
+					<div class="employer">@ {{employer.name}}</div>
+					<div class="email">{{user.email}}</div>
 				</div>
-				<button class="destroy admin" id="{{attributes.admin.id}}" data-guid="{{attributes.admin.guid}}" data-employer="{{attributes.employer.guid}}">Remove</button>
+				<button class="destroy admin" id="{{admin.id}}" data-guid="{{admin.guid}}" data-employer="{{employer.guid}}">Remove</button>
 			</li>
 		{{/each}}
 	{{/if_eq}}

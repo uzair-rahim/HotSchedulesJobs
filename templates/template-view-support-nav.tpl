@@ -1,5 +1,5 @@
 <div id="nav-logo"></div>
-<div id="nav-heading">HotSchedules Posts</div>
+<div id="nav-heading">HotSchedules Post</div>
 <ul id="nav-icons">
 	<li id="settings"></li>
 </ul>

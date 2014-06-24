@@ -2391,3 +2391,146 @@ input[type="password"].error:focus{
 		color: #ffffff;
 	}
 }
+
+
+/*********************/
+/******** 404 ********/
+/*********************/
+
+.four-o-four .logo-hsp{
+	display: block;
+	float: left;
+	clear: both;
+	width: 434px;
+	height: 64px;
+	margin: 20px 0 10px 20px;
+	background-image: url("../images/logo-hsp-color.png");
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 434px auto;
+}
+
+.four-o-four .icon-error{
+	display: block;
+	float: left;
+	clear: both;
+	width: 500px;
+	height: 190px;
+	margin: 20px;
+	line-height: 190px;
+	color: #f2a412;
+	font-size: 52px;
+	font-family: "Roboto";
+	text-indent: 220px;
+	font-weight: bold;
+	background-image: url("../images/icon-404-error.png");
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 200px auto;
+}
+
+.four-o-four h1{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 20px;
+	font-family: "Roboto";
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 36px;
+
+}
+
+.four-o-four h2{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 20px;
+	font-family: "Roboto";
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.four-o-four h2 a{
+	font-family: "Roboto";
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	color: #222222;
+}
+
+.four-o-four p{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 20px;
+	font-family: "Roboto";
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.four-o-four p a{
+	font-family: "Roboto";
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	text-decoration: underline;
+	color: #222222;
+}
+
+.four-o-four p.small{
+	font-size: 16px;
+}
+
+@media screen and (max-width: 650px){
+
+	.four-o-four .logo-hsp{
+		margin: 10px 0 10px 20px;
+		width: 248px;
+		background-size: 248px auto;
+	}
+
+	.four-o-four .icon-error{
+		width: 248px;
+		height: 95px;
+		margin: 10px 20px;
+		line-height: 95px;
+		color: #f2a412;
+		font-size: 33px;
+		text-indent: 110px;
+		background-size: 100px auto;
+	}
+
+	.four-o-four h1{
+		margin: 10px 20px 20px 20px;
+		font-size: 24px;
+		line-height: 24px;
+
+	}
+
+	.four-o-four h2{
+		margin: 0 20px 20px 20px;
+		font-size: 16px;
+		line-height: 16px;
+	}
+
+	.four-o-four h2 a{
+		font-size: 16px;
+		line-height: 16px;
+	}
+
+	.four-o-four p{
+		margin: 0 20px 20px 20px;
+		font-size: 16px;
+		line-height: 16px;
+	}
+
+	.four-o-four p a{
+		font-size: 16px;
+		line-height: 16px;
+		text-decoration: underline;
+		color: #222222;
+	}
+}

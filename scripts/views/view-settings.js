@@ -24,6 +24,8 @@ define([
 
 		saveSettings : function(){
 
+			$("input").removeClass("error");
+
 			var firstname = $("#firstname").val();
 			var lastname = $("#lastname").val();
 			var current = $("#current").val();
@@ -32,12 +34,17 @@ define([
 
 			if(current === ""){
 				Utils.ShowToast({ message : "Current password is required"});
+				$("#current").addClass("error");
 			}else if(password === ""){	
 				Utils.ShowToast({ message : "New password is required"});
+				$("#password").addClass("error");
 			}else if(confirm === ""){	
 				Utils.ShowToast({ message : "Confirm password is required"});
+				$("#confirm").addClass("error");
 			}else if(password !== confirm){
-				Utils.ShowToast({ message : "Password does not match the confirm password"});
+				Utils.ShowToast({ message : "New password does not match confirm password"});
+				$("#password").addClass("error");
+				$("#confirm").addClass("error");
 			}else{
 
 				var user = this.model;

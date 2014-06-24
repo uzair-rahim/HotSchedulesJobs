@@ -30,7 +30,7 @@
 			<input type="password" id="current" value="" placeholder="Current Password"/>
 		</div>
 		<div class="field-container one-half" style="clear:left;">
-			<label>Change Password</label>
+			<label>New Password</label>
 			<input type="password" id="password" value="" placeholder="New Passsword"/>
 		</div>
 		<div class="field-container one-half">

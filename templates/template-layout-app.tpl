@@ -28,15 +28,13 @@
 		<div id="close-help" class="btn-close"></div>
 	</div>
 	<div id="app-help-content">
-		<h6>Are you a new user?</h6>
-		<p>If you have never logged into HotSchedules Post before, please sign up. It’s free!</p>
-		<h6>Are you a Job Seeker?</h6>
-		<p>Sorry! We don’t have a web view for HotSchedules Post, please login through the app on your Android or iPhone. Don’t have the app? Download it here.</p>
-		<h4>Contact us</h4>
-		<h6>By Email</h6>
-		<p><a href="mailto:customercare@redbookconnect.com" id="customercare" tabIndex="-1">customercare@redbookconnect.com</a></p>
-		<h6>By Phone</h6>
-		<p><a href="tel:+1-866-753-3853" id="phone" tabIndex="-1">866-753-3853</a></p>
-		<p>For additional information go to the <a href="https://hotschedules-redbookconnect.rightanswers.com/portal/public/" id="support" tabIndex="-1">HotSchedules Support Site</a>.</p>
+		<h6>Need help?</h6>
+		<p>HotSchedules Post makes it easy to create a restaurant profile and post a job. It's free, just <a href="index.jsp?#signup" tabIndex="-1">sign-up</a> and go</p>
+		<h6>Want to find a job?</h6>
+		<p>Simply download the HotSchedules Post FREE app, sign-up and go.</p>
+		<h6>Have more questions?</h6>
+		<p>We're happy to help. Email us at <a href="mailto:customercare@redbookconnect.com" id="customercare" tabIndex="-1">customercare@redbookconnect.com</a></p>
+		<p>Or call us at <a href="tel:+1-877-720-8578" id="phone" tabIndex="-1">877-720-8578</a></p>
+		<p>For additional information go to the <a href="https://hotschedulespost-redbookconnect.rightanswers.com/portal/public/" id="support" tabIndex="-1">HotSchedules Support Site</a>.</p>
 	</div>
 </div>

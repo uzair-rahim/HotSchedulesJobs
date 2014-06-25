@@ -1479,7 +1479,8 @@ input[type="password"].error:focus{
 }
 
 
-.hourly-profile > .about-section > .about{
+.hourly-profile > .about-section > .about,
+.hourly-profile > .history-section > .history{
 	display: block;
 	float: left;
 	clear: both;

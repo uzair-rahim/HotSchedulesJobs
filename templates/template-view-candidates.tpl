@@ -122,29 +122,34 @@
 							<div class="candidate-network"><span>0</span> / 0</div>
 							<div class="hourly-profile">
 								<div class="about-section">
-									<label>{{../../../../language.about}}</label>
+									<label>About</label>
 									{{#isNotNull user.about}}
 										<div class="about">{{user.about}}</div>
 									{{else}}
 										<div class="about">Not Available</div>
 									{{/isNotNull}}
 								</div>
-								<!--
-								<div class="history-section">
-									<label>Work History</label>
-									<ul class="work-history">
-										<li>
-											<div class="employer-logo">
-												<img src="images/profiles/PFChangs.jpg"/>
-											</div>
-											<div class="employment-info">
-												<div class="employer-name">Bartender<span>@ PF Changs</span></div>
-												<div class="employment-date">Sep 2012 - Feb 2014</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-								-->
+								{{#isNotNull user.primaryWorkHistory}}
+									<div class="history-section">
+										<label>Work History</label>
+										<ul class="work-history">
+											<li>
+												<div class="employer-logo">
+													<!--<img src="images/profiles/PFChangs.jpg"/>-->
+												</div>
+												<div class="employment-info">
+													<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}<span>@ {{user.primaryWorkHistory.employer.name}}</span></div>
+													<div class="employment-date">Not Available</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								{{else}}
+									<div class="history-section">
+										<label>Work History</label>
+										<div class="history">Not Available</div>
+									</div>
+								{{/isNotNull}}
 							</div>
 						</li>
 					{{/if_eq}}

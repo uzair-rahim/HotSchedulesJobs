@@ -34,9 +34,9 @@
 		<p>Sorry! We don’t have a web view for HotSchedules Post, please login through the app on your Android or iPhone. Don’t have the app? Download it here.</p>
 		<h4>Contact us</h4>
 		<h6>By Email</h6>
-		<p><a href="mailto:customercare@redbookconnect.com" id="customercare">customercare@redbookconnect.com</a></p>
+		<p><a href="mailto:customercare@redbookconnect.com" id="customercare" tabIndex="-1">customercare@redbookconnect.com</a></p>
 		<h6>By Phone</h6>
-		<p><a href="tel:+1-866-753-3853" id="phone">866-753-3853</a></p>
-		<p>For additional information go to the <a href="https://hotschedules-redbookconnect.rightanswers.com/portal/public/" id="support">HotSchedules Support Site</a>.</p>
+		<p><a href="tel:+1-866-753-3853" id="phone" tabIndex="-1">866-753-3853</a></p>
+		<p>For additional information go to the <a href="https://hotschedules-redbookconnect.rightanswers.com/portal/public/" id="support" tabIndex="-1">HotSchedules Support Site</a>.</p>
 	</div>
 </div>

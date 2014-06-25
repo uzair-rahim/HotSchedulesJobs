@@ -35,6 +35,7 @@
 					<label>About</label>
 					<div class="about">This letter may come to you as a surprise but I really prayed to God to help me choose somebody that will be my true partner. My name is Augusto Nandu Savimbi. I am the first son of Mr. Jonas Savinbi, the leader of the UNITA movement in Angola.</div>
 				</div>
+				<!--
 				<div class="history-section">
 					<label>Work History</label>
 					<ul class="work-history">
@@ -58,6 +59,7 @@
 						</li>
 					</ul>
 				</div>
+				-->
 			</div>
 		</li>
 	{{/each}}

@@ -1,1 +1,1 @@
-this app lets you find talent
+Find your people at the Post

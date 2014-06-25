@@ -1474,6 +1474,7 @@ input[type="password"].error:focus{
 
 .hourly-profile > .about-section label,
 .hourly-profile > .history-section label{
+	float: left;
 	clear: both;
 }
 
@@ -1488,6 +1489,7 @@ input[type="password"].error:focus{
 	line-height: 16px;
 	border:1px solid #d5d7db;
 	background-color: #ffffff;
+	width: calc(100% - 30px);
 }
 
 .hourly-profile > .history-section > ul.work-history{

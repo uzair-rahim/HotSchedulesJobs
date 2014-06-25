@@ -38,7 +38,7 @@
 			<li>
 				<div class="photo">
 					{{#isNotNull user.photo}}
-						<img src="{{user.photo}}"/>
+						<img src="{{user.photo.url}}"/>
 					{{/isNotNull}}
 				</div>
 				<div class="info">

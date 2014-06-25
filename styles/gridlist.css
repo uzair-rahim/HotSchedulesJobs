@@ -751,6 +751,12 @@ ul.grid-list.support > li .logo{
 	background-size: 28px auto;
 }
 
+ul.grid-list.support > li .photo img,
+ul.grid-list.support > li .logo img{
+	width: 40px;
+	height: 40px;
+}
+
 ul.grid-list.support > li .info{
 	display: block;
 	float: left;

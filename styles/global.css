@@ -1414,7 +1414,9 @@ input[type="password"].error:focus{
 
 
 
-
+/********************************/
+/*Hourly Profile Start          */
+/********************************/
 
 .hourly-profile{
 	display: block;
@@ -1442,7 +1444,6 @@ input[type="password"].error:focus{
 	margin: 10px 0 10px 75px;
 	max-width: 440px;
 	width: 100%;
-	height: 150px;
 }
 
 .hourly-profile > .history-section{
@@ -1451,7 +1452,6 @@ input[type="password"].error:focus{
 	margin: 10px 0 10px 20px;
 	max-width: 440px;
 	width: 100%;
-	height: 150px;
 }
 
 @media screen and (max-width: 1010px){
@@ -1570,6 +1570,10 @@ input[type="password"].error:focus{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+/********************************/
+/*Hourly Profile End            */
+/********************************/
 
 
 .flyout{

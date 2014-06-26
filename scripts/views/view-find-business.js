@@ -153,7 +153,6 @@ define([
 							}
 
 						Utils.CreateUserSession(user);
-
 						Utils.ShowToast({message : "Welcome to HotSchedules Post"});
 						App.router.navigate("jobs", true);
 

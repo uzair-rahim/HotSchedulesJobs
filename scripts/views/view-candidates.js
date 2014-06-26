@@ -17,6 +17,7 @@ define([
 		template: Template,
 		numberOfCalls : 0,
 		numberOfJobs : 0,
+		referralsArray : [],
 		events : {
 			"click #breadcrumb li" 			: "back",
 			"click #archive-candidates"		: "archiveCandidates",
@@ -130,6 +131,8 @@ define([
 
 		getReferralsForCandidates : function(){
 			var candidates = this.getAllCandidates();
+			var count = 0;
+			var self = this;
 
 			$.each(candidates, function(){
 				var that = this;
@@ -139,6 +142,21 @@ define([
 					type : "GET",
 					success : function(response){
 						var referred = $("#candidates-list[data-guid='"+that.job+"'] > li[data-user='"+that.user+"'] .candidate-referral .referred-by");
+
+						if(response.length >= 1){
+							$(referred).attr("data-id", count);
+							count++;
+
+							var referringUsers = new Array();
+
+							for(var i = 0; i < response.length; i++){
+								referringUsers.push(response[i]);
+							}
+
+							self.referralsArray.push(referringUsers);
+						}
+
+
 						if(response.length === 1 ){
 							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
 		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
@@ -162,20 +180,40 @@ define([
 			var name = $(candidate).find(".candidate-info .candidate-name").text();
 				name = name.split(" ").slice(0, -1).join(' ') + "'s";
 
+			var id = $(event.target).closest(".referred-by").data("id");
+			var candidatesReferrals = this.referralsArray[id];	
 			var alert = $("#app-alert-referral");
-				$(alert).find(".alert-title").text(name + " Referrals");
+				$(alert).find(".alert-body #referrals-segment ul.referrals-list").html("");
+				$(alert).find(".alert-body #pending-segment ul.referrals-list").html("");
 
-			var alertWidth = $(alert).width();	
-			var alertHeight = $(alert).height();
-			var windowWidth = $(window).width();
-			var windowHeight = $(window).height();
+				var referrals = 0;
+				var pending = 0;
+				
+				for(var i = 0; i < candidatesReferrals.length; i++){
+					var photo = candidatesReferrals[i].referringUser.photo;
+					var image;
+					if(photo !== null){
+						image = "<img src='"+photo.url+"'/>";
+					}else{
+						image = ""
+					}
 
-				$(alert).css("margin-top", "0");
+					var status = candidatesReferrals[i].status;
 
-				$(alert).css("top", windowHeight/2 - alertHeight/2);
-				$(alert).addClass("show");
+					if(status === 0){
+						referrals++;
+						$("#segmented-referrals span").text("("+referrals+")");
+						$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+candidatesReferrals[i].referringUser.firstname+" "+candidatesReferrals[i].referringUser.lastname+"</div><div class='position'>Not Available</div></div></li>");
+					}else{
+						pending++;
+						$("#segmented-pending span").text("("+referrals+")");
+						$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+candidatesReferrals[i].referringUser.firstname+" "+candidatesReferrals[i].referringUser.lastname+"</div><div class='position'>Not Available</div></div></li>");
+					}
+				}
 
-				$(document).find("#app-modal").addClass("show");
+			$(alert).find(".alert-title").text(name + " Referrals");
+			$(alert).addClass("show");
+			$(document).find("#app-modal").addClass("show");
 
 			event.stopPropagation();
 		},

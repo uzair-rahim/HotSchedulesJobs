@@ -157,7 +157,7 @@ define([
 							var referringUsers = new Array();
 
 							for(var i = 0; i < response.length; i++){
-								referringUsers.push(response[i].referringUser);
+								referringUsers.push(response[i]);
 							}
 
 							self.referralsArray.push(referringUsers);
@@ -779,9 +779,14 @@ define([
 			var id = $(event.target).closest(".referred-by").data("id");
 			var candidatesReferrals = this.referralsArray[id];	
 			var alert = $("#app-alert-referral");
+				$(alert).find(".alert-body #referrals-segment ul.referrals-list").html("");
+				$(alert).find(".alert-body #pending-segment ul.referrals-list").html("");
+
+				var referrals = 0;
+				var pending = 0;
 				
 				for(var i = 0; i < candidatesReferrals.length; i++){
-					var photo = candidatesReferrals[i].photo;
+					var photo = candidatesReferrals[i].referringUser.photo;
 					var image;
 					if(photo !== null){
 						image = "<img src='"+photo.url+"'/>";
@@ -789,7 +794,17 @@ define([
 						image = ""
 					}
 
-					$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+candidatesReferrals[i].firstname+" "+candidatesReferrals[i].lastname+"</div><div class='position'>Not Available</div></div></li>");
+					var status = candidatesReferrals[i].status;
+
+					if(status === 0){
+						referrals++;
+						$("#segmented-referrals span").text("("+referrals+")");
+						$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+candidatesReferrals[i].referringUser.firstname+" "+candidatesReferrals[i].referringUser.lastname+"</div><div class='position'>Not Available</div></div></li>");
+					}else{
+						pending++;
+						$("#segmented-pending span").text("("+referrals+")");
+						$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+candidatesReferrals[i].referringUser.firstname+" "+candidatesReferrals[i].referringUser.lastname+"</div><div class='position'>Not Available</div></div></li>");
+					}
 				}
 
 			$(alert).find(".alert-title").text(name + " Referrals");

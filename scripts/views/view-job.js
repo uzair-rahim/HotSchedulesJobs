@@ -73,9 +73,9 @@ define([
 	    		}, 20);
 	    		
 	    		var jobPostingGUID = Utils.GetStandaloneJobGUID();
-	    		//var jobPostingEmployerGUID = $.cookie("job-posting-emp-guid");
+	    		var jobPostingEmployerGUID = this.model.employer.guid;
 
-	    		var appURL = "hotschedulespost://?jobpostingguid="+jobPostingGUID; //+"&jobpostingempguid="+jobPostingEmployerGUID;
+	    		var appURL = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
 	    		
 	    		window.location = appURL;
 

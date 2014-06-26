@@ -14,7 +14,8 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #continue"	: "continue"
+			"click #continue"	: "continue",
+			"click #help-icon"	: "showHelp",
 		},
 
 		initialize : function(){
@@ -24,7 +25,11 @@ define([
 
 		continue : function(){
 			console.log("Continue...");
-			App.router.navigate("logout", true);
+			App.router.navigate("findBusiness", true);
+		},
+
+		showHelp : function(){
+			Utils.ShowHelp();
 		},
 		
 		serializeData : function(){

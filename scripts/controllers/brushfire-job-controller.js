@@ -23,7 +23,6 @@ define([
 				Utils.ResetLayout();
 
 				var jobGUID = Utils.GetStandaloneJobGUID();
-				console.log(jobGUID);
 
 				if(!jobGUID){
 					window.location.href = "index.jsp";

@@ -13,7 +13,7 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
-		googePlayURl : "https://play.google.com/store/apps/details?id=com.tdr3.hs.android",
+		googlePlayURL : "https://play.google.com/store/apps/details?id=com.tdr3.hs.android",
 		appStoreURL : "https://itunes.apple.com/us/app/hotschedules/id294934058?mt=8",
 		events : {
 			"click #google-play"	: "androidDevice",
@@ -60,7 +60,7 @@ define([
 			if(device === "Android"){
 
 			}else{
-				window.location = this.googePlayURl;
+				window.location = this.googlePlayURL;
 			}
 		},
 
@@ -72,10 +72,10 @@ define([
 	    	    	window.location = that.appStoreURL;
 	    		}, 20);
 	    		
-	    		var jobPostingGUID = $.cookie("job-posting-guid");
-	    		var jobPostingEmployerGUID = $.cookie("job-posting-emp-guid");
+	    		var jobPostingGUID = Utils.GetStandaloneJobGUID();
+	    		//var jobPostingEmployerGUID = $.cookie("job-posting-emp-guid");
 
-	    		var appURL = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
+	    		var appURL = "hotschedulespost://?jobpostingguid="+jobPostingGUID; //+"&jobpostingempguid="+jobPostingEmployerGUID;
 	    		
 	    		window.location = appURL;
 

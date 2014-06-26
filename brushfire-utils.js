@@ -219,7 +219,12 @@ define([
 			GetStandaloneJobGUID : function(){
 				console.log("Getting Standalone Job GUID...");
 
-				var StandaloneJobGUID = $.cookie("job-posting-guid");
+				var url = window.location.href;
+				var indexOfID = url.indexOf("?id=");
+				var id = url.substring(indexOfID+4); 
+
+				var StandaloneJobGUID = id;
+				
 				if(StandaloneJobGUID !== undefined){
 					return StandaloneJobGUID;
 				}else{

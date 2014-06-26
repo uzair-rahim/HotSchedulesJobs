@@ -22,7 +22,7 @@
 		<button id="decline-terms">Decline</button>
 	</div>
 </div>
-<div id="app-help">
+<div id="app-help" tabIndex="-1">
 	<div class="header">
 		<label>Get Help</label>
 		<div id="close-help" class="btn-close"></div>

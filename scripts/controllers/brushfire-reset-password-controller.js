@@ -22,6 +22,12 @@ define([
 				var head = new ViewHead();
 				layout.head.show(head);
 
+				var app = $(document).find(".app");
+
+				if(!$(app).hasClass("background")){
+					$(app).addClass("background");
+				}
+
 				var view = new ViewResetPassword();
 				layout.body.show(view);
 			}

@@ -255,13 +255,13 @@ input[type="password"].error:focus{
 	margin: 0 0 0 -80px;
 	width: 160px;
 	height: 45px;
-	background-image: url("../images/logo-rbc-black.png");
+	background-image: url("../images/logo-rbc.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 160px 45px;
 }
 
-@media screen and (max-height: 700px){
+@media screen and (max-height: 800px){
 	.rbc-logo{
 		display: none;
 	}
@@ -327,15 +327,20 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	width: 320px;
-	height: 500px;
 	top: 0;
 	left: 50%;
 	margin: 110px 0 0 -160px;
 	overflow: hidden;
 }
 
+.form-container.wide{
+	width: 600px;
+	margin: 110px 0 0 -300px;
+}
+
 @media screen and (max-width: 640px){
-	.form-container{
+	.form-container,
+	.form-container.wide{
 		width: 300px;
 		margin: 30px 0 0 -150px;
 	}
@@ -344,10 +349,10 @@ input[type="password"].error:focus{
 .form-container .login-form{
 	display: block;
 	float: left;
-	width: 320px;
-	height: 340px;
+	width: 100%;
+	min-height: 310px;
+	padding: 0 0 30px 0;
 	overflow: hidden;
-	background-color: rgba(0,153,205, 0.8);
 	background-color: rgba(255,170,0, 0.8);
 }
 
@@ -375,6 +380,7 @@ input[type="password"].error:focus{
 }
 
 
+.form-container .login-form input[type="text"],
 .form-container .login-form input[type="email"],
 .form-container .login-form input[type="password"]{
 	display: block;
@@ -384,9 +390,53 @@ input[type="password"].error:focus{
 	margin: 4px 30px;
 }
 
+.form-container .login-form input[type="text"]:hover,
 .form-container .login-form input[type="email"]:hover,
 .form-container .login-form input[type="password"]:hover{
 	border-color: #e49904;
+}
+
+.form-container .login-form input[type="text"]#firstname{
+	width: 106px;
+	clear: none;
+	margin: 4px 0 4px 30px;
+}
+
+.form-container .login-form input[type="text"]#lastname{
+	width: 106px;
+	clear: none;
+	margin: 4px 0 4px 8px;
+}
+
+.form-container .login-form input[type="text"]#businessname{
+	width: 245px;
+	clear: none;
+	margin: 4px 0 4px 30px;
+}
+
+.form-container .login-form input[type="text"]#businessaddress{
+	width: 245px;
+	clear: none;
+	margin: 4px 0 4px 8px;
+}
+
+
+.form-container .login-form input[type="checkbox"]#accept{
+	float: left;
+	margin: 10px 0 0 30px;
+}
+
+.form-container .login-form label.terms{
+	float: left;
+	margin: 9px 0 0 5px;
+	font-weight: normal;
+	color: #ffffff;
+}
+
+.form-container .login-form label.terms span{
+	font-weight: normal;
+	color: #ffffff;
+	text-decoration: underline;
 }
 
 .form-container button{
@@ -434,12 +484,29 @@ input[type="password"].error:focus{
 	.form-container .login-form{
 		clear: both;
 		width: 100%;
-		height: 320px;
 	}
 
 	.form-container .login-form .logo{
 		margin: 10px 30px;
 	}
+
+	.form-container .login-form input[type="text"]#firstname{
+		width: 96px;
+		margin: 4px 0 4px 30px;
+	}
+
+	.form-container .login-form input[type="text"]#lastname{
+		width: 96px;
+		margin: 4px 0 4px 8px;
+	}
+
+	.form-container .login-form input[type="text"]#businessname,
+	.form-container .login-form input[type="text"]#businessaddress{
+		clear: both;
+		width: calc(100% - 80px);
+		margin: 4px 0 4px 30px;
+	}
+
 }
 
 .form-container .link{
@@ -448,7 +515,7 @@ input[type="password"].error:focus{
 	width: 100%;
 	margin: 10px 0 0 0;
 	text-align: center;
-	color: #666666;
+	color: #eeeeee;
 	text-decoration: underline;
 	-webkit-transition: all 300ms;
     -moz-transition: all 300ms;
@@ -458,67 +525,128 @@ input[type="password"].error:focus{
 }
 
 .form-container .link:hover{
-	color: #222222;
+	color: #ffffff;
 }
 
-.form-container .signup-form .logo{
-	display: block;
-	float: left;
-	clear: both;
-	margin: 20px 30px;
-	width: calc(100% - 60px);
-	height: 80px;
-	background-image: url("../images/logo-bf-wide.png");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: auto 80px;
-}
-
-.form-container .signup-form{
-	display: block;
-	float: left;
-	width: 600px;
-	height: 340px;
-	overflow: hidden;
-	background-color: rgba(0,153,205, 0.8);
-	background-color: rgba(255,170,0, 0.8);
-}
-
-.form-container .signup-form input{
+.form-container .login-form .search-result{
 	display: block;
 	float: left;
 	clear: both;
 	width: calc(100% - 80px);
-	margin: 4px 30px;
+	margin: 0 0 0 40px;
 }
 
-.form-container .signup-form input:hover{
-	border-color: #e49904;
+.form-container .login-form .search-result p{
+	float: left;
+	clear: both;
+	font-size: 14px;
+	margin: 0 0 20px 0;
+}
+
+.form-container .login-form .search-result ul.business-search-result{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+.form-container .login-form .search-result ul.business-search-result li{
+	display: block;
+	float: left;
+	width: 100%;
+	height: 50px;
+}
+
+.form-container .login-form .search-result ul.business-search-result li:nth-child(odd){
+	background-color: rgba(255,255,255,0.15);
+}
+
+.form-container .login-form .search-result ul.business-search-result li .info{
+	display: block;
+	float: left;
+	width: calc(100% - 170px);
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.form-container .login-form .search-result ul.business-search-result li .info .line1{
+	display: block;
+	float: left;
+	clear: both;
+	font-weight: bold;
+	margin: 10px 0 0 15px;
+	color: #ffffff;
+	font-size: 14px;
+	width: calc(100% - 20px);
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.form-container .login-form .search-result ul.business-search-result li .info .line2{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 0 0 15px;
+	color: #ffffff;
+	font-size: 12px;
+	width: calc(100% - 20px);
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.form-container .login-form .search-result ul.business-search-result li .action{
+	display: block;
+	float: left;
+	width: 170px;
+}
+
+.form-container .login-form .search-result ul.business-search-result li .action button{
+	float: right;
+	margin: 10px 10px 0 0;
+}
+
+.form-container .login-form .search-result ul.business-search-result li .action a.claimed{
+	float: right;
+	margin: 16px 10px 0 0;
 }
 
 @media screen and (max-width: 640px){
-	.form-container .signup-form{
-		clear: both;
-		width: 100%;
+	.form-container .login-form .search-result{
+		width: calc(100% - 20px);
+		margin: 0 0 0 10px;
 	}
 
-	.form-container .signup-form .logo{
-		margin: 10px 30px;
+	.form-container .login-form .search-result ul.business-search-result li{
+		height: 52px;
+	}
+
+	
+	.form-container .login-form .search-result ul.business-search-result li .info{
+		width: calc(100% - 64px);
+	}
+
+	.form-container .login-form .search-result ul.business-search-result li .info .line1{
+		margin: 10px 0 0 15px;
+	}
+
+	.form-container .login-form .search-result ul.business-search-result li .info .line2{
+		margin: 0 0 0 15px;
+	}
+
+	.form-container .login-form .search-result ul.business-search-result li .action{
+		width: 64px;
+	}
+
+	.form-container .login-form .search-result ul.business-search-result li .action button{
+		float: right;
+		width: 64px;
+	}
+
+	.form-container .login-form .search-result ul.business-search-result li .action a.claimed{
+		float: right;
+		width: 64px;
 	}
 }
-
-.form-container .signup-form button#signup{
-	background-color: #068dba;
-	background-color: #e49904;
-	border: 1px solid #ffffff;
-	font-size: 14px;
-}
-
-.form-container .signup-form button#signup:hover{
-	background-color: #096d8e;
-	background-color: #c17804;
-}
-
 
 
 /********************************/
@@ -545,12 +673,17 @@ input[type="password"].error:focus{
     transition: all 300ms;
 }
 
+#help-icon.wide{
+	margin: 40px 280px;
+}
+
 #help-icon:hover{
 	background-color: #e49904;
 }
 
 @media screen and (max-width: 640px){
-	#help-icon{
+	#help-icon,
+	#help-icon.wide{
 		margin: 40px 130px;
 	}
 }
@@ -1213,6 +1346,12 @@ input[type="password"].error:focus{
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 40px auto;
+	overflow: hidden;
+}
+
+.app-alert.referral-list ul.referrals-list li .picture img{
+	width: 40px;
+	height: 40px;
 }
 
 .app-alert.referral-list ul.referrals-list li .info{

@@ -43,7 +43,8 @@ define([
 					"#firstname"	: "alpha",
 					"#lastname"		: "alpha",
 					"#emailaddress"	: "email",
-					"#password"		: "alphanumeric"
+					"#password"		: "alphanumeric",
+					"#confirm"		: "alphanumeric"
 				});
 
 				if(!vldtRegister){
@@ -56,16 +57,19 @@ define([
 							$(key).addClass("error");
 							switch(key){
 								case "#firstname":
-									Utils.ShowToast({message : "There are errors in the form..."});
+									Utils.ShowToast({message : "First name is required"});
 								break;
 								case "#lastname":
-									Utils.ShowToast({message : "There are errors in the form..."});
+									Utils.ShowToast({message : "Last name is required"});
 								break;	
 								case "#emailaddress":
-									Utils.ShowToast({message : "There are errors in the form..."});
+									Utils.ShowToast({message : "Email address is required"});
 								break;
 								case "#password":
-									Utils.ShowToast({message : "There are errors in the form..."});
+									Utils.ShowToast({message : "Password is required"});
+								break;
+								case "#confirm":
+									Utils.ShowToast({message : "Confirm password is required"});
 								break;
 							}
 						}
@@ -73,11 +77,18 @@ define([
 
 					return false;
 				}else{
-					
-					var that = this;
-					var model = new ModelUser();
 
-					var user = new Object();
+					var password = $("#password").val();
+					var confirm = $("#confirm").val();
+
+					if(password !== confirm){
+						Utils.ShowToast({message : "Password does not match confirm password"});
+					}else{
+
+						var that = this;
+						var model = new ModelUser();
+
+						var user = new Object();
 						user.firstname = $("#firstname").val(),
 						user.lastname = $("#lastname").val(),
 						user.emailaddress = $("#emailaddress").val(),
@@ -92,13 +103,16 @@ define([
 								}else{
 									console.log("User successfuly registered!");
 									that.createSession(response);
-									App.router.navigate("findBusiness", true);
+									App.router.navigate("accountVerification", true);
 								}
 							},
 							error : function(){
 								Utils.ShowToast({message : "Error processing request"});
 							}
 						});
+
+					}
+					
 				}
 
 			}

@@ -30,6 +30,10 @@ define([
 			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
 		},
 
+		onRender : function(){
+			$(document).find(".rbc-logo").remove();
+		},
+
 		alertPrimaryAction : function(){
 			//var listener = $("#app-alert").attr("data-listener");
 			//switch(listener){
@@ -56,12 +60,12 @@ define([
 
 			$("input").removeClass("error");
 			$("label").removeClass("bad");
-			$("label[for=name]").text("Business Name");
-			$("label[for=address]").text("Business Address");
+			$("label[for=businessname]").text("Business Name");
+			$("label[for=businessaddress]").text("Business Address");
 
 			var vldtFind = vldt.validate({
-				"#name" 	: "required",
-				"#address"	: "required"
+				"#businessname" 	: "required",
+				"#businessaddress"	: "required"
 			});
 
 			if(!vldtFind){
@@ -72,11 +76,11 @@ define([
 					if(errors[key] === false){
 						$(key).addClass("error");
 						switch(key){
-							case "#name":
-								$("label[for=name]").addClass("bad").text("Business Name is required");
+							case "#businessname":
+								Utils.ShowToast({message : "Business name is required"});
 							break;
-							case "#address":
-								$("label[for=address]").addClass("bad").text("Business Address is required");
+							case "#businessaddress":
+								Utils.ShowToast({message : "Business address is required"});
 							break;
 						}
 					}
@@ -86,8 +90,8 @@ define([
 
 			}else{
 
-				var businessName = $("#name").val();
-				var businessAddress = $("#address").val();
+				var businessName = $("#businessname").val();
+				var businessAddress = $("#businessaddress").val();
 				var businesses = new CollectionBusinesses({name : businessName, address : businessAddress});
 
 				businesses.fetch({
@@ -131,10 +135,27 @@ define([
 			
 			var modelBusiness = new ModelBusiness();	
 				modelBusiness.save(businessObject, {
-					success : function(){
+					success : function(response){
 						console.log("Business successfully saved...");
-						Utils.ShowToast({message : "Great success..."});
-						App.router.navigate("logout", true);
+						
+						var user = new Object();
+							user.guid = response.attributes.admins[0].user.guid;
+							user.firstname = response.attributes.admins[0].user.firstname;
+							user.lastname = response.attributes.admins[0].user.lastname;
+							user.email = response.attributes.admins[0].user.emails[0].email;
+							user.employerIds = new Array();	
+							user.employerIds[0] = response.attributes.guid;
+
+							if(response.attributes.admins[0].user.roles.length > 0){
+								user.role = response.attributes.admins[0].user.roles[0].role;
+							}else{
+								user.role = "user";
+							}
+
+						Utils.CreateUserSession(user);
+
+						Utils.ShowToast({message : "Welcome to HotSchedules Post"});
+						App.router.navigate("jobs", true);
 
 					},
 					error : function(){

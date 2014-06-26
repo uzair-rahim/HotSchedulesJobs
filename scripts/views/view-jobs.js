@@ -18,6 +18,7 @@ define([
 		jobGUID : null,
 		numberOfCalls : 0,
 		numberOfJobs : 0,
+		referralsArray : [],
 		template: Template,
 		events : {
 			"click #add-new-job"			: "addNewJob",
@@ -136,6 +137,8 @@ define([
 
 		getReferralsForCandidates : function(){
 			var candidates = this.getAllCandidates();
+			var count = 0;
+			var self = this;
 
 			$.each(candidates, function(){
 				var that = this;
@@ -145,6 +148,22 @@ define([
 					type : "GET",
 					success : function(response){
 						var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
+
+
+						if(response.length >= 1){
+							$(referred).attr("data-id", count);
+							count++;
+
+							var referringUsers = new Array();
+
+							for(var i = 0; i < response.length; i++){
+								referringUsers.push(response[i].referringUser);
+							}
+
+							self.referralsArray.push(referringUsers);
+						}
+
+
 						if(response.length === 1 ){
 							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
 		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
@@ -757,14 +776,25 @@ define([
 			var name = $(candidate).find(".candidate-info .candidate-name").text();
 				name = name.split(" ").slice(0, -1).join(' ') + "'s";
 
-
-				//Populate referrals list here then...
-
-
+			var id = $(event.target).closest(".referred-by").data("id");
+			var candidatesReferrals = this.referralsArray[id];	
 			var alert = $("#app-alert-referral");
-				$(alert).find(".alert-title").text(name + " Referrals");
-				$(alert).addClass("show");
-				$(document).find("#app-modal").addClass("show");
+				
+				for(var i = 0; i < candidatesReferrals.length; i++){
+					var photo = candidatesReferrals[i].photo;
+					var image;
+					if(photo !== null){
+						image = "<img src='"+photo.url+"'/>";
+					}else{
+						image = ""
+					}
+
+					$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+candidatesReferrals[i].firstname+" "+candidatesReferrals[i].lastname+"</div><div class='position'>Not Available</div></div></li>");
+				}
+
+			$(alert).find(".alert-title").text(name + " Referrals");
+			$(alert).addClass("show");
+			$(document).find("#app-modal").addClass("show");
 
 			event.stopPropagation();
 		},

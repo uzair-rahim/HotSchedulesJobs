@@ -51,6 +51,7 @@ define([
 							user.firstname = response.attributes.firstname;
 							user.lastname = response.attributes.lastname;
 							user.email = response.attributes.email;
+							user.verified = response.attributes.verified;
 							user.employerIds = response.attributes.employerIds;
 
 							if(response.attributes.roles.length > 0){
@@ -67,7 +68,12 @@ define([
 								if(user.employerIds.length > 0){
 									App.router.navigate("jobs", true);
 								}else{
-									App.router.navigate("findBusiness", true);
+									if(user.verified){
+										App.router.navigate("findBusiness", true);
+									}else{
+										App.router.navigate("accountVerification", true);
+									}
+									
 								}
 							}
 					},

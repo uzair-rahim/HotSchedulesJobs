@@ -49,7 +49,7 @@ define([
 			}else if(confirm === ""){
 				Utils.ShowToast({message : "Confirm password is required"});
 			}else if(password !== confirm){
-				Utils.ShowToast({message : "Password does not match the confirm password"});
+				Utils.ShowToast({message : "New password does not match the confirm password"});
 			}else{
 				var that = this;
 				var restURL = Utils.GetURL("/services/rest/public/resetPassword/");

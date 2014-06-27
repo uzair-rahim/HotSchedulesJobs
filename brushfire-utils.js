@@ -29,6 +29,7 @@ define([
 					lastname		: "",
 					guid			: "",
 					email			: "",
+					verified		: false,
 					employerIds		: "",
 					role			: "user"
 				}

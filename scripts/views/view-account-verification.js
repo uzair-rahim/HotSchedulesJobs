@@ -15,6 +15,7 @@ define([
 		template: Template,
 		events : {
 			"click #continue"	: "continue",
+			"click #resend"		: "resendPIN",
 			"click #help-icon"	: "showHelp",
 		},
 
@@ -25,7 +26,56 @@ define([
 
 		continue : function(){
 			console.log("Continue...");
-			App.router.navigate("findBusiness", true);
+
+			var pin = $("#pincode").val();
+
+			if(pin === ""){
+				Utils.ShowToast({message : "PIN is required"});
+			}else{
+
+				var that = this;
+				var restURL = Utils.GetURL("/services/rest/user/");
+				var user = Utils.GetUserSession();
+				
+				$.ajax({
+					url : restURL+user.guid+"/verify",
+					type : "POST",
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					data : {"verificationCode" : pin},
+	    			success : function(){
+	    				App.router.navigate("findBusiness", true);
+	    			},
+	    			error : function(response){
+	    				if(response.status === 400){
+	    					console.log("Invalid PIN Code...");
+							Utils.ShowToast({ message : "Invalid PIN Code"});
+	    				}
+	    			}
+				});
+
+			}
+			
+		},
+
+		resendPIN : function(){
+			var that = this;
+			var restURL = Utils.GetURL("/services/rest/user/");
+			var user = Utils.GetUserSession();
+			
+			$.ajax({
+				url : restURL+user.guid+"/resendEmail",
+				type : "GET",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	    		success : function(){
+	    			Utils.ShowToast({ message : "We've sent you another PIN"});
+	    		},
+	    		error : function(response){
+	    			if(response.status === 400){
+	    				console.log("Error resending PIN...");
+						Utils.ShowToast({ message : "Error resending PIN"});
+	    			}
+	    		}
+			});
 		},
 
 		showHelp : function(){
@@ -34,6 +84,7 @@ define([
 		
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.user = this.model,
 				jsonObject.language = App.Language;
 			return jsonObject;
 		}

@@ -379,6 +379,11 @@ input[type="password"].error:focus{
 	font-size: 14px;
 }
 
+.form-container .login-form p b{
+	color: #ffffff;
+	font-size: 14px;
+}
+
 
 .form-container .login-form input[type="text"],
 .form-container .login-form input[type="email"],

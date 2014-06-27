@@ -163,12 +163,20 @@ define([
 			},
 
 			accountVerification : function(){
-				this.setLayout();
-				this.setHeader("heading");
-				this.setBackground();
 
-				var view = new ViewAccountVerification();
-				this.layout.body.show(view);
+				if(Utils.CheckSession()){
+
+					this.setLayout();
+					this.setHeader("heading");
+					this.setBackground();
+
+					var user = Utils.GetUserSession();
+
+					var view = new ViewAccountVerification({model : user});
+					this.layout.body.show(view);
+				}else{
+					App.router.navigate("login", true);
+				}
 			},
 
 			jobs : function(){

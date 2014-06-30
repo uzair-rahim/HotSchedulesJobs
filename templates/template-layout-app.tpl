@@ -32,6 +32,7 @@
 		<p>HotSchedules Post makes it easy to create a restaurant profile and post a job. It's free, just <a href="index.jsp?#signup" tabIndex="-1">sign-up</a> and go</p>
 		<h6>Want to find a job?</h6>
 		<p>Simply download the HotSchedules Post FREE app, sign-up and go.</p>
+		<div id="google-play"></div><div id="app-store"></div>
 		<h6>Have more questions?</h6>
 		<p>We're happy to help. Email us at <a href="mailto:customercare@redbookconnect.com" id="customercare" tabIndex="-1">customercare@redbookconnect.com</a></p>
 		<p>Or call us at <a href="tel:+1-877-720-8578" id="phone" tabIndex="-1">877-720-8578</a></p>

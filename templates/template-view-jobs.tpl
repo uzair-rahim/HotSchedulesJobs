@@ -18,7 +18,7 @@
 	<div class="alert-body">
 		<div id="referrals-segment">
 			<ul class="referrals-list">
-				
+				There are pending requests.
 			</ul>
 		</div>
 		<div id="pending-segment">

@@ -177,19 +177,19 @@
 								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 							</div>
-							<div class="candidate-referral">
+							<!--<div class="candidate-referral">
 								<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>
 								<div class="referred-by">
 									<div class="picture"></div>
 									<div class="name">{{../../../language.notAvailable}}</div>
 								</div>
-							</div>
+							</div>-->
 							<div class="candidate-unarchive"></div>
-							<div class="candidate-message"></div>
+							<!--<div class="candidate-message"></div>-->
 							<!--<div class="candidate-rating"></div>-->
 							<!--<div class="candidate-endorse">0</div>-->
-							<div class="candidate-network"><span>0</span> / 0</div>
-							<div class="hourly-profile">
+							<!--<div class="candidate-network"><span>0</span> / 0</div>-->
+							<!--<div class="hourly-profile">
 								<div class="about-section">
 									<label>{{../../../language.about}}</label>
 									<div class="about">This letter may come to you as a surprise but I really prayed to God to help me choose somebody that will be my true partner. My name is Augusto Nandu Savimbi. I am the first son of Mr. Jonas Savinbi, the leader of the UNITA movement in Angola.</div>
@@ -217,7 +217,7 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div>-->
 						</li>
 					{{/if_eq}}
 				{{/each}}

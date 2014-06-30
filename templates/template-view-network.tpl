@@ -70,8 +70,8 @@
 										<!--<img src="images/profiles/PFChangs.jpg"/>-->
 									</div>
 									<div class="employment-info">
-										<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}<span>@ {{user.primaryWorkHistory.employer.name}}</span></div>
-										<div class="employment-date">Not Available</div>
+										<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}</div>
+										<div class="employment-date">@ {{user.primaryWorkHistory.employer.name}}</div>
 									</div>
 								</li>
 							</ul>
@@ -112,31 +112,33 @@
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>
-						<div class="about">This letter may come to you as a surprise but I really prayed to God to help me choose somebody that will be my true partner. My name is Augusto Nandu Savimbi. I am the first son of Mr. Jonas Savinbi, the leader of the UNITA movement in Angola.</div>
+						{{#isNotNull user.about}}
+							<div class="about">{{user.about}}</div>
+						{{else}}
+							<div class="about">Not Available</div>
+						{{/isNotNull}}
 					</div>
-					<div class="history-section">
-						<label>Work History</label>
-						<ul class="work-history">
-							<li>
-								<div class="employer-logo">
-									<img src="images/profiles/PFChangs.jpg"/>
-								</div>
-								<div class="employment-info">
-									<div class="employer-name">Bartender<span>@ PF Changs</span></div>
-									<div class="employment-date">Sep 2012 - Feb 2014</div>
-								</div>
-							</li>
-							<li>
-								<div class="employer-logo">
-									<img src="images/profiles/McDonalds.jpg"/>
-								</div>
-								<div class="employment-info">
-									<div class="employer-name">Bartender<span>@ McDonalds</span></div>
-									<div class="employment-date">Oct 2009 - Jul 2012</div>
-								</div>
-							</li>
-						</ul>
-					</div>
+					{{#isNotNull user.primaryWorkHistory}}
+						<div class="history-section">
+							<label>Work History</label>
+							<ul class="work-history">
+								<li>
+									<div class="employer-logo">
+										<!--<img src="images/profiles/PFChangs.jpg"/>-->
+									</div>
+									<div class="employment-info">
+										<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}</div>
+										<div class="employment-date">@ {{user.primaryWorkHistory.employer.name}}</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					{{else}}
+						<div class="history-section">
+							<label>Work History</label>
+							<div class="history">Not Available</div>
+						</div>
+					{{/isNotNull}}
 				</div>
 			</li>
 		{{/each}}

@@ -138,8 +138,8 @@
 													<!--<img src="images/profiles/PFChangs.jpg"/>-->
 												</div>
 												<div class="employment-info">
-													<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}<span>@ {{user.primaryWorkHistory.employer.name}}</span></div>
-													<div class="employment-date">Not Available</div>
+													<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}</div>
+													<div class="employment-date">@ {{user.primaryWorkHistory.employer.name}}</div>
 												</div>
 											</li>
 										</ul>

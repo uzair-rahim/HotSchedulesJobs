@@ -183,47 +183,54 @@ define([
 
 				if(Utils.CheckSession()){
 
-					var that = this;
+					var hasEmployerID = Utils.GetUserSession().employerIds.length > 0
 
-					App.clearTrail();
-					App.pushTrail(App.Language.jobs);
+					if(!hasEmployerID){
+						App.router.navigate("logout", true);
+					}else{
+						var that = this;
 
-					var jobtypes = new ModelJobTypes();
-					var jobs = new CollectionJobs();
-					var models = new Object();
+						App.clearTrail();
+						App.pushTrail(App.Language.jobs);
 
-					$.when(
-						jobtypes.fetch({
-							success : function(jobtypesResponse){
-								console.log("Job Types fetched successfully...");
-								models.jobtypes = jobtypesResponse.attributes;
-							},
-							error : function(){
-								console.log("Error fetching Job Types...");
-								Utils.ShowToast({ message : "Error fetching Job Types..."});
-							}
-						}),
-						jobs.fetch({
-							success : function(collection, jobsResponse){
-								console.log("Jobs fetched successfully...");
-								models.jobs = jobsResponse;
-							},
-							error : function(){
-								console.log("Error fetching Jobs...");
-								Utils.ShowToast({message : "Error fetching Jobs..."});
-							}
-						})
+						var jobtypes = new ModelJobTypes();
+						var jobs = new CollectionJobs();
+						var models = new Object();
 
-					).then(function(){
-						that.removeBackground();
-						that.setLayout();
-						that.setHeader("navigation");
+						$.when(
+							jobtypes.fetch({
+								success : function(jobtypesResponse){
+									console.log("Job Types fetched successfully...");
+									models.jobtypes = jobtypesResponse.attributes;
+								},
+								error : function(){
+									console.log("Error fetching Job Types...");
+									Utils.ShowToast({ message : "Error fetching Job Types..."});
+								}
+							}),
+							jobs.fetch({
+								success : function(collection, jobsResponse){
+									console.log("Jobs fetched successfully...");
+									models.jobs = jobsResponse;
+								},
+								error : function(){
+									console.log("Error fetching Jobs...");
+									Utils.ShowToast({message : "Error fetching Jobs..."});
+								}
+							})
 
-						var view = new ViewJobs({model : models});
-							that.layout.body.show(view);
-					});	
+						).then(function(){
+							that.removeBackground();
+							that.setLayout();
+							that.setHeader("navigation");
+
+							var view = new ViewJobs({model : models});
+								that.layout.body.show(view);
+						});	
+					}
+
 				}else{
-					App.router.navigate("login", true);
+					App.router.navigate("logout", true);
 				}
 
 				

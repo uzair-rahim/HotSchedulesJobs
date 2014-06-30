@@ -80,6 +80,12 @@ define([
 			this.numberOfJobs = this.model.jobs.length;
 			this.getSharedConnections();
 			this.getReferralsForCandidates();
+
+			$("#new-bonus, #new-wage, .bonus, .wage").keyup(function(){
+    			var value = $(this).val();
+    			value = value.replace(/[^0-9]+/g, '');
+    			$(this).val(value);
+			});
 		},
 
 		getSharedConnections : function(){
@@ -219,9 +225,9 @@ define([
 			var wholeNumber = /^[0-9]+$/;
 
 			if(wage === ""){
-				Utils.ShowToast({message : "Invalid wage..."});
+				Utils.ShowToast({message : "Wage is required"});
 			}else if(bonus !== "" && !wholeNumber.test(bonus)){
-				Utils.ShowToast({message : "Invalid bonus..."});
+				Utils.ShowToast({message : "Invalid bonus amount"});
 			}else{
 				var job = new Object();	
 					job.shifts = new Object();
@@ -354,9 +360,9 @@ define([
 			var wholeNumber = /^[0-9]+$/;
 
 			if(wage === ""){
-				Utils.ShowToast({message : "Invalid wage..."});
+				Utils.ShowToast({message : "Wage is required"});
 			}else if(bonus !== "" && !wholeNumber.test(bonus)){
-				Utils.ShowToast({message : "Invalid bonus..."});
+				Utils.ShowToast({message : "Invalid bonus amount"});
 			}else{
 
 				var update = new Object();

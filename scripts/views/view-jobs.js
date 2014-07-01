@@ -81,7 +81,7 @@ define([
 			this.getSharedConnections();
 			this.getReferralsForCandidates();
 
-			$("#new-bonus, #new-wage, .bonus, .wage").keyup(function(){
+			$("#new-bonus, .bonus").keyup(function(){
     			var value = $(this).val();
     			value = value.replace(/[^0-9]+/g, '');
     			$(this).val(value);
@@ -223,9 +223,12 @@ define([
 			var wage = $("#new-wage").val();
 			var bonus = $("#new-bonus").val();
 			var wholeNumber = /^[0-9]+$/;
+			var currency = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/
 
 			if(wage === ""){
 				Utils.ShowToast({message : "Wage is required"});
+			}else if(!currency.test(wage)){
+				Utils.ShowToast({message : "Invalid wage amount"});
 			}else if(bonus !== "" && !wholeNumber.test(bonus)){
 				Utils.ShowToast({message : "Invalid bonus amount"});
 			}else{
@@ -358,9 +361,12 @@ define([
 			var bonus = $(item).find(".bonus").val();
 
 			var wholeNumber = /^[0-9]+$/;
+			var currency = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/
 
 			if(wage === ""){
 				Utils.ShowToast({message : "Wage is required"});
+			}else if(!currency.test(wage)){
+				Utils.ShowToast({message : "Invalid wage amount"});
 			}else if(bonus !== "" && !wholeNumber.test(bonus)){
 				Utils.ShowToast({message : "Invalid bonus amount"});
 			}else{

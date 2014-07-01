@@ -6,6 +6,7 @@
 		<input type="text" placeholder="Business Name" id="businessname"/>
 		<input type="text" placeholder="Business Address" id="businessaddress"/>
 		<button id="find">Find My Business</button>
+		<a id="logout-link">Logout, I'll do it later</a>
 		{{#if_not_eq businesses undefined}}
 			<div class="search-result">
 				<p>Search Results</p>

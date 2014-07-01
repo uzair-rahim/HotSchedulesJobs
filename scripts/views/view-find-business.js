@@ -18,6 +18,7 @@ define([
 		events : {
 			"click #find"		: "find",
 			"click #cancel"		: "cancel",
+			"click #logout-link": "logout",
 			"click .claim"		: "claimBusiness",
 			"click .claimed"	: "alreadyClaimed",
 			"click #help-icon"	: "showHelp"
@@ -171,13 +172,12 @@ define([
 			Utils.HideAlert();
 		},
 
-		cancel : function(){
-			//console.log("Cancel...");
-			//App.router.navigate("logout", true);
-		},
-
 		showHelp : function(){
 			Utils.ShowHelp();
+		},
+
+		logout : function(){
+			App.router.navigate("logout", true);
 		},
 		
 		serializeData : function(){

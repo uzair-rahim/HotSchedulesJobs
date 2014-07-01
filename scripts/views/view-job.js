@@ -13,8 +13,6 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
-		googlePlayURL : "https://play.google.com/store/apps/details?id=com.tdr3.hs.android",
-		appStoreURL : "https://itunes.apple.com/us/app/hotschedules/id294934058?mt=8",
 		events : {
 			"click #google-play"	: "androidDevice",
 			"click #app-store"		: "iOSDevice"
@@ -60,7 +58,7 @@ define([
 			if(device === "Android"){
 
 			}else{
-				window.location = this.googlePlayURL;
+				window.location = Utils.GetStoreLinks().google;
 			}
 		},
 
@@ -80,7 +78,7 @@ define([
 	    		window.location = appURL;
 
 			}else{
-				window.location = this.appStoreURL;
+				window.location = Utils.GetStoreLinks().apple;
 			}
 		},
 

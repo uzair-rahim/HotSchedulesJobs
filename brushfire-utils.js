@@ -284,6 +284,15 @@ define([
 				$("#decline-terms").text("Decline");
 				$(document).find("#alert-terms-conditions .alert-action").removeClass("single");
 				$(document).find("#app-modal").removeClass("show");
+			},
+
+			// Links to Google Play and App Store
+			GetStoreLinks : function(){
+				var links = new Object();
+					links.google = "http://play.google.com/store/apps/details?id=com.hotschedules.brushfire"
+					links.apple = "https://itunes.apple.com/us/app/hotschedules/id294934058?mt=8"
+
+				return links;
 			}
 			
 		});

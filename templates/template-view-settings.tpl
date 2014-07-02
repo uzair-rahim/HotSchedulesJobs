@@ -25,15 +25,15 @@
 			<label>Email Address</label>
 			<input type="text" id="emailaddress" value="{{user.emailaddress}}" placeholder="Email Address" disabled/>
 		</div>
-		<div class="field-container" style="clear:both;">
+		<div class="field-container">
 			<label>Current Password</label>
 			<input type="password" id="current" value="" placeholder="Current Password"/>
 		</div>
-		<div class="field-container one-half" style="clear:left;">
+		<div class="field-container">
 			<label>New Password</label>
-			<input type="password" id="password" value="" placeholder="New Passsword"/>
+			<input type="password" id="password" value="" placeholder="New Passsword (8 characters min)"/>
 		</div>
-		<div class="field-container one-half">
+		<div class="field-container">
 			<label>Confirm Password</label>
 			<input type="password" id="confirm" value="" placeholder="Confirm Password"/>
 		</div>

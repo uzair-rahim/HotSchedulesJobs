@@ -83,6 +83,8 @@ define([
 
 					if(password !== confirm){
 						Utils.ShowToast({message : "Password does not match confirm password"});
+					}else if(password.length < 8){
+						Utils.ShowToast({message : "Password too short (8 characters min)"});
 					}else{
 
 						var that = this;

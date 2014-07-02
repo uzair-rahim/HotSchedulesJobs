@@ -41,6 +41,9 @@ define([
 			}else if(confirm === ""){	
 				Utils.ShowToast({ message : "Confirm password is required"});
 				$("#confirm").addClass("error");
+			}else if(password.length < 8){
+				Utils.ShowToast({message : "Password too short (8 characters min)"});
+				$("#password").addClass("error");
 			}else if(password !== confirm){
 				Utils.ShowToast({ message : "New password does not match confirm password"});
 				$("#password").addClass("error");

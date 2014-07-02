@@ -31,6 +31,8 @@ define([
 
 			if(pin === ""){
 				Utils.ShowToast({message : "PIN is required"});
+			}else if(isNaN(pin)){
+				Utils.ShowToast({message : "Invalid PIN"});
 			}else{
 
 				var that = this;

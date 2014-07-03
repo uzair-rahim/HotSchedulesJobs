@@ -78,8 +78,9 @@ define([
 	    		
 	    		var jobPostingGUID = Utils.GetStandaloneJobGUID();
 	    		var jobPostingEmployerGUID = this.model.employer.guid;
+	    		var url = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
 
-	    		window.location = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
+	    		window.location = url
 		},
 
 		serializeData : function(){

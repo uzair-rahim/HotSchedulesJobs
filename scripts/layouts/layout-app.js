@@ -33,9 +33,16 @@ define([
 			},
 
 			onRender : function(){
-				$.get("terms.html", function(data){
-					$(".terms-and-conditions").html(data);
-				});
+				var device = this.detectDevice();
+				if(device === "iOS"){
+					$.get("terms-apple.html", function(data){
+						$(".terms-and-conditions").html(data);
+					});
+				}else{
+					$.get("terms.html", function(data){
+						$(".terms-and-conditions").html(data);
+					});	
+				}
 			},
 
 			onShow : function(){

@@ -14,8 +14,8 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #google-play"	: "androidDevice",
-			"click #app-store"		: "iOSDevice"
+			"click #google-play"	: "openGooglePlay",
+			"click #app-store"		: "openAppStore"
 		},
 
 		initialize : function(){
@@ -53,33 +53,33 @@ define([
 
 		},
 
-		androidDevice : function(){
+		openGooglePlay : function(){
 			var device = this.detectDevice();
 			if(device === "Android"){
-
+				this.launchApp(Utils.GetStoreLinks().google);
 			}else{
 				window.location = Utils.GetStoreLinks().google;
 			}
 		},
 
-		iOSDevice : function(){
+		openAppStore : function(){
 			var device = this.detectDevice();
-			var that = this;
 			if(device === "iOS"){
+				this.launchApp(Utils.GetStoreLinks().apple);
+			}else{
+				window.location = Utils.GetStoreLinks().apple;
+			}
+		},
+
+		launchApp : function(store){
 				setTimeout(function () {
-	    	    	window.location = that.appStoreURL;
+	    	    	window.location = store;
 	    		}, 20);
 	    		
 	    		var jobPostingGUID = Utils.GetStandaloneJobGUID();
 	    		var jobPostingEmployerGUID = this.model.employer.guid;
 
-	    		var appURL = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
-	    		
-	    		window.location = appURL;
-
-			}else{
-				window.location = Utils.GetStoreLinks().apple;
-			}
+	    		window.location = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
 		},
 
 		serializeData : function(){

@@ -319,9 +319,15 @@ define([
 					success : function(response){
 						App.router.controller.profileSettings();
 					},
-					error : function(){
+					error : function(x, s, e){
 						console.log("Error adding admin to employer...");
-						Utils.ShowToast({ message : "Error adding admin to employer..."});
+						if(s.status === 400 && s.responseJSON.errorCode === 14){
+							Utils.ShowToast({ message : "User is already an admin"});
+						}else if(s.status === 404 && s.responseJSON.errorCode === 6){
+							Utils.ShowToast({ message : "User not found"});
+						}else{
+							Utils.ShowToast({ message : "Error adding admin to employer..."});
+						}
 					}
 				});	
 			}

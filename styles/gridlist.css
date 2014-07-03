@@ -490,6 +490,7 @@ ul.grid-list > li .candidate-referral .referred-by .name{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 960px){
@@ -509,6 +510,7 @@ ul.grid-list > li .candidate-message{
 	background-position: center;
 	background-size: 22px auto;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 ul.grid-list > li .candidate-message:hover{
@@ -526,6 +528,7 @@ ul.grid-list > li .candidate-archive{
 	background-position: center;
 	background-size: 22px auto;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 ul.grid-list > li .candidate-archive:hover{
@@ -543,6 +546,7 @@ ul.grid-list > li .candidate-unarchive{
 	background-position: center;
 	background-size: 22px auto;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 ul.grid-list > li .candidate-unarchive:hover{
@@ -566,6 +570,7 @@ ul.grid-list > li .candidate-endorse{
 	background-repeat: no-repeat;
 	background-position: 15px 10px;
 	background-size: auto 20px;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 400px){
@@ -594,6 +599,7 @@ ul.grid-list > li .candidate-network{
 }
 
 ul.grid-list > li .candidate-network.has-connections{
+	cursor: pointer;
 	background-image: url("../images/icon-network.png");
 }
 

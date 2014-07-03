@@ -19,16 +19,19 @@
 					<img id="logo" src="{{employerProfile.logo.url}}"/>
 				{{/hasPhoto}}
 			</div>
-			<div id="logo-action" class="custom-select" data-index="0" data-value="0">
-				<button class="custom-select-button">Update Logo</button>
-				<ul class="custom-select-list">
-					<li id="upload-logo">Update Logo</li>
-					<li id="remove-logo">Remove Logo</li>
-				</ul>
+			<div class="logo-action-container">
+				<div id="logo-action" class="custom-select" data-index="0" data-value="0">
+					<button class="custom-select-button">Update Logo</button>
+					<ul class="custom-select-list">
+						<li id="upload-logo">Update Logo</li>
+						<li id="remove-logo">Remove Logo</li>
+					</ul>
+				</div>
+				<div class="allowed-types">.jpg, .jpeg, .gif</div>
+				<form enctype="multipart/form-data" data-remote="true">
+					<input type="file" id="logo-file" name="file" accept="image/jpg,image/jpeg,image/gif"/>
+				</form>
 			</div>
-			<form enctype="multipart/form-data" data-remote="true">
-				<input type="file" id="logo-file" name="file" accept="image/jpg,image/jpeg,image/gif"/>
-			</form>
 		</div>
 		<div class="field-container">
 			<label>Restaurant Name</label>

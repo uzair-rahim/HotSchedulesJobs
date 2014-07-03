@@ -4,6 +4,7 @@
 			<div class="fold"></div>
 			<div class="fold center"></div>
 			<div class="fold"></div>
+			<div class="grid-pattern"></div>
 			<img src="//maps.googleapis.com/maps/api/staticmap?center={{job.employer.location.latitude}},{{job.employer.location.longitude}}&zoom=14&size=592x205&markers=color:red|{{job.employer.location.latitude}},{{job.employer.location.longitude}}"/>
 		</div>
 		<div id="job-details">

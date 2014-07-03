@@ -138,6 +138,8 @@ define([
 				modelBusiness.save(businessObject, {
 					success : function(response){
 						console.log("Business successfully saved...");
+
+						Utils.DeleteUserSession();
 						
 						var user = new Object();
 							user.guid = response.attributes.admins[0].user.guid;

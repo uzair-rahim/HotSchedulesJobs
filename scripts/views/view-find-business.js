@@ -152,7 +152,7 @@ define([
 							if(response.attributes.admins[0].user.roles.length > 0){
 								user.role = response.attributes.admins[0].user.roles[0].role;
 							}else{
-								user.role = "user";
+								user.role = "employerAdmin";
 							}
 
 						Utils.CreateUserSession(user);

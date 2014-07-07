@@ -23,7 +23,7 @@ define([
 		        "/": lvalue / rvalue,
 		        "%": lvalue % rvalue
 		    }[operator];
-		});
+		};
 
 	Handlebars.registerHelper("math", math);
 	return math;

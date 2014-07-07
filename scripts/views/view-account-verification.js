@@ -14,7 +14,7 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #continue"	: "continue",
+			"click #continue"	: "continueFind",
 			"click #resend"		: "resendPIN",
 			"click #help-icon"	: "showHelp",
 		},
@@ -24,7 +24,7 @@ define([
 			console.log("Account Verification view initialized...");
 		},
 
-		continue : function(){
+		continueFind : function(){
 			console.log("Continue...");
 
 			var pin = $("#pincode").val();

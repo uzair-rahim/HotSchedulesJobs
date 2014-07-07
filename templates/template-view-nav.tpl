@@ -9,6 +9,7 @@
 	<!--<li id="messages"></li>-->
 	<li id="settings"></li>
 </ul>
+<div id="nav-user">{{username}}</div>
 <ul id="settings-flyout" class="nav-flyout">
 	<li id="account-settings">Account Settings</li>
 	<li id="profile-settings">Profile Settings</li>

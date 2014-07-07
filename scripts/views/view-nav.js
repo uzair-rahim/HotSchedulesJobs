@@ -117,6 +117,7 @@ define([
 
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.username = Utils.GetUserSession().firstname + " " + Utils.GetUserSession().lastname;
 				jsonObject.language = App.Language;
 			return jsonObject;
 		}

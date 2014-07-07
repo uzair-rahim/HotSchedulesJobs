@@ -903,6 +903,14 @@ input[type="password"].error:focus{
 	}
 }
 
+#nav-user{
+	display: block;
+	float: right;
+	color: #dddddd;
+	
+	line-height: 40px;
+}
+
 #nav-icons{
 	display: block;
 	float: right;

@@ -19,8 +19,8 @@
 		</div>
 		<div id="job-apps">
 			<div id="job-message">Interested in this job? You can get it and more here...</div>
-			<div id="google-play"></div>
-			<div id="app-store"></div>
+			<div id="google-play" class="google-hspost-scheme"></div>
+			<div id="app-store" class="ios-hspost-scheme"></div>
 		</div>
 	</div>
 	<div id="job-footer">

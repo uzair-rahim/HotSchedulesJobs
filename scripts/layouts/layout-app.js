@@ -18,13 +18,13 @@ define([
 			},
 			
 			events : {
-				"click #primary-action"		: "primaryAction",
-				"click #secondary-action"	: "secondaryAction",
-				"click #close-help"			: "closeHelp",
-				"click #accept-terms"		: "acceptTerms",
-				"click #decline-terms"		: "declineTerms",
-				"click #google-play"		: "androidDevice",
-				"click #app-store"			: "iOSDevice"
+				"click #primary-action"			: "primaryAction",
+				"click #secondary-action"		: "secondaryAction",
+				"click #close-help"				: "closeHelp",
+				"click #accept-terms"			: "acceptTerms",
+				"click #decline-terms"			: "declineTerms",
+				"click .google-hspost-help"		: "androidDevice",
+				"click .ios-hspost-help"		: "iOSDevice"
 			},
 
 			initialize : function(){

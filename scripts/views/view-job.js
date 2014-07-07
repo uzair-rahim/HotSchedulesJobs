@@ -14,8 +14,8 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #google-play"	: "openGooglePlay",
-			"click #app-store"		: "openAppStore"
+			"click .google-hspost-scheme"	: "openGooglePlay",
+			"click .ios-hspost-scheme"		: "openAppStore"
 		},
 
 		initialize : function(){

@@ -18,6 +18,7 @@ require.config({
 		hbs 			: "libraries/thirdparty/hbs",
 		i18nprecompile 	: "libraries/thirdparty/i18nprecompile",
 		json2 			: "libraries/thirdparty/json2",
+		async			: "libraries/thirdparty/async",
 		approuter 		: "scripts/routers/brushfire-job-router",
 		appcontroller 	: "scripts/controllers/brushfire-job-controller"
 	},

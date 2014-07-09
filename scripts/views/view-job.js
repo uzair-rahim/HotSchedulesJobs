@@ -4,9 +4,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
-		"hbs!templates/template-view-job"
+		"hbs!templates/template-view-job",
+		"async!https://maps.googleapis.com/maps/api/js?key=AIzaSyA6cyoae_8rRsygZxbPIiuNp220ipankW0&sensor=false"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, App, Utils, Marionette, Template, Async){
 	"use strict";
 
 	var ViewJob = Marionette.ItemView.extend({
@@ -24,6 +25,22 @@ define([
 		},
 
 		onShow : function(){
+
+			var mapLatLng = new google.maps.LatLng(this.model.employer.location.latitude,this.model.employer.location.longitude)
+
+			var mapOptions = {
+				disableDefaultUI: true,
+				center: mapLatLng,
+				zoom: 14
+			}
+
+			var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+			var marker = new google.maps.Marker({
+				map: map,
+				position: mapLatLng,
+			});
+
 			var device = this.detectDevice();
 			switch(device){
 				case "iOS" :

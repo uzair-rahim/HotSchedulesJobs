@@ -2271,7 +2271,8 @@ input[type="password"].error:focus{
 	background-image: url("../images/background-grid-pattern.png");
 }
 
-#job-map img{
+#job-map img,
+#job-map #map-canvas{
 	position: absolute;
 	display: block;
 	float: left;
@@ -2516,9 +2517,10 @@ input[type="password"].error:focus{
 		height: 101px;
 	}
 
-	#job-map img{
+	#job-map img,
+	#job-map #map-canvas{
 		width: 292px;
-		height: 110px;
+		height: 115px;
 	}
 
 	#job-logo{

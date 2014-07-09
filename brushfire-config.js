@@ -1,5 +1,7 @@
 require.config({
-	paths: {
+    //baseUrl: "@BrushfireBaseURL@",
+    urlArgs: "brushfire=@Version@",
+    paths: {
 		app 			: "brushfire-app",
 		utils			: "brushfire-utils",
 		modernizr		: "libraries/thirdparty/modernizr.2.6.2",

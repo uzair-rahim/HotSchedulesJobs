@@ -56,7 +56,10 @@ define([
 		openGooglePlay : function(){
 			var device = this.detectDevice();
 			if(device === "Android"){
-				this.launchApp(Utils.GetStoreLinks().google);
+				var jobPostingGUID = Utils.GetStandaloneJobGUID();
+	    		var jobPostingEmployerGUID = this.model.employer.guid;
+	    		var url = "intent://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID+"#Intent;package=com.hotschedules.brushfire;scheme=hotschedulespost;end";
+	    		window.location = url
 			}else{
 				window.location = Utils.GetStoreLinks().google;
 			}
@@ -65,15 +68,8 @@ define([
 		openAppStore : function(){
 			var device = this.detectDevice();
 			if(device === "iOS"){
-				this.launchApp(Utils.GetStoreLinks().apple);
-			}else{
-				window.location = Utils.GetStoreLinks().apple;
-			}
-		},
-
-		launchApp : function(store){
 				setTimeout(function () {
-	    	    	window.location = store;
+	    	    	window.location = Utils.GetStoreLinks().apple;
 	    		}, 20);
 	    		
 	    		var jobPostingGUID = Utils.GetStandaloneJobGUID();
@@ -81,6 +77,9 @@ define([
 	    		var url = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
 
 	    		window.location = url
+			}else{
+				window.location = Utils.GetStoreLinks().apple;
+			}
 		},
 
 		serializeData : function(){

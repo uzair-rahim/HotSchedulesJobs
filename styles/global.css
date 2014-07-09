@@ -2228,6 +2228,7 @@ input[type="password"].error:focus{
 }
 
 #job-map{
+	position: relative;
 	display: block;
 	float: left;
 	clear: both;
@@ -2275,6 +2276,7 @@ input[type="password"].error:focus{
 	display: block;
 	float: left;
 	width: 592px;
+	height: 200px;
 }
 
 #job-details{
@@ -2516,6 +2518,7 @@ input[type="password"].error:focus{
 
 	#job-map img{
 		width: 292px;
+		height: 110px;
 	}
 
 	#job-logo{

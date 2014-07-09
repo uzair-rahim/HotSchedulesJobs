@@ -196,7 +196,9 @@
 											<ul class="work-history">
 												<li>
 													<div class="employer-logo">
-														<!--<img src="images/profiles/PFChangs.jpg"/>-->
+														{{#isNotNull user.primaryWorkHistory.employer.logo}}
+															<img src="{{user.primaryWorkHistory.employer.url}}"/>
+														{{/isNotNull}}
 													</div>
 													<div class="employment-info">
 														<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}</div>

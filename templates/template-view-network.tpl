@@ -67,7 +67,9 @@
 							<ul class="work-history">
 								<li>
 									<div class="employer-logo">
-										<!--<img src="images/profiles/PFChangs.jpg"/>-->
+										{{#isNotNull this.attributes.primaryWorkHistory.employer.logo}}
+											<img src="{{this.attributes.primaryWorkHistory.employer.logo.url}}"/>
+										{{/isNotNull}}
 									</div>
 									<div class="employment-info">
 										<div class="employer-name">{{this.attributes.primaryWorkHistory.jobs.[0].jobName}}</div>
@@ -124,7 +126,9 @@
 							<ul class="work-history">
 								<li>
 									<div class="employer-logo">
-										<!--<img src="images/profiles/PFChangs.jpg"/>-->
+										{{#isNotNull this.attributes.primaryWorkHistory.employer.logo}}
+											<img src="{{this.attributes.primaryWorkHistory.employer.logo.url}}"/>
+										{{/isNotNull}}
 									</div>
 									<div class="employment-info">
 										<div class="employer-name">{{this.attributes.primaryWorkHistory.jobs.[0].jobName}}</div>

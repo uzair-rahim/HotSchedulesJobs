@@ -33,23 +33,25 @@
 			<div class="hourly-profile">
 				<div class="about-section">
 					<label>About</label>
-					{{#isNotNull user.about}}
-						<div class="about">{{user.about}}</div>
+					{{#isNotNull this.attributes.about}}
+						<div class="about">{{this.attributes.about}}</div>
 					{{else}}
 						<div class="about">Not Available</div>
 					{{/isNotNull}}
 				</div>
-				{{#isNotNull user.primaryWorkHistory}}
+				{{#isNotNull this.attributes.primaryWorkHistory}}
 					<div class="history-section">
 						<label>Work History</label>
 						<ul class="work-history">
 							<li>
 								<div class="employer-logo">
-									<!--<img src="images/profiles/PFChangs.jpg"/>-->
+									{{#isNotNull this.attributes.primaryWorkHistory.employer.logo}}
+										<img src="{{this.attributes.primaryWorkHistory.employer.logo.url}}"/>
+									{{/isNotNull}}
 								</div>
 								<div class="employment-info">
-									<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}</div>
-									<div class="employment-date">@ {{user.primaryWorkHistory.employer.name}}</div>
+									<div class="employer-name">{{this.attributes.primaryWorkHistory.jobs.[0].jobName}}</div>
+									<div class="employment-date">@ {{this.attributes.primaryWorkHistory.employer.name}}</div>
 								</div>
 							</li>
 						</ul>

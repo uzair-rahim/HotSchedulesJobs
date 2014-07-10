@@ -289,7 +289,7 @@ define([
 			// Links to Google Play and App Store
 			GetStoreLinks : function(){
 				var links = new Object();
-					links.google = "http://play.google.com/store/apps/details?id=com.hotschedules.brushfire"
+					links.google = "https://play.google.com/store/apps/details?id=com.hotschedules.brushfire"
 					links.apple = "https://itunes.apple.com/us/app/hotschedules/id888794188?mt=8"
 
 				return links;

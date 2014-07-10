@@ -197,7 +197,7 @@
 												<li>
 													<div class="employer-logo">
 														{{#isNotNull user.primaryWorkHistory.employer.logo}}
-															<img src="{{user.primaryWorkHistory.employer.url}}"/>
+															<img src="{{user.primaryWorkHistory.employer.logo.url}}"/>
 														{{/isNotNull}}
 													</div>
 													<div class="employment-info">

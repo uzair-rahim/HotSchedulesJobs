@@ -112,9 +112,9 @@
 						{{#each this.candidates}}
 							{{#if_eq this.archived false}}
 								<li class="{{#if_eq seen false}}new{{/if_eq}}">
-									{{#hasPhoto this.user.photo.url}}
+									{{#isNotNull this.user.photo}}
 										<img src="{{this.user.photo.url}}"/>
-									{{/hasPhoto}}
+									{{/isNotNull}}
 								</li>
 							{{/if_eq}}
 						{{/each}}
@@ -161,9 +161,9 @@
 							<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" data-email="{{user.email}}">
 								<input class="candidate-select" type="checkbox"/>
 								<div class="candidate-picture">
-									{{#hasPhoto this.user.photo.url}}
+									{{#isNotNull this.user.photo}}
 										<img src="{{this.user.photo.url}}"/>
-									{{/hasPhoto}}
+									{{/isNotNull}}
 								</div>
 								<div class="candidate-info">
 									<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>

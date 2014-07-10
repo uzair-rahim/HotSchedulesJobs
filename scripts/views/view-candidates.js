@@ -208,7 +208,7 @@ define([
 					var position = candidatesReferrals[i].referringUser.primaryWorkHistory.jobs[0].jobName;
 					var employer = candidatesReferrals[i].referringUser.primaryWorkHistory.employer.name;
 
-					if(status === 0){
+					if(status === 1){
 						referrals++;
 						$("#segmented-referrals span").text("("+referrals+")");
 						$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");

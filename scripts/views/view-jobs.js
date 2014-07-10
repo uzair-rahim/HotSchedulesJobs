@@ -172,7 +172,9 @@ define([
 
 						if(response.length === 1 ){
 							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
-		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+		    				if(response[0].referringUser.photo !== null){
+		    					$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+		    				}
 						}else if(response.length > 1){
 							$(referred).find(".name").text(response.length + " referrals");
 						}else{

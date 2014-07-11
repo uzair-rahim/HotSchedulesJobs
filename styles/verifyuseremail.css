@@ -1,0 +1,112 @@
+body{
+	font-family: Helvetica, Arial, Sans-serif;
+	text-align: center;
+	background-color: #eeeeee;
+}
+
+.container{
+	max-width: 620px;
+	margin: 0 auto;
+	background-color: #ffffff;
+	margin-bottom: 50px;
+}
+
+h1{
+	font-size: 24px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color: #333333;
+}
+
+h2{
+	font-size: 18px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color: #333333;
+	padding-top: 10px;
+}
+
+p{
+	font-size: 16px;
+	color: #333333;
+}
+
+.hs{
+	font-weight: 500;
+}
+
+.post{
+	font-weight: 500;
+	color: #ff9933;
+}
+
+.pin{
+	color: #ff9933;
+	text-decoration: underline;
+}
+
+.header{
+	border-bottom: 1px solid #7e8288;
+	height: 50px;
+}
+
+.logo{
+	float: left;
+	margin: 10px 5px 10px 10px;
+}
+
+.emailtitle{
+	float: left;
+	margin: 15px 0 10px 0px;
+	font-size: 14px;
+	color: #ff0066;
+	font-weight: 300;
+}
+
+.htmllink{
+	float: right;
+	font-size: 14px;
+	margin: 15px 10px 10px 10px;
+	color: #ff0066;
+	font-weight: 300;
+}
+
+.clear{
+	clear: both;
+}
+
+.content{
+	max-width: 600px;
+	margin: 30px auto;
+}
+
+.content a{
+	color: #ff9933;
+	text-decoration: underline;
+}
+
+hr.divider{
+	max-width: 358px;
+	background-color: #7e8288;
+}
+
+button{
+	height: 50px;
+	padding: 0 20px 0 20px;
+	background: none;
+	border: 3px solid #ff0066;
+	color: #ff0066;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 14px;
+	margin: 10px 0 20px 0;
+}
+
+.footertext{
+	font-size: 12px;
+	color: #ffffff;
+}
+
+.footertext a{
+	color: #ffffff;
+}

@@ -190,6 +190,89 @@ define([
 
 		},
 
+		candidateReferral : function(event){
+			var candidate = $(event.target).closest(".view-profile");
+			var name = $(candidate).find(".candidate-info .candidate-name").text();
+				name = name.split(" ").slice(0, -1).join(' ') + "'s";
+
+				$("#segmented-referrals span").text(0);
+				$("#segmented-pending span").text(0);
+
+			var id = $(event.target).closest(".referred-by").data("id");
+			var candidatesReferrals = this.referralsArray[id];	
+			var alert = $("#app-alert-referral");
+				$(alert).find(".alert-body #referrals-segment ul.referrals-list").html("");
+				$(alert).find(".alert-body #pending-segment ul.referrals-list").html("");
+
+				var referrals = 0;
+				var pending = 0;
+				
+				for(var i = 0; i < candidatesReferrals.length; i++){
+					var photo = candidatesReferrals[i].referringUser.photo;
+					var image;
+					if(photo !== null){
+						image = "<img src='"+photo.url+"'/>";
+					}else{
+						image = ""
+					}
+
+					var status = candidatesReferrals[i].status;
+
+					var firstname = candidatesReferrals[i].referringUser.firstname;
+					var lastname = candidatesReferrals[i].referringUser.lastname;
+					var position = candidatesReferrals[i].referringUser.primaryWorkHistory.jobs[0].jobName;
+					var employer = candidatesReferrals[i].referringUser.primaryWorkHistory.employer.name;
+
+					if(status === 1){
+						referrals++;
+						$("#segmented-referrals span").text("("+referrals+")");
+						$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");
+					}else{
+						pending++;
+						$("#segmented-pending span").text("("+pending+")");
+						$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");
+					}
+				}
+
+				if(referrals === 0){
+					$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='empty'>There are pending requests</div></li>")
+				}
+
+				if(pending === 0){
+					$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='empty'>There are no pending requests</div></li>")
+				}
+
+			$(alert).find(".alert-title").text(name + " Referrals");
+			$(alert).css("top", $(window).height()/2 - $(alert).height()/2);
+			$(alert).addClass("show");
+			$(document).find("#app-modal").addClass("show");
+
+			event.stopPropagation();
+		},
+
+		showSegmentedReferrals : function(){
+			$("#pending-segment").hide();
+			$("#referrals-segment").show();
+
+			$("#segmented-referrals").removeClass("unselected");
+			$("#segmented-pending").addClass("unselected");
+		},
+
+		showSegmentedPending : function(){
+			$("#referrals-segment").hide();
+			$("#pending-segment").show();
+
+			$("#segmented-pending").removeClass("unselected");
+			$("#segmented-referrals").addClass("unselected");
+			
+		},
+
+		closeCandidateReferral : function(event){
+			var alert = $("#app-alert-referral");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
+		},
+
 		disableToolbarButtons : function(){
 			$(".candidate-select").prop("checked", false);
 			$("#send-message").prop("disabled", true);
@@ -783,89 +866,6 @@ define([
 			}
 
 			event.stopPropagation();
-		},
-
-		candidateReferral : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var name = $(candidate).find(".candidate-info .candidate-name").text();
-				name = name.split(" ").slice(0, -1).join(' ') + "'s";
-
-				$("#segmented-referrals span").text(0);
-				$("#segmented-pending span").text(0);
-
-			var id = $(event.target).closest(".referred-by").data("id");
-			var candidatesReferrals = this.referralsArray[id];	
-			var alert = $("#app-alert-referral");
-				$(alert).find(".alert-body #referrals-segment ul.referrals-list").html("");
-				$(alert).find(".alert-body #pending-segment ul.referrals-list").html("");
-
-				var referrals = 0;
-				var pending = 0;
-				
-				for(var i = 0; i < candidatesReferrals.length; i++){
-					var photo = candidatesReferrals[i].referringUser.photo;
-					var image;
-					if(photo !== null){
-						image = "<img src='"+photo.url+"'/>";
-					}else{
-						image = ""
-					}
-
-					var status = candidatesReferrals[i].status;
-
-					var firstname = candidatesReferrals[i].referringUser.firstname;
-					var lastname = candidatesReferrals[i].referringUser.lastname;
-					var position = candidatesReferrals[i].referringUser.primaryWorkHistory.jobs[0].jobName;
-					var employer = candidatesReferrals[i].referringUser.primaryWorkHistory.employer.name;
-
-					if(status === 1){
-						referrals++;
-						$("#segmented-referrals span").text("("+referrals+")");
-						$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");
-					}else{
-						pending++;
-						$("#segmented-pending span").text("("+pending+")");
-						$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");
-					}
-				}
-
-				if(referrals === 0){
-					$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='empty'>There are pending requests</div></li>")
-				}
-
-				if(pending === 0){
-					$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='empty'>There are no pending requests</div></li>")
-				}
-
-			$(alert).find(".alert-title").text(name + " Referrals");
-			$(alert).css("top", $(window).height()/2 - $(alert).height()/2);
-			$(alert).addClass("show");
-			$(document).find("#app-modal").addClass("show");
-
-			event.stopPropagation();
-		},
-
-		showSegmentedReferrals : function(){
-			$("#pending-segment").hide();
-			$("#referrals-segment").show();
-
-			$("#segmented-referrals").removeClass("unselected");
-			$("#segmented-pending").addClass("unselected");
-		},
-
-		showSegmentedPending : function(){
-			$("#referrals-segment").hide();
-			$("#pending-segment").show();
-
-			$("#segmented-pending").removeClass("unselected");
-			$("#segmented-referrals").addClass("unselected");
-			
-		},
-
-		closeCandidateReferral : function(event){
-			var alert = $("#app-alert-referral");
-				$(alert).removeClass("show");
-				$(document).find("#app-modal").removeClass("show");
 		},
 
 		serializeData : function(){

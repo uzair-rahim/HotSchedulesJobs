@@ -838,6 +838,7 @@ define([
 				}
 
 			$(alert).find(".alert-title").text(name + " Referrals");
+			$(alert).css("top", $(window).height()/2 - $(alert).height()/2);
 			$(alert).addClass("show");
 			$(document).find("#app-modal").addClass("show");
 

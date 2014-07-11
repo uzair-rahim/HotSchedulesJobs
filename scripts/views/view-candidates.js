@@ -158,8 +158,10 @@ define([
 
 
 						if(response.length === 1 ){
-							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
-		    				$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");
+							if(response[0].referringUser.photo !== null){
+		    					$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
+		    				}
 						}else if(response.length > 1){
 							$(referred).find(".name").text(response.length + " referrals");
 						}else{
@@ -228,6 +230,7 @@ define([
 				}
 
 			$(alert).find(".alert-title").text(name + " Referrals");
+			$(alert).css("top", $(window).height()/2 - $(alert).height()/2);
 			$(alert).addClass("show");
 			$(document).find("#app-modal").addClass("show");
 

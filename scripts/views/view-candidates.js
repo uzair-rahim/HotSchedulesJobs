@@ -44,6 +44,7 @@ define([
 		},
 
 		onShow : function(){
+			this.referralsArray = [];
 			this.numberOfJobs = this.model.jobs.length;
 
 			if(this.options.mode === "child"){
@@ -156,7 +157,6 @@ define([
 							self.referralsArray.push(referringUsers);
 						}
 
-
 						if(response.length === 1 ){
 							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");
 							if(response[0].referringUser.photo !== null){
@@ -230,7 +230,6 @@ define([
 				}
 
 			$(alert).find(".alert-title").text(name + " Referrals");
-			$(alert).css("top", $(window).height()/2 - $(alert).height()/2);
 			$(alert).addClass("show");
 			$(document).find("#app-modal").addClass("show");
 

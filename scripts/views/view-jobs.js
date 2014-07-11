@@ -77,6 +77,7 @@ define([
 		},
 
 		onShow : function(){
+			this.referralsArray = [];
 			this.numberOfJobs = this.model.jobs.length;
 			this.getSharedConnections();
 			this.getReferralsForCandidates();
@@ -155,7 +156,6 @@ define([
 					success : function(response){
 						var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
 
-
 						if(response.length >= 1){
 							$(referred).attr("data-id", count);
 							count++;
@@ -168,7 +168,6 @@ define([
 
 							self.referralsArray.push(referringUsers);
 						}
-
 
 						if(response.length === 1 ){
 							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
@@ -243,7 +242,6 @@ define([
 				}
 
 			$(alert).find(".alert-title").text(name + " Referrals");
-			$(alert).css("top", $(window).height()/2 - $(alert).height()/2);
 			$(alert).addClass("show");
 			$(document).find("#app-modal").addClass("show");
 

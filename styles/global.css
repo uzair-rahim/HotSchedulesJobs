@@ -1142,7 +1142,7 @@ input[type="password"].error:focus{
 
 
 .app-alert{
-	position: absolute;
+	position: fixed;
 	display: none;
 	float: left;
 	width: 324px;
@@ -1777,13 +1777,19 @@ input[type="password"].error:focus{
 	top: 70px;
 	right: -320px;
 	width: 320px;
-	max-height: 340px;
+	max-height: 540px;
 	border: 1px solid #ced2d9;
 	box-shadow: inset 1px 0 0 0 rgba(255,255,255, 0.5);
 	background: #f7f8f8;
 	z-index: 999;
 	overflow: auto;
 	 -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (max-height: 550px){
+	.flyout{
+		height: 320px;
+	}
 }
 
 .flyout.show{

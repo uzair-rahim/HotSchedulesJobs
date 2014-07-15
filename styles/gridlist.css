@@ -136,16 +136,16 @@ ul.grid-list > li .job-info .job-shift{
 	text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 600px){
 	ul.grid-list > li .job-info{
 		border-right: none;
-		width: 190px;
+		width: 165px;
 
 	}
 
 	ul.grid-list li .job-info .job-name,
 	ul.grid-list li .job-info .job-shift{
-		width: 190px;
+		width: 165px;
 	}
 }
 
@@ -160,7 +160,7 @@ ul.grid-list > li .candidates-info{
 	border-right: 1px dotted #bbbbbb;
 }
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 600px){
 	ul.grid-list > li .candidates-info{
 		display: none;
 	}
@@ -258,7 +258,7 @@ ul.grid-list > li .posted-info.new{
 	font-weight: bold;
 }
 
-@media screen and (max-width: 1020px){
+@media screen and (max-width: 780px){
 	ul.grid-list > li .posted-info{
 		display: none;
 	}
@@ -294,7 +294,7 @@ ul.grid-list > li .job-actions{
 	display: block;
 	float: right;
 	margin: 5px 0;
-	width: 190px;
+	width: 110px;
 	height: 40px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -310,17 +310,12 @@ ul.grid-list > li .job-actions button:first-child{
 }
 
 @media screen and (max-width: 660px){
-	ul.grid-list > li .job-actions{
-		width: 70px;
-	}
-
-	ul.grid-list > li .job-actions button:first-child{
-		display: none;
-	}
+	
 }
 
 ul.grid-list > li .job-actions .custom-select-list.job-status{
-	margin-left: 33px;
+	margin-left: -47px;
+	max-height: 180px;
 }
 
 ul.grid-list > li .candidate-select{
@@ -642,7 +637,7 @@ ul.grid-list > li .count.new{
 	border: 1px solid #3e92ce;
 }
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 600px){
 	ul.grid-list > li .count{
 		display: block;
 	}

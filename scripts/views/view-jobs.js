@@ -35,15 +35,11 @@ define([
 			"click .unpost-job"				: "unpostJob",
 			"click .delete-job"				: "deleteJob",
 			"click .copy-tiny-url"			: "copyTinyURL",
-			"click #close-copy-link"		: "closeTinyURL",
 			"click .share-with-employees"	: "shareJobWithEmployees",
 			"click .share-with-followers"	: "shareJobWithFollowers",
 			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .referred-by"			: "candidateReferral",
-			"click #segmented-referrals"	: "showSegmentedReferrals",
-			"click #segmented-pending"		: "showSegmentedPending",
-			"click #close-referral-list"	: "closeCandidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
 			"click #send-message"			: "sendBulkMessage",
@@ -246,29 +242,6 @@ define([
 			$(document).find("#app-modal").addClass("show");
 
 			event.stopPropagation();
-		},
-
-		showSegmentedReferrals : function(){
-			$("#pending-segment").hide();
-			$("#referrals-segment").show();
-
-			$("#segmented-referrals").removeClass("unselected");
-			$("#segmented-pending").addClass("unselected");
-		},
-
-		showSegmentedPending : function(){
-			$("#referrals-segment").hide();
-			$("#pending-segment").show();
-
-			$("#segmented-pending").removeClass("unselected");
-			$("#segmented-referrals").addClass("unselected");
-			
-		},
-
-		closeCandidateReferral : function(event){
-			var alert = $("#app-alert-referral");
-				$(alert).removeClass("show");
-				$(document).find("#app-modal").removeClass("show");
 		},
 
 		disableToolbarButtons : function(){
@@ -836,12 +809,6 @@ define([
 			}
 
 			event.stopPropagation();
-		},
-
-		closeTinyURL : function(){
-			var alert = $("#app-alert-tinyurl");
-				$(alert).removeClass("show");
-				$(document).find("#app-modal").removeClass("show");
 		},
 
 		shareJobWithEmployees : function(event){

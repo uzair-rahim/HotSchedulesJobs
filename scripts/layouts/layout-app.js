@@ -23,6 +23,10 @@ define([
 				"click #close-help"				: "closeHelp",
 				"click #accept-terms"			: "acceptTerms",
 				"click #decline-terms"			: "declineTerms",
+				"click #close-copy-link"		: "closeTinyURL",
+				"click #close-referral-list"	: "closeCandidateReferral",
+				"click #segmented-referrals"	: "showSegmentedReferrals",
+				"click #segmented-pending"		: "showSegmentedPending",
 				"click .google-hspost-help"		: "androidDevice",
 				"click .ios-hspost-help"		: "iOSDevice"
 			},
@@ -100,6 +104,34 @@ define([
 			declineTerms : function(){
 				Utils.HideTermsAndConditions();
 				$(document).find("#accept").prop("checked", false);
+			},
+
+			closeTinyURL : function(){
+				var alert = $("#app-alert-tinyurl");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
+			},
+
+			closeCandidateReferral : function(event){
+				var alert = $("#app-alert-referral");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
+			},
+
+			showSegmentedReferrals : function(){
+				$("#pending-segment").hide();
+				$("#referrals-segment").show();
+
+				$("#segmented-referrals").removeClass("unselected");
+				$("#segmented-pending").addClass("unselected");
+			},
+
+			showSegmentedPending : function(){
+				$("#referrals-segment").hide();
+				$("#pending-segment").show();
+
+				$("#segmented-pending").removeClass("unselected");
+				$("#segmented-referrals").addClass("unselected");			
 			},
 			
 			serializeData : function(){

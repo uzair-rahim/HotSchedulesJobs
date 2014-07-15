@@ -50,6 +50,8 @@ define([
 				Utils.ShowToast({message : "Confirm password is required"});
 			}else if(password !== confirm){
 				Utils.ShowToast({message : "New password does not match the confirm password"});
+			}else if(password.length < 8){
+				Utils.ShowToast({message : "Password too short (8 characters min)"});
 			}else{
 				var that = this;
 				var restURL = Utils.GetURL("/services/rest/public/resetPassword/");

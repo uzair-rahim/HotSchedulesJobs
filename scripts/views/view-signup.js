@@ -104,7 +104,23 @@ define([
 									Utils.ShowToast({message : "Email Address already exists"});
 								}else{
 									console.log("User successfuly registered!");
-									that.createSession(response);
+									
+									var user = new Object();
+									user.guid = response.attributes.guid;
+									user.firstname = response.attributes.firstname;
+									user.lastname = response.attributes.lastname;
+									user.email = response.attributes.email;
+									user.verified = response.attributes.verified;
+									user.employerIds = response.attributes.employerIds;
+
+									if(response.attributes.roles.length > 0){
+										user.role = response.attributes.roles[0].role;
+									}else{
+										user.role = "user";
+									}
+
+									Utils.CreateUserSession(user);
+
 									App.router.navigate("accountVerification", true);
 								}
 							},
@@ -118,15 +134,6 @@ define([
 				}
 
 			}
-		},
-
-		createSession : function(response) {
-			var authsession = {
-				firstname : response.attributes.firstname,
-				lastname : response.attributes.lastname,
-				guid : response.attributes.guid
-			}
-			Utils.CreateUserSession(authsession);
 		},
 
 		nevermind : function(){

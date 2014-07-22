@@ -116,7 +116,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="count {{hasNewCandidates this}}">{{this.candidates.length}}</div>
+			<div class="count {{hasNewCandidates this}}">{{totalUnarchivedCandidatesByJob this}}</div>
 			{{#if_not_eq this.candidates.length 0}}
 				<ul id="candidates-list" class="grid-list sub">
 					{{#each this.candidates}}

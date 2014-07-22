@@ -402,6 +402,7 @@ define([
 		addReferralBonus : function(event){
 			var link = $(event.target).parent()
 				$(link).next().removeClass("hidden");
+				$(link).next().find(".bonus").focus();
 				$(link).addClass("hidden");
 				event.stopPropagation();
 		},

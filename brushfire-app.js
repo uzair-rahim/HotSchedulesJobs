@@ -107,6 +107,13 @@ define([
 			console.log("ajaxSuccess...");
 		});
 
+		// When navigating away from the app
+		$(window).on('beforeunload', function(){
+      		if(!Utils.GetUserSession().verified){
+      			Utils.DeleteUserSession();	
+      		}
+		});
+
 		// Load language pack
 		App.getLanguagePack = function(){
 			console.log("Load language pack...");

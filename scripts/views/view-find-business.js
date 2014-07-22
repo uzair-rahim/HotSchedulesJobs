@@ -148,6 +148,7 @@ define([
 							user.email = response.attributes.admins[0].user.emails[0].email;
 							user.employerIds = new Array();	
 							user.employerIds[0] = response.attributes.guid;
+							user.verified = true;
 
 							if(response.attributes.admins[0].user.roles.length > 0){
 								user.role = response.attributes.admins[0].user.roles[0].role;

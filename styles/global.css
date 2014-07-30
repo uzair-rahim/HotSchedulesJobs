@@ -469,6 +469,25 @@ input[type="password"]::selection{
 	text-decoration: underline;
 }
 
+.form-container .login-form .remember-me{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 0 15px 30px;
+}
+
+.form-container .login-form .remember-me input[type="checkbox"]{
+	float: left;
+	margin: 0 5px 0 0;
+}
+
+.form-container .login-form .remember-me label{
+	display: block;
+	float: left;
+	color: #ffffff;
+	font-weight: normal;
+}
+
 .form-container button{
 	display: block;
 	float: left;

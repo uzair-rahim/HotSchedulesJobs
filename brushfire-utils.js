@@ -62,6 +62,20 @@ define([
 				}
 			},
 
+			// Remember User's Email Address on Login
+			RememberUserEmail : function(check, email){
+				if(check){
+					$.cookie("BrushfireUserEmail", email);
+				}else{
+					$.removeCookie("BrushfireUserEmail");
+				}
+			},
+
+			// Get Remembered Email Address
+			GetRememberedEmail : function(){
+				return $.cookie("BrushfireUserEmail");
+			},
+
 			// Check if support user
 			IsSupportUser : function(roles){
 				for(var i = 0; i < roles.length; i++){

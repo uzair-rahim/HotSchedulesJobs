@@ -28,6 +28,11 @@ define([
 		},
 
 		onShow : function(){
+
+			if(typeof Utils.GetRememberedEmail() !== "undefined"){
+				$("#remember-me-check").prop("checked", true);
+			}
+
 			$("#emailaddress, #password").keyup(function(event){
 				if(event.keyCode == 13){
 					$("#login").click();
@@ -40,6 +45,7 @@ define([
 
 			var emailField = $("#emailaddress").val();
 			var passwordField = $("#password").val();
+			var checked = $("#remember-me-check").prop("checked");
 
 			var auth = new ModelAuthenticate({email : emailField, password : passwordField});
 				auth.fetch({
@@ -56,6 +62,8 @@ define([
 							user.roles = response.attributes.roles;
 
 							Utils.CreateUserSession(user);
+							Utils.RememberUserEmail(checked, user.email);
+
 							var support = Utils.IsSupportUser(user.roles);
 
 							if(support){
@@ -98,6 +106,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
+				jsonObject.userEmail = Utils.GetRememberedEmail();
 			return jsonObject;
 		}
 		

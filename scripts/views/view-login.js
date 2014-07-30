@@ -53,16 +53,12 @@ define([
 							user.email = response.attributes.email;
 							user.verified = response.attributes.verified;
 							user.employerIds = response.attributes.employerIds;
-
-							if(response.attributes.roles.length > 0){
-								user.role = response.attributes.roles[0].role;
-							}else{
-								user.role = "user";
-							}
+							user.roles = response.attributes.roles;
 
 							Utils.CreateUserSession(user);
+							var support = Utils.IsSupportUser(user.roles);
 
-							if(user.role === "support"){
+							if(support){
 								App.router.navigate("support", true);
 							}else{
 								if(user.employerIds.length > 0){
@@ -73,7 +69,6 @@ define([
 									}else{
 										App.router.navigate("accountVerification", true);
 									}
-									
 								}
 							}
 					},

@@ -112,12 +112,7 @@ define([
 									user.email = response.attributes.email;
 									user.verified = response.attributes.verified;
 									user.employerIds = response.attributes.employerIds;
-
-									if(response.attributes.roles.length > 0){
-										user.role = response.attributes.roles[0].role;
-									}else{
-										user.role = "user";
-									}
+									user.roles = response.attributes.roles;
 
 									Utils.CreateUserSession(user);
 

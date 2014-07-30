@@ -166,6 +166,20 @@ input[type="password"].error:focus{
 	border: 1px solid #ff4040;
 }
 
+textarea::selection,
+input[type="text"]::selection,
+input[type="email"]::selection,
+input[type="url"]::selection,
+input[type="number"]::selection,
+input[type="password"]::selection,
+input[type="text"]::selection,
+input[type="email"]::selection,
+input[type="url"]::selection,
+input[type="number"]::selection,
+input[type="password"]::selection{
+	background: #a8d1ff;
+}
+
 .custom-select button{
 	display: block;
 	float: left;

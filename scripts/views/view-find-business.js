@@ -149,12 +149,7 @@ define([
 							user.employerIds = new Array();	
 							user.employerIds[0] = response.attributes.guid;
 							user.verified = true;
-
-							if(response.attributes.admins[0].user.roles.length > 0){
-								user.role = response.attributes.admins[0].user.roles[0].role;
-							}else{
-								user.role = "employerAdmin";
-							}
+							user.roles = response.attributes.admins[0].user.roles;
 
 						Utils.CreateUserSession(user);
 						Utils.ShowToast({message : "Welcome to HotSchedules Post"});

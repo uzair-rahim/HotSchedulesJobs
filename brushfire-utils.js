@@ -31,7 +31,7 @@ define([
 					email			: "",
 					verified		: false,
 					employerIds		: "",
-					role			: "user"
+					roles			: []
 				}
 
 				for(var key in defaults){
@@ -60,6 +60,17 @@ define([
 				}else{
 					return false;
 				}
+			},
+
+			// Check if support user
+			IsSupportUser : function(roles){
+				for(var i = 0; i < roles.length; i++){
+					if(roles[i].role === "support"){
+						return true;
+					}
+				}
+
+				return false;
 			},
 
 			// Custom select

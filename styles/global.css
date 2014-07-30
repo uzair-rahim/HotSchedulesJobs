@@ -812,7 +812,7 @@ input[type="password"]::selection{
 #app-help #app-help-content a,
 #app-help #app-help-content a#phone,
 #app-help #app-help-content a#customercare,
-#app-help #app-help-content a#support {
+#app-help #app-help-content a#supportSite {
   color: #fff;
   text-decoration: underline;
 }

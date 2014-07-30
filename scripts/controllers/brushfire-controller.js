@@ -576,12 +576,18 @@ define([
 				var that = this;
 
 				if(Utils.CheckSession()){
-					this.removeBackground();
-					this.setLayout();
-					this.setHeader("support");
+					var roles = Utils.GetUserSession().roles;
+					var support = Utils.IsSupportUser(roles);
+					if(support){
+						this.removeBackground();
+						this.setLayout();
+						this.setHeader("support");
 
-					var view = new ViewSupport();
-					that.layout.body.show(view);
+						var view = new ViewSupport();
+						that.layout.body.show(view);
+					}else{
+						App.router.navigate("logout", true);
+					}
 
 				}else{
 					App.router.navigate("login", true);

@@ -108,9 +108,16 @@
 							<li class="copy-tiny-url disabled">Copy Job Link</li>
 						{{/if_not_eq}}
 
-						
-						<li class="share-with-employees disabled">Share with Employees</li>
-						<li class="share-with-followers disabled">Share with Followers</li>
+						{{#if_not_eq status "UNPOSTED"}}
+							<li class="share-with-employees active">Share with Employees</li>
+						{{else}}
+							<li class="share-with-employees disabled">Share with Employees</li>
+						{{/if_not_eq}}
+						{{#if_not_eq status "UNPOSTED"}}
+							<li class="share-with-followers active">Share with Followers</li>
+						{{else}}
+							<li class="share-with-followers disabled">Share with Followers</li>
+						{{/if_not_eq}}
 						<li class="divider"></li>
 						<li class="delete-job">Delete</li>
 					</ul>

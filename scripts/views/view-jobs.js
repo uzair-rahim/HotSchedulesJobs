@@ -37,14 +37,16 @@ define([
 			"click .copy-tiny-url"			: "copyTinyURL",
 			"click .share-with-employees"	: "shareJobWithEmployees",
 			"click .share-with-followers"	: "shareJobWithFollowers",
-			"click .view-candidates" 		: "candidates",
+			"click .view-candidates"		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .referred-by"			: "candidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
 			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
-			"click .candidate-network"		: "candidateNetwork"
+			"click .candidate-network"		: "candidateNetwork",
+			"click .share-with-employees"	: "shareJobWithEmployees",
+			"click .share-with-followers"	: "shareJobWithFollowers"
 		},
 
 		initialize : function(){
@@ -632,6 +634,7 @@ define([
 
 			var candidate = $(event.target).closest(".view-profile");
 			var job = $(candidate).closest("#job-list > li");
+			var seen = $(candidate).find(".candidate-info .candidate-name").hasClass("new");
 
 			var request = new Object();
 			var update = new Object();
@@ -642,6 +645,7 @@ define([
 
 				update.id = $(candidate).attr("data-id");;
 				update.archived = true;
+				update.seen = !seen;
 
 				var candidate = new ModelCandidate(request);
 
@@ -687,6 +691,8 @@ define([
 				var id =  $(job).attr("data-id");
 				var guid =  $(element).closest(".view-profile").attr("data-guid");
 
+				var seen = $(element).closest(".view-profile").find(".candidate-info .candidate-name").hasClass("new");
+
 				var request = new Object();
 					request.type = "update";
 					request.jobGuid = jobGuid;
@@ -695,6 +701,7 @@ define([
 				var update = new Object();
 					update.id = id;	
 					update.archived = true;
+					update.seen = !seen;
 
 				var candidate = new ModelCandidate(request);
 

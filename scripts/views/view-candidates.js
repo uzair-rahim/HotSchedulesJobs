@@ -329,6 +329,7 @@ define([
 
 			var candidate = $(event.target).closest("#candidates-list > li");
 			var job = $(candidate).closest("#candidates-list");
+			var seen = $(candidate).find(".candidate-info .candidate-name").hasClass("new");
 			var request = new Object();
 			var update = new Object();
 
@@ -338,6 +339,7 @@ define([
 
 				update.id = $(candidate).attr("data-id");;
 				update.archived = true;
+				update.seen = !seen;
 
 				var candidate = new ModelCandidate(request);
 
@@ -360,6 +362,7 @@ define([
 
 			var candidate = $(event.target).closest("#archived-candidates-list > li");
 			var job = $(candidate).closest(".view-profile");
+			var seen = $(candidate).closest(".view-profile").find(".candidate-info .candidate-name").hasClass("new");
 			var request = new Object();
 			var update = new Object();
 
@@ -369,6 +372,7 @@ define([
 
 				update.id = $(candidate).attr("data-id");;
 				update.archived = false;
+				update.seen = !seen;
 
 				var candidate = new ModelCandidate(request);
 
@@ -413,6 +417,7 @@ define([
 				var jobGuid = $(job).attr("data-guid");
 				var id =  $(job).attr("data-id");
 				var guid =  $(element).closest(".view-profile").attr("data-guid");
+				var seen = $(element).closest(".view-profile").find(".candidate-info .candidate-name").hasClass("new");
 
 				var request = new Object();
 					request.type = "update";
@@ -422,6 +427,7 @@ define([
 				var update = new Object();
 					update.id = id;	
 					update.archived = true;
+					update.seen = !seen;
 
 				var candidate = new ModelCandidate(request);
 

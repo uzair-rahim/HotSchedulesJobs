@@ -1,6 +1,5 @@
 require.config({
-    //baseUrl: "@BrushfireBaseURL@",
-    urlArgs: "brushfire=@Version@",
+    baseUrl: ".",
     paths: {
 		app 			: "brushfire-app",
 		utils			: "brushfire-utils",
@@ -10,16 +9,24 @@ require.config({
 		jquerycookie	: "libraries/thirdparty/jquery.cookie",
 		jquerydatatable	: "libraries/thirdparty/jquery.dataTables.min",
 		vldt			: "libraries/thirdparty/vldt",
-		underscore		: "libraries/thirdparty/underscore",
 		backbone		: "libraries/thirdparty/backbone",
 		wreqr			: "libraries/thirdparty/backbone.wreqr",
 		marionette		: "libraries/thirdparty/backbone.marionette",
-		Handlebars		: "libraries/thirdparty/handlebars",
 		hbs 			: "libraries/thirdparty/hbs",
-		i18nprecompile 	: "libraries/thirdparty/i18nprecompile",
-		json2 			: "libraries/thirdparty/json2",
-		approuter 		: "scripts/routers/brushfire-router",
-		appcontroller 	: "scripts/controllers/brushfire-controller"
+        Handlebars		: "libraries/thirdparty/hbs/handlebars",
+		i18nprecompile 	: "libraries/thirdparty/hbs/i18nprecompile",
+		json2 			: "libraries/thirdparty/hbs/json2",
+		underscore		: "libraries/thirdparty/hbs/underscore",
+		// brushfire-config
+        approuter 		: "scripts/routers/brushfire-router",
+   		appcontroller 	: "scripts/controllers/brushfire-controller",
+   		// brushfire-job-config
+        async			: "libraries/thirdparty/async",
+	    jobrouter 		: "scripts/routers/brushfire-job-router",
+	    jobcontroller 	: "scripts/controllers/brushfire-job-controller",
+	    // brushfire-reset-password-config
+        resetpasswordrouter     : "scripts/routers/brushfire-reset-password-router",
+	    resetpasswordcontroller : "scripts/controllers/brushfire-reset-password-controller"
 	},
 	shim: {
 
@@ -36,7 +43,7 @@ require.config({
 		},
 		
 		backbone:{
-			deps:["jquery", "underscore"],
+			deps:["jquery", "hbs/underscore"],
 			exports: "Backbone"
 		},
 
@@ -65,9 +72,3 @@ require.config({
 	}
 });
 
-require(["app", "approuter"],function(App, ApplicationRouter){
-	var options = {};
-	var router = new ApplicationRouter();
-	App.router = router;
-	App.start(options);
-});

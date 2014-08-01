@@ -16,7 +16,10 @@
     <script type="text/javascript">
       var CONTEXT_ROOT = '<%= request.getContextPath() %>'; 
     </script>
-    <script>var requirejs = { urlArgs: 'brushfire=@Version@' };</script>
+    <script>var requirejs = {
+        baseUrl: '@BaseURL@',
+        urlArgs: 'rpj=@Version@'
+        };</script>
     <script src="libraries/thirdparty/require.js" data-main="brushfire-reset-password-config"></script>
     <script type="text/javascript">
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()

@@ -1,13 +1,13 @@
 define([
 		"jquery",
 		"jquerycookie",
-		"underscore",
+		"hbs/underscore",
 		"modernizr",
 		"utils",
 		"backbone",
 		"wreqr",
 		"marionette",
-		"Handlebars",
+		"hbs/handlebars",
 		"scripts/models/model-language"
 	],
 	function($, Cookie, _, Modernizr, Utils, Backbone, Wreqr, Marionette, Handlebars, ModelLanguage){

@@ -28,7 +28,9 @@ define([
 				"click #segmented-referrals"	: "showSegmentedReferrals",
 				"click #segmented-pending"		: "showSegmentedPending",
 				"click .google-hspost-help"		: "androidDevice",
-				"click .ios-hspost-help"		: "iOSDevice"
+				"click .ios-hspost-help"		: "iOSDevice",
+				"click #close-share-job"		: "closeShareJob",
+				"click #send-share-job"			: "sendShareJob"
 			},
 
 			initialize : function(){
@@ -132,6 +134,12 @@ define([
 
 				$("#segmented-pending").removeClass("unselected");
 				$("#segmented-referrals").addClass("unselected");			
+			},
+
+			closeShareJob : function(){
+				var alert = $("#app-alert-share-job");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
 			},
 			
 			serializeData : function(){

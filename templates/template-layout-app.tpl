@@ -60,6 +60,23 @@
 		<button id="close-referral-list">Close</button>
 	</div>
 </div>
+<!--Share Job Alert-->
+<div id="app-alert-share-job" class="app-alert share-job">
+	<div class="alert-title">Share Job</div>
+	<div class="alert-body">
+		<p>Which jobs would you like to share?</p>
+		<ul class="jobs-list">
+			<li>
+				<input type="checkbox" id="123"/>
+				<label for="123">Bartender</label>
+			</li>
+		</ul>
+	</div>
+	<div class="alert-action">
+		<button id="send-share-job" class="primary">Share</button>
+		<button id="close-share-job">Close</button>
+	</div>
+</div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">
 	<div class="header">

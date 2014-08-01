@@ -23,6 +23,7 @@ define([
 			"click .candidate-message"	: "networkMessage",
 			"click #send-message"		: "sendBulkMessage",
 			"click .candidate-network"	: "networkConnections",
+			"click #share-job"			: "shareJob"
 
 		},
 
@@ -36,11 +37,32 @@ define([
 			      .indexOf(m[3].toUpperCase()) >= 0;
 			};
 
-			// OVERWRITES old selecor
+			// OVERWRITES old selector
 			$.expr[':'].contains = function(a, i, m) {
 			  return jQuery(a).text().toUpperCase()
 			      .indexOf(m[3].toUpperCase()) >= 0;
 			};			
+
+			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
+			this.listenTo(App, "alertSecondaryAction", this.alertPrimaryAction);
+		},
+
+		alertPrimaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "delete":
+					this.completeDeleteJob();
+				break;
+			}
+		},
+
+		alertSecondaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "delete":
+					this.cancelDeleteJob();
+				break;
+			}
 		},
 
 		profile : function(event){
@@ -72,8 +94,10 @@ define([
 			var count = $(".candidate-select:checked").length;
 			if(count > 0){
 				$("#send-message").prop("disabled",false);
+				$("#share-job").prop("disabled",false);
 			}else{
 				$("#send-message").prop("disabled",true);
+				$("#share-job").prop("disabled",true);
 			}
 			event.stopPropagation();
 		},
@@ -160,6 +184,21 @@ define([
 
 		clearAllFilter : function(){
 			$(".filter-section .checkbox-group input").prop("checked", false);
+		},
+
+		shareJob : function(event){
+			var userguids = [];
+
+			$(".candidate-select:checked").each(function(){
+				var guid = $(this).closest("li.view-profile").data("guid");
+				userguids.push(guid);
+			});
+
+			var guids = userguids.join(",");
+			var alert = $("#app-alert-share-job");
+			$(alert).addClass("show");
+			$(document).find("#app-modal").addClass("show");
+			$(".candidate-select").prop("checked", false);
 		},
 
 		serializeData : function(){

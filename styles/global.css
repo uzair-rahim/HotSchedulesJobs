@@ -1478,6 +1478,35 @@ input[type="password"]::selection{
 	color: #aaaaaa;
 }
 
+.app-alert.share-job{
+	height: 320px;
+	margin-top: -160px;
+}
+
+.app-alert.share-job .alert-body{
+	margin: 10px;
+}
+
+.app-alert.share-job .alert-body ul.jobs-list{
+	height: 180px;
+	overflow: auto;
+	margin: 10px 0 0 0;
+}
+
+.app-alert.share-job .alert-body ul.jobs-list li{
+	float: left;
+	clear: both;
+	padding: 5px 0;
+	margin: 0 0 0 5px;
+}
+
+.app-alert.share-job .alert-body ul.jobs-list li label{
+	font-weight: normal;
+	color: #222222;
+}
+
+
+
 
 
 #app-modal{

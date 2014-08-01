@@ -37,16 +37,14 @@ define([
 			"click .copy-tiny-url"			: "copyTinyURL",
 			"click .share-with-employees"	: "shareJobWithEmployees",
 			"click .share-with-followers"	: "shareJobWithFollowers",
-			"click .view-candidates"		: "candidates",
+			"click .view-candidates" 		: "candidates",
 			"click .view-profile"			: "profile",
 			"click .referred-by"			: "candidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
 			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
-			"click .candidate-network"		: "candidateNetwork",
-			"click .share-with-employees"	: "shareJobWithEmployees",
-			"click .share-with-followers"	: "shareJobWithFollowers"
+			"click .candidate-network"		: "candidateNetwork"
 		},
 
 		initialize : function(){
@@ -824,7 +822,7 @@ define([
 			var isDisabled = $(item).hasClass("disabled")
 
 			if(!isDisabled){
-				
+				Utils.ShowToast({ type : "success", message : "Job shared with all employees"});
 			}
 
 			event.stopPropagation();
@@ -835,7 +833,7 @@ define([
 			var isDisabled = $(item).hasClass("disabled")
 
 			if(!isDisabled){
-				
+				Utils.ShowToast({ type : "success", message : "Job shared with all followers"});
 			}
 
 			event.stopPropagation();

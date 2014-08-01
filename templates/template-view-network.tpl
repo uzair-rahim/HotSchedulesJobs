@@ -11,6 +11,7 @@
 
 <div id="toolbar" class="hideable-toolbar">
 	<button id="send-message" class="primary" disabled>Send Message</button>
+	<button id="share-job" disabled>Send Message</button>
 </div>
 
 <div id="filter-flyout" class="flyout">
@@ -38,7 +39,7 @@
 	<div class="grid-list-head">Current Employees ({{employees.length}})</div>
 	<ul id="employees-list" class="grid-list top">
 		{{#each employees}}
-			<li class="view-profile" data-email="{{this.attributes.email}}">
+			<li class="view-profile" data-email="{{this.attributes.email}}" data-guid="{{this.attributes.guid}}">
 				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.attributes.photo}}
@@ -97,7 +98,7 @@
 	<div class="grid-list-head">People Following Your Business ({{followers.length}})</div>
 	<ul id="followers-list" class="grid-list top">
 		{{#each followers}}
-			<li class="view-profile" data-email="{{this.attributes.email}}">
+			<li class="view-profile" data-email="{{this.attributes.email}}" data-guid="{{this.attributes.guid}}">
 				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.attributes.photo}}

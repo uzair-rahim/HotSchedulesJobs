@@ -1,5 +1,5 @@
 define([
-        'Handlebars'
+        'hbs/handlebars'
 ], function ( Handlebars ) {
 	
 	function greaterThan(lvalue, rvalue, options) {

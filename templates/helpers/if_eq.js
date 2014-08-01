@@ -1,5 +1,5 @@
 define([
-        'Handlebars'
+        'hbs/handlebars'
 ], function ( Handlebars ) {
 	
 	function equalTo(lvalue, rvalue, options) {

@@ -65,12 +65,10 @@
 	<div class="alert-title">Share Job</div>
 	<div class="alert-body">
 		<p>Which jobs would you like to share?</p>
-		<ul class="jobs-list">
-			<li>
-				<input type="checkbox" id="123"/>
-				<label for="123">Bartender</label>
-			</li>
-		</ul>
+		<div id="select-share-job" class="custom-select share-job" data-index="0" data-value="">
+			<button class="custom-select-button"></button>
+			<ul class="custom-select-list"></ul>
+		</div>
 	</div>
 	<div class="alert-action">
 		<button id="send-share-job" class="primary">Share</button>

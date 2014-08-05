@@ -26,13 +26,14 @@ define([
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-yelp-rating",
 		"scripts/collections/collection-jobs",
+		"scripts/collections/collection-jobs-info",
 		"scripts/collections/collection-employer-profile",
 		"scripts/collections/collection-network",
 		"scripts/collections/collection-employees",
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -347,6 +348,7 @@ define([
 
 					var userGuid = Utils.GetUserSession().employerIds[0];
 					var jobtypes = new ModelJobTypes();
+					var jobsinfo = new CollectionJobsInfo();
 					var employees = new CollectionEmployees({guid : userGuid});
 					var followers = new CollectionFollowers({guid : userGuid});
 					var models = new Object();
@@ -361,6 +363,17 @@ define([
 							error : function(){
 								console.log("Error fetching Job Types...");
 								Utils.ShowToast({ message : "Error fetching Job Types..."});
+							}
+						}),
+
+						jobsinfo.fetch({
+							success : function(jobsinfoResponse){
+								console.log("Jobs Info fetched successfully...");
+								models.jobsinfo = jobsinfoResponse.models;
+							},
+							error : function(){
+								console.log("Error fetching Jobs info...");
+								Utils.ShowToast({ message : "Error fetching Jobs info..."});
 							}
 						}),
 

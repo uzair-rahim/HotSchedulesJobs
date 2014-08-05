@@ -1479,31 +1479,19 @@ input[type="password"]::selection{
 }
 
 .app-alert.share-job{
-	height: 320px;
-	margin-top: -160px;
+	overflow: visible;
 }
 
 .app-alert.share-job .alert-body{
 	margin: 10px;
+	height: 60px;
 }
 
-.app-alert.share-job .alert-body ul.jobs-list{
-	height: 180px;
-	overflow: auto;
-	margin: 10px 0 0 0;
+.app-alert.share-job .alert-body .custom-select.share-job{
+	margin: 10px 0;
 }
 
-.app-alert.share-job .alert-body ul.jobs-list li{
-	float: left;
-	clear: both;
-	padding: 5px 0;
-	margin: 0 0 0 5px;
-}
 
-.app-alert.share-job .alert-body ul.jobs-list li label{
-	font-weight: normal;
-	color: #222222;
-}
 
 
 

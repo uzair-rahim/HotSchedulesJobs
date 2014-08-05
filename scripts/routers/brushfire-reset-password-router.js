@@ -1,6 +1,6 @@
 define([
 		"marionette",
-		"appcontroller"
+		"resetpasswordcontroller"
 	],
 	function(Marionette, AppController){
 		"use strict";

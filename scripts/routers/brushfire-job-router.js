@@ -1,6 +1,6 @@
 define([
 		"marionette",
-		"appcontroller"
+		"jobcontroller"
 	],
 	function(Marionette, AppController){
 		"use strict";

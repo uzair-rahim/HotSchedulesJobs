@@ -17,8 +17,8 @@
       var CONTEXT_ROOT = '<%= request.getContextPath() %>'; 
     </script>
     <script>var requirejs = {
-        baseUrl: '@BaseURL@',
-        urlArgs: 'ij=@Version@'
+        //baseUrl: '@BaseURL@',
+        //urlArgs: 'ij=@Version@'
         };</script>
     <script src="libraries/thirdparty/require.js" data-main="brushfire-config"></script>
     <script type="text/javascript">

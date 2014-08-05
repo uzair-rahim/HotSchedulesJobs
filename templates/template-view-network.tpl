@@ -11,7 +11,7 @@
 
 <div id="toolbar" class="hideable-toolbar">
 	<button id="send-message" class="primary" disabled>Send Message</button>
-	<button id="share-job" disabled>Send Message</button>
+	<button id="share-job" disabled>Share Job</button>
 </div>
 
 <div id="filter-flyout" class="flyout">

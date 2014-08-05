@@ -13,6 +13,8 @@ define([
 		tagName : "div",
 		className : "content",
 		template: Template,
+		employeesGuids : null,
+		followersGuids : null,
 		events : {
 			"click #filter"				: "showFilter",
 			"click #cancel-filter"		: "hideFilter",
@@ -43,26 +45,23 @@ define([
 			      .indexOf(m[3].toUpperCase()) >= 0;
 			};			
 
-			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
-			this.listenTo(App, "alertSecondaryAction", this.alertPrimaryAction);
+			this.listenTo(App, "sendShareJob", this.sendShareJob);
 		},
 
-		alertPrimaryAction : function(){
-			var listener = $("#app-alert").attr("data-listener");
-			switch(listener){
-				case "delete":
-					this.completeDeleteJob();
-				break;
-			}
-		},
+		onShow : function(){
 
-		alertSecondaryAction : function(){
-			var listener = $("#app-alert").attr("data-listener");
-			switch(listener){
-				case "delete":
-					this.cancelDeleteJob();
-				break;
+			var jobs = this.model.jobsinfo;
+
+			var shareJobsButton = $("#select-share-job button");
+			var shareJobsList = $("#select-share-job .custom-select-list");
+			
+			$(shareJobsButton).text(jobs[0].attributes.jobName);
+			$(shareJobsList).html("");
+			
+			for(var i = 0; i < jobs.length; i++){
+				$(shareJobsList).append("<li>"+jobs[i].attributes.jobName+"</li>");
 			}
+
 		},
 
 		profile : function(event){
@@ -119,7 +118,8 @@ define([
 
 			var emails = addresses.join(",");
 			window.location.href = "mailto:"+manager+"?bcc="+emails;
-			$(".candidate-select").prop("checked", false);
+
+			this.disableToolbarButtons();
 		},
 
 		networkConnections : function(event){
@@ -188,17 +188,94 @@ define([
 
 		shareJob : function(event){
 			var userguids = [];
+			var employeesGuids = [];
+			var followersGuids = [];
 
 			$(".candidate-select:checked").each(function(){
 				var guid = $(this).closest("li.view-profile").data("guid");
-				userguids.push(guid);
+				var list = $(this).closest("ul.grid-list");
+				var network = $(list).attr("id");
+
+				if(network === "followers-list"){
+					followersGuids.push(guid);
+				}else if(network === "employees-list"){
+					employeesGuids.push(guid);
+				}
+
 			});
 
-			var guids = userguids.join(",");
+			this.employeesGuids = employeesGuids;
+			this.followersGuids = followersGuids;
+
 			var alert = $("#app-alert-share-job");
 			$(alert).addClass("show");
 			$(document).find("#app-modal").addClass("show");
+
+		},
+
+		sendShareJob : function(){
+			var jobIndex = $("#select-share-job").attr("data-index");
+			var jobGuid = this.model.jobsinfo[jobIndex].attributes.guid;
+			var employeesGuids = this.employeesGuids;
+			var followersGuids = this.followersGuids;
+
+			if(employeesGuids !== null){
+				this.sendToUsers(jobGuid, employeesGuids, 1);
+			}
+
+			if(followersGuids !== null){
+				this.sendToUsers(jobGuid, followersGuids, 2);
+			}
+
+			this.disableToolbarButtons();
+			var alert = $("#app-alert-share-job");
+				$(alert).removeClass("show");
+		},
+
+		sendToUsers : function(jobGuid, userGuids, type){
+			var share = new Object();
+				share.fromUser = new Object();
+				share.jobPosting = new Object();
+				share.employer = new Object();
+
+				share.fromUser.guid = Utils.GetUserSession().guid;
+				share.employer.guid = Utils.GetUserSession().employerIds[0];
+				share.jobPosting.guid = jobGuid
+				share.toUserGuids = userGuids
+				share.type = type;
+
+			var that = this;
+			var restURL = Utils.GetURL("/services/rest/share");
+				
+			$.ajax({
+				headers: { 
+			        'Accept': 'application/json',
+			        'Content-Type': 'application/json' 
+			    },
+				url : restURL,
+				type : "POST",
+				data: JSON.stringify(share),
+	    		processData: false,
+	    		success : function(){
+	    			switch(type){
+	    				case 1:
+	    					that.employeesGuids = null;
+	    				break;
+	    				case 2:
+	    					that.followerGuids = null;
+	    				break;
+	    			}
+	    		},
+	    		error : function(response){
+	    			Utils.ShowToast({message : "Error sharing job"});
+	    		}
+			});
+		},
+
+		disableToolbarButtons : function(){
 			$(".candidate-select").prop("checked", false);
+			$("#share-job").prop("disabled", true);
+			$("#send-message").prop("disabled", true);
 		},
 
 		serializeData : function(){

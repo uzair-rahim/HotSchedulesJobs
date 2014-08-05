@@ -822,7 +822,40 @@ define([
 			var isDisabled = $(item).hasClass("disabled")
 
 			if(!isDisabled){
-				Utils.ShowToast({ type : "success", message : "Job shared with all employees"});
+
+				var job = $(item).closest("#job-list.grid-list > li").data("guid");
+
+				var share = new Object();
+					share.fromUser = new Object();
+					share.jobPosting = new Object();
+					share.employer = new Object();
+					
+					share.fromUser.guid = Utils.GetUserSession().guid;
+					share.jobPosting.guid = job
+					share.employer.guid = Utils.GetUserSession().employerIds[0];
+					share.type = 1;
+
+				var that = this;
+				var restURL = Utils.GetURL("/services/rest/share");
+				
+				$.ajax({
+					 headers: { 
+				        'Accept': 'application/json',
+				        'Content-Type': 'application/json' 
+				    },
+					url : restURL,
+					type : "POST",
+					data: JSON.stringify(share),
+	    			processData: false,
+	    			success : function(response){
+	    				Utils.ShowToast({ type : "success", message : "Job shared with all employees"});		
+	    			},
+	    			error : function(response){
+	    				Utils.ShowToast({message : "Error sharing job"});
+	    			}
+				});
+
+				
 			}
 
 			event.stopPropagation();
@@ -833,7 +866,40 @@ define([
 			var isDisabled = $(item).hasClass("disabled")
 
 			if(!isDisabled){
-				Utils.ShowToast({ type : "success", message : "Job shared with all followers"});
+
+				var job = $(item).closest("#job-list.grid-list > li").data("guid");
+
+				var share = new Object();
+					share.fromUser = new Object();
+					share.jobPosting = new Object();
+					share.employer = new Object();
+
+					share.fromUser.guid = Utils.GetUserSession().guid;
+					share.jobPosting.guid = job
+					share.employer.guid = Utils.GetUserSession().employerIds[0];
+					share.type = 2;
+
+				var that = this;
+				var restURL = Utils.GetURL("/services/rest/share");
+				
+				$.ajax({
+					headers: { 
+				        'Accept': 'application/json',
+				        'Content-Type': 'application/json' 
+				    },
+					url : restURL,
+					type : "POST",
+					data: JSON.stringify(share),
+	    			processData: false,
+	    			success : function(response){
+	    				Utils.ShowToast({ type : "success", message : "Job shared with all followers"});		
+	    			},
+	    			error : function(response){
+	    				Utils.ShowToast({message : "Error sharing job"});
+	    			}
+				});
+
+				
 			}
 
 			event.stopPropagation();

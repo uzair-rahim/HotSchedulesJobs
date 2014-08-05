@@ -6,7 +6,7 @@
 	<li id="network">Network</li>
 </ul>
 <ul id="nav-icons">
-	<li id="messages"></li>
+	<!--<li id="messages"></li>-->
 	<li id="settings"></li>
 </ul>
 <div id="nav-user">{{username}}</div>

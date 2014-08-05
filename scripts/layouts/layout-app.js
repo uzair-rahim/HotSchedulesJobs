@@ -94,6 +94,10 @@ define([
 				App.trigger("alertSecondaryAction");
 			},
 
+			sendShareJob : function(){
+				App.trigger("sendShareJob");
+			},
+
 			closeHelp : function(){
 				Utils.HideHelp();
 			},

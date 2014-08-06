@@ -169,7 +169,6 @@ define([
 			this.adminID = id;
 			this.adminGUID = guid;
 			this.adminEmployer = employer;
-			alert(id + " - " + guid);
 			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
 		},
 
@@ -202,7 +201,6 @@ define([
 			var guid = $(event.target).attr("data-guid");
 			this.employerID = id;
 			this.employerGUID = guid;
-			alert(id + " - " + guid);
 			Utils.ShowAlert({listener : "employer", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Employer", message : "Are you sure you wan't to remove this employer?" });
 		},
 
@@ -241,8 +239,6 @@ define([
 			var guid = $(event.target).attr("data-guid");
 			this.userID = id;
 			this.userGUID = guid;
-
-			alert(id + " - " + guid);
 			Utils.ShowAlert({listener : "user", primary : true, primaryType : "destroy", primaryText : "Deactivate", title : "Deactivate User", message : "Are you sure you wan't to deactivate this user?" });
 		},
 

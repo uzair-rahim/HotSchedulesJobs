@@ -28,7 +28,8 @@ define([
 			"click #add-admin"		: "addAdmin",
 			"click #make-admin"		: "makeAdmin",
 			"click .remove-admin"	: "removeAdmin",
-			"change #logo-file"		: "startLogoUpload",
+			"change #logo-file"		: "resizeLogo"
+			//"change #logo-file"		: "startLogoUpload"
 		},
 
 		initialize : function(){
@@ -42,48 +43,67 @@ define([
 			$("#logo-file").click();
 		},
 
+		resizeLogo : function(){
+			var logo = $("#logo-file")[0].files[0];
+			if(logo.size > 4194304){
+				Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 4MB", primary : false, secondaryText : "Ok" });
+			}else{
+
+				var _URL = window.URL || window.webkitURL;
+				var image = new Image();
+	    		image.src = _URL.createObjectURL(logo);
+
+	    		image.onload = function(){
+	    			var alert = $("#app-alert-resize-logo");
+	    			var overlay = $(alert).find(".resize-logo-container .overlay")
+	    			var ratio = $(overlay).width() / this.width;
+	    			var newHeight = this.height * ratio;
+	    			var marginTop = ($(overlay).height() - newHeight)/2	
+	    			
+	    			$(alert).find(".resize-logo-container .overlay").after("<img class='resize-logo-image' src='"+image.src+"' style='margin-top:"+marginTop+"px'/>");
+					$(alert).addClass("show");
+					$(document).find("#app-modal").addClass("show");
+	    		}
+			}
+		},
+
 		startLogoUpload : function(event){
 
 			var employerGUIDs = Utils.GetUserSession().employerIds;
 			var guid = employerGUIDs[0];
 
 			var logo = $("#logo-file")[0].files[0];
+			var data = new FormData();
+				data.append("file", logo);
 
-			if(logo.size > 4194304){
-				Utils.ShowAlert({ listener : "logo", title : "File Size Too Large", message : "The selected image file size is too large and exceeds the allowed limit of 4MB", primary : false, secondaryText : "Ok" });
-			}else{
-				var data = new FormData();
-					data.append("file", logo);
+			var restURL = Utils.GetURL("/services/rest/employer/logo/");
 
-				var restURL = Utils.GetURL("/services/rest/employer/logo/");
+			$.ajax({
+				url : restURL+guid,
+				data : data,
+				type : "POST",
+				contentType: false,
+	    		processData: false,
+	    		success : function(response){
 
-				$.ajax({
-					url : restURL+guid,
-					data : data,
-					type : "POST",
-					contentType: false,
-	    			processData: false,
-	    			success : function(response){
+    				var _URL = window.URL || window.webkitURL;
 
-	    				var _URL = window.URL || window.webkitURL;
+	    			var image = new Image();
+	    				image.src = _URL.createObjectURL(logo);
 
-	    				var image = new Image();
-	    					image.src = _URL.createObjectURL(logo);
+	    			var logoImage = $("#logo");
 
-	    				var logoImage = $("#logo");
-
-	    				if($(logoImage).length > 0){
-							$(logoImage).attr("src", image.src);
-						}else{
-							$(".logo-container .logo").append("<img id='logo' src='"+image.src+"'/>");
-						}
-	    			},
-	    			error : function(){
-	    				console.log("Error uploading logo...");
-						Utils.ShowToast({ message : "Error uploading logo..."});
-	    			}
-				});	
-			}
+	    			if($(logoImage).length > 0){
+						$(logoImage).attr("src", image.src);
+					}else{
+						$(".logo-container .logo").append("<img id='logo' src='"+image.src+"'/>");
+					}
+	    		},
+	    		error : function(){
+	    			console.log("Error uploading logo...");
+					Utils.ShowToast({ message : "Error uploading logo..."});
+	    		}
+			});	
 
 		},
 

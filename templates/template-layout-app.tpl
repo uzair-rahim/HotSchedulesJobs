@@ -60,6 +60,27 @@
 		<button id="close-referral-list">Close</button>
 	</div>
 </div>
+<!--Resize logo on upload alert-->
+<div id="app-alert-resize-logo" class="app-alert resize-logo">
+	<div class="alert-title">Your Logo</div>
+	<div class="alert-body">
+		<div class="resize-logo-container">
+			<div class="overlay"></div>
+			<div class="background"></div>
+		</div>
+		<div class="resize-slider-container">
+			<div class="icon small"></div>
+			<div class="slider">
+				<div class="handle"></div>
+			</div>
+			<div class="icon"></div>
+		</div>
+	</div>
+	<div class="alert-action">
+		<button id="save-logo" class="primary">Save</button>
+		<button id="close-resize-logo">Close</button>
+	</div>
+</div>
 <!--Share Job Alert-->
 <div id="app-alert-share-job" class="app-alert share-job">
 	<div class="alert-title">Share Job</div>

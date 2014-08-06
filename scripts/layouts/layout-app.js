@@ -1,11 +1,12 @@
 define([
 		"jquery",
+		"jqueryui",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-layout-app"
 	],
-	function($, App, Utils, Marionette, Template){
+	function($, UI, App, Utils, Marionette, Template){
 		"use strict";
 
 		var LayoutApp = Marionette.Layout.extend({
@@ -30,7 +31,9 @@ define([
 				"click .google-hspost-help"		: "androidDevice",
 				"click .ios-hspost-help"		: "iOSDevice",
 				"click #close-share-job"		: "closeShareJob",
-				"click #send-share-job"			: "sendShareJob"
+				"click #send-share-job"			: "sendShareJob",
+				"click #save-logo"				: "saveLogo",
+				"click #close-resize-logo"		: "closeResizeLogo"
 			},
 
 			initialize : function(){
@@ -62,6 +65,9 @@ define([
 						$("#app-store").remove()
 					break;
 				}
+
+				var handle = $(".resize-slider-container .slider .handle");
+					$(handle).draggable();
 			},
 
 			detectDevice : function(){
@@ -138,6 +144,13 @@ define([
 
 				$("#segmented-pending").removeClass("unselected");
 				$("#segmented-referrals").addClass("unselected");			
+			},
+
+			closeResizeLogo : function(event){
+				var alert = $("#app-alert-resize-logo");
+				$(alert).removeClass("show");
+				$(document).find("#app-modal").removeClass("show");
+				$("#app-alert-resize-logo img.resize-logo-image").remove();
 			},
 
 			closeShareJob : function(){

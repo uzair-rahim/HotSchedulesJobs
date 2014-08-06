@@ -1491,6 +1491,114 @@ input[type="password"]::selection{
 	margin: 10px 0;
 }
 
+.app-alert.resize-logo{
+	width: 300px;
+	height: 400px;
+	margin-top: -245px;
+	border:1px solid #cccccc;
+	box-shadow: 0px 0px 30px 0 rgba(0,0,0,0.25);
+}
+
+.app-alert.resize-logo .alert-body{
+	width: 100%;
+	height: 290px;
+}
+
+.app-alert.resize-logo .resize-logo-container{
+	position: relative;
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin: 10px auto;
+	overflow: hidden;
+}
+
+.app-alert.resize-logo .resize-logo-container .overlay{
+	position: absolute;
+	display: block;
+	width: 200px;
+	height: 200px;
+	border: 1px solid #aaaaaa;
+	background: -moz-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
+  	background: -webkit-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
+  	background: -ms-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
+  	background: -o-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
+	z-index: 3;
+}
+
+.app-alert.resize-logo .resize-logo-container img.resize-logo-image{
+	position: absolute;
+	display: block;
+	min-width: 200px;
+	width: 100%;
+	z-index: 2;
+}
+
+.app-alert.resize-logo .resize-logo-container .background{
+	position: absolute;
+	display: block;
+	width: 150px;
+	height: 150px;
+	margin: 25px;
+	border-radius: 75px;
+	border: 1px solid #aaaaaa;
+	background-color: #000000;
+	z-index: 1;
+}
+
+.app-alert.resize-logo .resize-slider-container{
+	display: block;
+	float: left;
+	clear: both;
+	width: 245px;
+	height: 20px;
+	margin: 0 0 0 33px;
+}
+
+.app-alert.resize-logo .resize-slider-container .icon{
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	background-image: url("../images/icon-image.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px 20px;
+	overflow: hidden;
+}
+
+.app-alert.resize-logo .resize-slider-container .icon.small{
+	background-size: 16px 16px;
+	width: 16px;
+}
+
+.app-alert.resize-logo .resize-slider-container .slider{
+	display: block;
+	float: left;
+	width: 186px;
+	height: 5px;
+	background-color: #e8eaeb;
+	border: 1px solid #D0D0D0;
+	border-radius: 4px;
+	margin: 8px;
+	box-shadow: inset 0px 0px 2px 0 rgba(0,0,0,0.15), 0px 1px 2px 0 rgba(255,255,255,1);
+}
+
+.app-alert.resize-logo .resize-slider-container .slider .handle{
+	display: block;
+	float: left;
+	width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	border: 1px solid #ced0d6;
+	background-color: #ffffff;
+	position: absolute;
+	margin: -8px 0 0 0;
+}
+
+.app-alert.resize-logo .alert-action button{
+	width: 130px;
+}
 
 
 

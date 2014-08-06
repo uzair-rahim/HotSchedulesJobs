@@ -697,19 +697,42 @@ ul.grid-list > li .candidate-rating.one{
 
 /* SUPPORT STYLES */
 
+.search-type-container{
+	display: block;
+	float: left;
+	margin: 3px 0 0 0;
+}
+
+.search-type-container .custom-select-button{
+	margin: 0 !important;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: 0;
+	padding: 6px 20px 6px 8px;
+	text-align: left;
+}
+
+.search-type-container .custom-select-list{
+	position: absolute;
+	margin-top: 30px;
+}
+
 #search-field{
 	float: left;
 	width: 285px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
 
 #search-button{
 	margin-top: 2px; 
 }
 
-@media screen and (max-width: 410px){
+@media screen and (max-width: 530px){
 
 	#search-field{
-		width: calc(100% - 20px);
+		width: calc(100% - 137px);
+		margin-right: 0;
 	}
 
 	#search-button{
@@ -761,7 +784,7 @@ ul.grid-list.support > li .logo img{
 ul.grid-list.support > li .info{
 	display: block;
 	float: left;
-	width: calc(100% - 150px);
+	width: calc(100% - 210px);
 	white-space: nowrap;
 }
 

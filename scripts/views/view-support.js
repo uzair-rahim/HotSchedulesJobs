@@ -28,6 +28,7 @@ define([
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Support view initialized...");
 
+			$(document.body).delegate(".grid-list.support li button.destroy.user", "click", this.removeUser);
 			$(document.body).delegate(".grid-list.support li button.destroy.admin", "click", this.removeAdmin);
 			$(document.body).delegate(".grid-list.support li button.destroy.employer", "click", this.removeEmployer);
 
@@ -44,58 +45,99 @@ define([
 		},
 
 		search : function(){
-			var that = this;
 			var searchTerm = $("#search-field").val();
 			if(searchTerm !== ""){
-				var search = new CollectionSupportSearch({string : searchTerm});
-
-					search.fetch({
-						success : function(response){
-
-							var employersArray = new Array();
-							var employersGUIDArray = new Array();
-							var adminsArray = new Array();
-
-							for(var i = 0; i<response.models.length; i++){
-								var model = response.models[i].toJSON();
-								var employer = model.employer;
-								var employerGUID = employer.guid;
-
-								adminsArray.push(model);
-
-								var exist = $.inArray(employerGUID, employersGUIDArray);
-
-								if(exist === -1){
-									employersGUIDArray.push(employerGUID);
-									employersArray.push(employer);
-								}else{
-
-								}
-
-							}
-
-							that.model = new Object();
-
-							that.model.admins = new Object();
-							that.model.employers = new Object();
-
-							that.model.admins = adminsArray;
-							that.model.employers = employersArray;
-
-							that.render();
-						},
-						error : function(){
-							console.log("Error fetching search results...");
-							Utils.ShowToast({ message : "Error fetching search results..."});
-						}
-					});
+				var searchType = $("#search-type").attr("data-index");
+				switch(searchType){
+					case "0":
+						this.searchAdminsAndStores(searchTerm);
+					break;
+					case "1":
+						this.searchUsers(searchTerm);
+					break;
+				}
 
 			}
+		},
+
+		searchAdminsAndStores : function(searchTerm){
+			var that = this;
+			var search = new CollectionSupportSearch({string : searchTerm});
+			search.fetch({
+				success : function(response){
+					var employersArray = new Array();
+					var employersGUIDArray = new Array();
+					var adminsArray = new Array();
+
+					for(var i = 0; i<response.models.length; i++){
+						var model = response.models[i].toJSON();
+						var employer = model.employer;
+						var employerGUID = employer.guid;
+
+						adminsArray.push(model);
+
+						var exist = $.inArray(employerGUID, employersGUIDArray);
+
+						if(exist === -1){
+							employersGUIDArray.push(employerGUID);
+							employersArray.push(employer);
+						}else{
+
+						}
+
+					}
+
+					that.model = new Object();
+
+					that.model.admins = new Object();
+					that.model.employers = new Object();
+
+					that.model.admins = adminsArray;
+					that.model.employers = employersArray;
+
+					that.render();
+				},
+				error : function(){
+					console.log("Error fetching search results...");
+					Utils.ShowToast({ message : "Error fetching search results..."});
+				}
+			});
+		},
+
+		searchUsers : function(searchTerm){
+			var that = this;
+			var restURL = Utils.GetURL("/services/rest/search/?types=2&searchString="+searchTerm);
+			$.ajax({
+				url : restURL,
+				type : "GET",
+				success : function(response){
+
+					var usersArray = new Array();
+
+					for(var i = 0; i<response.results.length; i++){
+						var model = response.results[i].user;
+						usersArray.push(model);
+					}
+
+					that.model = new Object();
+					that.model.users = usersArray;
+
+					that.render();
+
+				},
+				error : function(){
+					console.log("Error fetching search results...");
+					Utils.ShowToast({ message : "Error fetching search results..."});
+				}
+			});
 		},
 
 		alertPrimaryAction : function(){
 			var listener = $("#app-alert").attr("data-listener");
 			switch(listener){
+				case "user":
+					this.completeRemoveUser();
+				break;
 				case "admin":
 					this.completeRemoveAdmin();
 				break;
@@ -108,6 +150,9 @@ define([
 		alertSecondaryAction : function(){
 			var listener = $("#app-alert").attr("data-listener");
 			switch(listener){
+				case "user":
+					this.cancelRemoveUser();
+				break;
 				case "admin":
 					this.cancelRemoveAdmin();
 				break;
@@ -124,6 +169,7 @@ define([
 			this.adminID = id;
 			this.adminGUID = guid;
 			this.adminEmployer = employer;
+			alert(id + " - " + guid);
 			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
 		},
 
@@ -156,6 +202,7 @@ define([
 			var guid = $(event.target).attr("data-guid");
 			this.employerID = id;
 			this.employerGUID = guid;
+			alert(id + " - " + guid);
 			Utils.ShowAlert({listener : "employer", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Employer", message : "Are you sure you wan't to remove this employer?" });
 		},
 
@@ -188,11 +235,54 @@ define([
 		cancelRemoveEmployer : function(){
 			Utils.HideAlert();
 		},
+
+		removeUser : function(event){
+			var id = $(event.target).attr("id");
+			var guid = $(event.target).attr("data-guid");
+			this.userID = id;
+			this.userGUID = guid;
+
+			alert(id + " - " + guid);
+			Utils.ShowAlert({listener : "user", primary : true, primaryType : "destroy", primaryText : "Deactivate", title : "Deactivate User", message : "Are you sure you wan't to deactivate this user?" });
+		},
+
+		completeRemoveUser : function(){
+			Utils.HideAlert();
+
+			var that = this;
+			var restURL = Utils.GetURL("/services/rest/user");
+
+			$.ajax({
+				headers: { 
+			        'Accept': 'application/json',
+			        'Content-Type': 'application/json' 
+			    },
+				url : restURL,
+				type : "PUT",
+				data : JSON.stringify({ guid : that.userGUID, accountState : "deactivated"}),
+				dataType: "text",
+	    		processData: false,
+	    		success : function(response){
+	    			Utils.ShowToast({message : "User removed successfully"});
+	    			setTimeout(function(){
+						App.router.controller.support();
+	    			},2000)
+	    		},
+	    		error : function(response){
+	    			Utils.ShowToast({message : "Error removing user"});
+	    		}
+			});
+		},
+
+		cancelRemoveUser : function(){
+			Utils.HideAlert();
+		},
 		
 		serializeData : function(){
 			var jsonObject = new Object();
 
 				if(typeof this.model !== "undefined"){
+					jsonObject.users = this.model.users;
 					jsonObject.admins = this.model.admins;
 					jsonObject.employers = this.model.employers;
 				}

@@ -18,7 +18,7 @@ define([
 			},
 
 			initialize : function(options){
-				console.log("Support Search model initialized...");
+				console.log("Support Search collection initialized...");
 				this.string = options.string;
 			}
 

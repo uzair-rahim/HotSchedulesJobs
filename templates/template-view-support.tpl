@@ -2,15 +2,25 @@
 
 <div id="toolbar" class="support">
 	<div class="search-type-container">
-		<div id="search-type" class="custom-select search-type" data-index="0" data-value="Location/Admin">
-			<button class="custom-select-button">Location/Admin</button>
-			<ul class="custom-select-list">
-				<li>Location/Admin</li>
-				<li>User</li>
-			</ul>
-		</div>
+		{{#if_not_eq users undefined}}
+			<div id="search-type" class="custom-select search-type" data-index="1" data-value="User">
+				<button class="custom-select-button">User</button>
+		{{else}}
+			<div id="search-type" class="custom-select search-type" data-index="0" data-value="Location/Admin">
+				<button class="custom-select-button">Location/Admin</button>
+		{{/if_not_eq}}
+				<ul class="custom-select-list">
+					<li id="select-location-admin">Location/Admin</li>
+					<li id="select-user">User</li>
+				</ul>
+			</div>
 	</div>
-	<input id="search-field" type="text" placeholder="Search for Admins of Employers"/>
+	{{#if_not_eq users undefined}}
+		<input id="search-field" type="text" placeholder="Search for Users"/>
+	{{else}}
+		<input id="search-field" type="text" placeholder="Search for Admins or Employers"/>
+	{{/if_not_eq}}
+
 	<button id="search-button" class="primary" style="margin-top:2px;">Search</button>
 </div>
 

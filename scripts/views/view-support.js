@@ -32,6 +32,10 @@ define([
 			$(document.body).delegate(".grid-list.support li button.destroy.admin", "click", this.removeAdmin);
 			$(document.body).delegate(".grid-list.support li button.destroy.employer", "click", this.removeEmployer);
 
+			$(document.body).delegate("#select-location-admin", "click", this.selectLocationAdmin);
+			$(document.body).delegate("#select-user", "click", this.selectUser);
+
+
 			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
 			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
 		},
@@ -42,6 +46,14 @@ define([
 					$("#search-button").click();
 				}
 			});
+		},
+
+		selectLocationAdmin : function(){
+			$("#search-field").attr("placeholder", "Search for Admins or Employers");
+		},
+
+		selectUser : function(){
+			$("#search-field").attr("placeholder", "Search for Users");
 		},
 
 		search : function(){

@@ -216,23 +216,9 @@ define([
 		sendShareJob : function(){
 			var jobIndex = $("#select-share-job").attr("data-index");
 			var jobGuid = this.model.jobsinfo[jobIndex].attributes.guid;
-			var employeesGuids = this.employeesGuids;
-			var followersGuids = this.followersGuids;
+			var employeeGuids = this.employeesGuids;
+			var followerGuids = this.followersGuids;
 
-			if(employeesGuids !== null){
-				this.sendToUsers(jobGuid, employeesGuids, 1);
-			}
-
-			if(followersGuids !== null){
-				this.sendToUsers(jobGuid, followersGuids, 2);
-			}
-
-			this.disableToolbarButtons();
-			var alert = $("#app-alert-share-job");
-				$(alert).removeClass("show");
-		},
-
-		sendToUsers : function(jobGuid, userGuids, type){
 			var share = new Object();
 				share.fromUser = new Object();
 				share.jobPosting = new Object();
@@ -241,12 +227,14 @@ define([
 				share.fromUser.guid = Utils.GetUserSession().guid;
 				share.employer.guid = Utils.GetUserSession().employerIds[0];
 				share.jobPosting.guid = jobGuid
-				share.toUserGuids = userGuids
-				share.type = type;
+				share.toEmployeeGuids = employeeGuids;
+				share.toFollowerGuids = followerGuids;
+
+				share.type = 1;
 
 			var that = this;
 			var restURL = Utils.GetURL("/services/rest/share");
-				
+
 			$.ajax({
 				headers: { 
 			        'Accept': 'application/json',
@@ -257,19 +245,16 @@ define([
 				data: JSON.stringify(share),
 	    		processData: false,
 	    		success : function(){
-	    			switch(type){
-	    				case 1:
-	    					that.employeesGuids = null;
-	    				break;
-	    				case 2:
-	    					that.followerGuids = null;
-	    				break;
-	    			}
+	    			Utils.ShowToast({message : "Job Shared with your network"});
 	    		},
 	    		error : function(response){
 	    			Utils.ShowToast({message : "Error sharing job"});
 	    		}
 			});
+
+			this.disableToolbarButtons();
+			var alert = $("#app-alert-share-job");
+				$(alert).removeClass("show");
 		},
 
 		disableToolbarButtons : function(){

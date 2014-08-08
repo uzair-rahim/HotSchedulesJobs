@@ -2,7 +2,7 @@
 <div class="form-container wide">
 	<div class="login-form">
 		<div class="logo"></div>
-		<p>Is your business already on HotSchedules Post? Search now. Or create a new page if we don’t have it.</p>
+		<p>Is your business already on HotSchedules Post? Search now. Or create a new page if we don't have it.</p>
 		<input type="text" placeholder="Business Name" id="businessname"/>
 		<input type="text" placeholder="Business Address" id="businessaddress"/>
 		<button id="find">Find My Business</button>

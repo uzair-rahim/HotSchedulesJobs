@@ -79,10 +79,12 @@ define([
 							$(".resize-logo-image").css({top : 0, left: 0});
 						},
 						drag : function(event, ui){
-							imageScale = ((((ui.position.left - 75)/146)*100)+100) + "%";
+							imageScale = ((((ui.position.left - 75)/126)*100)+100) + "%";
 							$(".resize-logo-image").css("width", imageScale);
 						},
 						stop : function(){
+							$(".resize-logo-image").draggable("destroy");
+
 							var imagePosition = $(".resize-logo-image").offset();
 							var imageWidth = $(".resize-logo-image").width();
 							var imageHeight = $(".resize-logo-image").height();

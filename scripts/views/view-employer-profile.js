@@ -57,12 +57,24 @@ define([
 	    		image.onload = function(){
 	    			var alert = $("#app-alert-resize-logo");
 	    			var overlay = $(alert).find(".resize-logo-container .overlay")
-	    			var ratio = $(overlay).width() / this.width;
-	    			var newHeight = this.height * ratio;
 	    			
 	    			$(alert).find(".resize-logo-container .overlay").after("<img class='resize-logo-image' src='"+image.src+"'/>");
 					$(alert).addClass("show");
 					$(document).find("#app-modal").addClass("show");
+
+					var containerWidth = $(".resize-logo-container").width();
+					var containerHeight = $(".resize-logo-container").height();
+
+					var imagePosition = $(".resize-logo-image").offset();
+					var imageWidth = $(".resize-logo-image").width();
+					var imageHeight = $(".resize-logo-image").height();
+							
+					var x1 = (imagePosition.left + containerWidth) - imageWidth;
+					var y1 = (imagePosition.top + containerHeight) - imageHeight;
+					var x2 = imagePosition.left;
+					var y2 = imagePosition.top;
+
+					$(".resize-logo-image").draggable({containment : [x1,y1,x2,y2]});
 	    		}
 			}
 		},
@@ -118,7 +130,7 @@ define([
 				processData: false,
 	    		success : function(response){
 	    			$("#logo").remove();
-					$(".logo-container .logo").append("<img id='logo' src='"+response.url+"'/>");
+					$(".logo-container .logo").append("<img id='logo' src='"+response.url+"?"+(new Date().getTime())+"'/>");
 	    		},
 	    		error : function(){
 	    			console.log("Error uploading logo...");

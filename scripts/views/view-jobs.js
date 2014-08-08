@@ -737,14 +737,24 @@ define([
 		postJob : function(event){
 			var item = $(event.target);
 			var job = $(item).closest("#job-list.grid-list > li").data("guid");
-			this.updateJobStatus(job,"post");
+			var currentState = $(item).closest("#job-list.grid-list > li .job-actions .custom-select").attr("data-value");
+		
+			if(currentState !== "POSTED"){
+				this.updateJobStatus(job,"post");
+			}
+	
 			event.stopPropagation();
 		},
 
 		unpostJob : function(event){
 			var item = $(event.target);
 			var job = $(item).closest("#job-list.grid-list > li").data("guid");
-			this.updateJobStatus(job,"unpost");
+			var currentState = $(item).closest("#job-list.grid-list > li .job-actions .custom-select").attr("data-value");
+
+			if(currentState !== "UNPOSTED"){
+				this.updateJobStatus(job,"unpost");
+			}
+			
 			event.stopPropagation();
 		},
 
@@ -781,6 +791,7 @@ define([
 		},
 
 		updateJobStatus : function(jobGUID, type){
+
 			var restURL = Utils.GetURL("/services/rest/job/");
 
 			var status = 0;

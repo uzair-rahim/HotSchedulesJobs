@@ -29,7 +29,6 @@ define([
 			"click #make-admin"		: "makeAdmin",
 			"click .remove-admin"	: "removeAdmin",
 			"change #logo-file"		: "resizeLogo"
-			//"change #logo-file"		: "startLogoUpload"
 		},
 
 		initialize : function(){
@@ -37,6 +36,8 @@ define([
 			console.log("Employer profile view initialized...");
 			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
 			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
+
+			$(document.body).delegate("#save-logo", "click", this.startLogoUpload);
 		},
 
 		uploadLogo : function(){
@@ -58,9 +59,8 @@ define([
 	    			var overlay = $(alert).find(".resize-logo-container .overlay")
 	    			var ratio = $(overlay).width() / this.width;
 	    			var newHeight = this.height * ratio;
-	    			var marginTop = ($(overlay).height() - newHeight)/2	
 	    			
-	    			$(alert).find(".resize-logo-container .overlay").after("<img class='resize-logo-image' src='"+image.src+"' style='margin-top:"+marginTop+"px'/>");
+	    			$(alert).find(".resize-logo-container .overlay").after("<img class='resize-logo-image' src='"+image.src+"'/>");
 					$(alert).addClass("show");
 					$(document).find("#app-modal").addClass("show");
 	    		}
@@ -72,9 +72,39 @@ define([
 			var employerGUIDs = Utils.GetUserSession().employerIds;
 			var guid = employerGUIDs[0];
 
+			var container = $(document).find(".resize-logo-container");
+			var containerX = $(container).offset().left;
+			var containerY = $(container).offset().top;
+
+			var image = $(document).find(".resize-logo-image");
+			var imageWidth = $(image).width();
+			var imageHeight = $(image).height();
+
+			var imageX = $(image).offset().left;
+			var imageY = $(image).offset().top;
+
+			var crop = new Object();
+				crop.imageWidth = imageWidth;
+				crop.imageHeight = imageHeight;
+				crop.cropWidth = 200;
+				crop.cropHeight = 200;
+				crop.cropFromX = containerX - imageX;
+				crop.cropFromY = containerY - imageY;
+
+			var params = new Blob([JSON.stringify(crop)], { type: "application/json"});
+			
+			$(document).find("#app-alert-resize-logo").removeClass("show");
+			$(document).find("#app-modal").removeClass("show");
+			$(document).find("#app-alert-resize-logo img.resize-logo-image").remove();
+			$(document).find(".resize-slider-container .slider .handle").css("left", 75);
+
 			var logo = $("#logo-file")[0].files[0];
+
 			var data = new FormData();
 				data.append("file", logo);
+				data.append("params", params, null);
+				
+				
 
 			var restURL = Utils.GetURL("/services/rest/employer/logo/");
 
@@ -82,28 +112,19 @@ define([
 				url : restURL+guid,
 				data : data,
 				type : "POST",
-				contentType: false,
-	    		processData: false,
+				dataType : "json",
+				cache : false,
+				contentType : false,
+				processData: false,
 	    		success : function(response){
-
-    				var _URL = window.URL || window.webkitURL;
-
-	    			var image = new Image();
-	    				image.src = _URL.createObjectURL(logo);
-
-	    			var logoImage = $("#logo");
-
-	    			if($(logoImage).length > 0){
-						$(logoImage).attr("src", image.src);
-					}else{
-						$(".logo-container .logo").append("<img id='logo' src='"+image.src+"'/>");
-					}
+	    			$("#logo").remove();
+					$(".logo-container .logo").append("<img id='logo' src='"+response.url+"'/>");
 	    		},
 	    		error : function(){
 	    			console.log("Error uploading logo...");
 					Utils.ShowToast({ message : "Error uploading logo..."});
 	    		}
-			});	
+			});
 
 		},
 

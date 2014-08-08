@@ -6,7 +6,7 @@ define([
 		"marionette",
 		"hbs!templates/template-layout-app"
 	],
-	function($, UI, App, Utils, Marionette, Template){
+	function($, JQueryUI, App, Utils, Marionette, Template){
 		"use strict";
 
 		var LayoutApp = Marionette.Layout.extend({
@@ -66,8 +66,35 @@ define([
 					break;
 				}
 
+				
+				var containerWidth = $(".resize-logo-container").width();
+				var containerHeight = $(".resize-logo-container").height();
+
+				var imageScale = 0;
 				var handle = $(".resize-slider-container .slider .handle");
-					$(handle).draggable();
+					$(handle).draggable({
+						axis: "x",
+						containment: "parent",
+						start : function(event, ui){
+							$(".resize-logo-image").css({top : 0, left: 0});
+						},
+						drag : function(event, ui){
+							imageScale = ((((ui.position.left - 75)/146)*100)+100) + "%";
+							$(".resize-logo-image").css("width", imageScale);
+						},
+						stop : function(){
+							var imagePosition = $(".resize-logo-image").offset();
+							var imageWidth = $(".resize-logo-image").width();
+							var imageHeight = $(".resize-logo-image").height();
+							
+							var x1 = (imagePosition.left + containerWidth) - imageWidth;
+							var y1 = (imagePosition.top + containerHeight) - imageHeight;
+							var x2 = imagePosition.left;
+							var y2 = imagePosition.top;
+
+							$(".resize-logo-image").draggable({containment : [x1,y1,x2,y2]});
+						}
+					});
 			},
 
 			detectDevice : function(){
@@ -151,6 +178,7 @@ define([
 				$(alert).removeClass("show");
 				$(document).find("#app-modal").removeClass("show");
 				$("#app-alert-resize-logo img.resize-logo-image").remove();
+				$(".resize-slider-container .slider .handle").css("left", 75);
 			},
 
 			closeShareJob : function(){

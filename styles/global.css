@@ -1493,15 +1493,16 @@ input[type="password"]::selection{
 
 .app-alert.resize-logo{
 	width: 300px;
-	height: 400px;
-	margin-top: -245px;
+	height: 360px;
+	margin-top: -180px;
 	border:1px solid #cccccc;
 	box-shadow: 0px 0px 30px 0 rgba(0,0,0,0.25);
 }
 
 .app-alert.resize-logo .alert-body{
-	width: 100%;
-	height: 290px;
+	width: 200px;
+	height: 240px;
+	margin: 10px 50px;
 }
 
 .app-alert.resize-logo .resize-logo-container{
@@ -1509,7 +1510,6 @@ input[type="password"]::selection{
 	display: block;
 	width: 200px;
 	height: 200px;
-	margin: 10px auto;
 	overflow: hidden;
 }
 
@@ -1519,11 +1519,12 @@ input[type="password"]::selection{
 	width: 200px;
 	height: 200px;
 	border: 1px solid #aaaaaa;
-	background: -moz-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
-  	background: -webkit-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
-  	background: -ms-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
-  	background: -o-radial-gradient(transparent 72px, rgba(0,0,0,0.5) 75px);
+	background: -moz-radial-gradient(transparent 98px, rgba(0,0,0,0.5) 100px);
+  	background: -webkit-radial-gradient(transparent 98px, rgba(0,0,0,0.5) 100px);
+  	background: -ms-radial-gradient(transparent 98px, rgba(0,0,0,0.5) 100px);
+  	background: -o-radial-gradient(transparent 98px, rgba(0,0,0,0.5) 100px);
 	z-index: 3;
+	pointer-events: none;
 }
 
 .app-alert.resize-logo .resize-logo-container img.resize-logo-image{
@@ -1537,10 +1538,9 @@ input[type="password"]::selection{
 .app-alert.resize-logo .resize-logo-container .background{
 	position: absolute;
 	display: block;
-	width: 150px;
-	height: 150px;
-	margin: 25px;
-	border-radius: 75px;
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
 	border: 1px solid #aaaaaa;
 	background-color: #000000;
 	z-index: 1;
@@ -1550,9 +1550,9 @@ input[type="password"]::selection{
 	display: block;
 	float: left;
 	clear: both;
-	width: 245px;
+	width: 200px;
 	height: 20px;
-	margin: 0 0 0 33px;
+	margin: 10px 0;
 }
 
 .app-alert.resize-logo .resize-slider-container .icon{
@@ -1575,7 +1575,7 @@ input[type="password"]::selection{
 .app-alert.resize-logo .resize-slider-container .slider{
 	display: block;
 	float: left;
-	width: 186px;
+	width: 146px;
 	height: 5px;
 	background-color: #e8eaeb;
 	border: 1px solid #D0D0D0;

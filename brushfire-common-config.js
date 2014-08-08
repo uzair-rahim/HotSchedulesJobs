@@ -31,6 +31,7 @@ require.config({
 	shim: {
 
 		jqueryui : {
+			exports : "$",
 			deps:["jquery"]
 		},
 

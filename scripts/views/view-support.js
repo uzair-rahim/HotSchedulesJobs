@@ -58,7 +58,7 @@ define([
 
 		search : function(){
 			var searchTerm = $("#search-field").val();
-			if(searchTerm !== ""){
+			if(searchTerm !== "" && searchTerm.trim() !== "" && searchTerm.indexOf("#") < 0  && searchTerm.indexOf("%") < 0){
 				var searchType = $("#search-type").attr("data-index");
 				switch(searchType){
 					case "0":
@@ -68,7 +68,10 @@ define([
 						this.searchUsers(searchTerm);
 					break;
 				}
+			}
 
+			if(searchTerm.indexOf("#") >= 0  || searchTerm.indexOf("%") >= 0){
+				Utils.ShowToast({ message : "Invalid search term"});
 			}
 		},
 
@@ -181,7 +184,7 @@ define([
 			this.adminID = id;
 			this.adminGUID = guid;
 			this.adminEmployer = employer;
-			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
+			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you want to remove this admin?" });
 		},
 
 		completeRemoveAdmin : function(){
@@ -213,7 +216,7 @@ define([
 			var guid = $(event.target).attr("data-guid");
 			this.employerID = id;
 			this.employerGUID = guid;
-			Utils.ShowAlert({listener : "employer", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Employer", message : "Are you sure you wan't to remove this employer?" });
+			Utils.ShowAlert({listener : "employer", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Employer", message : "Are you sure you want to remove this employer?" });
 		},
 
 		completeRemoveEmployer : function(){

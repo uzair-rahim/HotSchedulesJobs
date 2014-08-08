@@ -141,7 +141,7 @@ define([
 		},
 
 		removeLogo : function(){
-			Utils.ShowAlert({listener : "logo", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Logo", message : "Are you sure you wan't to remove the logo?" });
+			Utils.ShowAlert({listener : "logo", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Logo", message : "Are you sure you want to remove the logo?" });
 		},
 
 		alertPrimaryAction : function(){
@@ -394,7 +394,7 @@ define([
 			this.adminID = id;
 			this.adminGUID = guid;
 			this.adminUserGUID = userGuid;
-			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you wan't to remove this admin?" });
+			Utils.ShowAlert({listener : "admin", primary : true, primaryType : "destroy", primaryText : "Remove", title : "Remove Admin", message : "Are you sure you want to remove this admin?" });
 		},
 
 		serializeData : function(){

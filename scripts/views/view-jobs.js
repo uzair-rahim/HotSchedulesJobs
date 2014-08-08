@@ -762,7 +762,7 @@ define([
 			var item = $(event.target);
 			var job = $(item).closest("#job-list.grid-list > li").data("guid");
 			this.jobGUID = job;
-			Utils.ShowAlert({listener : "delete", primary : true, primaryType : "destroy", primaryText : "Delete", title : "Delete Job", message : "Are you sure you wan't to delete this job?" });
+			Utils.ShowAlert({listener : "delete", primary : true, primaryType : "destroy", primaryText : "Delete", title : "Delete Job", message : "Are you sure you want to delete this job?" });
 			event.stopPropagation();
 		},
 

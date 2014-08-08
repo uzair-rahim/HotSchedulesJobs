@@ -239,7 +239,7 @@ define([
 			var guid = $(event.target).attr("data-guid");
 			this.userID = id;
 			this.userGUID = guid;
-			Utils.ShowAlert({listener : "user", primary : true, primaryType : "destroy", primaryText : "Deactivate", title : "Deactivate User", message : "Are you sure you wan't to deactivate this user?" });
+			Utils.ShowAlert({listener : "user", primary : true, primaryType : "destroy", primaryText : "Deactivate", title : "Deactivate User", message : "Are you sure you want to deactivate this user?" });
 		},
 
 		completeRemoveUser : function(){

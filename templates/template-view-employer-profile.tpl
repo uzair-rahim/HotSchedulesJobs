@@ -16,7 +16,7 @@
 		<div class="logo-container">
 			<div class="logo">
 				{{#hasPhoto employerProfile.logo}}
-					<img id="logo" src="{{employerProfile.logo.url}}"/>
+					<img id="logo" src="{{employerProfile.logo.url}}?{{bust}}"/>
 				{{/hasPhoto}}
 			</div>
 			<div class="logo-action-container">

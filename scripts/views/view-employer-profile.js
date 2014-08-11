@@ -404,6 +404,7 @@ define([
 				jsonObject.employerProfile = this.model.profile;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
+				jsonObject.bust = new Date().getTime();
 			return jsonObject;
 		}
 		

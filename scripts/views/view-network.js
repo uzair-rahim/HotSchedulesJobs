@@ -52,14 +52,16 @@ define([
 
 			var jobs = this.model.jobsinfo;
 
-			var shareJobsButton = $("#select-share-job button");
-			var shareJobsList = $("#select-share-job .custom-select-list");
-			
-			$(shareJobsButton).text(jobs[0].attributes.jobName);
-			$(shareJobsList).html("");
-			
-			for(var i = 0; i < jobs.length; i++){
-				$(shareJobsList).append("<li>"+jobs[i].attributes.jobName+"</li>");
+			if(jobs.length > 0){
+				var shareJobsButton = $("#select-share-job button");
+				var shareJobsList = $("#select-share-job .custom-select-list");
+				
+				$(shareJobsButton).text(jobs[0].attributes.jobName);
+				$(shareJobsList).html("");
+				
+				for(var i = 0; i < jobs.length; i++){
+					$(shareJobsList).append("<li>"+jobs[i].attributes.jobName+"</li>");
+				}
 			}
 
 		},

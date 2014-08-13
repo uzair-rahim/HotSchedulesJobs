@@ -288,6 +288,7 @@ define([
 			}else if(bonus !== "" && !wholeNumber.test(bonus)){
 				Utils.ShowToast({message : "Invalid bonus amount"});
 			}else{
+				var index = Utils.GetSelectedEmployer();
 				var job = new Object();	
 					job.shifts = new Object();
 					job.jobType = new Object();
@@ -303,7 +304,7 @@ define([
 					job.shifts = [{id : 0}];
 					job.updatedBy.guid = Utils.GetUserSession().guid;
 					job.createdBy.guid = Utils.GetUserSession().guid;
-					job.employer.guid = Utils.GetUserSession().employerIds[0];
+					job.employer.guid = Utils.GetUserSession().employerIds[index];
 
 					job.jobName = $("#new-position button").text();
 					job.description = $("#new-description").val();
@@ -835,6 +836,7 @@ define([
 			if(!isDisabled){
 
 				var job = $(item).closest("#job-list.grid-list > li").data("guid");
+				var index = Utils.GetSelectedEmployer();
 
 				var share = new Object();
 					share.fromUser = new Object();
@@ -843,7 +845,7 @@ define([
 					
 					share.fromUser.guid = Utils.GetUserSession().guid;
 					share.jobPosting.guid = job
-					share.employer.guid = Utils.GetUserSession().employerIds[0];
+					share.employer.guid = Utils.GetUserSession().employerIds[index];
 					share.type = 1;
 
 				var that = this;
@@ -879,6 +881,7 @@ define([
 			if(!isDisabled){
 
 				var job = $(item).closest("#job-list.grid-list > li").data("guid");
+				var index = Utils.GetSelectedEmployer();
 
 				var share = new Object();
 					share.fromUser = new Object();
@@ -887,7 +890,7 @@ define([
 
 					share.fromUser.guid = Utils.GetUserSession().guid;
 					share.jobPosting.guid = job
-					share.employer.guid = Utils.GetUserSession().employerIds[0];
+					share.employer.guid = Utils.GetUserSession().employerIds[index];
 					share.type = 2;
 
 				var that = this;

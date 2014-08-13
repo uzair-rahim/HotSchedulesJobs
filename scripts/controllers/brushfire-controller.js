@@ -345,8 +345,8 @@ define([
 					App.clearTrail();
 					App.pushTrail(App.Language.network);
 
-
-					var userGuid = Utils.GetUserSession().employerIds[0];
+					var index = Utils.GetSelectedEmployer();
+					var userGuid = Utils.GetUserSession().employerIds[index];
 					var jobtypes = new ModelJobTypes();
 					var jobsinfo = new CollectionJobsInfo();
 					var employees = new CollectionEmployees({guid : userGuid});
@@ -471,10 +471,10 @@ define([
 					var employerGUIDs = Utils.GetUserSession().employerIds;
 
 					if(employerGUIDs.length != 0){
-
+						var index = Utils.GetSelectedEmployer();
 						var employerPPA = new ModelEmployerPPA();
-						var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUIDs[0]});
-						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[0]});
+						var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUIDs[index]});
+						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[index]});
 						var models = new Object();
 
 						$.when(

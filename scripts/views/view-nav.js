@@ -22,6 +22,7 @@ define([
 			"click #settings" 			: "settings",
 			"click #account-settings" 	: "accountSettings",
 			"click #profile-settings" 	: "profileSettings",
+			"click #stores-list" 		: "switchStore",
 			"click #terms-conditions" 	: "termsAndCondition",
 			"click #logout" 			: "logout"
 		},
@@ -59,6 +60,10 @@ define([
 					$("#nav-menu").css("display", "none");	
 				}
 			});
+
+			var selectedStoreIndex = Utils.GetSelectedEmployer();
+			$("#stores-list li").removeClass("selected");
+			$("#stores-list li:eq("+selectedStoreIndex+")").addClass("selected");
 		},
 
 		showMenu : function(){
@@ -99,6 +104,12 @@ define([
 			this.route("profileSettings");
 		},
 
+		switchStore : function(event){
+			var index = $(event.target).index();
+			Utils.SetSelectedEmployer(index);
+			this.route("jobs");
+		},
+
 		termsAndCondition : function(){
 			Utils.ShowTermsAndConditions({inApp : true, secondaryButtonText : "OK"});
 		},
@@ -118,6 +129,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.username = Utils.GetUserSession().firstname + " " + Utils.GetUserSession().lastname;
+				jsonObject.employers = Utils.GetUserSession().adminEmployers;
 				jsonObject.language = App.Language;
 			return jsonObject;
 		}

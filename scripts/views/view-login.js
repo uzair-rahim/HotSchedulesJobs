@@ -64,21 +64,30 @@ define([
 							user.verified = response.attributes.verified;
 							user.employerIds = response.attributes.employerIds;
 							user.roles = response.attributes.roles;
+							user.adminEmployers = response.attributes.adminEmployers;
 
 							Utils.CreateUserSession(user);
 							Utils.RememberUserEmail(checked, user.email);
+							Utils.SetSelectedEmployer(0);
 
 							var support = Utils.IsSupportUser(user.roles);
 
 							if(support){
+								//If the user is a support user go to support page
 								App.router.navigate("support", true);
 							}else{
-								if(user.employerIds.length > 0){
+								if(user.employerIds.length  === 1 ){
+									//If the user is an admin of only one employer go directly to the jobs page
+									App.router.navigate("jobs", true);
+								}else if(user.employerIds.length > 1){
+									//If the user is an admin of more than one employer go to select employer page before going to the jobs page
 									App.router.navigate("jobs", true);
 								}else{
 									if(user.verified){
+										//If the user is not an admin already but have verified the email go to find business page
 										App.router.navigate("findBusiness", true);
 									}else{
+										//if the user is not an admin and has not verified the email go to account verification page
 										App.router.navigate("accountVerification", true);
 									}
 								}

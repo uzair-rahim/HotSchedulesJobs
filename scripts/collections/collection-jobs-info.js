@@ -15,7 +15,8 @@ define([
 		
 		url : function(){
 			var user= Utils.GetUserSession();
-			var url = this.urlRoot() + user.employerIds[0] + "/jobpostingsinfo";
+			var index = Utils.GetSelectedEmployer();
+			var url = this.urlRoot() + user.employerIds[index] + "/jobpostingsinfo";
 			return url;
 		},
 

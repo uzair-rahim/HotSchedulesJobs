@@ -16,11 +16,12 @@ define([
 		url : function(){
 			var user= Utils.GetUserSession();
 			var url = this.urlRoot();
+			var index = Utils.GetSelectedEmployer();
 			
 			if(typeof this.guid !== "undefined"){
 				url += this.guid;
 			}else{
-				url += "list/" + user.employerIds[0];
+				url += "list/" + user.employerIds[index];
 			}
 
 			return url;

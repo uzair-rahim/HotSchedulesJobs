@@ -216,6 +216,7 @@ define([
 		},
 
 		sendShareJob : function(){
+			var index = Utils.GetSelectedEmployer();
 			var jobIndex = $("#select-share-job").attr("data-index");
 			var jobGuid = this.model.jobsinfo[jobIndex].attributes.guid;
 			var employeeGuids = this.employeesGuids;
@@ -227,7 +228,7 @@ define([
 				share.employer = new Object();
 
 				share.fromUser.guid = Utils.GetUserSession().guid;
-				share.employer.guid = Utils.GetUserSession().employerIds[0];
+				share.employer.guid = Utils.GetUserSession().employerIds[index];
 				share.jobPosting.guid = jobGuid
 				share.toEmployeeGuids = employeeGuids;
 				share.toFollowerGuids = followerGuids;

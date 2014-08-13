@@ -25,13 +25,14 @@ define([
 			CreateUserSession : function(options){
 				console.log("Create user session...");
 				var defaults = {
-					firstname		: "",
-					lastname		: "",
-					guid			: "",
-					email			: "",
-					verified		: false,
-					employerIds		: "",
-					roles			: []
+					firstname			: "",
+					lastname			: "",
+					guid				: "",
+					email				: "",
+					verified			: false,
+					employerIds			: "",
+					roles				: [],
+					adminEmployers		: []
 				}
 
 				for(var key in defaults){
@@ -74,6 +75,16 @@ define([
 			// Get Remembered Email Address
 			GetRememberedEmail : function(){
 				return $.cookie("BrushfireUserEmail");
+			},
+
+			// Set Selected Employer
+			SetSelectedEmployer : function(index){
+				$.cookie("BrushfireSelectedEmployer", index);
+			},
+
+			// Get Selected Employer
+			GetSelectedEmployer : function(index){
+				return parseInt($.cookie("BrushfireSelectedEmployer"));
 			},
 
 			// Check if support user

@@ -82,7 +82,8 @@ define([
 		startLogoUpload : function(event){
 
 			var employerGUIDs = Utils.GetUserSession().employerIds;
-			var guid = employerGUIDs[0];
+			var index = Utils.GetSelectedEmployer();
+			var guid = employerGUIDs[index];
 
 			var container = $(document).find(".resize-logo-container");
 			var containerX = $(container).offset().left;
@@ -177,7 +178,8 @@ define([
 			if($(logoImage).length > 0){
 				
 				var employerGUIDs = Utils.GetUserSession().employerIds;
-				var logo = new EmployerLogo({id : 0, guid : employerGUIDs[0]});
+				var index = Utils.GetSelectedEmployer();
+				var logo = new EmployerLogo({id : 0, guid : employerGUIDs[index]});
 
 				logo.destroy({
 					dataType : "text",
@@ -211,7 +213,8 @@ define([
 			var employerGUIDs = Utils.GetUserSession().employerIds;
 			var userGUID = Utils.GetUserSession().guid;
 			var self = this.adminUserGUID == userGUID;
-			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUIDs[0], admin : this.adminGUID});
+			var index = Utils.GetSelectedEmployer();
+			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUIDs[index], admin : this.adminGUID});
 		
 				deleteAdmin.destroy({
 					dataType : "text",
@@ -308,8 +311,9 @@ define([
 					employer.location = address;
 
 					var employerGUIDs = Utils.GetUserSession().employerIds;
+					var index = Utils.GetSelectedEmployer();
 
-					var profile = new EmployerProfile({guid : employerGUIDs[0]});
+					var profile = new EmployerProfile({guid : employerGUIDs[index]});
 
 					profile.save(employer, {
 						success : function(){
@@ -362,7 +366,8 @@ define([
 
 			}else{
 				var employerGUIDs = Utils.GetUserSession().employerIds;
-				var newAdmin = new NewAdmin({guid : employerGUIDs[0]});
+				var index = Utils.GetSelectedEmployer();
+				var newAdmin = new NewAdmin({guid : employerGUIDs[index]});
 					newAdmin.unset("guid");
 				var email = $("#admin-email").val();
 

@@ -47,8 +47,12 @@ define([
 			var passwordField = $("#password").val();
 			var checked = $("#remember-me-check").prop("checked");
 
-			var auth = new ModelAuthenticate({email : emailField, password : passwordField});
-				auth.fetch({
+			var authObject = {emailaddress : emailField, password : passwordField};
+
+			var auth = new ModelAuthenticate();
+				auth.save(
+					authObject,
+					{
 					success : function(response){
 						console.log("User successfully authenticated...");
 

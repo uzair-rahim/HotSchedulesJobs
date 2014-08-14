@@ -82,29 +82,10 @@
 										<div class="about">Not Available</div>
 									{{/isNotNull}}
 								</div>
-								{{#isNotNull user.primaryWorkHistory}}
-									<div class="history-section">
-										<label>Work History</label>
-										<ul class="work-history">
-											<li>
-												<div class="employer-logo">
-													{{#isNotNull user.primaryWorkHistory.employer.logo}}
-														<img src="{{user.primaryWorkHistory.employer.logo.url}}"/>
-													{{/isNotNull}}
-												</div>
-												<div class="employment-info">
-													<div class="employer-name">{{user.primaryWorkHistory.jobs.[0].jobName}}</div>
-													<div class="employment-date">@ {{user.primaryWorkHistory.employer.name}}</div>
-												</div>
-											</li>
-										</ul>
-									</div>
-								{{else}}
-									<div class="history-section">
-										<label>Work History</label>
-										<div class="history">Not Available</div>
-									</div>
-								{{/isNotNull}}
+								<div class="history-section">
+									<label>Work History</label>
+									<ul class="work-history"></ul>
+								</div>
 							</div>
 						</li>
 					{{/if_eq}}

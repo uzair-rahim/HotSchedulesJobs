@@ -5,11 +5,12 @@ define([
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-jobs",
+		"scripts/models/model-user",
 		"scripts/models/model-job",
 		"scripts/models/model-candidate",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelJob, ModelCandidate, CollectionConnections){
+	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelJob, ModelCandidate, CollectionConnections){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -536,6 +537,7 @@ define([
 		profile : function(event){
 
 			var item = $(event.target).closest(".view-profile");
+			var userGuid = $(item).attr("data-user");
 			var job = $(item).closest("#job-list > li");
 			var candidatesList = $(job).find(".candidates-list");
 			var isNewCandidate = $(item).find(".candidate-name").hasClass("new");
@@ -550,43 +552,81 @@ define([
 			$(allProfiles).removeClass("show");
 
 			if(!isProfileExpanded){
-				$(item).addClass("expanded");	
-				$(item).removeClass("faded");	
-				$(profile).addClass("show");
 
-				if(isNewCandidate){
-					$(item).find("*").removeClass("new");
-
-					$(job).find(".candidates-list li:eq("+$(item).index()+")").removeClass("new");
-
-					var request = new Object();
-					var update = new Object();
-
-					request.type = "update";
-					request.jobGuid = $(job).attr("data-guid");
-					request.guid = $(item).attr("data-guid");
-
-					update.id = $(item).attr("data-id");;
-					update.seen = true;
-
-					var candidate = new ModelCandidate(request);
-
-						candidate.save(update, {
-							success : function(){
-								console.log("Candidate successfully marked as seen...");
-
-								if(!$(candidatesList).find("*").hasClass("new")){
-									$(job).find("*").removeClass("new")
-								}
-
-							},
-							error : function(){
-								console.log("There was an error trying to mark the cadndidates as seen");
-								Utils.ShowToast({ message : "Unexpected error occured"});
-							}
+				var user = new ModelUser();
+				user.set({guid : userGuid});
+				user.getWorkHistory(function(){
+					var history = user.get("workHistory");
+					var list = $(item).find(".hourly-profile .history-section .work-history");
+					$(list).html("");
+					
+					if(history.length > 0){
+						$.each(history, function(){
+							var el = "<li>";
+									el += "<div class='employer-logo'>"
+										if(this.employer.logo !== null){
+											el += "<img src='"+this.employer.logo.url+"'/>";
+										}
+									el += "</div>"	
+									el += "<div class='employment-info'>"
+										el += "<div class='employer-name'>"
+											var total = this.jobs.length;
+											$.each(this.jobs, function(index){
+												el += this.jobName;
+												if(index !== total-1){
+													el += ", ";
+												}
+											});
+										el += "</div>"
+										el += "<div class='employment-date'>@ "+ this.employer.name +"</div>"
+									el += "</div>"
+								el += "</li>"
+							$(list).append(el);
 						});
+					}else{
+						$(list).remove();
+						$(item).find(".hourly-profile .history-section").append("<div class='history'>Not Available</div>");
+					}
 
-				}
+					
+					$(item).addClass("expanded");	
+					$(item).removeClass("faded");	
+					$(profile).addClass("show");
+
+					if(isNewCandidate){
+						$(item).find("*").removeClass("new");
+						$(job).find(".candidates-list li:eq("+$(item).index()+")").removeClass("new");
+
+						var request = new Object();
+						var update = new Object();
+
+						request.type = "update";
+						request.jobGuid = $(job).attr("data-guid");
+						request.guid = $(item).attr("data-guid");
+
+						update.id = $(item).attr("data-id");;
+						update.seen = true;
+
+						var candidate = new ModelCandidate(request);
+
+							candidate.save(update, {
+								success : function(){
+									console.log("Candidate successfully marked as seen...");
+
+									if(!$(candidatesList).find("*").hasClass("new")){
+										$(job).find("*").removeClass("new")
+									}
+
+								},
+								error : function(){
+									console.log("There was an error trying to mark the cadndidates as seen");
+									Utils.ShowToast({ message : "Unexpected error occured"});
+								}
+							});
+
+					}
+
+				});
 
 			}else{
 				$(item).removeClass("expanded");

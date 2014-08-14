@@ -6,9 +6,9 @@ define([
 		"vldt",
 		"marionette",
 		"hbs!templates/template-view-signup",
-		"scripts/models/model-user"
+		"scripts/models/model-signup"
 	],
-	function($, Cookie, App, Utils, Vldt, Marionette, Template, ModelUser){
+	function($, Cookie, App, Utils, Vldt, Marionette, Template, ModelSignUp){
 	"use strict";
 
 	var ViewSignup = Marionette.ItemView.extend({
@@ -88,7 +88,7 @@ define([
 					}else{
 
 						var that = this;
-						var model = new ModelUser();
+						var model = new ModelSignUp();
 
 						var user = new Object();
 						user.firstname = $("#firstname").val(),

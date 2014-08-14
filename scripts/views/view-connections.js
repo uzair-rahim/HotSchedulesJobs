@@ -4,9 +4,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
-		"hbs!templates/template-view-connections"
+		"hbs!templates/template-view-connections",
+		"scripts/models/model-user"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, App, Utils, Marionette, Template, ModelUser){
 	"use strict";
 
 	var ViewConnections = Marionette.ItemView.extend({
@@ -70,21 +71,60 @@ define([
 		},
 
 		profile : function(event){
-			
+
 			var item = $(event.target).closest("#connections-list > li");
-			var allItems = $("#connections-list > li");
+			var userGuid = $(item).attr("data-guid");
 			var profile = $(item).find(".hourly-profile");
 			var isProfileExpanded = $(profile).hasClass("show");
 			var allProfiles = $(".hourly-profile");
+			var allItems = $("#connections-list > li");
 
 			$(allItems).removeClass("expanded");
 			$(allItems).addClass("faded");
 			$(allProfiles).removeClass("show");
 
 			if(!isProfileExpanded){
-				$(item).addClass("expanded");	
-				$(item).removeClass("faded");	
-				$(profile).addClass("show");
+
+				var user = new ModelUser();
+				user.set({guid : userGuid});
+				user.getWorkHistory(function(){
+					var history = user.get("workHistory");
+					var list = $(item).find(".hourly-profile .history-section .work-history");
+					$(list).html("");
+					
+					if(history.length > 0){
+						$.each(history, function(){
+							var el = "<li>";
+									el += "<div class='employer-logo'>"
+										if(this.employer.logo !== null){
+											el += "<img src='"+this.employer.logo.url+"'/>";
+										}
+									el += "</div>"	
+									el += "<div class='employment-info'>"
+										el += "<div class='employer-name'>"
+											var total = this.jobs.length;
+											$.each(this.jobs, function(index){
+												el += this.jobName;
+												if(index !== total-1){
+													el += ", ";
+												}
+											});
+										el += "</div>"
+										el += "<div class='employment-date'>@ "+ this.employer.name +"</div>"
+									el += "</div>"
+								el += "</li>"
+							$(list).append(el);
+						});
+					}else{
+						$(list).remove();
+						$(item).find(".hourly-profile .history-section").append("<div class='history'>Not Available</div>");
+					}
+
+					$(item).addClass("expanded");	
+					$(item).removeClass("faded");	
+					$(profile).addClass("show");
+				});
+
 			}else{
 				$(item).removeClass("expanded");
 				$(allItems).removeClass("faded");	

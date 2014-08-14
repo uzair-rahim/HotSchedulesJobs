@@ -3,7 +3,7 @@ define([
 	"utils"
 	],
 	function(Backbone, Utils){
-		var User = Backbone.Model.extend({
+		var SignUp = Backbone.Model.extend({
 
 			defaults : {
 				firstname	: null,
@@ -22,11 +22,11 @@ define([
 			},
 
 			initialize : function(){
-				console.log('User model initialize...')
+				console.log('Sign Up model initialize...');
 			}
 
 		});
 
-		return User;
+		return SignUp;
 	}
 );

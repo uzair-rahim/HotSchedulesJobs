@@ -38,6 +38,7 @@ ul.grid-list.sub{
 	   -moz-transition: all 500ms;
 	     -o-transition: all 500ms;
 	        transition: all 500ms;
+	-webkit-backface-visibility: hidden;
 }
 
 ul.grid-list.sub.show{
@@ -55,6 +56,7 @@ ul.grid-list > li{
 	/*border-top: 1px dotted #ffffff;*/
 	border-bottom: 1px dotted #bbbbbb;
 	overflow: hidden;
+	-webkit-backface-visibility: hidden;
 }
 
 ul.grid-list > li:hover{

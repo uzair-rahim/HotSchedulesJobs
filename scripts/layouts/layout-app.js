@@ -33,7 +33,8 @@ define([
 				"click #close-share-job"		: "closeShareJob",
 				"click #send-share-job"			: "sendShareJob",
 				"click #save-logo"				: "saveLogo",
-				"click #close-resize-logo"		: "closeResizeLogo"
+				"click #close-resize-logo"		: "closeResizeLogo",
+				"click #set-employer"			: "setEmployer"
 			},
 
 			initialize : function(){
@@ -187,6 +188,16 @@ define([
 				var alert = $("#app-alert-share-job");
 				$(alert).removeClass("show");
 				$(document).find("#app-modal").removeClass("show");
+			},
+
+			setEmployer : function(){
+				var alertDialog = $(document).find("#app-alert-select-employer");
+				var index = $(alertDialog).find(".custom-select").attr("data-index");
+				Utils.SetSelectedEmployer(index);
+				$(alertDialog).removeClass("show");
+				$(alertDialog).find(".custom-select-list").html("");
+				$(alertDialog).find(".custom-select").attr("data-index", 0);
+				App.router.navigate("jobs", true);
 			},
 			
 			serializeData : function(){

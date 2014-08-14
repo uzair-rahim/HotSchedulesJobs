@@ -79,13 +79,19 @@ define([
 
 			// Set Selected Employer
 			SetSelectedEmployer : function(index){
-				$.cookie("BrushfireSelectedEmployer", index);
+				localStorage.setItem("BrushfireSelectedEmployer", index);
 			},
 
 			// Get Selected Employer
 			GetSelectedEmployer : function(index){
-				return parseInt($.cookie("BrushfireSelectedEmployer"));
+				return parseInt(localStorage.getItem("BrushfireSelectedEmployer"));
 			},
+
+			// Remove Selected Employer
+			RemoveSelectedEmployer : function(index){
+				localStorage.removeItem("BrushfireSelectedEmployer")
+			},
+
 
 			// Check if support user
 			IsSupportUser : function(roles){

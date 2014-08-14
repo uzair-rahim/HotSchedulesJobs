@@ -72,16 +72,16 @@ define([
 
 							var support = Utils.IsSupportUser(user.roles);
 
-							if(support){
+							//if(support){
 								//If the user is a support user go to support page
-								App.router.navigate("support", true);
-							}else{
+							//	App.router.navigate("support", true);
+							//}else{
 								if(user.employerIds.length  === 1 ){
 									//If the user is an admin of only one employer go directly to the jobs page
 									App.router.navigate("jobs", true);
 								}else if(user.employerIds.length > 1){
 									//If the user is an admin of more than one employer go to select employer page before going to the jobs page
-									App.router.navigate("jobs", true);
+									App.router.navigate("selectEmployer", true);
 								}else{
 									if(user.verified){
 										//If the user is not an admin already but have verified the email go to find business page
@@ -91,7 +91,7 @@ define([
 										App.router.navigate("accountVerification", true);
 									}
 								}
-							}
+							//}
 					},
 
 					error : function(){

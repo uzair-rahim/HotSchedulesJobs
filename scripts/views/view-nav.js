@@ -106,8 +106,10 @@ define([
 
 		switchStore : function(event){
 			var index = $(event.target).index();
-			Utils.SetSelectedEmployer(index);
-			this.route("jobs");
+			if(index !== Utils.GetSelectedEmployer()){
+				Utils.SetSelectedEmployer(index);
+				this.route("jobs");
+			}
 		},
 
 		termsAndCondition : function(){

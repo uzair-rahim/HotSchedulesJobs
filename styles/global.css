@@ -1635,10 +1635,25 @@ input[type="password"]::selection{
 
 
 
+.app-alert.select-employer .alert-body{
+	height: 35px;
+	margin: 10px;
+}
+
+.app-alert.select-employer .alert-body .custom-select-button{
+	width: 100%;
+	text-align: left;
+}
+
+.app-alert.select-employer .alert-body .custom-select-list{
+	width: 100%;
+}
 
 
 
-#app-modal{
+
+#app-modal,
+.view-modal{
 	position: absolute;
 	display: none;
 	float: left;
@@ -1659,6 +1674,12 @@ input[type="password"]::selection{
 
 #app-modal.show{
 	display: block;
+}
+
+.view-modal{
+	position: fixed;
+	display: block;
+	background-image: none;
 }
 
 

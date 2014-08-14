@@ -25,7 +25,8 @@ define([
 				"accountSettings"		: "accountSettings",
 				"profileSettings"		: "profileSettings",
 				"logout"				: "logout",
-				"support"				: "support"
+				"support"				: "support",
+				"selectEmployer"		: "selectEmployer"
 			}
 
 		});

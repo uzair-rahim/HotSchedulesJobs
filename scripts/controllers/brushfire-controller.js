@@ -22,6 +22,7 @@ define([
 		"scripts/views/view-settings",
 		"scripts/views/view-employer-profile",
 		"scripts/views/view-support",
+		"scripts/views/view-select-employer",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-yelp-rating",
@@ -33,7 +34,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -602,6 +603,20 @@ define([
 						App.router.navigate("logout", true);
 					}
 
+				}else{
+					App.router.navigate("login", true);
+				}
+			},
+
+			selectEmployer : function(){
+				var that = this;
+				if(Utils.CheckSession()){
+					this.removeBackground();
+					this.setLayout();
+					this.setHeader("navigation");
+
+					var view = new ViewSelectEmployer();
+					that.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}

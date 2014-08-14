@@ -96,6 +96,19 @@
 		<button id="close-share-job">Close</button>
 	</div>
 </div>
+<!--Select Employer Alert-->
+<div id="app-alert-select-employer" class="app-alert select-employer">
+	<div class="alert-title">Select A Store</div>
+	<div class="alert-body">
+		<div id="select-employer" class="custom-select select-employer" data-index="0" data-value="">
+			<button class="custom-select-button"></button>
+			<ul class="custom-select-list"></ul>
+		</div>
+	</div>
+	<div class="alert-action single">
+		<button id="set-employer" class="primary">Go</button>
+	</div>
+</div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">
 	<div class="header">

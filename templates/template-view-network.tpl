@@ -52,7 +52,7 @@
 				</div>
 				<div class="candidate-message"></div>
 				<!--<div class="candidate-endorse">0</div>-->
-				<!--<div class="candidate-network"><span>0</span> / 0</div>-->
+				<div class="candidate-network sycn"></div>
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>
@@ -92,7 +92,7 @@
 				</div>
 				<div class="candidate-message"></div>
 				<!--<div class="candidate-endorse">0</div>-->
-				<!--<div class="candidate-network"><span>0</span> / 0</div>-->
+				<div class="candidate-network sycn"></div>
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>

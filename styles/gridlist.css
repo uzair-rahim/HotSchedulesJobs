@@ -10,6 +10,9 @@
 	font-size: 16px;
 	font-weight: bold;
 	text-transform: capitalize;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 @media screen and (max-width: 510px){
@@ -595,9 +598,14 @@ ul.grid-list > li .candidate-network{
 	background-size: 40px auto;
 }
 
+ul.grid-list > li .candidate-network:hover,
 ul.grid-list > li .candidate-network.has-connections{
 	cursor: pointer;
 	background-image: url("../images/icon-network.png");
+}
+
+ul.grid-list > li .candidate-network.sycn{
+	width: 50px;
 }
 
 ul.grid-list > li .candidate-network span{

@@ -1641,6 +1641,10 @@ input[type="password"]::selection{
 
 
 
+.app-alert.select-employer{
+	overflow: visible;
+}
+
 .app-alert.select-employer .alert-body{
 	height: 35px;
 	margin: 10px;

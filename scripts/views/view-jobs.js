@@ -708,6 +708,8 @@ define([
 
 			if(count > 0){
 				var candidate = $(event.target).closest(".view-profile");
+				var name = $(candidate).find(".candidate-info .candidate-name").text();
+				localStorage.setItem("HSSharedConnectionName", name);
 				var guid = $(candidate).attr("data-user");
 				App.router.navigate("connections/"+guid, true);
 			}

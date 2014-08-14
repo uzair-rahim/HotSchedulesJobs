@@ -165,14 +165,11 @@ define([
 		},
 
 		networkConnections : function(event){
-			var count = $(event.target).find("span").text();
-
-			if(count > 0){
-				var candidate = $(event.target).closest(".view-profile");
-				var guid = $(candidate).attr("data-guid");
-				App.router.navigate("connections/"+guid, true);
-			}
-
+			var candidate = $(event.target).closest(".view-profile");
+			var name = $(candidate).find(".candidate-info .candidate-name").text();
+			localStorage.setItem("HSSharedConnectionName", name);
+			var guid = $(candidate).attr("data-guid");
+			App.router.navigate("connections/"+guid, true);
 			event.stopPropagation();
 		},
 

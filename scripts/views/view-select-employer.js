@@ -22,7 +22,7 @@ define([
 		},
 
 		onShow : function(){
-			var employers = Utils.GetUserSession().adminEmployers;
+			var employers = Utils.GetAdminEmployers();
 			var alert = $(document).find("#app-alert-select-employer");
 
 			$(alert).find(".custom-select button").text(employers[0].name);
@@ -32,7 +32,6 @@ define([
 			});
 
 			$(alert).addClass("show");
-			Utils.ShowLoadingAnimation();
 		},
 	
 		serializeData : function(){

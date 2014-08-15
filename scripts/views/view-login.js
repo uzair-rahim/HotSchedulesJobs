@@ -64,10 +64,13 @@ define([
 							user.verified = response.attributes.verified;
 							user.employerIds = response.attributes.employerIds;
 							user.roles = response.attributes.roles;
-							user.adminEmployers = response.attributes.adminEmployers;
-
+						
 							Utils.CreateUserSession(user);
 							Utils.RememberUserEmail(checked, user.email);
+
+						var adminEmployers = response.attributes.adminEmployers;
+							Utils.SetAdminEmployers(adminEmployers);	
+							
 							Utils.SetSelectedEmployer(0);
 
 							var support = Utils.IsSupportUser(user.roles);

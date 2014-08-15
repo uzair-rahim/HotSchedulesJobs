@@ -77,6 +77,21 @@ define([
 				return $.cookie("BrushfireUserEmail");
 			},
 
+			// Set Admin Employers
+			SetAdminEmployers : function(employers){
+				localStorage.setItem("HSAdminEmployers", JSON.stringify(employers));
+			},
+
+			// Get Admin Employers
+			GetAdminEmployers : function(){
+				return JSON.parse(localStorage.getItem("HSAdminEmployers"));
+			},
+
+			// Remove Admin Employers
+			RemoveAdminEmployers : function(){
+				localStorage.removeItem("HSAdminEmployers")
+			},
+
 			// Set Selected Employer
 			SetSelectedEmployer : function(index){
 				localStorage.setItem("BrushfireSelectedEmployer", index);

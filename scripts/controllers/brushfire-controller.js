@@ -32,9 +32,10 @@ define([
 		"scripts/collections/collection-network",
 		"scripts/collections/collection-employees",
 		"scripts/collections/collection-followers",
+		"scripts/collections/collection-endorsements",
 		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements, CollectionSharedConnections){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -352,6 +353,7 @@ define([
 					var jobsinfo = new CollectionJobsInfo();
 					var employees = new CollectionEmployees({guid : userGuid});
 					var followers = new CollectionFollowers({guid : userGuid});
+					var endorsements = new CollectionEndorsements({guid : userGuid});
 					var models = new Object();
 
 
@@ -393,6 +395,15 @@ define([
 							},
 							error : function(){
 								Utils.ShowToast({ message : "Error fetching followers..."});
+							}
+						}),
+
+						endorsements.fetch({
+							success : function(response){
+								models.endorsements = response.models;
+							},
+							error : function(){
+								Utils.ShowToast({ message : "Error fetching endorsements..."});
 							}
 						})
 

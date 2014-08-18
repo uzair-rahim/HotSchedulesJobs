@@ -307,6 +307,7 @@ define([
 			var jsonObject = new Object();
 				jsonObject.employees = this.model.employees;
 				jsonObject.followers = this.model.followers;
+				jsonObject.endorsements = this.model.endorsements;
 				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();

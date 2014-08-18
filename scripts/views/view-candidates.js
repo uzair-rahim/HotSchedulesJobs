@@ -240,12 +240,10 @@ define([
 
 		profile : function(event){
 
-			var item = $(event.target).closest(".view-profile");
+			var item = $(event.target).closest("#candidates-list > li");
 			var userGuid = $(item).attr("data-user");
-			var job = $(item).closest("#candidates-list > li");
-			var candidatesList = $(job).find(".candidates-list");
+			var job = $(item).closest("#candidates-list");
 			var isNewCandidate = $(item).find(".candidate-name").hasClass("new");
-			var candidateGuid = $(item).attr("id");
 			var allItems = $("#candidates-list > li");
 			var profile = $(item).find(".hourly-profile");
 			var isProfileExpanded = $(profile).hasClass("show");
@@ -316,18 +314,12 @@ define([
 							candidate.save(update, {
 								success : function(){
 									console.log("Candidate successfully marked as seen...");
-
-									if(!$(candidatesList).find("*").hasClass("new")){
-										$(job).find("*").removeClass("new")
-									}
-
 								},
 								error : function(){
 									console.log("There was an error trying to mark the cadndidates as seen");
 									Utils.ShowToast({ message : "Unexpected error occured"});
 								}
 							});
-
 					}
 
 				});

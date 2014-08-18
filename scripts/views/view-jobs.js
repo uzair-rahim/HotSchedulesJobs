@@ -578,7 +578,8 @@ define([
 												}
 											});
 										el += "</div>"
-										el += "<div class='employment-date'>@ "+ this.employer.name +"</div>"
+										el += "<div class='employment-date'>@"+ this.employer.name +"</div>"
+										el += "<div class='employment-date'>"+ this.startDate + " - " +this.endDate +"</div>"
 									el += "</div>"
 								el += "</li>"
 							$(list).append(el);

@@ -1957,7 +1957,8 @@ input[type="password"]::selection{
 .hourly-profile > .history-section > ul.work-history li .employment-info{
 	display: block;
 	float: left;
-	margin: 14px 0 0 4px;
+	margin: 8px 0 0 4px;
+	width: calc(100% - 70px);
 }
 
 .hourly-profile > .history-section > ul.work-history li .employment-info .employer-name{

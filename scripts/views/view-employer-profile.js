@@ -54,28 +54,36 @@ define([
 				var image = new Image();
 	    		image.src = _URL.createObjectURL(logo);
 
-	    		image.onload = function(){
-	    			var alert = $("#app-alert-resize-logo");
-	    			var overlay = $(alert).find(".resize-logo-container .overlay")
-	    			
-	    			$(alert).find(".resize-logo-container .overlay").after("<img class='resize-logo-image' src='"+image.src+"'/>");
-					$(alert).addClass("show");
-					$(document).find("#app-modal").addClass("show");
+	    		var filetype = logo.type;
+	    		var isImageFile = filetype === "image/jpg" || filetype === "image/jpeg" || filetype === "image/gif" || filetype === "image/png";
 
-					var containerWidth = $(".resize-logo-container").width();
-					var containerHeight = $(".resize-logo-container").height();
+	    		if(isImageFile){
+	    			image.onload = function(){
+		    			var alert = $("#app-alert-resize-logo");
+		    			var overlay = $(alert).find(".resize-logo-container .overlay")
+		    			
+		    			$(alert).find(".resize-logo-container .overlay").after("<img class='resize-logo-image' src='"+image.src+"'/>");
+						$(alert).addClass("show");
+						$(document).find("#app-modal").addClass("show");
 
-					var imagePosition = $(".resize-logo-image").offset();
-					var imageWidth = $(".resize-logo-image").width();
-					var imageHeight = $(".resize-logo-image").height();
-							
-					var x1 = (imagePosition.left + containerWidth) - imageWidth;
-					var y1 = (imagePosition.top + containerHeight) - imageHeight;
-					var x2 = imagePosition.left;
-					var y2 = imagePosition.top;
+						var containerWidth = $(".resize-logo-container").width();
+						var containerHeight = $(".resize-logo-container").height();
 
-					$(".resize-logo-image").draggable({containment : [x1,y1,x2,y2]});
+						var imagePosition = $(".resize-logo-image").offset();
+						var imageWidth = $(".resize-logo-image").width();
+						var imageHeight = $(".resize-logo-image").height();
+								
+						var x1 = (imagePosition.left + containerWidth) - imageWidth;
+						var y1 = (imagePosition.top + containerHeight) - imageHeight;
+						var x2 = imagePosition.left;
+						var y2 = imagePosition.top;
+
+						$(".resize-logo-image").draggable({containment : [x1,y1,x2,y2]});
+		    		}
+	    		}else{
+	    			Utils.ShowToast({ message : "Unsupported file type"});
 	    		}
+	    		
 			}
 		},
 

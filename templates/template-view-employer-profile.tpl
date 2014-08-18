@@ -29,7 +29,7 @@
 				</div>
 				<div class="allowed-types">.jpg, .jpeg, .gif, .png</div>
 				<form enctype="multipart/form-data" data-remote="true">
-					<input type="file" id="logo-file" name="file" accept="image/jpg,image/jpeg,image/gif"/>
+					<input type="file" id="logo-file" name="file" accept="image/jpg,image/jpeg,image/gif,image/png"/>
 				</form>
 			</div>
 		</div>

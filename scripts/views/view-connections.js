@@ -140,7 +140,7 @@ define([
 				jsonObject.connections = this.model;
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
-				jsonObject.name = localStorage.getItem("HSSharedConnectionName");
+				jsonObject.name = Utils.GetSharedConnectionName();
 			return jsonObject;
 		}
 		

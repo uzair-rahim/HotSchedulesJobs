@@ -79,17 +79,17 @@ define([
 
 			// Set Admin Employers
 			SetAdminEmployers : function(employers){
-				localStorage.setItem("HSAdminEmployers", JSON.stringify(employers));
+				localStorage.setItem("BrushfireAdminEmployers", JSON.stringify(employers));
 			},
 
 			// Get Admin Employers
 			GetAdminEmployers : function(){
-				return JSON.parse(localStorage.getItem("HSAdminEmployers"));
+				return JSON.parse(localStorage.getItem("BrushfireAdminEmployers"));
 			},
 
 			// Remove Admin Employers
 			RemoveAdminEmployers : function(){
-				localStorage.removeItem("HSAdminEmployers")
+				localStorage.removeItem("BrushfireAdminEmployers")
 			},
 
 			// Set Selected Employer
@@ -105,6 +105,22 @@ define([
 			// Remove Selected Employer
 			RemoveSelectedEmployer : function(index){
 				localStorage.removeItem("BrushfireSelectedEmployer")
+			},
+
+			
+			// Set Shared Connection Name
+			SetSharedConnectionName : function(name){
+				localStorage.setItem("BrushfireSharedConnectionName",name);
+			},
+
+			// Get Shared Connection Name
+			GetSharedConnectionName : function(name){
+				return localStorage.getItem("BrushfireSharedConnectionName");
+			},
+
+			// Remove Shared Connection Name
+			RemoveSharedConnectionName : function(index){
+				localStorage.removeItem("BrushfireSharedConnectionName");
 			},
 
 

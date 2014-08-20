@@ -17,6 +17,9 @@ define([
 			var user= Utils.GetUserSession();
 			var url = this.urlRoot();
 			var index = Utils.GetSelectedEmployer();
+			if (isNaN(index)) {
+			    index = 0;
+			}
 			
 			if(typeof this.guid !== "undefined"){
 				url += this.guid;

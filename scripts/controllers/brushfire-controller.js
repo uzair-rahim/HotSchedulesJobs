@@ -635,6 +635,9 @@ define([
 
 			logout : function(){
 				Utils.DeleteUserSession();
+				Utils.RemoveAdminEmployers();
+				Utils.RemoveSharedConnectionName();
+				Utils.RemoveSelectedEmployer();
 				App.router.navigate("login", true);
 			}
 			

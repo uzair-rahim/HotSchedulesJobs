@@ -152,6 +152,7 @@ define([
 							user.roles = response.attributes.admins[0].user.roles;
 
 						Utils.CreateUserSession(user);
+						Utils.SetSelectedEmployer(0);
 						Utils.ShowToast({message : "Welcome to HotSchedules Post"});
 						App.router.navigate("jobs", true);
 

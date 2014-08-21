@@ -98,8 +98,12 @@ define([
 			},
 
 			// Get Selected Employer
-			GetSelectedEmployer : function(index){
-				return parseInt(localStorage.getItem("BrushfireSelectedEmployer"));
+			GetSelectedEmployer : function(){
+				var index = parseInt(localStorage.getItem("BrushfireSelectedEmployer"));
+				if(isNaN(index)) {
+			    	index = 0;
+				}
+				return index;
 			},
 
 			// Remove Selected Employer

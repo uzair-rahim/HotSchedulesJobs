@@ -579,7 +579,7 @@ define([
 											});
 										el += "</div>"
 										el += "<div class='employment-date'>@"+ this.employer.name +"</div>"
-										el += "<div class='employment-date'>"+ this.startDate + " - " +this.endDate +"</div>"
+										el += "<div class='employment-date'>"+ Utils.FormatDate(this.startDate, "month/yyyy") + " - " + Utils.FormatDate(this.endDate, "month/yyyy") +"</div>"
 									el += "</div>"
 								el += "</li>"
 							$(list).append(el);

@@ -366,6 +366,37 @@ define([
 					links.apple = "https://itunes.apple.com/us/app/hotschedules/id888794188?mt=8"
 
 				return links;
+			},
+
+			// Format Date
+			FormatDate : function(given,type){
+				var date = new Date(given);
+				var defaultType = "mm/dd/yyyy";
+				var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+				var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+				var	retval = "";
+				
+				if(typeof(type) === "undefined"){
+					type = defaultType;
+				}
+
+				if(given === "Present"){
+					retval = "Present";
+				}else{
+					switch(type){
+						case "mm/dd/yyyy":
+							retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+						break;
+						case "month/yyyy":
+							retval = months[date.getMonth()] + " - " + date.getFullYear();
+						break;
+						default:
+							retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+						break;
+					}	
+				}
+				
+				return retval;
 			}
 			
 		});

@@ -1851,7 +1851,7 @@ input[type="password"]::selection{
 
 .hourly-profile.show{
 	opacity: 1;
-    max-height:1000px;
+    max-height:5000px;
 
 }
 

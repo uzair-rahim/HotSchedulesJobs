@@ -72,7 +72,7 @@
 							<div class="candidate-message"></div>
 							<!--<div class="candidate-rating"></div>-->
 							<!--<div class="candidate-endorse">0</div>-->
-							<div class="candidate-network sync"><span>0</span> / 0</div>
+							<div class="candidate-network sync"></div>
 							<div class="hourly-profile">
 								<div class="about-section">
 									<label>About</label>

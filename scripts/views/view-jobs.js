@@ -18,16 +18,15 @@ define([
 		className : "content",
 		jobGUID : null,
 		numberOfCalls : 0,
-		numberOfJobs : 0,
-		referralsArray : [],
 		template: Template,
 		events : {
 			"click #add-new-job"			: "addNewJob",
 			"click #cancel-add"				: "cancelAddJob",
 			"click #save-add"				: "saveAddJob",
-			"click #job-list > li"			: "expandJob",
+			"click .candidates-info .link"	: "expandJob",
 			"click #archive-candidates"		: "archiveCandidates",
 			"click .edit-job"				: "editJob",
+			"click #job-list > li"			: "editJob",
 			"click .save-job"				: "saveJob",
 			"click .add-referral-bonus"		: "addReferralBonus",
 			"click .cancel-edit"			: "cancelEdit",
@@ -39,6 +38,7 @@ define([
 			"click .share-with-employees"	: "shareJobWithEmployees",
 			"click .share-with-followers"	: "shareJobWithFollowers",
 			"click .view-candidates" 		: "candidates",
+			"click .close-candidates"		: "closeCandidates",
 			"click .view-profile"			: "profile",
 			"click .referred-by"			: "candidateReferral",
 			"click .candidate-select"		: "candidateSelect",
@@ -74,175 +74,11 @@ define([
 		},
 
 		onShow : function(){
-			this.referralsArray = [];
-			this.numberOfJobs = this.model.jobs.length;
-			this.getSharedConnections();
-			this.getReferralsForCandidates();
-
 			$("#new-bonus, .bonus").keyup(function(){
     			var value = $(this).val();
     			value = value.replace(/[^0-9]+/g, '');
     			$(this).val(value);
 			});
-		},
-
-		getSharedConnections : function(){
-
-			if(this.numberOfJobs > 0){
-				var that = this;
-				var index = this.numberOfJobs-1;
-				var job = this.model.jobs[index].guid
-
-				var connections = new CollectionConnections({jobGUID : job, userGUID : Utils.GetUserSession().guid});
-				connections.fetch({
-					success : function(response){
-						console.log("Shared connections fetched successfully...");
-						for(var i = 0; i < response.length; i++){
-
-							var candidate = response.models[i].attributes.candidateGuid;
-							var total = response.models[i].attributes.totalConnections;
-							var shared = response.models[i].attributes.sharedConnections.length;
-							
-							var element = $("#job-list li[data-guid='"+job+"'] li[data-guid='"+candidate+"'] .candidate-network");
-							$(element).addClass("has-connections");
-							$(element).html("<span>"+shared+"</span> / "+total);
-
-						}
-
-						that.numberOfJobs--;
-						that.getSharedConnections();
-					},
-					error : function(){
-						console.log("There was an error trying to fetch shared connections");
-						Utils.ShowToast({ message : "Error fetching shared connections..."});
-					}
-				});
-			}
-
-		},
-
-		getAllCandidates : function(){
-
-			var list = new Array();
-			var jobs = this.model.jobs;
-
-			for(var job in jobs){
-				for(var index = 0; index < jobs[job].candidates.length; index++){
-					var data = new Object();
-						data.job = jobs[job].guid;
-						data.user = jobs[job].candidates[index].user.guid;
-					list.push(data);
-				}
-			}
-
-			return list;
-			
-		},
-
-		getReferralsForCandidates : function(){
-			var candidates = this.getAllCandidates();
-			var count = 0;
-			var self = this;
-
-			$.each(candidates, function(){
-				var that = this;
-				var restURL = Utils.GetURL("/services/rest/referral/?jobPostingGuid="+this.job+"&userGuid="+this.user);
-				$.ajax({
-					url : restURL,
-					type : "GET",
-					success : function(response){
-						var referred = $("#job-list > li[data-guid='"+that.job+"'] #candidates-list li[data-user='"+that.user+"'] .candidate-referral .referred-by");
-
-						if(response.length >= 1){
-							$(referred).attr("data-id", count);
-							count++;
-
-							var referringUsers = new Array();
-
-							for(var i = 0; i < response.length; i++){
-								referringUsers.push(response[i]);
-							}
-
-							self.referralsArray.push(referringUsers);
-						}
-
-						if(response.length === 1 ){
-							$(referred).find(".name").text(response[0].referringUser.firstname + " " + response[0].referringUser.lastname.charAt(0) + ". referral");	
-		    				if(response[0].referringUser.photo !== null){
-		    					$(referred).find(".picture").html("<img src='"+response[0].referringUser.photo.url+"'/>");
-		    				}
-						}else if(response.length > 1){
-							$(referred).find(".name").text(response.length + " referrals");
-						}else{
-							$(referred).remove();
-						}
-					},
-					error : function(){
-						console.log("Error fetching referrals...");
-						Utils.ShowToast({ message : "Error fetching referrals..."});
-					}
-				});
-			});
-
-		},
-
-		candidateReferral : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var name = $(candidate).find(".candidate-info .candidate-name").text();
-				name = name.split(" ").slice(0, -1).join(' ') + "'s";
-
-				$("#segmented-referrals span").text(0);
-				$("#segmented-pending span").text(0);
-
-			var id = $(event.target).closest(".referred-by").data("id");
-			var candidatesReferrals = this.referralsArray[id];	
-			var alert = $("#app-alert-referral");
-				$(alert).find(".alert-body #referrals-segment ul.referrals-list").html("");
-				$(alert).find(".alert-body #pending-segment ul.referrals-list").html("");
-
-				var referrals = 0;
-				var pending = 0;
-				
-				for(var i = 0; i < candidatesReferrals.length; i++){
-					var photo = candidatesReferrals[i].referringUser.photo;
-					var image;
-					if(photo !== null){
-						image = "<img src='"+photo.url+"'/>";
-					}else{
-						image = ""
-					}
-
-					var status = candidatesReferrals[i].status;
-
-					var firstname = candidatesReferrals[i].referringUser.firstname;
-					var lastname = candidatesReferrals[i].referringUser.lastname;
-					var position = candidatesReferrals[i].referringUser.primaryWorkHistory.jobs[0].jobName;
-					var employer = candidatesReferrals[i].referringUser.primaryWorkHistory.employer.name;
-
-					if(status === 1){
-						referrals++;
-						$("#segmented-referrals span").text("("+referrals+")");
-						$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");
-					}else{
-						pending++;
-						$("#segmented-pending span").text("("+pending+")");
-						$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='picture'>"+image+"</div><div class='info'><div class='name'>"+firstname+" "+lastname+"</div><div class='position'>"+position+" @ "+employer+"</div></div></li>");
-					}
-				}
-
-				if(referrals === 0){
-					$(alert).find(".alert-body #referrals-segment ul.referrals-list").append("<li><div class='empty'>There are pending requests</div></li>")
-				}
-
-				if(pending === 0){
-					$(alert).find(".alert-body #pending-segment ul.referrals-list").append("<li><div class='empty'>There are no pending requests</div></li>")
-				}
-
-			$(alert).find(".alert-title").text(name + " Referrals");
-			$(alert).addClass("show");
-			$(document).find("#app-modal").addClass("show");
-
-			event.stopPropagation();
 		},
 
 		disableToolbarButtons : function(){
@@ -485,25 +321,27 @@ define([
 
 		expandJob : function(event){
 
-			this.disableToolbarButtons();
+			var link = $(event.target);
+			var noCandidates = link.hasClass("no");
 
-			var add = $("#add-job");
-			var isAddJobExpanded = $("#add-job").hasClass("show");
-			var all = $("#job-list > li");
-			var allListItems = $("#job-list li");
-			var allEdits = $("#job-list > li .edit-mode");
-			var allCandidates = $("#job-list > li .grid-list.sub");
-			var li = $(event.target).closest("#job-list > li");
-			var edit = $(li).find(".edit-mode");
-			var candidates = $(li).find(".grid-list.sub");
-			var allProfiles = $(li).find(".hourly-profile");
+			if(!noCandidates){
+				this.disableToolbarButtons();
 
-			$(add).removeClass("show");
+				var add = $("#add-job");
+				var all = $("#job-list > li");
+				var allListItems = $("#job-list li");
+				var allEdits = $("#job-list > li .edit-mode");
+				var allCandidates = $("#job-list > li .grid-list.sub");
+				var li = $(event.target).closest("#job-list > li");
+				var edit = $(li).find(".edit-mode");
+				var candidates = $(li).find(".grid-list.sub");
+				var allProfiles = $(li).find(".hourly-profile");
 
-			var isEditExpanded = $(edit).hasClass("show");
-			var isCandidatesListExpanded = $(candidates).hasClass("show");
+				$(add).removeClass("show");
 
-			//if(!isAddJobExpanded){
+				var isEditExpanded = $(edit).hasClass("show");
+				var isCandidatesListExpanded = $(candidates).hasClass("show");
+
 				if(!isEditExpanded){
 
 					$(all).removeClass("expanded");
@@ -514,7 +352,6 @@ define([
 					$(allCandidates).removeClass("show");
 					$(allProfiles).removeClass("show");
 
-
 					if(!isCandidatesListExpanded){
 						$(candidates).addClass("show");
 						$(li).addClass("expanded");
@@ -524,8 +361,28 @@ define([
 						$(all).removeClass("faded");
 					}
 				}
-			//}
 
+			}
+
+			event.stopPropagation();
+
+		},
+
+		closeCandidates : function(event){
+			var all = $("#job-list > li");
+			var allListItems = $("#job-list li");
+			var allEdits = $("#job-list > li .edit-mode");
+			var allCandidates = $("#job-list > li .grid-list.sub");
+			var allProfiles = $("#job-list > li .hourly-profile");
+			
+			$(all).removeClass("expanded");
+			$(allListItems).removeClass("expanded");
+			$(allListItems).removeClass("faded");
+			$(allEdits).removeClass("show");
+			$(allCandidates).removeClass("show");
+			$(allProfiles).removeClass("show");
+
+			event.stopPropagation();
 		},
 
 		candidates : function(event){
@@ -704,17 +561,11 @@ define([
 		},
 
 		candidateNetwork : function(event){
-
-			var count = $(event.target).find("span").text();
-
-			if(count > 0){
-				var candidate = $(event.target).closest(".view-profile");
-				var name = $(candidate).find(".candidate-info .candidate-name").text();
-				Utils.SetSharedConnectionName(name);
-				var guid = $(candidate).attr("data-user");
-				App.router.navigate("connections/"+guid, true);
-			}
-
+			var candidate = $(event.target).closest(".view-profile");
+			var name = $(candidate).find(".candidate-info .candidate-name").text();
+			Utils.SetSharedConnectionName(name);
+			var guid = $(candidate).attr("data-user");
+			App.router.navigate("connections/"+guid, true);
 			event.stopPropagation();
 		},
 

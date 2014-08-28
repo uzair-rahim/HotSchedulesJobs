@@ -70,20 +70,9 @@
 			</div>
 			<div class="candidates-info">
 				{{#if_not_eq this.candidates.length 0}}
-					<ul class="candidates-list">
-						{{#each this.candidates}}
-							{{#if_eq this.archived false}}
-								<li class="{{#if_eq seen false}}new{{/if_eq}}">
-									{{#isNotNull this.user.photo}}
-										<img src="{{this.user.photo.url}}"/>
-									{{/isNotNull}}
-								</li>
-							{{/if_eq}}
-						{{/each}}
-					</ul>
-					<div class="more {{hasNewCandidates ../this}}">{{moreCandidates this.candidates}}</div>
+					<div class="link">{{this.candidates.length}} Candidate{{#if_gt this.candidates.length 1}}s{{/if_gt}}</div>
 				{{else}}
-					<div class="more">No Candidates</div>
+					<div class="link no">No Candidates</div>
 				{{/if_not_eq}}
 			</div>
 			<!--<div class="share-info">0 shares</div>-->
@@ -139,18 +128,18 @@
 									<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 									<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 								</div>
-								<div class="candidate-referral">
+								<!--<div class="candidate-referral">
 									<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>
 									<div class="referred-by">
 										<div class="picture"></div>
 										<div class="name">Not Available</div>
 									</div>
-								</div>
+								</div>-->
 								<div class="candidate-archive"></div>
 								<div class="candidate-message"></div>
 								<!--<div class="candidate-rating"></div>-->
 								<!--<div class="candidate-endorse">0</div>-->
-								<div class="candidate-network"><span>0</span> / 0</div>
+								<div class="candidate-network sync"><span>0</span> / 0</div>
 								<div class="hourly-profile">
 									<div class="about-section">
 										<label>About</label>

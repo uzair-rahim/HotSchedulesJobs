@@ -6,10 +6,11 @@ define([
 		"marionette",
 		"hbs!templates/template-view-candidates",
 		"scripts/models/model-user",
+		"scripts/models/model-network",
 		"scripts/models/model-candidate",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelCandidate, CollectionConnections){
+	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelCandidate, CollectionConnections){
 	"use strict";
 
 	var ViewCandidates = Marionette.ItemView.extend({
@@ -31,7 +32,9 @@ define([
 			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
 			"click .candidate-unarchive"	: "candidateUnarchive",
-			"click .candidate-network"		: "candidateNetwork"
+			"click .candidate-network"		: "candidateNetwork",
+			"click .user-connect"			: "createConnection",
+			"click .user-disconnect"		: "deleteConnection"
 		},
 
 		initialize : function(){
@@ -44,6 +47,33 @@ define([
 				$("#filter").hide();
 				this.numberOfJobs = 1;
 			}
+
+			var candidatesList = $(".grid-list");
+			var that = this;
+
+			$.each(candidatesList, function(){
+				var candidate = $(this).find("li.view-profile");
+				$.each(candidate, function(){
+					var userGUID = $(this).attr("data-user");
+					if(that.isUserConnected(userGUID)){
+						var connectionIcon = $(this).find(".user-connect");
+						connectionIcon.addClass("user-disconnect");
+						connectionIcon.removeClass("user-connect");
+					}
+				});
+			});
+		},
+
+		isUserConnected : function(userGUID){
+			var connections = Utils.GetUserConnectionsList();
+			var retval = false;
+			$.each(connections, function(){
+				if(this === userGUID){
+					retval = true;
+				}
+			});
+
+			return retval;
 		},
 
 		back : function(event){
@@ -364,6 +394,34 @@ define([
 
 		clearAllFilter : function(){
 			$(".filter-section .checkbox-group input").prop("checked", false);
+		},
+
+		createConnection : function(event){
+			var connection = new Object();
+				connection.fromUserGuid = Utils.GetUserSession().guid;
+				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
+
+			var network = new ModelNetwork();
+				network.createConnection(connection, function(data){
+					Utils.AddToUserConnectionsList(connection.toUserGuid);
+				});
+
+			event.stopPropagation();
+		},
+
+		deleteConnection : function(event){
+			var connection = new Object();
+				connection.fromUserGuid = Utils.GetUserSession().guid;
+				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
+			
+			console.log(connection);
+
+			var network = new ModelNetwork();
+				network.deleteConnection(connection, function(data){
+					Utils.RemoveFromUserConnectionsList(connection.toUserGuid);
+				});
+
+			event.stopPropagation();
 		},
 
 		serializeData : function(){

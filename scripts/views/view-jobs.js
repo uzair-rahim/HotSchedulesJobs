@@ -6,11 +6,12 @@ define([
 		"marionette",
 		"hbs!templates/template-view-jobs",
 		"scripts/models/model-user",
+		"scripts/models/model-network",
 		"scripts/models/model-job",
 		"scripts/models/model-candidate",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelJob, ModelCandidate, CollectionConnections){
+	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, CollectionConnections){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -45,7 +46,9 @@ define([
 			"click .candidate-message"		: "candidateMessage",
 			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
-			"click .candidate-network"		: "candidateNetwork"
+			"click .candidate-network"		: "candidateNetwork",
+			"click .user-connect"			: "createConnection",
+			"click .user-disconnect"		: "deleteConnection"
 		},
 
 		initialize : function(){
@@ -79,6 +82,34 @@ define([
     			value = value.replace(/[^0-9]+/g, '');
     			$(this).val(value);
 			});
+
+			var candidatesList = $(".grid-list.sub");
+			var that = this;
+
+			$.each(candidatesList, function(){
+				var candidate = $(this).find("li.view-profile");
+				$.each(candidate, function(){
+					var userGUID = $(this).attr("data-user");
+					if(that.isUserConnected(userGUID)){
+						var connectionIcon = $(this).find(".user-connect");
+						connectionIcon.addClass("user-disconnect");
+						connectionIcon.removeClass("user-connect");
+					}
+				});
+			});
+
+		},
+
+		isUserConnected : function(userGUID){
+			var connections = Utils.GetUserConnectionsList();
+			var retval = false;
+			$.each(connections, function(){
+				if(this === userGUID){
+					retval = true;
+				}
+			});
+
+			return retval;
 		},
 
 		disableToolbarButtons : function(){
@@ -195,27 +226,23 @@ define([
 			//if(!isAddJobExpanded){
 				//if(!isCandidatesListExpanded){
 
-					$(all).removeClass("expanded");
-					$(all).addClass("faded");
-					$(allListItems).removeClass("expanded");
-					$(allListItems).removeClass("faded");
-					$(allEdits).removeClass("show");
-					$(allCandidates).removeClass("show");
-					$(profile).removeClass("show");
-
 					if(!isEditExpanded){
+
+						$(all).removeClass("expanded");
+						$(all).addClass("faded");
+						$(allListItems).removeClass("expanded");
+						$(allListItems).removeClass("faded");
+						$(allEdits).removeClass("show");
+						$(allCandidates).removeClass("show");
+						$(profile).removeClass("show");
+
 						$(edit).addClass("show");
 						$(li).removeClass("faded");
 						$(li).addClass("expanded");
-					}else{
-						$(edit).removeClass("show");
-						$(li).removeClass("expanded");
-						$(all).removeClass("faded");
 					}
 				//}
 			//}
 
-			event.stopPropagation();
 		},
 
 		cancelEdit : function(event){
@@ -809,6 +836,34 @@ define([
 
 				
 			}
+
+			event.stopPropagation();
+		},
+
+		createConnection : function(event){
+			var connection = new Object();
+				connection.fromUserGuid = Utils.GetUserSession().guid;
+				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
+
+			var network = new ModelNetwork();
+				network.createConnection(connection, function(data){
+					Utils.AddToUserConnectionsList(connection.toUserGuid);
+				});
+
+			event.stopPropagation();
+		},
+
+		deleteConnection : function(event){
+			var connection = new Object();
+				connection.fromUserGuid = Utils.GetUserSession().guid;
+				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
+			
+			console.log(connection);
+
+			var network = new ModelNetwork();
+				network.deleteConnection(connection, function(data){
+					Utils.RemoveFromUserConnectionsList(connection.toUserGuid);
+				});
 
 			event.stopPropagation();
 		},

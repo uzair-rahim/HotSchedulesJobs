@@ -638,6 +638,7 @@ define([
 				Utils.RemoveAdminEmployers();
 				Utils.RemoveSharedConnectionName();
 				Utils.RemoveSelectedEmployer();
+				Utils.RemoveUserConnectionsList();
 				App.router.navigate("login", true);
 			}
 			

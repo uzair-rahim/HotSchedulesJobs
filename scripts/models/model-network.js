@@ -16,6 +16,42 @@ define([
 
 			initialize : function(){
 				console.log("Network model initialized...");
+			},
+
+			createConnection : function(connections, callback){
+				var that = this;
+				var guid = this.attributes.guid;
+				var url = this.urlRoot();
+				$.ajax({
+					data : JSON.stringify(connections),
+					type : "POST",
+					contentType : "application/json",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error create connection");
+						Utils.ShowToast({message : "Error create connection"});
+					}
+				});
+			},
+
+			deleteConnection : function(connections, callback){
+				var that = this;
+				var guid = this.attributes.guid;
+				var url = this.urlRoot() + "/from/" + connections.fromUserGuid + "/to/" + connections.toUserGuid;
+				$.ajax({
+					type : "DELETE",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error deleting connection");
+						Utils.ShowToast({message : "Error deleting connection"});
+					}
+				});
 			}
 
 		});

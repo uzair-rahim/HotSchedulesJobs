@@ -51,6 +51,7 @@
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
 				<div class="candidate-message"></div>
+				<div class="user-connect"></div>
 				<!--<div class="candidate-endorse">0</div>-->
 				<div class="candidate-network sync"></div>
 				<div class="hourly-profile">
@@ -91,6 +92,7 @@
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
 				<div class="candidate-message"></div>
+				<div class="user-connect"></div>
 				<!--<div class="candidate-endorse">0</div>-->
 				<div class="candidate-network sync"></div>
 				<div class="hourly-profile">
@@ -129,6 +131,7 @@
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
 				<!--<div class="candidate-message"></div>-->
+				<div class="user-connect"></div>
 				<!--<div class="candidate-endorse">0</div>-->
 				<div class="candidate-network sync"></div>
 				<div class="hourly-profile">

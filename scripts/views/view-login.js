@@ -6,9 +6,10 @@ define([
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-login",
-		"scripts/models/model-authenticate"
+		"scripts/models/model-authenticate",
+		"scripts/models/model-user"
 	],
-	function($, jqueryUI, Cookie, App, Utils, Marionette, Template, ModelAuthenticate){
+	function($, jqueryUI, Cookie, App, Utils, Marionette, Template, ModelAuthenticate, ModelUser){
 	"use strict";
 
 	var ViewLogin = Marionette.ItemView.extend({
@@ -47,12 +48,10 @@ define([
 			var passwordField = $("#password").val();
 			var checked = $("#remember-me-check").prop("checked");
 
+			var that = this;
 			var authObject = {emailaddress : emailField, password : passwordField};
-
 			var auth = new ModelAuthenticate();
-				auth.save(
-					authObject,
-					{
+				auth.save(authObject, {
 					success : function(response){
 						console.log("User successfully authenticated...");
 
@@ -70,31 +69,20 @@ define([
 
 						var adminEmployers = response.attributes.adminEmployers;
 							Utils.SetAdminEmployers(adminEmployers);	
-							
 							Utils.SetSelectedEmployer(0);
 
-							var support = Utils.IsSupportUser(user.roles);
+						var support = Utils.IsSupportUser(user.roles);	
 
-							if(support){
-								//If the user is a support user go to support page
-								App.router.navigate("support", true);
-							}else{
-								if(user.employerIds.length  === 1 ){
-									//If the user is an admin of only one employer go directly to the jobs page
-									App.router.navigate("jobs", true);
-								}else if(user.employerIds.length > 1){
-									//If the user is an admin of more than one employer go to select employer page before going to the jobs page
-									App.router.navigate("selectEmployer", true);
-								}else{
-									if(user.verified){
-										//If the user is not an admin already but have verified the email go to find business page
-										App.router.navigate("findBusiness", true);
-									}else{
-										//if the user is not an admin and has not verified the email go to account verification page
-										App.router.navigate("accountVerification", true);
-									}
-								}
-							}
+							var user = new ModelUser({guid : user.guid});
+							user.getNetworkUsers(function(data){
+								var connections = [];
+								$.each(data, function(){
+									connections.push(this.guid);
+								});
+
+								Utils.SetUserConnectionsList(connections);
+								that.routeUser(support);
+							});
 					},
 
 					error : function(){
@@ -117,6 +105,29 @@ define([
 
 		showHelp : function(){
 			Utils.ShowHelp();
+		},
+
+		routeUser : function(support){
+			if(support){
+				//If the user is a support user go to support page
+				App.router.navigate("support", true);
+			}else{
+				if(user.employerIds.length  === 1 ){
+					//If the user is an admin of only one employer go directly to the jobs page
+					App.router.navigate("jobs", true);
+				}else if(user.employerIds.length > 1){
+					//If the user is an admin of more than one employer go to select employer page before going to the jobs page
+					App.router.navigate("selectEmployer", true);
+				}else{
+					if(user.verified){
+						//If the user is not an admin already but have verified the email go to find business page
+						App.router.navigate("findBusiness", true);
+					}else{
+						//if the user is not an admin and has not verified the email go to account verification page
+						App.router.navigate("accountVerification", true);
+					}
+				}
+			}
 		},
 		
 		serializeData : function(){

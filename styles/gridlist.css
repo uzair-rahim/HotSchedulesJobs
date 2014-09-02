@@ -574,7 +574,7 @@ ul.grid-list > li .candidate-network.has-connections{
 }
 
 ul.grid-list > li .candidate-network.sync{
-	width: 50px;
+	width: 45px;
 }
 
 ul.grid-list > li .candidate-network span{
@@ -587,7 +587,7 @@ ul.grid-list > li .candidate-network.has-connections span{
 	color: #2d3c4b;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 600px){
 	ul.grid-list > li .candidate-network{
 		display: none;
 	}
@@ -616,7 +616,7 @@ ul.grid-list > li .count.new{
 	border: 1px solid #3e92ce;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 500px){
 	ul.grid-list > li .count{
 		display: block;
 	}
@@ -658,6 +658,39 @@ ul.grid-list > li .candidate-rating.one{
 
 @media screen and (max-width: 700px){
 	ul.grid-list > li .candidate-rating{
+		display: none;
+	}
+}
+
+ul.grid-list > li .user-connect,
+ul.grid-list > li .user-disconnect{
+	display: block;
+	float: right;
+	margin: 5px 0;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	background-image: url("../images/icon-plus.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 22px auto;
+}
+
+ul.grid-list > li .user-connect:hover{
+	background-image: url("../images/icon-plus-hover.png");
+}
+
+ul.grid-list > li .user-disconnect{
+	background-image: url("../images/icon-minus.png");
+}
+
+ul.grid-list > li .user-disconnect:hover{
+	background-image: url("../images/icon-minus-hover.png");
+}
+
+@media screen and (max-width: 500px){
+	ul.grid-list > li .user-connect,
+	ul.grid-list > li .user-disconnect{
 		display: none;
 	}
 }

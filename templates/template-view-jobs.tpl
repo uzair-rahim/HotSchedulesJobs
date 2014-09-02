@@ -70,7 +70,7 @@
 			</div>
 			<div class="candidates-info">
 				{{#if_not_eq this.candidates.length 0}}
-					<div class="link">{{this.candidates.length}} Candidate{{#if_gt this.candidates.length 1}}s{{/if_gt}}</div>
+					<div class="link">{{totalUnarchivedCandidatesByJob this}} Candidate{{#if_gt this.candidates.length 1}}s{{/if_gt}}</div>
 				{{else}}
 					<div class="link no">No Candidates</div>
 				{{/if_not_eq}}
@@ -137,6 +137,7 @@
 								</div>-->
 								<div class="candidate-archive"></div>
 								<div class="candidate-message"></div>
+								<div class="user-connect"></div>
 								<!--<div class="candidate-rating"></div>-->
 								<!--<div class="candidate-endorse">0</div>-->
 								<div class="candidate-network sync"></div>

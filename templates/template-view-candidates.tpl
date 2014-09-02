@@ -70,6 +70,7 @@
 							</div>-->
 							<div class="candidate-archive"></div>
 							<div class="candidate-message"></div>
+							<div class="user-connect"></div>
 							<!--<div class="candidate-rating"></div>-->
 							<!--<div class="candidate-endorse">0</div>-->
 							<div class="candidate-network sync"></div>

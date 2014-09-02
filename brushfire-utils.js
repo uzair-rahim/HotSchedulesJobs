@@ -127,6 +127,43 @@ define([
 				localStorage.removeItem("BrushfireSharedConnectionName");
 			},
 
+			// Set User Connections List
+			SetUserConnectionsList : function(connections){
+				localStorage.setItem("BrushfireUserConnectionsList", JSON.stringify(connections));
+			},
+
+			// Get User Connections List
+			GetUserConnectionsList : function(){
+				return JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
+			},
+
+			// Add to User Connections List
+			AddToUserConnectionsList : function(userGUID){
+				var connections = JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
+				var connectionsArray = [];
+				$.each(connections, function(){
+					connectionsArray.push(this);
+				});
+				connectionsArray.push(userGUID);
+				localStorage.setItem("BrushfireUserConnectionsList", JSON.stringify(connectionsArray));
+			},
+
+			// Remove from User Connections List
+			RemoveFromUserConnectionsList : function(userGUID){
+				var connections = JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
+				var connectionsArray = [];
+				$.each(connections, function(){
+					if(this !== userGUID){
+						connectionsArray.push(this);
+					}
+				});
+				localStorage.setItem("BrushfireUserConnectionsList", JSON.stringify(connectionsArray));
+			},
+
+			// Remove User Connections List
+			RemoveUserConnectionsList : function(){
+				localStorage.removeItem("BrushfireUserConnectionsList");
+			},
 
 			// Check if support user
 			IsSupportUser : function(roles){

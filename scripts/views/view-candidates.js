@@ -8,9 +8,10 @@ define([
 		"scripts/models/model-user",
 		"scripts/models/model-network",
 		"scripts/models/model-candidate",
+		"scripts/models/model-referral",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelCandidate, CollectionConnections){
+	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelCandidate, ModelReferral, CollectionConnections){
 	"use strict";
 
 	var ViewCandidates = Marionette.ItemView.extend({
@@ -26,13 +27,14 @@ define([
 			"click #search-filter"			: "searchFilter",
 			"click #clear"					: "clearAllFilter",
 			"click .view-profile"			: "profile",
-			"click .referred-by"			: "candidateReferral",
+			"click .candidate-referral"		: "candidateReferral",
 			"click .candidate-select"		: "candidateSelect",
 			"click .candidate-message"		: "candidateMessage",
 			"click #send-message"			: "sendBulkMessage",
 			"click .candidate-archive"		: "candidateArchive",
 			"click .candidate-unarchive"	: "candidateUnarchive",
 			"click .candidate-network"		: "candidateNetwork",
+			"click .candidate-endorse"		: "candidateEndorsements",
 			"click .user-connect"			: "createConnection",
 			"click .user-disconnect"		: "deleteConnection"
 		},
@@ -287,11 +289,42 @@ define([
 		},
 	
 		candidateNetwork : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var name = $(candidate).find(".candidate-info .candidate-name").text();
-			Utils.SetSharedConnectionName(name);
-			var guid = $(candidate).attr("data-user");
-			App.router.navigate("connections/"+guid, true);
+			var user = $(event.target).closest(".view-profile");
+			var guid1 = Utils.GetUserSession().guid;
+			var guid2 = $(user).attr("data-user");	
+
+			var network = new ModelNetwork();
+				network.getSharedConnections(guid1, guid2, function(data){
+					Utils.ShowSharedConnections(data);
+				});
+
+			event.stopPropagation();
+		},
+
+		candidateReferral : function(event){
+			var user = $(event.target).closest(".view-profile");
+			var job = $(event.target).closest("#candidates-list");
+			var userGUID = $(user).attr("data-user");
+			var jobPostingGUID = $(job).attr("data-guid");
+
+			var referral = new ModelReferral();
+				referral.getReferralsList(jobPostingGUID, userGUID, function(data){
+					Utils.ShowReferrals(data);
+				});
+
+
+			event.stopPropagation();
+		},
+
+		candidateEndorsements : function(event){
+			var user = $(event.target).closest(".view-profile");
+			var userGUID = $(user).attr("data-user");
+
+			var endorsements = new ModelUser();
+				endorsements.getEndorsements(userGUID, function(data){
+					Utils.ShowEndorsements(data);
+				});
+
 			event.stopPropagation();
 		},
 

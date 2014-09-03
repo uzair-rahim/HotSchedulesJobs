@@ -438,6 +438,131 @@ define([
 				}
 				
 				return retval;
+			},
+
+			// Show Shared Connections
+			ShowSharedConnections : function(connections){
+				var list = $("ul.shared-connections-list");
+					list.html("");
+
+				if(connections.length === 0){
+					list.append('<li><div class="empty">There are no shared connections</div></li>')
+				}
+
+				$.each(connections, function(){
+					var candidate =  '<li>';
+						candidate += '<div class="picture">';
+						if(this.photo !== null){
+							candidate += '<img src="'+this.photo.url+'"/>'
+						}
+						candidate += '</div>';
+						candidate += '<div class="info">';
+						candidate += '<div class="name">'+this.firstname+" "+this.lastname+'</div>';
+						if(this.primaryWorkHistory !== null){
+							candidate += '<div class="position">'+this.primaryWorkHistory.jobs[0].jobName+" @ "+this.primaryWorkHistory.employer.name+'</div>';	
+						}else{
+							candidate += '<div class="position">Not Available</div>';
+						}
+						candidate += '</div>';
+						candidate += '<div class="send-message" data-email="'+this.email+'"></div>';
+						candidate += '</li>';
+						list.append(candidate);
+				});
+
+				var alertDialog = $(document).find("#app-alert-shared-connections");
+				var app = $(document).find(".app");
+					alertDialog.addClass("show");
+					app.append('<div class="view-modal"></div>');
+			},
+
+			// Show Endorsements
+			ShowEndorsements : function(endorsements){
+				var list = $("ul.endorsements-list");
+					list.html("");
+
+				if(endorsements.length === 0){
+					list.append('<li><div class="empty">There are no endorsements</div></li>')
+				}
+
+				$.each(endorsements, function(){
+					var user =  '<li>';
+						user += '<div class="picture">';
+						if(this.photo !== null){
+							user += '<img src="'+this.photo.url+'"/>'
+						}
+						user += '</div>';
+						user += '<div class="info">';
+						user += '<div class="name">'+this.firstname+" "+this.lastname+'</div>';
+						if(this.primaryWorkHistory !== null){
+							user += '<div class="position">'+this.primaryWorkHistory.jobs[0].jobName+" @ "+this.primaryWorkHistory.employer.name+'</div>';	
+						}else{
+							user += '<div class="position">Not Available</div>';
+						}
+						user += '</div>';
+						user += '<div class="send-message" data-email="'+this.email+'"></div>';
+						user += '</li>';
+						list.append(user);
+				});
+
+				var alertDialog = $(document).find("#app-alert-endorsements");
+				var app = $(document).find(".app");
+					alertDialog.addClass("show");
+					app.append('<div class="view-modal"></div>');
+			},
+
+			// Show Referrals
+			ShowReferrals : function(referrals){
+				var referralList = $("#referrals-segment ul.referrals-list");
+				var pendingList = $("#pending-segment ul.referrals-list");
+				var referralsCount = $("#segmented-referrals span");
+				var pendingCount = $("#segmented-pending span");
+				var totalReferrals = 0;
+				var totalPending = 0;
+
+				referralList.html("");
+				pendingList.html("");
+
+				$.each(referrals, function(){
+					var referral =  '<li>';
+						referral += '<div class="picture">';
+						if(this.referringUser.photo !== null){
+							referral += '<img src="'+this.referringUser.photo.url+'"/>'
+						}
+						referral += '</div>';
+						referral += '<div class="info">';
+						referral += '<div class="name">'+this.referringUser.firstname+" "+this.referringUser.lastname+'</div>';
+						if(this.referringUser.primaryWorkHistory !== null){
+							referral += '<div class="position">'+this.referringUser.primaryWorkHistory.jobs[0].jobName+" @ "+this.referringUser.primaryWorkHistory.employer.name+'</div>';	
+						}else{
+							referral += '<div class="position">Not Available</div>';
+						}
+						referral += '</div>';
+						referral += '</li>';
+
+						if(this.status === 1){
+							totalReferrals++;
+							referralList.append(referral);
+						}else if(this.status === 0){
+							totalPending++;
+							pendingList.append(referral);
+						}	
+				});
+
+				referralsCount.html(totalReferrals);
+				pendingCount.html(totalPending);
+
+				if(totalReferrals === 0){
+					referralList.html('<li><div class="empty">There are referrals</div></li>');
+				}
+
+				if(totalPending === 0){
+					pendingList.html('<li><div class="empty">There are no pending referrals</div></li>');
+				}
+
+				var alertDialog = $(document).find("#app-alert-referrals");
+				var app = $(document).find(".app");
+					alertDialog.addClass("show");
+					app.append('<div class="view-modal"></div>');
 			}
 			
 		});

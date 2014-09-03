@@ -34,8 +34,8 @@
 	</div>
 </div>
 <!--Candidate Referrals List Alert-->
-<div id="app-alert-referral" class="app-alert referral-list">
-	<div class="alert-title">Candidate's Referrals</div>
+<div id="app-alert-referrals" class="app-alert referral-list">
+	<div class="alert-title">Referrals</div>
 	<div class="alert-segmented-control">
 		<div id="segmented-referrals" class="tab left">Referrals <span>(0)</span></div>
 		<div id="segmented-pending" class="tab right unselected">Pending <span>(0)</span></div>
@@ -43,21 +43,41 @@
 	<div class="alert-body">
 		<div id="referrals-segment">
 			<ul class="referrals-list">
-				There are pending requests.
 			</ul>
 		</div>
 		<div id="pending-segment">
 			<ul class="referrals-list">
-				<li>
-					<div class="empty">
-						There are no pending requests.
-					</div>
-				</li>
 			</ul>
 		</div>
 	</div>
 	<div class="alert-action single">
 		<button id="close-referral-list">Close</button>
+	</div>
+</div>
+<!--Candidate Connections List Alert-->
+<div id="app-alert-shared-connections" class="app-alert shared-connections-list">
+	<div class="alert-title">Shared Connections</div>
+	<div class="alert-body">
+		<div id="shared-connections-segment">
+			<ul class="shared-connections-list">
+			</ul>
+		</div>
+	</div>
+	<div class="alert-action single">
+		<button id="close-connections-list">Close</button>
+	</div>
+</div>
+<!--User Endorsements List Alert-->
+<div id="app-alert-endorsements" class="app-alert endorsements-list">
+	<div class="alert-title">Endorsements</div>
+	<div class="alert-body">
+		<div id="endorsements-segment">
+			<ul class="endorsements-list">
+			</ul>
+		</div>
+	</div>
+	<div class="alert-action single">
+		<button id="close-endorsements-list">Close</button>
 	</div>
 </div>
 <!--Resize logo on upload alert-->

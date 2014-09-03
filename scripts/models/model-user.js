@@ -78,6 +78,22 @@ define([
 						Utils.ShowToast({message : "Error fetching user network"});
 					}
 				});
+			},
+
+			getEndorsements : function(userGUID,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + userGUID + "/endorsements";
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching user endorsements");
+						Utils.ShowToast({message : "Error fetching user endorsements"});
+					}
+				});
 			}
 
 		});

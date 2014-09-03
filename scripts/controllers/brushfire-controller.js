@@ -33,9 +33,8 @@ define([
 		"scripts/collections/collection-employees",
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
-		"scripts/collections/collection-shared-connections",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements, CollectionSharedConnections){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -555,46 +554,6 @@ define([
 				}else{
 					App.router.navigate("login", true);
 				}
-			},
-
-			connections : function(id){
-				
-				var that = this;
-
-				if(Utils.CheckSession()){
-					App.pushTrail(App.Language.sharedConnections);
-
-					this.removeBackground();
-					this.setLayout();
-					this.setHeader("navigation");
-
-					var user1guid = id;
-					var user2guid = Utils.GetUserSession().guid;
-					var models = new Object();
-					
-					var sharedConnections = new CollectionSharedConnections({ guid1 : user1guid, guid2 : user2guid });
-
-					$.when(
-						sharedConnections.fetch({
-							success : function(response){
-								models = response.models;
-							},
-							error : function(){
-								Utils.ShowToast({ message : "Error fetching shared connections..."});
-							}
-						})
-
-					).then(function(){
-						var view = new ViewConnections({model : models});
-							that.layout.body.show(view);
-
-					});
-						
-
-				}else{
-					App.router.navigate("login", true);
-				}
-
 			},
 
 			support : function(){

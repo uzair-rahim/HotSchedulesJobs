@@ -27,6 +27,7 @@ define([
 			"click .candidate-message"	: "networkMessage",
 			"click #send-message"		: "sendBulkMessage",
 			"click .candidate-network"	: "networkConnections",
+			"click .candidate-endorse"	: "networkEndorsements",
 			"click #share-job"			: "shareJob",
 			"click .user-connect"		: "createConnection",
 			"click .user-disconnect"	: "deleteConnection"
@@ -196,11 +197,27 @@ define([
 		},
 
 		networkConnections : function(event){
-			var candidate = $(event.target).closest(".view-profile");
-			var name = $(candidate).find(".candidate-info .candidate-name").text();
-			Utils.SetSharedConnectionName(name);
-			var guid = $(candidate).attr("data-guid");
-			App.router.navigate("connections/"+guid, true);
+			var user = $(event.target).closest(".view-profile");
+			var guid1 = Utils.GetUserSession().guid;
+			var guid2 = $(user).attr("data-guid");	
+
+			var network = new ModelNetwork();
+				network.getSharedConnections(guid1, guid2, function(data){
+					Utils.ShowSharedConnections(data);
+				});
+
+			event.stopPropagation();
+		},
+
+		networkEndorsements : function(event){
+			var user = $(event.target).closest(".view-profile");
+			var userGUID = $(user).attr("data-guid");
+
+			var endorsements = new ModelUser();
+				endorsements.getEndorsements(userGUID, function(data){
+					Utils.ShowEndorsements(data);
+				});
+
 			event.stopPropagation();
 		},
 

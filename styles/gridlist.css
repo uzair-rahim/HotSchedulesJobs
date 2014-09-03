@@ -384,6 +384,33 @@ ul.grid-list > li .candidate-info .candidate-job{
 
 ul.grid-list > li .candidate-referral{
 	display: block;
+	float: right;
+	margin: 5px 5px 0 0;
+	width: 45px;
+	height: 40px;
+	line-height: 42px;
+	color: #969ba2;
+	font-size: 12px;
+	text-indent: 50px;
+	background-image: url("../images/icon-referral.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 40px auto;
+	cursor: pointer;
+}
+
+ul.grid-list > li .candidate-referral:hover{
+	background-image: url("../images/icon-referral-hover.png");
+}
+
+@media screen and (max-width: 600px){
+	ul.grid-list > li .candidate-referral{
+		display: none;
+	}
+}
+
+/*ul.grid-list > li .candidate-referral{
+	display: block;
 	float: left;
 	margin: 5px 0;
 	width: 270px;
@@ -466,7 +493,7 @@ ul.grid-list > li .candidate-referral .referred-by .name{
 	ul.grid-list > li .candidate-referral{
 		display: none;
 	}
-}
+}*/
 
 ul.grid-list > li .candidate-message{
 	display: block;
@@ -526,7 +553,7 @@ ul.grid-list > li .candidate-endorse{
 	display: block;
 	float: right;
 	margin: 5px 0;
-	width: 60px;
+	width: 40px;
 	height: 40px;
 	line-height: 42px;
 	color: #969ba2;
@@ -537,12 +564,16 @@ ul.grid-list > li .candidate-endorse{
 	text-overflow: ellipsis;
 	background-image: url("../images/icon-endorsements.png");
 	background-repeat: no-repeat;
-	background-position: 15px 10px;
+	background-position: 12px 10px;
 	background-size: auto 20px;
 	cursor: pointer;
 }
 
-@media screen and (max-width: 400px){
+ul.grid-list > li .candidate-endorse:hover{
+	background-image: url("../images/icon-endorsements-hover.png");
+}
+
+@media screen and (max-width: 500px){
 	ul.grid-list > li .candidate-endorse{
 		display: none;
 	}
@@ -587,7 +618,7 @@ ul.grid-list > li .candidate-network.has-connections span{
 	color: #2d3c4b;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 540px){
 	ul.grid-list > li .candidate-network{
 		display: none;
 	}
@@ -688,7 +719,7 @@ ul.grid-list > li .user-disconnect:hover{
 	background-image: url("../images/icon-minus-hover.png");
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 400px){
 	ul.grid-list > li .user-connect,
 	ul.grid-list > li .user-disconnect{
 		display: none;

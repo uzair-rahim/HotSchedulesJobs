@@ -69,11 +69,11 @@
 				<div class="job-shift">@ ${{formatCurrency wage}} / {{wageType}}</div>
 			</div>
 			<div class="candidates-info">
-				{{#if_not_eq this.candidates.length 0}}
+				{{#hasUnarchivedCandidates this}}
 					<div class="link">{{totalUnarchivedCandidatesByJob this}} Candidate{{#if_gt this.candidates.length 1}}s{{/if_gt}}</div>
 				{{else}}
 					<div class="link no">No Candidates</div>
-				{{/if_not_eq}}
+				{{/hasUnarchivedCandidates}}
 			</div>
 			<!--<div class="share-info">0 shares</div>-->
 			<div class="bonus-info {{hasNewCandidates this}}">{{#isNotNull referralBonus}}${{referralBonus}}{{else}}No{{/isNotNull}} Ref. Bonus</div>
@@ -128,19 +128,13 @@
 									<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 									<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 								</div>
-								<!--<div class="candidate-referral">
-									<div class="date {{#if_eq seen false}}new{{/if_eq}}">{{dateConverter created}}</div>
-									<div class="referred-by">
-										<div class="picture"></div>
-										<div class="name">Not Available</div>
-									</div>
-								</div>-->
 								<div class="candidate-archive"></div>
 								<div class="candidate-message"></div>
 								<div class="user-connect"></div>
 								<!--<div class="candidate-rating"></div>-->
-								<!--<div class="candidate-endorse">0</div>-->
+								<div class="candidate-endorse"></div>
 								<div class="candidate-network sync"></div>
+								<div class="candidate-referral"></div>
 								<div class="hourly-profile">
 									<div class="about-section">
 										<label>About</label>

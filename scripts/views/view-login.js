@@ -73,8 +73,8 @@ define([
 
 						var support = Utils.IsSupportUser(user.roles);	
 
-							var user = new ModelUser({guid : user.guid});
-							user.getNetworkUsers(function(data){
+							var userModel = new ModelUser({guid : user.guid});
+							userModel.getNetworkUsers(function(data){
 								var connections = [];
 								$.each(data, function(){
 									connections.push(this.guid);

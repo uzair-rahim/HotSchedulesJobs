@@ -18,6 +18,22 @@ define([
 				console.log("Network model initialized...");
 			},
 
+			getSharedConnections : function(guid1,guid2,callback){
+				var that = this;
+				var url = this.urlRoot()+"/shared?user1Guid="+guid1+"&user2Guid="+guid2;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching shared connections");
+						Utils.ShowToast({message : "Error fetching shared connections"});
+					}
+				});
+			},
+
 			createConnection : function(connections, callback){
 				var that = this;
 				var guid = this.attributes.guid;

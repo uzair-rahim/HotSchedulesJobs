@@ -19,22 +19,25 @@ define([
 			},
 			
 			events : {
-				"click #primary-action"			: "primaryAction",
-				"click #secondary-action"		: "secondaryAction",
-				"click #close-help"				: "closeHelp",
-				"click #accept-terms"			: "acceptTerms",
-				"click #decline-terms"			: "declineTerms",
-				"click #close-copy-link"		: "closeTinyURL",
-				"click #close-referral-list"	: "closeCandidateReferral",
-				"click #segmented-referrals"	: "showSegmentedReferrals",
-				"click #segmented-pending"		: "showSegmentedPending",
-				"click .google-hspost-help"		: "androidDevice",
-				"click .ios-hspost-help"		: "iOSDevice",
-				"click #close-share-job"		: "closeShareJob",
-				"click #send-share-job"			: "sendShareJob",
-				"click #save-logo"				: "saveLogo",
-				"click #close-resize-logo"		: "closeResizeLogo",
-				"click #set-employer"			: "setEmployer"
+				"click #primary-action"				: "primaryAction",
+				"click #secondary-action"			: "secondaryAction",
+				"click #close-help"					: "closeHelp",
+				"click #accept-terms"				: "acceptTerms",
+				"click #decline-terms"				: "declineTerms",
+				"click #close-copy-link"			: "closeTinyURL",
+				"click #close-referral-list"		: "closeCandidateReferral",
+				"click #close-connections-list"		: "closeSharedConnections",
+				"click #segmented-referrals"		: "showSegmentedReferrals",
+				"click #segmented-pending"			: "showSegmentedPending",
+				"click .google-hspost-help"			: "androidDevice",
+				"click .ios-hspost-help"			: "iOSDevice",
+				"click #close-share-job"			: "closeShareJob",
+				"click #send-share-job"				: "sendShareJob",
+				"click #save-logo"					: "saveLogo",
+				"click #close-resize-logo"			: "closeResizeLogo",
+				"click #close-endorsements-list"	: "closeEndorsements",
+				"click #set-employer"				: "setEmployer",
+				"click .send-message"				: "sendMessage"
 			},
 
 			initialize : function(){
@@ -155,9 +158,10 @@ define([
 			},
 
 			closeCandidateReferral : function(event){
-				var alert = $("#app-alert-referral");
-				$(alert).removeClass("show");
-				$(document).find("#app-modal").removeClass("show");
+				var alertDialog = $("#app-alert-referrals");
+					alertDialog.removeClass("show");
+				var app = $(document).find(".app");
+					app.find(".view-modal").remove();
 			},
 
 			showSegmentedReferrals : function(){
@@ -174,6 +178,22 @@ define([
 
 				$("#segmented-pending").removeClass("unselected");
 				$("#segmented-referrals").addClass("unselected");			
+			},
+
+			closeSharedConnections : function(event){
+				var alertDialog = $("#app-alert-shared-connections");
+					alertDialog.removeClass("show");
+				var app = $(document).find(".app");
+					app.find(".view-modal").remove();
+
+			},
+
+			closeEndorsements : function(event){
+				var alertDialog = $("#app-alert-endorsements");
+					alertDialog.removeClass("show");
+				var app = $(document).find(".app");
+					app.find(".view-modal").remove();
+
 			},
 
 			closeResizeLogo : function(event){
@@ -199,7 +219,12 @@ define([
 				$(alertDialog).find(".custom-select").attr("data-index", 0);
 				App.router.navigate("jobs", true);
 			},
-			
+
+			sendMessage : function(event){
+				var email = $(event.target).attr("data-email");
+				window.location.href = "mailto:"+email;
+			},
+
 			serializeData : function(){
 				var jsonObject = new Object();
 					jsonObject.language = App.Language;

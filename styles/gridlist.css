@@ -694,7 +694,8 @@ ul.grid-list > li .candidate-rating.one{
 }
 
 ul.grid-list > li .user-connect,
-ul.grid-list > li .user-disconnect{
+ul.grid-list > li .user-disconnect,
+ul.grid-list > li .user-connect-self{
 	display: block;
 	float: right;
 	margin: 5px 0;
@@ -718,6 +719,12 @@ ul.grid-list > li .user-disconnect{
 ul.grid-list > li .user-disconnect:hover{
 	background-image: url("../images/icon-minus-hover.png");
 }
+
+ul.grid-list > li .user-connect-self,
+ul.grid-list > li .user-connect-self:hover{
+	background-image: url("../images/icon-plus-light.png");
+}
+
 
 @media screen and (max-width: 400px){
 	ul.grid-list > li .user-connect,

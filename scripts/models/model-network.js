@@ -68,6 +68,38 @@ define([
 						Utils.ShowToast({message : "Error deleting connection"});
 					}
 				});
+			},
+
+			getReceivedRequests : function(userGUID, callback){
+				var that = this;
+				var url = this.urlRoot() + "/receivedRequests/" + userGUID;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching received connections requests");
+						Utils.ShowToast({message : "Error fetching received connections requests"});
+					}
+				});
+			},
+
+			getSentRequests : function(userGUID, callback){
+				var that = this;
+				var url = this.urlRoot() + "/sentRequests/" + userGUID;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching sent connections requests");
+						Utils.ShowToast({message : "Error fetching sent connections requests"});
+					}
+				});
 			}
 
 		});

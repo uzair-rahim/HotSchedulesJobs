@@ -7,9 +7,10 @@ define([
 		"marionette",
 		"hbs!templates/template-view-login",
 		"scripts/models/model-authenticate",
-		"scripts/models/model-user"
+		"scripts/models/model-user",
+		"scripts/models/model-network"
 	],
-	function($, jqueryUI, Cookie, App, Utils, Marionette, Template, ModelAuthenticate, ModelUser){
+	function($, jqueryUI, Cookie, App, Utils, Marionette, Template, ModelAuthenticate, ModelUser, ModelNetwork){
 	"use strict";
 
 	var ViewLogin = Marionette.ItemView.extend({
@@ -76,12 +77,30 @@ define([
 							var userModel = new ModelUser({guid : user.guid});
 							userModel.getNetworkUsers(function(data){
 								var connections = [];
+
 								$.each(data, function(){
 									connections.push(this.guid);
 								});
 
-								Utils.SetUserConnectionsList(connections);
-								that.routeUser(support);
+								var networkModel = new ModelNetwork();
+									networkModel.getReceivedRequests(user.guid, function(data){
+
+										$.each(data, function(){
+											connections.push(this.fromUserGuid);
+										});
+
+										networkModel.getSentRequests(user.guid, function(data){
+											
+											$.each(data, function(){
+												connections.push(this.toUserGuid);
+											});
+
+											Utils.SetUserConnectionsList(connections);
+											that.routeUser(support);
+
+										});
+
+									});
 							});
 					},
 

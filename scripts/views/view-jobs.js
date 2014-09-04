@@ -85,6 +85,7 @@ define([
     			$(this).val(value);
 			});
 
+			var loggedUserGUID = Utils.GetUserSession().guid;
 			var candidatesList = $(".grid-list.sub");
 			var that = this;
 
@@ -95,6 +96,11 @@ define([
 					if(that.isUserConnected(userGUID)){
 						var connectionIcon = $(this).find(".user-connect");
 						connectionIcon.addClass("user-disconnect");
+						connectionIcon.removeClass("user-connect");
+					}
+
+					if(userGUID == loggedUserGUID){
+						connectionIcon.addClass("user-connect-self");
 						connectionIcon.removeClass("user-connect");
 					}
 				});
@@ -878,8 +884,12 @@ define([
 				connection.fromUserGuid = Utils.GetUserSession().guid;
 				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
 
+			var icons = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .user-connect");	
+
 			var network = new ModelNetwork();
 				network.createConnection(connection, function(data){
+					icons.addClass("user-disconnect");
+					icons.removeClass("user-connect");
 					Utils.AddToUserConnectionsList(connection.toUserGuid);
 				});
 
@@ -890,11 +900,13 @@ define([
 			var connection = new Object();
 				connection.fromUserGuid = Utils.GetUserSession().guid;
 				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
-			
-			console.log(connection);
 
+			var icons = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .user-disconnect");		
+			
 			var network = new ModelNetwork();
 				network.deleteConnection(connection, function(data){
+					icons.addClass("user-connect");
+					icons.removeClass("user-disconnect");
 					Utils.RemoveFromUserConnectionsList(connection.toUserGuid);
 				});
 

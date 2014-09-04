@@ -140,7 +140,7 @@ define([
 			// Add to User Connections List
 			AddToUserConnectionsList : function(userGUID){
 				var connections = JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
-				var connectionsArray = [];
+				var connectionsArray = new Array();
 				$.each(connections, function(){
 					connectionsArray.push(this);
 				});
@@ -149,14 +149,16 @@ define([
 			},
 
 			// Remove from User Connections List
-			RemoveFromUserConnectionsList : function(userGUID){
+			RemoveFromUserConnectionsList : function(userGUID){				
 				var connections = JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
-				var connectionsArray = [];
+					localStorage.removeItem("BrushfireUserConnectionsList");
+				var connectionsArray = new Array();
 				$.each(connections, function(){
-					if(this !== userGUID){
+					if(this != userGUID){
 						connectionsArray.push(this);
 					}
 				});
+				
 				localStorage.setItem("BrushfireUserConnectionsList", JSON.stringify(connectionsArray));
 			},
 
@@ -552,7 +554,7 @@ define([
 				pendingCount.html(totalPending);
 
 				if(totalReferrals === 0){
-					referralList.html('<li><div class="empty">There are referrals</div></li>');
+					referralList.html('<li><div class="empty">There are no referrals</div></li>');
 				}
 
 				if(totalPending === 0){

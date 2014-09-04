@@ -65,6 +65,7 @@ define([
 					}
 
 					if(userGUID == loggedUserGUID){
+						var connectionIcon = $(this).find(".user-connect");
 						connectionIcon.addClass("user-connect-self");
 						connectionIcon.removeClass("user-connect");
 					}

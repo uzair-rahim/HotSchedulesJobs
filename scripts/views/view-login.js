@@ -96,7 +96,7 @@ define([
 											});
 
 											Utils.SetUserConnectionsList(connections);
-											that.routeUser(support);
+											that.routeUser(support,user);
 
 										});
 
@@ -126,7 +126,7 @@ define([
 			Utils.ShowHelp();
 		},
 
-		routeUser : function(support){
+		routeUser : function(support,user){
 			if(support){
 				//If the user is a support user go to support page
 				App.router.navigate("support", true);

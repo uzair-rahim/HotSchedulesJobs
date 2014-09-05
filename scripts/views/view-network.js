@@ -97,7 +97,7 @@ define([
 			var connections = Utils.GetUserConnectionsList();
 			var retval = false;
 			$.each(connections, function(){
-				if(this === userGUID){
+				if(this == userGUID){
 					retval = true;
 				}
 			});

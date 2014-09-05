@@ -106,14 +106,13 @@ define([
 					}
 				});
 			});
-
 		},
 
 		isUserConnected : function(userGUID){
 			var connections = Utils.GetUserConnectionsList();
 			var retval = false;
 			$.each(connections, function(){
-				if(this === userGUID){
+				if(this == userGUID){
 					retval = true;
 				}
 			});
@@ -771,7 +770,11 @@ define([
 				url : restURL + jobGUID + "/status/"+status,
 				type : "PUT",
 				success : function(response){
-					App.router.controller.jobs();
+					if(status == 0){
+						Utils.ShowSharePostedJobAlert(jobGUID);	
+					}else{
+						App.router.controller.jobs();
+					}
 				},
 				error : function(){
 					console.log("Error update job status...");

@@ -122,12 +122,12 @@
 	<div class="alert-body">
 		<div class="field-container">
 			<input type="checkbox" id="share-posted-current-employees"/>
-			<label for="share-posted-current-employees">Current Emplyees</label>
+			<label for="share-posted-current-employees">Current Employees</label>
 		</div>
-		<div class="field-container">
+		<!--<div class="field-container">
 			<input type="checkbox" id="share-posted-connections"/>
 			<label for="share-posted-connections">My Connections</label>
-		</div>
+		</div>-->
 		<div class="field-container">
 			<input type="checkbox" id="share-posted-followers"/>
 			<label for="share-posted-followers">Followers</label>

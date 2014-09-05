@@ -223,7 +223,93 @@ define([
 			sendSharePostedJob : function(){
 				var alertDialog = $("#app-alert-share-posted-job");
 				var jobGUID = alertDialog.attr("data-job");
-				console.log(jobGUID);
+			
+				var toCurrentEmployees = $("#share-posted-current-employees").prop("checked");
+				var toConnections = $("#share-posted-connections").prop("checked");
+				var toFollowers = $("#share-posted-followers").prop("checked");
+
+				this.closeSharePostedJob();
+
+				var deferred = [];
+
+				var index = Utils.GetSelectedEmployer();
+					var share = new Object();
+					share.fromUser = new Object();
+					share.jobPosting = new Object();
+					share.employer = new Object();
+					
+					share.fromUser.guid = Utils.GetUserSession().guid;
+					share.jobPosting.guid = jobGUID;
+					share.employer.guid = Utils.GetUserSession().employerIds[index];
+
+					var that = this;
+					var restURL = Utils.GetURL("/services/rest/share");
+
+				if(toCurrentEmployees){
+					share.type = 1;
+					deferred.push(
+						$.ajax({
+							 headers: { 
+						        'Accept': 'application/json',
+						        'Content-Type': 'application/json' 
+						    },
+							url : restURL,
+							type : "POST",
+							data: JSON.stringify(share),
+			    			processData: false,
+			    			error : function(response){
+			    				Utils.ShowToast({message : "Error sharing job with employees"});
+			    			}
+						})
+					);
+				}
+
+				if(toFollowers){
+					share.type = 2;
+					deferred.push(
+						$.ajax({
+							 headers: { 
+						        'Accept': 'application/json',
+						        'Content-Type': 'application/json' 
+						    },
+							url : restURL,
+							type : "POST",
+							data: JSON.stringify(share),
+			    			processData: false,
+			    			error : function(response){
+			    				Utils.ShowToast({message : "Error sharing job with followers"});
+			    			}
+						})
+					);
+				}
+
+				if(toConnections){
+					var connections = Utils.GetUserConnectionsList();
+					share.type = 0;
+					share.toUserGuids = connections;
+					deferred.push(
+						$.ajax({
+							 headers: { 
+						        'Accept': 'application/json',
+						        'Content-Type': 'application/json' 
+						    },
+							url : restURL,
+							type : "POST",
+							data: JSON.stringify(share),
+			    			processData: false,
+			    			error : function(response){
+			    				Utils.ShowToast({message : "Error sharing job with connections"});
+			    			}
+						})
+					);
+				}
+
+				$.when.apply($, deferred).done(function(){
+					if(toCurrentEmployees || toFollowers){
+						Utils.ShowToast({ type : "success", message : "Job shared successfully"})
+					}
+				});
+
 			},
 
 			setEmployer : function(){

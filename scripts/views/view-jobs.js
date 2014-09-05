@@ -202,8 +202,10 @@ define([
 				var model = new ModelJob();				
 					model.save(job,{
 						type : "POST",
-						success : function(){
+						success : function(response){
 							console.log("Job successfully saved");
+							var jobGUID = response.attributes.guid;
+							Utils.ShowSharePostedJobAlert(jobGUID);	
 							App.router.controller.jobs();
 						},
 						error : function(){

@@ -116,6 +116,28 @@
 		<button id="close-share-job">Close</button>
 	</div>
 </div>
+<!--Share Posted Job Alert-->
+<div id="app-alert-share-posted-job" class="app-alert share-job">
+	<div class="alert-title">Share This Job?</div>
+	<div class="alert-body">
+		<div class="field-container">
+			<input type="checkbox" id="share-posted-current-employees"/>
+			<label for="share-posted-current-employees">Current Emplyees</label>
+		</div>
+		<div class="field-container">
+			<input type="checkbox" id="share-posted-connections"/>
+			<label for="share-posted-connections">My Connections</label>
+		</div>
+		<div class="field-container">
+			<input type="checkbox" id="share-posted-followers"/>
+			<label for="share-posted-followers">Followers</label>
+		</div>
+	</div>
+	<div class="alert-action">
+		<button id="send-share-posted-job" class="primary">Share</button>
+		<button id="close-share-posted-job">Close</button>
+	</div>
+</div>
 <!--Select Employer Alert-->
 <div id="app-alert-select-employer" class="app-alert select-employer">
 	<div class="alert-title">Select A Store</div>

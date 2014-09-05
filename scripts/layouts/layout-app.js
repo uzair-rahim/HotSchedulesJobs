@@ -32,6 +32,8 @@ define([
 				"click .google-hspost-help"			: "androidDevice",
 				"click .ios-hspost-help"			: "iOSDevice",
 				"click #close-share-job"			: "closeShareJob",
+				"click #close-share-posted-job"		: "closeSharePostedJob",
+				"click #send-share-posted-job"		: "sendSharePostedJob",
 				"click #send-share-job"				: "sendShareJob",
 				"click #save-logo"					: "saveLogo",
 				"click #close-resize-logo"			: "closeResizeLogo",
@@ -205,9 +207,23 @@ define([
 			},
 
 			closeShareJob : function(){
-				var alert = $("#app-alert-share-job");
-				$(alert).removeClass("show");
+				var alertDialog = $("#app-alert-share-job");
+				$(alertDialog).removeClass("show");
 				$(document).find("#app-modal").removeClass("show");
+			},
+
+			closeSharePostedJob : function(){
+				var alertDialog = $("#app-alert-share-posted-job");
+					alertDialog.attr("data-job", "");
+				$(alertDialog).removeClass("show");
+				$(document).find(".view-modal").remove();
+				App.router.controller.jobs();
+			},
+
+			sendSharePostedJob : function(){
+				var alertDialog = $("#app-alert-share-posted-job");
+				var jobGUID = alertDialog.attr("data-job");
+				console.log(jobGUID);
 			},
 
 			setEmployer : function(){

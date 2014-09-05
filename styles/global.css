@@ -1655,6 +1655,20 @@ input[type="password"]::selection{
 	margin: 10px 0;
 }
 
+.app-alert.share-job .alert-body .field-container{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 0 0 5px 0;
+}
+
+.app-alert.share-job .alert-body .field-container label{
+	font-weight: normal;
+	color: #222222;
+	font-size: 13px;
+	margin: 0 0 0 2px;
+}
+
 .app-alert.resize-logo{
 	width: 300px;
 	height: 360px;

@@ -7,6 +7,7 @@ define([
 		var BrushfireUtils = Backbone.Model.extend({
 
 			CONTEXT : CONTEXT_ROOT,
+			recipientsGUIDS : [],
 
 			// Get URL
 			GetURL : function(url){
@@ -586,7 +587,33 @@ define([
 				var alertDialog = $(document).find("#app-alert-new-message");
 					alertDialog.removeClass("show");
 				$(document).find(".view-modal").remove();	
-			}
+			},
+
+			AddRecipientToNewMessage : function(recipients){
+				var alertDialog = $(document).find("#app-alert-new-message");
+				var recipientsContainer = alertDialog.find(".pills-container");
+					recipientsContainer.find(".pill").remove();
+				var that = this;	
+				$.each(recipients, function(){
+					var pill = '<div class="pill">';
+						pill+= this.name;
+						pill+= '</div>';
+					recipientsContainer.append(pill);
+					that.recipientsGUIDS.push(this.guid);
+				});
+			},
+
+			RemoveRecipientFromNewMessage : function(index){
+				this.recipientsGUIDS.splice(index,1);
+			},
+
+			RemoveAllRecipientFromNewMessage : function(){
+				this.recipientsGUIDS = [];
+			},
+
+			GetNewMessageRecipients : function(){
+				return this.recipientsGUIDS;
+			},
 			
 		});
 

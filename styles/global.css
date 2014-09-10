@@ -189,6 +189,7 @@ input[type="password"]::selection{
 	border-top-color: #a8a9aa;
 	border-radius: 3px;
 	box-shadow: inset 0 1px 0 0 #f0f0f0, 0 0 0 1px rgba(255,255,255, 0.5);
+	overflow: hidden;
 }
 
 .pills-container:hover{
@@ -201,6 +202,23 @@ input[type="password"]::selection{
 	font-weight: normal;
 	line-height: 28px;
 	margin: 0 6px;
+}
+
+.pills-container .pill{
+	display: block;
+	float: left;
+	line-height: 18px;
+	font-size: 12px;
+	margin: 2px 5px 0 0;
+	padding: 2px 18px 2px 4px;
+	background-color: #dfeaf2;
+	background-image: url("../images/icon-close-pill.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: auto 8px;
+	border: 1px solid #c4d6e6;
+	border-radius: 3px;
+	color: #37689a;
 }
 
 .custom-select button{
@@ -2185,6 +2203,7 @@ input[type="password"]::selection{
 	font-weight: normal;
 }
 
+.hourly-profile > .history-section > ul.work-history li .employment-info .employment-position,
 .hourly-profile > .history-section > ul.work-history li .employment-info .employment-date{
 	display: block;
 	float: left;

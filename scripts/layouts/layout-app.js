@@ -19,29 +19,30 @@ define([
 			},
 			
 			events : {
-				"click #primary-action"				: "primaryAction",
-				"click #secondary-action"			: "secondaryAction",
-				"click #close-help"					: "closeHelp",
-				"click #accept-terms"				: "acceptTerms",
-				"click #decline-terms"				: "declineTerms",
-				"click #close-copy-link"			: "closeTinyURL",
-				"click #close-referral-list"		: "closeCandidateReferral",
-				"click #close-connections-list"		: "closeSharedConnections",
-				"click #segmented-referrals"		: "showSegmentedReferrals",
-				"click #segmented-pending"			: "showSegmentedPending",
-				"click .google-hspost-help"			: "androidDevice",
-				"click .ios-hspost-help"			: "iOSDevice",
-				"click #close-share-job"			: "closeShareJob",
-				"click #close-share-posted-job"		: "closeSharePostedJob",
-				"click #send-share-posted-job"		: "sendSharePostedJob",
-				"click #send-share-job"				: "sendShareJob",
-				"click #save-logo"					: "saveLogo",
-				"click #close-resize-logo"			: "closeResizeLogo",
-				"click #close-endorsements-list"	: "closeEndorsements",
-				"click #set-employer"				: "setEmployer",
-				"click .send-message"				: "sendMessage",
-				"click #send-new-message"			: "sendNewMessage",
-				"click #cancel-new-message"			: "cancelNewMessage",
+				"click #primary-action"					: "primaryAction",
+				"click #secondary-action"				: "secondaryAction",
+				"click #close-help"						: "closeHelp",
+				"click #accept-terms"					: "acceptTerms",
+				"click #decline-terms"					: "declineTerms",
+				"click #close-copy-link"				: "closeTinyURL",
+				"click #close-referral-list"			: "closeCandidateReferral",
+				"click #close-connections-list"			: "closeSharedConnections",
+				"click #segmented-referrals"			: "showSegmentedReferrals",
+				"click #segmented-pending"				: "showSegmentedPending",
+				"click .google-hspost-help"				: "androidDevice",
+				"click .ios-hspost-help"				: "iOSDevice",
+				"click #close-share-job"				: "closeShareJob",
+				"click #close-share-posted-job"			: "closeSharePostedJob",
+				"click #send-share-posted-job"			: "sendSharePostedJob",
+				"click #send-share-job"					: "sendShareJob",
+				"click #save-logo"						: "saveLogo",
+				"click #close-resize-logo"				: "closeResizeLogo",
+				"click #close-endorsements-list"		: "closeEndorsements",
+				"click #set-employer"					: "setEmployer",
+				"click .send-message"					: "sendMessage",
+				"click #send-new-message"				: "sendNewMessage",
+				"click #cancel-new-message"				: "cancelNewMessage",
+				"click #app-alert-new-message .pill"	: "removeRecipient"
 			},
 
 			initialize : function(){
@@ -333,11 +334,29 @@ define([
 			},
 
 			sendNewMessage : function(){
-				Utils.HideSendNewMessage();
+				var recipients = Utils.GetNewMessageRecipients();
+				var message = $("#new-message-text").val();
+				if(recipients.length === 0){
+					
+				}else if(message === ""){
+					
+				}else{
+					Utils.HideSendNewMessage();
+					Utils.RemoveAllRecipientFromNewMessage();
+					$("#new-message-text").val("");
+				}
 			},
 
 			cancelNewMessage : function(){
 				Utils.HideSendNewMessage();
+				Utils.RemoveAllRecipientFromNewMessage();
+				$("#new-message-text").val("");
+			},
+
+			removeRecipient : function(event){
+				var index = $(event.target).index() - 1;
+				Utils.RemoveRecipientFromNewMessage(index);
+				$(event.target).remove();
 			},
 
 			serializeData : function(){

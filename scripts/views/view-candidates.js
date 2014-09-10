@@ -146,7 +146,7 @@ define([
 													}
 												});
 											el += "</div>"
-											el += "<div class='employment-date'>@"+ this.employer.name +"</div>"
+											el += "<div class='employment-position'>@"+ this.employer.name +"</div>"
 											el += "<div class='employment-date'>"+ Utils.FormatDate(this.startDate, "month/yyyy") + " - " + Utils.FormatDate(this.endDate, "month/yyyy") +"</div>"
 										el += "</div>"
 									el += "</li>"
@@ -215,11 +215,34 @@ define([
 		},
 
 		candidateChat : function(event){
+			var candidate = $(event.target).closest("li.view-profile");
+			var candidateName = candidate.find(".candidate-info .candidate-name").text();
+			var candidateGUID = candidate.attr("data-guid");
+
+			var recipient = new Object();
+				recipient.name = candidateName;
+				recipient.guid = candidateGUID;
+
+			var recipients = new Array();
+				recipients.push(recipient);
+
+			Utils.AddRecipientToNewMessage(recipients);
 			Utils.ShowSendNewMessage();
 			event.stopPropagation();
 		},
 
 		sendBulkChat : function(event){	
+			var candidates = $(".candidate-select:checked");
+			var recipients = new Array();
+
+			$.each(candidates, function(){
+				var recipient = new Object();
+					recipient.name = $(this).closest("li.view-profile").find(".candidate-info .candidate-name").text();
+					recipient.guid = $(this).closest("li.view-profile").attr("data-guid");
+				recipients.push(recipient);
+			});
+
+			Utils.AddRecipientToNewMessage(recipients);
 			Utils.ShowSendNewMessage();
 			this.disableToolbarButtons();
 			$(".candidate-select").prop("checked", false);

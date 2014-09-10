@@ -985,7 +985,7 @@ input[type="password"]::selection{
 	display: block;
 	float: right;
 	color: #dddddd;
-	
+	margin: 0 5px 0 0;
 	line-height: 40px;
 }
 
@@ -1004,7 +1004,7 @@ input[type="password"]::selection{
 }
 
 #nav-icons li#messages{
-	background-image: url("../images/icon-messages.png");
+	background-image: url("../images/icon-chat-white.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 20px auto;
@@ -1014,7 +1014,7 @@ input[type="password"]::selection{
 	background-image: url("../images/icon-settings.png");
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 20px auto;
+	background-size: 18px auto;
 }
 
 .nav-flyout{

@@ -513,6 +513,24 @@ ul.grid-list > li .candidate-message:hover{
 	background-image: url("../images/icon-message-hover.png");
 }
 
+ul.grid-list > li .candidate-chat{
+	display: block;
+	float: right;
+	margin: 5px 0;
+	width: 40px;
+	height: 40px;
+	background-image: url("../images/icon-chat.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 24px auto;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+ul.grid-list > li .candidate-chat:hover{
+	background-image: url("../images/icon-chat-hover.png");
+}
+
 ul.grid-list > li .candidate-archive{
 	display: block;
 	float: right;

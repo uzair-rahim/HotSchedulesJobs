@@ -10,7 +10,7 @@
 </div>
 
 <div id="toolbar" class="hideable-toolbar">
-	<button id="send-message" class="primary" disabled>{{language.sendMessage}}</button>
+	<button id="send-chat" class="primary" disabled>{{language.sendMessage}}</button>
 	<button id="archive-candidates" disabled>{{language.archiveCandidates}}</button>
 </div>
 
@@ -62,7 +62,7 @@
 								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 							</div>
 							<div class="candidate-archive"></div>
-							<div class="candidate-message"></div>
+							<div class="candidate-chat"></div>
 							<div class="user-connect"></div>
 							<!--<div class="candidate-rating"></div>-->
 							<div class="candidate-endorse"></div>

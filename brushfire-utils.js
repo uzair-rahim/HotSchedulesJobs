@@ -573,6 +573,19 @@ define([
 				var app = $(document).find(".app");
 					alertDialog.addClass("show");
 					app.append('<div class="view-modal"></div>');
+			},
+
+			ShowSendNewMessage : function(jobGUID){
+				var alertDialog = $(document).find("#app-alert-new-message");
+				var app = $(document).find(".app");
+					alertDialog.addClass("show");
+					app.append('<div class="view-modal"></div>');
+			},
+
+			HideSendNewMessage : function(jobGUID){
+				var alertDialog = $(document).find("#app-alert-new-message");
+					alertDialog.removeClass("show");
+				$(document).find(".view-modal").remove();	
 			}
 			
 		});

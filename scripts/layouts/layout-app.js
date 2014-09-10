@@ -39,7 +39,9 @@ define([
 				"click #close-resize-logo"			: "closeResizeLogo",
 				"click #close-endorsements-list"	: "closeEndorsements",
 				"click #set-employer"				: "setEmployer",
-				"click .send-message"				: "sendMessage"
+				"click .send-message"				: "sendMessage",
+				"click #send-new-message"			: "sendNewMessage",
+				"click #cancel-new-message"			: "cancelNewMessage",
 			},
 
 			initialize : function(){
@@ -255,6 +257,7 @@ define([
 						    },
 							url : restURL,
 							type : "POST",
+							async : false,
 							data: JSON.stringify(share),
 			    			processData: false,
 			    			error : function(response){
@@ -274,6 +277,7 @@ define([
 						    },
 							url : restURL,
 							type : "POST",
+							async : false,
 							data: JSON.stringify(share),
 			    			processData: false,
 			    			error : function(response){
@@ -295,6 +299,7 @@ define([
 						    },
 							url : restURL,
 							type : "POST",
+							async : false,
 							data: JSON.stringify(share),
 			    			processData: false,
 			    			error : function(response){
@@ -325,6 +330,14 @@ define([
 			sendMessage : function(event){
 				var email = $(event.target).attr("data-email");
 				window.location.href = "mailto:"+email;
+			},
+
+			sendNewMessage : function(){
+				Utils.HideSendNewMessage();
+			},
+
+			cancelNewMessage : function(){
+				Utils.HideSendNewMessage();
 			},
 
 			serializeData : function(){

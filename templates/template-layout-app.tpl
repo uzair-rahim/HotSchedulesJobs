@@ -151,6 +151,20 @@
 		<button id="set-employer" class="primary">Go</button>
 	</div>
 </div>
+<!--Compose Chat Alert-->
+<div id="app-alert-new-message" class="app-alert new-message">
+	<div class="alert-title">New Message</div>
+	<div class="alert-body">
+		<div class="pills-container">
+			<label>To:</label>
+		</div>
+		<textarea id="new-message-text"></textarea>
+	</div>
+	<div class="alert-action">
+		<button id="send-new-message" class="primary">Send</button>
+		<button id="cancel-new-message">Cancel</button>
+	</div>
+</div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">
 	<div class="header">

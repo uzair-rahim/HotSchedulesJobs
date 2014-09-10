@@ -45,8 +45,8 @@ define([
 			"click .candidate-endorse"		: "candidateEndorsements",
 			"click .candidate-referral"		: "candidateReferral",
 			"click .candidate-select"		: "candidateSelect",
-			"click .candidate-message"		: "candidateMessage",
-			"click #send-message"			: "sendBulkMessage",
+			"click .candidate-chat"			: "candidateChat",
+			"click #send-chat"				: "sendBulkChat",
 			"click .candidate-archive"		: "candidateArchive",
 			"click .candidate-network"		: "candidateNetwork",
 			"click .user-connect"			: "createConnection",
@@ -122,7 +122,7 @@ define([
 
 		disableToolbarButtons : function(){
 			$(".candidate-select").prop("checked", false);
-			$("#send-message").prop("disabled", true);
+			$("#send-chat").prop("disabled", true);
 			$("#archive-candidates").prop("disabled", true);
 		},
 
@@ -540,32 +540,23 @@ define([
 		candidateSelect : function(event){
 			var count = $(".candidate-select:checked").length;
 			if(count > 0){
-				$("#send-message").prop("disabled",false);
+				$("#send-chat").prop("disabled",false);
 				$("#archive-candidates").prop("disabled",false);
 			}else{
-				$("#send-message").prop("disabled",true);
+				$("#send-chat").prop("disabled",true);
 				$("#archive-candidates").prop("disabled",true);
 			}
 			event.stopPropagation();
 		},
 
-		candidateMessage : function(event){
-			var email = $(event.target).closest("li.view-profile").data("email");
-			window.location.href = "mailto:"+email;
+		candidateChat : function(event){
+			Utils.ShowSendNewMessage();
 			event.stopPropagation();
 		},
 
-		sendBulkMessage : function(event){
-			var manager = Utils.GetUserSession().email;
-			var addresses = [];
-
-			$(".candidate-select:checked").each(function(){
-				var email = $(this).closest("li.view-profile").data("email");
-				addresses.push(email);
-			});
-
-			var emails = addresses.join(",");
-			window.location.href = "mailto:"+manager+"?bcc="+emails;
+		sendBulkChat : function(event){		
+			Utils.ShowSendNewMessage();
+			this.disableToolbarButtons();
 			$(".candidate-select").prop("checked", false);
 		},
 

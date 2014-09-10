@@ -29,14 +29,22 @@
         var indexOfType = url.indexOf("?type=");
           if(indexOfType > 0){
             var type = url.substring(indexOfType+6);
-            switch(type){
-              case "noyelpid":
-                $("#brushfire.four-o-four h1").text("We're having trouble finding your store");
-                $("#brushfire.four-o-four p:eq(0)").html("If you don't have one, <a href='https://biz.yelp.com/' target='_blank'>create a Yelp account here.");
-                $("#brushfire.four-o-four p:eq(1)").html("Have a Yelp account? Make sure your phone number and address match on HotSchedules and Yelp");
-                $("#brushfire.four-o-four h2").html("Still not working? Give us a call at <a href='tel:866-763-3852'>866-763-3852</a>");
-              break;
-            }
+            if(type) {
+	            switch(type){
+	              case "noyelpid":
+	                $("#brushfire.four-o-four h1").text("We're having trouble finding your store");
+	                $("#brushfire.four-o-four p:eq(0)").html("If you don't have one, <a href='https://biz.yelp.com/' target='_blank'>create a Yelp account here.");
+	                $("#brushfire.four-o-four p:eq(1)").html("Have a Yelp account? Make sure your phone number and address match on HotSchedules and Yelp");
+	                $("#brushfire.four-o-four h2").html("Still not working? Give us a call at <a href='tel:866-763-3852'>866-763-3852</a>");
+	              break;
+	              case "UserEmailMissing":
+	                  $("#brushfire.four-o-four h1").text("Please set your email in HotSchedules before SingleSignOn into HSPost.");
+	                  $("#brushfire.four-o-four p:eq(0)").html("Seems like your HotSchedules account email is not set.");
+	                  $("#brushfire.four-o-four p:eq(1)").html("");
+	                  $("#brushfire.four-o-four h2").html("Still not working? Give us a call at <a href='tel:866-763-3852'>866-763-3852</a>");
+	              break;
+	            }
+             }
           }
 
         

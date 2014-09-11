@@ -168,7 +168,9 @@
 <!-- Quick Message View -->
 <div id="quick-message-view" class="dialog">
 	<div class="dialog-head">Messages</div>
-	<div class="dialog-body"></div>
+	<div class="dialog-body">
+		<div class="empty-body">No Messages</div>
+	</div>
 	<div id="see-all-messages" class="dialog-foot">See All Messages</div>
 </div>
 <!--App Help -->

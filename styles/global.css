@@ -1925,6 +1925,18 @@ input[type="password"]::selection{
 	height: 175px;
 }
 
+.dialog > .dialog-body > .empty-body{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	text-align: center;
+	font-size: 22px;
+	line-height: 30px;
+	color: #c2c5cc;
+	margin: 72px 0 0 0;
+}
+
 .dialog > .dialog-foot{
 	display: block;
 	float: left;

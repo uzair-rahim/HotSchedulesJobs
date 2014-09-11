@@ -18,7 +18,7 @@ define([
 			"click #jobs" 				: "jobs",
 			"click #candidates" 		: "candidates",
 			"click #network" 			: "network",
-			"click #messages" 			: "messages",
+			"click #messages" 			: "quickMessages",
 			"click #settings" 			: "settings",
 			"click #account-settings" 	: "accountSettings",
 			"click #profile-settings" 	: "profileSettings",
@@ -82,8 +82,8 @@ define([
 			this.route("network");
 		},
 
-		messages : function(){
-			this.route("messages");
+		quickMessages : function(){
+			Utils.ShowQuickMessage();
 		},
 
 		settings : function(){

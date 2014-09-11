@@ -86,7 +86,6 @@ define([
 		},
 
 		disableToolbarButtons : function(){
-			$(".candidate-select").prop("checked", false);
 			$("#send-chat").prop("disabled", true);
 			$("#archive-candidates").prop("disabled", true);
 		},

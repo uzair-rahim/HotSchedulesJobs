@@ -42,7 +42,8 @@ define([
 				"click .send-message"					: "sendMessage",
 				"click #send-new-message"				: "sendNewMessage",
 				"click #cancel-new-message"				: "cancelNewMessage",
-				"click #app-alert-new-message .pill"	: "removeRecipient"
+				"click #app-alert-new-message .pill"	: "removeRecipient",
+				"click #see-all-messages"				: "seeAllMessages"
 			},
 
 			initialize : function(){
@@ -357,6 +358,11 @@ define([
 				var index = $(event.target).index() - 1;
 				Utils.RemoveRecipientFromNewMessage(index);
 				$(event.target).remove();
+			},
+
+			seeAllMessages : function(){
+				Utils.HideQuickMessage();
+				App.router.navigate("messages", true);
 			},
 
 			serializeData : function(){

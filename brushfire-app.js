@@ -29,6 +29,7 @@ define([
 			App.getLanguagePack();
 			Utils.InitCustomSelect();
 			Utils.InitMaxTextAreaLength();
+			Utils.InitQuickMessageView();
 		});
 
 		// Add initializer to the App

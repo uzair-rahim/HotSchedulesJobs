@@ -165,6 +165,12 @@
 		<button id="cancel-new-message">Cancel</button>
 	</div>
 </div>
+<!-- Quick Message View -->
+<div id="quick-message-view" class="dialog">
+	<div class="dialog-head">Messages</div>
+	<div class="dialog-body"></div>
+	<div id="see-all-messages" class="dialog-foot">See All Messages</div>
+</div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">
 	<div class="header">

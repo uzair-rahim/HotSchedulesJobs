@@ -614,6 +614,30 @@ define([
 			GetNewMessageRecipients : function(){
 				return this.recipientsGUIDS;
 			},
+
+			ShowQuickMessage : function(){
+				var dialog = $(document).find("#quick-message-view");
+					dialog.addClass("show");
+			},
+
+			HideQuickMessage : function(){
+				var dialog = $(document).find("#quick-message-view");
+					dialog.removeClass("show");
+			},
+
+			InitQuickMessageView : function(){
+				$(document.body).on("click", function(event){
+					var element = $(event.target);
+					var isMessagesIcon = $(element).is("#messages");
+					var isQuickViewDialog = $(element).closest("#quick-message-view").length == 1;
+					
+					if(!isMessagesIcon && !isQuickViewDialog){
+						var dialog = $(document).find("#quick-message-view");
+							dialog.removeClass("show");
+					}
+					
+				});
+			},
 			
 		});
 

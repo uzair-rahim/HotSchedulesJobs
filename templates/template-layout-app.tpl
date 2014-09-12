@@ -169,9 +169,24 @@
 <div id="quick-message-view" class="dialog">
 	<div class="dialog-head">Messages</div>
 	<div class="dialog-body">
-		<div class="empty-body">No Messages</div>
+		<ul class="messages-list">
+			<li class="new">
+				<div class="candidate-picture"></div>
+				<div class="candidate-info">
+					<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
+					<div class="candidate-message">I can come in on Sunday.</div>
+				</div>
+			</li>
+			<li>
+				<div class="candidate-picture"></div>
+				<div class="candidate-info">
+					<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
+					<div class="candidate-message">I can come in on Sunday.</div>
+				</div>
+			</li>
+		</ul>
 	</div>
-	<div id="see-all-messages" class="dialog-foot">See All Messages</div>
+	<div id="see-all-messages" class="dialog-foot">See All</div>
 </div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">

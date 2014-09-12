@@ -26,20 +26,23 @@ define([
 
 		onShow : function(){
 
-			var mapLatLng = new google.maps.LatLng(this.model.employer.location.latitude,this.model.employer.location.longitude)
+			if(this.model.status == "POSTED"){
+				var mapLatLng = new google.maps.LatLng(this.model.employer.location.latitude,this.model.employer.location.longitude)
 
-			var mapOptions = {
-				disableDefaultUI: true,
-				center: mapLatLng,
-				zoom: 14
+				var mapOptions = {
+					disableDefaultUI: true,
+					center: mapLatLng,
+					zoom: 14
+				}
+
+				var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+				var marker = new google.maps.Marker({
+					map: map,
+					position: mapLatLng,
+				});
 			}
 
-			var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-			var marker = new google.maps.Marker({
-				map: map,
-				position: mapLatLng,
-			});
 
 			var device = this.detectDevice();
 			switch(device){

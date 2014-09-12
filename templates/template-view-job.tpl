@@ -1,24 +1,39 @@
 <div id="job-wrapper">
-	<div id="job-card">
+	{{#if_eq job.status "POSTED"}}
+		<div id="job-card">
+	{{else}}
+		<div id="job-card" class="unposted">
+	{{/if_eq}}
 		<div id="job-map">
 			<div class="fold"></div>
 			<div class="fold center"></div>
 			<div class="fold"></div>
 			<div class="grid-pattern"></div>
-			<div id="map-canvas"></div>
+			{{#if_eq job.status "POSTED"}}
+				<div id="map-canvas"></div>
+			{{else}}
+				<div class="message">Job Not Available</div>
+			{{/if_eq}}
+
 		</div>
-		<div id="job-details">
-			<div id="job-logo">
-				{{#isNotNull job.employer.logo}}
-					<img src="{{job.employer.logo.url}}"/>
-				{{/isNotNull}}
+		{{#if_eq job.status "POSTED"}}
+			<div id="job-details">
+				<div id="job-logo">
+					{{#isNotNull job.employer.logo}}
+						<img src="{{job.employer.logo.url}}"/>
+					{{/isNotNull}}
+				</div>
+				<div id="job-title">{{job.jobName}}</div>
+				<div id="job-restaurant">{{job.employer.name}}</div>
+				<div id="job-address">{{job.employer.location.address1}}, {{job.employer.location.city}}, {{job.employer.location.state}} {{job.employer.location.zip}}</div>
 			</div>
-			<div id="job-title">{{job.jobName}}</div>
-			<div id="job-restaurant">{{job.employer.name}}</div>
-			<div id="job-address">{{job.employer.location.address1}}, {{job.employer.location.city}}, {{job.employer.location.state}} {{job.employer.location.zip}}</div>
-		</div>
+		{{/if_eq}}
 		<div id="job-apps">
-			<div id="job-message">Interested in this job? You can get it and more here...</div>
+			{{#if_eq job.status "POSTED"}}
+				<div id="job-message">Interested in this job? You can get it and more here...</div>
+			{{else}}
+				<div id="job-message">Looking for a restaurant job? You can find'em here...</div>
+			{{/if_eq}}
 			<div id="google-play" class="google-hspost-scheme"></div>
 			<div id="app-store" class="ios-hspost-scheme"></div>
 		</div>

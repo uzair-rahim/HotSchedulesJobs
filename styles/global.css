@@ -2909,6 +2909,27 @@ ul.messages-list li.new .candidate-info .candidate-message{
 	background-image: url("../images/background-grid-pattern.png");
 }
 
+#job-map .message{
+	position: absolute;
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	text-align: center;
+	font-size: 60px;
+	line-height: 60px;
+	font-family: "Roboto";
+	font-weight: 100;
+	color: #628599;
+	margin: 190px 0 0 0;
+}
+
+#job-card.unposted #job-map,
+#job-card.unposted #job-map .fold,
+#job-card.unposted #job-map .grid-pattern{
+	height: 419px;
+}
+
 #job-map img,
 #job-map #map-canvas{
 	position: absolute;
@@ -3153,6 +3174,18 @@ ul.messages-list li.new .candidate-info .candidate-message{
 	#job-map .grid-pattern{
 		width: 292px;
 		height: 101px;
+	}
+
+	#job-map .message{
+		font-size: 25px;
+		line-height: 25px;
+		margin: 110px 0 0 0;
+	}
+
+	#job-card.unposted #job-map,
+	#job-card.unposted #job-map .fold,
+	#job-card.unposted #job-map .grid-pattern{
+		height: 222px;
 	}
 
 	#job-map img,

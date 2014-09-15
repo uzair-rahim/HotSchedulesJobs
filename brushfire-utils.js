@@ -424,7 +424,7 @@ define([
 					type = defaultType;
 				}
 
-				if(given === "Present"){
+				if(given === "Present" || given === 0){
 					retval = "Present";
 				}else{
 					switch(type){
@@ -432,7 +432,7 @@ define([
 							retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
 						break;
 						case "month/yyyy":
-							retval = months[date.getMonth()] + " - " + date.getFullYear();
+							retval = months[date.getMonth()] + " " + date.getFullYear();
 						break;
 						default:
 							retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();

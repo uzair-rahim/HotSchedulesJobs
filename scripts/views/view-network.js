@@ -146,7 +146,7 @@ define([
 											});
 										el += "</div>"
 										el += "<div class='employment-position'>@"+ this.employer.name +"</div>"
-										el += "<div class='employment-date'>"+ Utils.FormatDate(this.startDate, "month/yyyy") + " - " + Utils.FormatDate(this.endDate, "month/yyyy") +"</div>"
+										el += "<div class='employment-date'>"+ Utils.FormatDate(this.startDateMillis, "month/yyyy") + " - " + Utils.FormatDate(this.endDateMillis, "month/yyyy") +"</div>"
 									el += "</div>"
 								el += "</li>"
 							$(list).append(el);

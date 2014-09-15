@@ -1208,7 +1208,7 @@ input[type="password"]::selection{
 	background-color: rgba(0,0,0,0.8);
 	white-space: nowrap;
 	overflow: hidden;
-	z-index: 999;
+	z-index: 9999;
 
 	-webkit-transition: top 300ms;
     -moz-transition: top 300ms;
@@ -2089,7 +2089,7 @@ ul.messages-list li.new .candidate-info .candidate-message{
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 69px;
-	z-index: 9999;
+	z-index: 9998;
 }
 
 

@@ -44,7 +44,9 @@ define([
 				"click #send-new-message"				: "sendNewMessage",
 				"click #cancel-new-message"				: "cancelNewMessage",
 				"click #app-alert-new-message .pill"	: "removeRecipient",
-				"click #see-all-messages"				: "seeAllMessages"
+				"click #see-all-messages"				: "seeAllMessages",
+				"click #quick-message-list > li"		: "showQuickChatMessage",
+				"click #quick-message-view .chat"		: "showQuickChatList"
 			},
 
 			initialize : function(){
@@ -344,9 +346,38 @@ define([
 					Utils.ShowToast({type : "error", message : "Message cannot be empty"});
 				}else{
 					var users = Utils.GetNewMessageRecipients();
-					console.log(users);
+
+					var message = new Object();
+						message.sender = new Object();
+						message.sender.guid = Utils.GetUserSession().guid;
+						message.chatMessageContent = new Object();
+						message.chatMessageContent.text = $("#new-message-text").val();
+
+					var data = new Object();
+						data.jobPosting = new Object();
+						data.jobPosting.guid = Utils.GetJobPostingGUID();
+						data.candidate = new Object();
+						data.messages = new Array();
+						data.messages.push(message);
+
+					var dataArray = new Array();	
+
+					$.each(users, function(){
+						data.candidate.guid = this;
+						dataArray.push(data);
+					});
+
+					console.log(dataArray);
+
+					var chat = new ModelChat();
+						chat.createChat(dataArray, function(response){
+							console.log(response);
+							Utils.ShowToast({type : "success", message : "Message sent successfully"});
+						});
+
 					Utils.HideSendNewMessage();
 					Utils.RemoveAllRecipientFromNewMessage();
+					Utils.RemoveJobPostingGUID();
 					$("#new-message-text").val("");
 				}
 			},
@@ -366,6 +397,16 @@ define([
 			seeAllMessages : function(){
 				Utils.HideQuickMessage();
 				App.router.navigate("messages", true);
+			},
+
+			showQuickChatMessage : function(){
+				var quickMessages = $("#quick-message-view");
+					quickMessages.find(".mask").animate({scrollLeft : "400"}, 150);
+			},
+
+			showQuickChatList : function(){
+				var quickMessages = $("#quick-message-view");
+					quickMessages.find(".mask").animate({scrollLeft : "-400"}, 150);
 			},
 
 			serializeData : function(){

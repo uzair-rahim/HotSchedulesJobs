@@ -1903,7 +1903,7 @@ input[type="password"]::selection{
 	display: block;
 }
 
-.dialog > .dialog-head{
+.dialog .dialog-head{
 	display: block;
 	float: left;
 	clear: both;
@@ -1917,7 +1917,7 @@ input[type="password"]::selection{
 	background-color: #f4f5f5;
 }
 
-.dialog > .dialog-body{
+.dialog .dialog-body{
 	display: block;
 	float: left;
 	clear: both;
@@ -1926,7 +1926,7 @@ input[type="password"]::selection{
 	overflow: auto;
 }
 
-.dialog > .dialog-body > .empty-body{
+.dialog .dialog-body > .empty-body{
 	display: block;
 	float: left;
 	clear: both;
@@ -1938,7 +1938,7 @@ input[type="password"]::selection{
 	margin: 72px 0 0 0;
 }
 
-.dialog > .dialog-foot{
+.dialog .dialog-foot{
 	display: block;
 	float: left;
 	clear: both;
@@ -1970,6 +1970,29 @@ input[type="password"]::selection{
 	position: absolute;
 	top: -10px;
 	right: 16px;
+}
+
+#quick-message-view.dialog .mask{
+	display: block;
+	float: left;
+	width: 100%;
+	overflow: hidden;
+}
+
+#quick-message-view.dialog .scrollable{
+	display: block;
+	float: left;
+	clear: both;
+	width: 200%;
+}
+
+#quick-message-view.dialog .scrollable > .inbox,
+#quick-message-view.dialog .scrollable > .chat{
+	display: block;
+	float: left;
+	width: 50%;
+	height: 350px;
+	overflow: hidden;
 }
 
 ul.messages-list{

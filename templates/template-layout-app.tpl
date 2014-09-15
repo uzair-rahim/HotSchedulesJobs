@@ -167,26 +167,33 @@
 </div>
 <!-- Quick Message View -->
 <div id="quick-message-view" class="dialog">
-	<div class="dialog-head">Messages</div>
-	<div class="dialog-body">
-		<ul class="messages-list">
-			<li class="new">
-				<div class="candidate-picture"></div>
-				<div class="candidate-info">
-					<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
-					<div class="candidate-message">I can come in on Sunday.</div>
+	<div class="mask">
+		<div class="scrollable">
+			<div class="inbox">
+				<div class="dialog-head">Messages</div>
+				<div class="dialog-body">
+					<ul id="quick-message-list" class="messages-list">
+						<li class="new">
+							<div class="candidate-picture"></div>
+							<div class="candidate-info">
+								<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
+								<div class="candidate-message">I can come in on Sunday.</div>
+							</div>
+						</li>
+						<li>
+							<div class="candidate-picture"></div>
+							<div class="candidate-info">
+								<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
+								<div class="candidate-message">I can come in on Sunday.</div>
+							</div>
+						</li>
+					</ul>
 				</div>
-			</li>
-			<li>
-				<div class="candidate-picture"></div>
-				<div class="candidate-info">
-					<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
-					<div class="candidate-message">I can come in on Sunday.</div>
-				</div>
-			</li>
-		</ul>
+				<div id="see-all-messages" class="dialog-foot">See All</div>
+			</div>
+			<div class="chat"></div>
+		</div>
 	</div>
-	<div id="see-all-messages" class="dialog-foot">See All</div>
 </div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">

@@ -20,7 +20,7 @@ define([
 
 			createChat : function(chat,callback){
 				var that = this;
-				var url = this.urlRoot() + "/";
+				var url = this.urlRoot();
 				$.ajax({
 					type : "POST",
 					url : url,

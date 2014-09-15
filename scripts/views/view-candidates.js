@@ -88,6 +88,8 @@ define([
 		disableToolbarButtons : function(){
 			$("#send-chat").prop("disabled", true);
 			$("#archive-candidates").prop("disabled", true);
+			$(".candidate-select").prop("checked", false);
+			$(".candidate-select").prop("disabled", false);
 		},
 
 		back : function(event){
@@ -202,19 +204,26 @@ define([
 		},
 
 		candidateSelect : function(event){
+			var isChecked = $(event.target).prop("checked");
+
+			if(isChecked){
+				var jobPostingGUID = $(event.target).closest("ul.grid-list").attr("data-guid");
+				$("ul.grid-list:not([data-guid='"+jobPostingGUID+"'])").find(".candidate-select").prop("disabled", true);
+			}
+
 			var count = $(".candidate-select:checked").length;
 			if(count > 0){
 				$("#send-chat").prop("disabled",false);
 				$("#archive-candidates").prop("disabled",false);
 			}else{
-				$("#send-chat").prop("disabled",true);
-				$("#archive-candidates").prop("disabled",true);
+				this.disableToolbarButtons();
 			}
 			event.stopPropagation();
 		},
 
 		candidateChat : function(event){
 			var candidate = $(event.target).closest("li.view-profile");
+			var jobPostingGUID = $(event.target).closest("ul#candidates-list").attr("data-guid");
 			var candidateName = candidate.find(".candidate-info .candidate-name").text();
 			var candidateGUID = candidate.attr("data-user");
 
@@ -226,12 +235,14 @@ define([
 				recipients.push(recipient);
 
 			Utils.AddRecipientToNewMessage(recipients);
+			Utils.SetJobPostingGUID(jobPostingGUID);
 			Utils.ShowSendNewMessage();
 			event.stopPropagation();
 		},
 
 		sendBulkChat : function(event){	
 			var candidates = $(".candidate-select:checked");
+			var jobPostingGUID = $(".candidate-select:checked").closest("ul.grid-list").attr("data-guid");
 			var recipients = new Array();
 
 			$.each(candidates, function(){
@@ -242,9 +253,9 @@ define([
 			});
 
 			Utils.AddRecipientToNewMessage(recipients);
+			Utils.SetJobPostingGUID(jobPostingGUID);
 			Utils.ShowSendNewMessage();
 			this.disableToolbarButtons();
-			$(".candidate-select").prop("checked", false);
 		},
 
 		candidateArchive : function(event){
@@ -356,7 +367,6 @@ define([
 		archiveCandidates : function(){
 			this.numberOfCalls = $(".candidate-select:checked").length;
 			this.bulkArchive();
-			this.disableToolbarButtons();
 		},
 
 		bulkArchive : function(){

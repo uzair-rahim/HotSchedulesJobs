@@ -8,6 +8,7 @@ define([
 
 			CONTEXT : CONTEXT_ROOT,
 			recipientsGUIDS : [],
+			jobPostingGUID : null,
 
 			// Get URL
 			GetURL : function(url){
@@ -314,10 +315,17 @@ define([
 			},
 
 			InitMaxTextAreaLength : function(){
-				var maxlength = 512;
+				var maxlengthAbout = 512;
+				var maxlengthMessage = 1000;
 				$(document.body).delegate("textarea", "keyup", function(){
-					if ($(this).val().length > maxlength) {  
-            			$(this).val($(this).val().substring(0, maxlength));  
+					if ($(this).val().length > maxlengthAbout) {  
+            			$(this).val($(this).val().substring(0, maxlengthAbout));
+        			} 
+				});
+
+				$(document.body).delegate("textarea#new-message-text", "keyup", function(){
+					if ($(this).val().length > maxlengthMessage) {  
+            			$(this).val($(this).val().substring(0, maxlengthMessage));
         			} 
 				});
 			},
@@ -613,6 +621,18 @@ define([
 
 			GetNewMessageRecipients : function(){
 				return this.recipientsGUIDS;
+			},
+
+			SetJobPostingGUID : function(guid){
+				this.jobPostingGUID = guid;
+			},
+
+			GetJobPostingGUID : function(){
+				return this.jobPostingGUID;
+			},
+
+			RemoveJobPostingGUID : function(){
+				return this.null;
 			},
 
 			ShowQuickMessage : function(){

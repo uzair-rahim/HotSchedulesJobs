@@ -4,9 +4,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
+		"scripts/models/model-chat",
 		"hbs!templates/template-layout-app"
 	],
-	function($, JQueryUI, App, Utils, Marionette, Template){
+	function($, JQueryUI, App, Utils, Marionette, ModelChat, Template){
 		"use strict";
 
 		var LayoutApp = Marionette.Layout.extend({
@@ -338,10 +339,12 @@ define([
 				var recipients = Utils.GetNewMessageRecipients();
 				var message = $("#new-message-text").val();
 				if(recipients.length === 0){
-					
+					Utils.ShowToast({type : "error", message : "Must select at least one recipient"});
 				}else if(message === ""){
-					
+					Utils.ShowToast({type : "error", message : "Message cannot be empty"});
 				}else{
+					var users = Utils.GetNewMessageRecipients();
+					console.log(users);
 					Utils.HideSendNewMessage();
 					Utils.RemoveAllRecipientFromNewMessage();
 					$("#new-message-text").val("");

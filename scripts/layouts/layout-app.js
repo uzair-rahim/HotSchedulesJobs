@@ -367,7 +367,6 @@ define([
 						dataArray.push(data);
 					});
 
-					console.log(dataArray);
 
 					var chat = new ModelChat();
 						chat.createChat(dataArray, function(response){

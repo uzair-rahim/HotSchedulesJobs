@@ -617,7 +617,11 @@ define([
 
 			ShowQuickMessage : function(){
 				var dialog = $(document).find("#quick-message-view");
+				if(dialog.hasClass("show")){
+					dialog.removeClass("show");
+				}else{
 					dialog.addClass("show");
+				}
 			},
 
 			HideQuickMessage : function(){

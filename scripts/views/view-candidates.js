@@ -216,7 +216,7 @@ define([
 		candidateChat : function(event){
 			var candidate = $(event.target).closest("li.view-profile");
 			var candidateName = candidate.find(".candidate-info .candidate-name").text();
-			var candidateGUID = candidate.attr("data-guid");
+			var candidateGUID = candidate.attr("data-user");
 
 			var recipient = new Object();
 				recipient.name = candidateName;
@@ -237,7 +237,7 @@ define([
 			$.each(candidates, function(){
 				var recipient = new Object();
 					recipient.name = $(this).closest("li.view-profile").find(".candidate-info .candidate-name").text();
-					recipient.guid = $(this).closest("li.view-profile").attr("data-guid");
+					recipient.guid = $(this).closest("li.view-profile").attr("data-user");
 				recipients.push(recipient);
 			});
 

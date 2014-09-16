@@ -399,9 +399,18 @@ define([
 				App.router.navigate("messages", true);
 			},
 
-			showQuickChatMessage : function(){
-				var quickMessages = $("#quick-message-view");
-					quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
+			showQuickChatMessage : function(event){
+				var index = Utils.GetSelectedEmployer();
+				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var chatGUID = $(event.target).closest("#quick-message-list > li").attr("data-guid");
+				var chat = new ModelChat();
+					chat.getEmployerChat(employerGUID,chatGUID,function(response){
+						var template = Utils.GetChatListTemplate(response);
+						var quickMessages = $("#quick-message-view");
+							quickMessages.find(".chat .dialog-head").text(response.candidate.firstname + " " + response.candidate.lastname);
+							quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
+							quickMessages.find(".chat .dialog-body").html(template);
+					});
 			},
 
 			showQuickChatList : function(){

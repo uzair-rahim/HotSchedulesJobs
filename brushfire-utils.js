@@ -443,7 +443,7 @@ define([
 							retval = months[date.getUTCMonth()] + " " + date.getUTCFullYear();
 						break;
 						default:
-							retval = (date.getUTCMonth())+"/"+date.getDate()+"/"+date.getUTCFullYear();
+							retval = (date.getUTCMonth())+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
 						break;
 					}	
 				}
@@ -668,6 +668,31 @@ define([
 					
 				});
 			},
+
+			GetChatListTemplate : function(data){
+				var html  = '<ul class="chat-list">';
+					$.each(data.messages,function(){
+						if(this.employerSeen){
+							html += '<li>';
+						}else{
+							html += '<li class="new">';
+						}
+							html += '<div class="sender-picture">';
+								if(this.sender.photo == null){
+									html += '<div class="photo"></div>';
+								}else{
+									html += '<div class="photo"><img src="'+this.sender.photo.url+'"/></div>';
+								}
+							html += '</div>';
+							html += '<div class="message">';
+								html += '<div class="name">'+this.sender.firstname+" "+this.sender.lastname+'</div>';
+								html += '<div class="text">'+this.chatMessageContent.text+'</div>';
+							html += '<div>';	
+						html += '</li>';
+					});
+					html += '</ul>';
+				return html;
+			}
 			
 		});
 

@@ -91,9 +91,6 @@ define([
 				var employerGUID = Utils.GetUserSession().employerIds[index];
 				var chat = new ModelChat();
 					chat.getEmployerChats(employerGUID, function(response){
-
-						console.log(response);
-
 						var dialog = $(document).find("#quick-message-view");
 						var dialogBody = dialog.find(".inbox .dialog-body");
 						var html = "";
@@ -104,7 +101,7 @@ define([
 									$.each(response, function(){
 										if(this.latestMessage.employerSeen){ html += '<li data-guid="'+this.guid+'">'; }else{ html +='<li class="new" data-guid="'+this.guid+'">' }
 										html += '<div class="candidate-picture">'
-										if(this.candidate.photo !== null){ html+= '<img src="'+this.candidates.photo+'"/>';}
+										if(this.candidate.photo !== null){ html+= '<img src="'+this.candidate.photo.url+'"/>';}
 										html += '</div>'
 										html += '<div class="candidate-info">';
 										html += '<div class="candidate-profile">';

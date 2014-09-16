@@ -38,7 +38,7 @@ define([
 
 			getEmployerChats : function(employerGUID,callback){
 				var that = this;
-				var url = this.urlRoot() + "/employer/" + employerGUID; +"?archived=false";
+				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived=false";
 				$.ajax({
 					type : "GET",
 					url : url,
@@ -49,7 +49,22 @@ define([
 						console.log("Error fetching employer chat list");
 					}
 				});
-			}
+			},
+
+			getEmployerChat : function(employerGUID,chatGUID,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + chatGUID + "/employer/" + employerGUID;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching employer chat");
+					}
+				});
+			},
 
 		});
 

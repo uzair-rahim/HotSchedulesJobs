@@ -2058,17 +2058,17 @@ ul.messages-list li .candidate-picture{
 	overflow: hidden; 
 }
 
+ul.messages-list li .candidate-picture img{
+	width: 40px;
+	height: 40px;
+}
+
 ul.messages-list li .candidate-info{
 	display: block;
 	float: left;
 	clear: none;
 	width: calc(100% - 50px);
 	margin: 12px 0 0 0;
-}
-
-ul.messages-list li .candidate-info .candidate-profile img{
-	width: 40px;
-	height: 40px;
 }
 
 ul.messages-list li .candidate-info .candidate-profile{
@@ -2112,6 +2112,92 @@ ul.messages-list li.new .candidate-info .candidate-profile,
 ul.messages-list li.new .candidate-info .candidate-profile span,
 ul.messages-list li.new .candidate-info .candidate-message{
 	font-weight: bold;
+}
+
+ul.chat-list{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+ul.chat-list li{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 3px);
+	margin: 0 0 10px 0;
+	border-left: 3px solid transparent;
+}
+
+ul.chat-list li.new{
+	border-left: 3px solid #3e70ff;
+}
+
+ul.chat-list li > .sender-picture{
+	display: block;
+	float: left;
+	width: 50px;
+}
+
+ul.chat-list li > .sender-picture > .photo{
+	display: block;
+	float: left;
+	clear: none;
+	margin: 5px;
+	width: 38px;
+	height: 38px;
+	border-radius: 20px;
+	background-color: #fafbfc;
+	border: 1px solid #cccccc;
+	background-image: url("../images/default-avatar.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 38px auto;
+	overflow: hidden; 
+}
+
+ul.chat-list li > .sender-picture > .photo img{
+	width: 40px;
+	height: 40px;
+}
+
+ul.chat-list li > .message{
+	display: block;
+	float: left;
+	width: calc(100% - 50px);
+}
+
+ul.chat-list li > .message > .name{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 5px 0 0 0;
+	width: calc(100% - 10px);
+	color: #636970;
+	font-weight: bold;
+	line-height: 24px;
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+ul.chat-list li.new > .message > .name{
+	color: #2f3b4b;
+}
+
+ul.chat-list li > .message > .text{
+	display: block;
+	float: left;
+	clear: both;
+	width: calc(100% - 10px);
+	color: #959aa2;
+	font-size: 12px;
+}
+
+ul.chat-list li.new > .message > .text{
+	color: #636970;
 }
 
 

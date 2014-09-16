@@ -99,6 +99,7 @@ input[type="password"]{
 	border-radius: 3px;
 	box-shadow: inset 0 1px 0 0 #f0f0f0, 0 0 0 1px rgba(255,255,255, 0.5);
 	cursor: text;
+	resize: none;
 }
 
 textarea:hover,
@@ -1917,6 +1918,16 @@ input[type="password"]::selection{
 	background-color: #f4f5f5;
 }
 
+.dialog .dialog-head.back{
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	background-image: url("../images/icon-back-arrow.png");
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
+	background-size: 14px auto;
+}
+
 .dialog .dialog-body{
 	display: block;
 	float: left;
@@ -1924,6 +1935,10 @@ input[type="password"]::selection{
 	width: 100%;
 	height: 274px;
 	overflow: auto;
+}
+
+.dialog .dialog-body.short{
+	height: 254px;
 }
 
 .dialog .dialog-body > .empty-body{
@@ -1950,6 +1965,11 @@ input[type="password"]::selection{
 	border-top: 1px solid #cccccc;
 	background-color: #f4f5f5;
 	box-shadow: 0px -4px 10px 0 rgba(0,0,0,0.05);
+}
+
+.dialog .dialog-foot.tall{
+	height: 50px;
+	line-height: normal;
 }
 
 #quick-message-view.dialog{

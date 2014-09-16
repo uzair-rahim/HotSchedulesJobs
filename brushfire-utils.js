@@ -317,7 +317,7 @@ define([
 			InitMaxTextAreaLength : function(){
 				var maxlengthAbout = 512;
 				var maxlengthMessage = 1000;
-				$(document.body).delegate("textarea", "keyup", function(){
+				$(document.body).delegate("textarea:not('#new-message-text')", "keyup", function(){
 					if ($(this).val().length > maxlengthAbout) {  
             			$(this).val($(this).val().substring(0, maxlengthAbout));
         			} 
@@ -437,13 +437,13 @@ define([
 				}else{
 					switch(type){
 						case "mm/dd/yyyy":
-							retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+							retval = (date.getUTCMonth())+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
 						break;
 						case "month/yyyy":
-							retval = months[date.getMonth()] + " " + date.getFullYear();
+							retval = months[date.getUTCMonth()] + " " + date.getUTCFullYear();
 						break;
 						default:
-							retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+							retval = (date.getUTCMonth())+"/"+date.getDate()+"/"+date.getUTCFullYear();
 						break;
 					}	
 				}
@@ -635,18 +635,22 @@ define([
 				return this.null;
 			},
 
+			IsQuickMessageVisible : function(){
+				var dialog = $(document).find("#quick-message-view");
+				return dialog.hasClass("show");
+			},
+
 			ShowQuickMessage : function(){
 				var dialog = $(document).find("#quick-message-view");
-				if(dialog.hasClass("show")){
-					dialog.removeClass("show");
-				}else{
 					dialog.addClass("show");
-				}
 			},
 
 			HideQuickMessage : function(){
 				var dialog = $(document).find("#quick-message-view");
-					dialog.removeClass("show");
+					dialog.find(".mask").animate({scrollLeft : dialog.width() * (-1)}, 10, function(){
+						dialog.removeClass("show");	
+					});
+					
 			},
 
 			InitQuickMessageView : function(){
@@ -657,7 +661,9 @@ define([
 					
 					if(!isMessagesIcon && !isQuickViewDialog){
 						var dialog = $(document).find("#quick-message-view");
-							dialog.removeClass("show");
+							dialog.find(".mask").animate({scrollLeft : dialog.width() * (-1)}, 10, function(){
+								dialog.removeClass("show");	
+							});
 					}
 					
 				});

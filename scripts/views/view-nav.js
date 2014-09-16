@@ -4,9 +4,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
-		"hbs!templates/template-view-nav"
+		"hbs!templates/template-view-nav",
+		"scripts/models/model-chat"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, App, Utils, Marionette, Template, ModelChat){
 	"use strict";
 
 	var ViewNav = Marionette.ItemView.extend({
@@ -83,7 +84,50 @@ define([
 		},
 
 		quickMessages : function(){
-			Utils.ShowQuickMessage();
+			if(Utils.IsQuickMessageVisible()){
+				Utils.HideQuickMessage();	
+			}else{
+				var index = Utils.GetSelectedEmployer();
+				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var chat = new ModelChat();
+					chat.getEmployerChats(employerGUID, function(response){
+
+						console.log(response);
+
+						var dialog = $(document).find("#quick-message-view");
+						var dialogBody = dialog.find(".inbox .dialog-body");
+						var html = "";
+							if(response.length == 0){
+									html = '<div class="empty-body">No Messages</div>';
+							}else{
+								var html = '<ul id="quick-message-list" class="messages-list">';
+									$.each(response, function(){
+										if(this.latestMessage.employerSeen){ html += '<li data-guid="'+this.guid+'">'; }else{ html +='<li class="new" data-guid="'+this.guid+'">' }
+										html += '<div class="candidate-picture">'
+										if(this.candidate.photo !== null){ html+= '<img src="'+this.candidates.photo+'"/>';}
+										html += '</div>'
+										html += '<div class="candidate-info">';
+										html += '<div class="candidate-profile">';
+										html += this.candidate.firstname + " " + this.candidate.lastname;
+										if(this.candidate.primaryWorkHistory !== null){
+											html += '<span>';
+											html += "- " + this.candidate.primaryWorkHistory.jobs[0].jobName + " @ " + this.candidate.primaryWorkHistory.employer.name;
+											html += '</span>';	
+										}
+										html += '</div>';
+										html += '<div class="candidate-message">';
+										html += this.latestMessage.chatMessageContent.text;
+										html += '</div>';
+										html += '</div>';
+										html += '</li>';
+									});
+									html += '</ul>';
+							}
+						dialogBody.html(html);
+						Utils.ShowQuickMessage();
+					});
+			}
+			
 		},
 
 		settings : function(){

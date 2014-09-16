@@ -34,6 +34,21 @@ define([
 						console.log("Error creating chat");
 					}
 				});
+			},
+
+			getEmployerChats : function(employerGUID,callback){
+				var that = this;
+				var url = this.urlRoot() + "/employer/" + employerGUID; +"?archived=false";
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching employer chat list");
+					}
+				});
 			}
 
 		});

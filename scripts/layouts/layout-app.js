@@ -46,7 +46,7 @@ define([
 				"click #app-alert-new-message .pill"	: "removeRecipient",
 				"click #see-all-messages"				: "seeAllMessages",
 				"click #quick-message-list > li"		: "showQuickChatMessage",
-				"click #quick-message-view .chat"		: "showQuickChatList"
+				"click #quick-message-view #back"		: "showQuickChatList"
 			},
 
 			initialize : function(){
@@ -352,6 +352,8 @@ define([
 						message.sender.guid = Utils.GetUserSession().guid;
 						message.chatMessageContent = new Object();
 						message.chatMessageContent.text = $("#new-message-text").val();
+						message.employerSeen = new Object();
+						message.employerSeen = true;
 
 					var data = new Object();
 						data.jobPosting = new Object();
@@ -359,6 +361,7 @@ define([
 						data.candidate = new Object();
 						data.messages = new Array();
 						data.messages.push(message);
+						
 
 					var dataArray = new Array();	
 
@@ -367,10 +370,8 @@ define([
 						dataArray.push(data);
 					});
 
-
 					var chat = new ModelChat();
 						chat.createChat(dataArray, function(response){
-							console.log(response);
 							Utils.ShowToast({type : "success", message : "Message sent successfully"});
 						});
 
@@ -400,12 +401,12 @@ define([
 
 			showQuickChatMessage : function(){
 				var quickMessages = $("#quick-message-view");
-					quickMessages.find(".mask").animate({scrollLeft : "400"}, 150);
+					quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
 			},
 
 			showQuickChatList : function(){
 				var quickMessages = $("#quick-message-view");
-					quickMessages.find(".mask").animate({scrollLeft : "-400"}, 150);
+					quickMessages.find(".mask").animate({scrollLeft : quickMessages.width() * (-1)}, 150);
 			},
 
 			serializeData : function(){

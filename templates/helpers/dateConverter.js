@@ -16,13 +16,13 @@ define([
 
 			switch(type){
 				case "mm/dd/yyyy":
-					retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+					retval = (date.getUTCMonth()+1)+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
 				break;
 				case "month/yyyy":
-					retval = months[date.getMonth()] + " - " + date.getFullYear();
+					retval = months[date.getUTCMonth()+1] + " - " + date.getUTCFullYear();
 				break;
 				default:
-					retval = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+					retval = (date.getUTCMonth()+1)+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
 				break;
 			}
 			

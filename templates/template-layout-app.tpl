@@ -171,27 +171,14 @@
 		<div class="scrollable">
 			<div class="inbox">
 				<div class="dialog-head">Messages</div>
-				<div class="dialog-body">
-					<ul id="quick-message-list" class="messages-list">
-						<li class="new">
-							<div class="candidate-picture"></div>
-							<div class="candidate-info">
-								<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
-								<div class="candidate-message">I can come in on Sunday.</div>
-							</div>
-						</li>
-						<li>
-							<div class="candidate-picture"></div>
-							<div class="candidate-info">
-								<div class="candidate-profile">Julius Caesar <span>- Cook @ Red Lounge</span></div>
-								<div class="candidate-message">I can come in on Sunday.</div>
-							</div>
-						</li>
-					</ul>
-				</div>
+				<div class="dialog-body"></div>
 				<div id="see-all-messages" class="dialog-foot">See All</div>
 			</div>
-			<div class="chat"></div>
+			<div class="chat">
+				<div id="back" class="dialog-head back">Candidate Name</div>
+				<div class="dialog-body short"></div>
+				<div class="dialog-foot tall"></div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -403,6 +403,8 @@ define([
 				var index = Utils.GetSelectedEmployer();
 				var employerGUID = Utils.GetUserSession().employerIds[index];
 				var chatGUID = $(event.target).closest("#quick-message-list > li").attr("data-guid");
+				var item = $(event.target).closest("#quick-message-list > li");
+				var isUnseen = item.hasClass("new");
 				var chat = new ModelChat();
 					chat.getEmployerChat(employerGUID,chatGUID,function(response){
 						var template = Utils.GetChatListTemplate(response);
@@ -410,6 +412,11 @@ define([
 							quickMessages.find(".chat .dialog-head").text(response.candidate.firstname + " " + response.candidate.lastname);
 							quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
 							quickMessages.find(".chat .dialog-body").html(template);
+							if(isUnseen){
+								chat.updateChatMessageAsSeenByEmployer(chatGUID, function(response){
+									item.removeClass("new");
+								});	
+							}
 					});
 			},
 

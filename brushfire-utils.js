@@ -670,8 +670,13 @@ define([
 			},
 
 			GetChatListTemplate : function(data){
-				var html  = '<ul class="chat-list">';
+				var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+				var html = '<div class="job-info"><span>For:</span> '+data.jobPosting.jobName+'</div>';
+				 	html += '<ul class="chat-list">';
 					$.each(data.messages,function(){
+						var date = new Date(this.created);
+						var msgDate = months[date.getUTCMonth()] + " " + date.getUTCDate();
+						html += '<li class="date"><span>'+msgDate+'</span></li>';
 						if(this.employerSeen){
 							html += '<li>';
 						}else{

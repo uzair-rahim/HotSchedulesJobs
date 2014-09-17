@@ -38,7 +38,7 @@ define([
 
 			getEmployerChats : function(employerGUID,callback){
 				var that = this;
-				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived=false";
+				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived=0";
 				$.ajax({
 					type : "GET",
 					url : url,
@@ -65,6 +65,22 @@ define([
 					}
 				});
 			},
+
+			updateChatMessageAsSeenByEmployer : function(chatGUID,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + chatGUID + "/messages/employer/seen";
+				$.ajax({
+					type : "PUT",
+					url : url,
+					asyn : false,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error marking chat messages as seen by employer");
+					}
+				});
+			}
 
 		});
 

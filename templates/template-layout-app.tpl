@@ -176,19 +176,7 @@
 			</div>
 			<div class="chat">
 				<div id="back" class="dialog-head back">Messages</div>
-				<div class="dialog-body short">
-					<ul class="chat-list">
-						<li>
-							<div class="sender-picture">
-								<div class="photo"></div>
-							</div>
-							<div class="message">
-								<div class="name">James Cuffee</div>
-								<div class="text">Lipsum ipsum</div>
-							</div>
-						</li>
-					</ul>
-				</div>
+				<div class="dialog-body short"></div>
 				<div class="dialog-foot tall"></div>
 			</div>
 		</div>

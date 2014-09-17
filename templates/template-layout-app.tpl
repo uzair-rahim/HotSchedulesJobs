@@ -177,7 +177,10 @@
 			<div class="chat">
 				<div id="back" class="dialog-head back">Messages</div>
 				<div class="dialog-body short"></div>
-				<div class="dialog-foot tall"></div>
+				<div class="dialog-foot tall">
+					<input type="text" id="new-reply-text" placeholder="Message..."/>
+					<button class="primary" id="send-new-reply" disabled="true">Send</button>
+				</div>
 			</div>
 		</div>
 	</div>

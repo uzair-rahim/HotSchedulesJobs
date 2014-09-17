@@ -650,6 +650,11 @@ define([
 					dialog.find(".mask").animate({scrollLeft : dialog.width() * (-1)}, 10, function(){
 						dialog.removeClass("show");	
 					});
+				var sendReplyButton = $(document).find("#send-new-reply");
+					sendReplyButton.attr("data-guid", "");
+					sendReplyButton.prop("disabled", true);
+				var textField = $(document).find("#new-reply-text");
+					textField.val("");
 					
 			},
 
@@ -664,12 +669,56 @@ define([
 							dialog.find(".mask").animate({scrollLeft : dialog.width() * (-1)}, 10, function(){
 								dialog.removeClass("show");	
 							});
+						var sendReplyButton = $(document).find("#send-new-reply");
+							sendReplyButton.attr("data-guid", "");
+							sendReplyButton.prop("disabled", true);
+						var textField = $(document).find("#new-reply-text");
+							textField.val("");	
 					}
 					
 				});
 			},
 
 			GetChatListTemplate : function(data){
+				var html = '';
+
+				if(data.length == 0){
+					html = '<div class="empty-body">No Messages</div>';
+				}else{
+					html = '<ul id="quick-message-list" class="messages-list">';
+					$.each(data,function(){
+						if(this.latestMessage.employerSeen){
+							html += '<li data-guid="'+this.guid+'">';
+						}else{
+							html += '<li class="new" data-guid="'+this.guid+'">';
+						}
+						html += '<div class="candidate-picture">';
+							if(this.candidate.photo !== null){
+								html += '<img src="'+this.candidate.photo.url+'"/>';
+							}
+						html += '</div>';
+						html += '<div class="candidate-info">';
+							html += '<div class="candidate-profile">';
+								html += this.candidate.firstname + " " + this.candidate.lastname;
+								if(this.candidate.primaryWorkHistory !== null){
+									html += '<span>';
+									html += "- " + this.candidate.primaryWorkHistory.jobs[0].jobName + " @ " + this.candidate.primaryWorkHistory.employer.name;
+									html += '</span>';	
+									}
+							html += '</div>';
+							html += '<div class="candidate-message">';
+									html += this.latestMessage.chatMessageContent.text;
+							html += '</div>';
+						html += '</div>';		
+						html += '</li>';
+					});
+					html += '</ul>';
+				}
+
+				return html;
+			},
+
+			GetChatViewTemplate : function(data){
 				var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 				var html = '<div class="job-info"><span>For:</span> '+data.jobPosting.jobName+'</div>';
 				 	html += '<ul class="chat-list">';

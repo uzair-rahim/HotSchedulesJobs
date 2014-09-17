@@ -47,6 +47,7 @@ define([
 					},
 					error : function(){
 						console.log("Error fetching employer chat list");
+						Utils.HideQuickMessage();
 					}
 				});
 			},
@@ -62,6 +63,7 @@ define([
 					},
 					error : function(){
 						console.log("Error fetching employer chat");
+						Utils.HideQuickMessage();
 					}
 				});
 			},
@@ -78,6 +80,26 @@ define([
 					},
 					error : function(){
 						console.log("Error marking chat messages as seen by employer");
+						Utils.HideQuickMessage();
+					}
+				});
+			},
+
+			addChat : function(chat,chatGUID,callback){
+				var that = this;
+				var url = this.urlRoot() + "/"+ chatGUID + "/message";
+				$.ajax({
+					type : "POST",
+					url : url,
+					contentType : "application/json",
+					data : JSON.stringify(chat),
+					async : false,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error sending reply to chat");
+						Utils.HideQuickMessage();
 					}
 				});
 			}

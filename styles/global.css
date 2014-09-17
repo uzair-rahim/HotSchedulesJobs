@@ -33,6 +33,7 @@ button:disabled{
 
 button:disabled:hover{
 	background-color: #f4f6f7;
+	cursor: default;
 }
 
 button.primary{
@@ -1989,6 +1990,17 @@ input[type="password"]::selection{
 .dialog .dialog-foot.tall{
 	height: 50px;
 	line-height: normal;
+}
+
+.dialog .dialog-foot.tall #new-reply-text{
+	float: left;
+	width: calc(100% - 110px);
+	margin: 10px;
+}
+
+.dialog .dialog-foot.tall #send-new-reply{
+	float: left;
+	margin: 9px 0 0 0;
 }
 
 #quick-message-view.dialog{

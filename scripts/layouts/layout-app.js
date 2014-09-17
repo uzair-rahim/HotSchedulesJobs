@@ -46,7 +46,8 @@ define([
 				"click #app-alert-new-message .pill"	: "removeRecipient",
 				"click #see-all-messages"				: "seeAllMessages",
 				"click #quick-message-list > li"		: "showQuickChatMessage",
-				"click #quick-message-view #back"		: "showQuickChatList"
+				"click #quick-message-view #back"		: "showQuickChatList",
+				"click #send-new-reply"					: "sendReply"
 			},
 
 			initialize : function(){
@@ -109,6 +110,20 @@ define([
 
 							$(".resize-logo-image").draggable({containment : [x1,y1,x2,y2]});
 						}
+					});
+
+					$(document).undelegate("#new-reply-text", "keyup");
+					$(document).delegate("#new-reply-text", "keyup", function(){
+						var maxlength = 1000;						
+						if ($(this).val().length > maxlength) {  
+	            			$(this).val($(this).val().substring(0, maxlength));
+	        			}
+	        			var sendReplyButton = $(document).find("#send-new-reply");
+	        			if($(this).val().length > 0){
+	        				sendReplyButton.prop("disabled", false);
+	        			}else{
+	        				sendReplyButton.prop("disabled", true);
+	        			}
 					});
 			},
 
@@ -400,6 +415,7 @@ define([
 			},
 
 			showQuickChatMessage : function(event){
+				var that = this;
 				var index = Utils.GetSelectedEmployer();
 				var employerGUID = Utils.GetUserSession().employerIds[index];
 				var chatGUID = $(event.target).closest("#quick-message-list > li").attr("data-guid");
@@ -407,22 +423,69 @@ define([
 				var isUnseen = item.hasClass("new");
 				var chat = new ModelChat();
 					chat.getEmployerChat(employerGUID,chatGUID,function(response){
-						var template = Utils.GetChatListTemplate(response);
-						var quickMessages = $("#quick-message-view");
-							quickMessages.find(".chat .dialog-head").text(response.candidate.firstname + " " + response.candidate.lastname);
-							quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
-							quickMessages.find(".chat .dialog-body").html(template);
-							if(isUnseen){
-								chat.updateChatMessageAsSeenByEmployer(chatGUID, function(response){
-									item.removeClass("new");
-								});	
-							}
+						that.updateChatView(response,chatGUID);
+						if(isUnseen){
+							chat.updateChatMessageAsSeenByEmployer(chatGUID, function(response){
+								item.removeClass("new");
+							});	
+						}
 					});
 			},
 
 			showQuickChatList : function(){
 				var quickMessages = $("#quick-message-view");
 					quickMessages.find(".mask").animate({scrollLeft : quickMessages.width() * (-1)}, 150);
+				var sendReplyButton = $(document).find("#send-new-reply");
+					sendReplyButton.attr("data-guid", "");
+				var textField = $("#new-reply-text");
+					textField.val("");	
+			},
+
+			sendReply : function(event){
+				var that = this;
+				var sendButton = $(event.target);
+				var chatGUID = sendButton.attr("data-guid");
+				var textField = $("#new-reply-text");
+				
+				var message = new Object();
+					message.sender = new Object();
+					message.sender.guid = Utils.GetUserSession().guid;
+					message.chatMessageContent = new Object();
+					message.chatMessageContent.text = textField.val();
+					message.employerSeen = new Object();
+					message.employerSeen = true;
+			
+				var chat = new ModelChat();
+					chat.addChat(message,chatGUID, function(response){
+						that.updateChatView(response,chatGUID);
+						that.getEmployerChats();
+						textField.val("");
+						sendButton.prop("disabled", true);
+					});
+			},
+
+			getEmployerChats : function(){
+				var index = Utils.GetSelectedEmployer();
+				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var chat = new ModelChat();
+					chat.getEmployerChats(employerGUID, function(response){
+						var dialog = $(document).find("#quick-message-view");
+						var dialogBody = dialog.find(".inbox .dialog-body");
+						var template = Utils.GetChatListTemplate(response);
+						dialogBody.html(template);
+						Utils.ShowQuickMessage();
+					});
+			},
+
+			updateChatView : function(data,chatGUID){
+				var template = Utils.GetChatViewTemplate(data);
+				var quickMessages = $("#quick-message-view");
+					quickMessages.find(".chat .dialog-head").text(data.candidate.firstname + " " + data.candidate.lastname);
+					quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
+					quickMessages.find(".chat .dialog-body").html(template);
+					quickMessages.find(".chat .dialog-body").scrollTop(quickMessages.find(".chat .dialog-body").prop("scrollHeight"));
+				var sendReplyButton = $(document).find("#send-new-reply");
+					sendReplyButton.attr("data-guid", chatGUID);
 			},
 
 			serializeData : function(){

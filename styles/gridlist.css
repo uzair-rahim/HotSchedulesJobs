@@ -289,7 +289,7 @@ ul.grid-list > li .job-actions button:first-child{
 
 ul.grid-list > li .job-actions .custom-select-list.job-status{
 	margin-left: -47px;
-	max-height: 180px;
+	max-height: 200px;
 }
 
 ul.grid-list > li .candidate-select{

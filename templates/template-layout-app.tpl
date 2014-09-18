@@ -121,13 +121,13 @@
 	<div class="alert-title">Share This Job?</div>
 	<div class="alert-body">
 		<div class="field-container">
-			<input type="checkbox" id="share-posted-current-employees"/>
-			<label for="share-posted-current-employees">Current Employees</label>
-		</div>
-		<!--<div class="field-container">
 			<input type="checkbox" id="share-posted-connections"/>
-			<label for="share-posted-connections">My Connections</label>
-		</div>-->
+			<label for="share-posted-connections">Connections</label>
+		</div>
+		<div class="field-container">
+			<input type="checkbox" id="share-posted-current-employees"/>
+			<label for="share-posted-current-employees">Employees</label>
+		</div>
 		<div class="field-container">
 			<input type="checkbox" id="share-posted-followers"/>
 			<label for="share-posted-followers">Followers</label>

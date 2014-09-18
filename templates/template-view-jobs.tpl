@@ -96,7 +96,11 @@
 						{{else}}
 							<li class="copy-tiny-url disabled">Copy Job Link</li>
 						{{/if_not_eq}}
-
+						{{#if_not_eq status "UNPOSTED"}}
+							<li class="share-with-connections active">Share with Connections</li>
+						{{else}}
+							<li class="share-with-connections disabled">Share with Connections</li>
+						{{/if_not_eq}}
 						{{#if_not_eq status "UNPOSTED"}}
 							<li class="share-with-employees active">Share with Employees</li>
 						{{else}}

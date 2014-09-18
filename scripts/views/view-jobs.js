@@ -39,6 +39,7 @@ define([
 			"click .copy-tiny-url"			: "copyTinyURL",
 			"click .share-with-employees"	: "shareJobWithEmployees",
 			"click .share-with-followers"	: "shareJobWithFollowers",
+			"click .share-with-connections"	: "shareJobWithConnections",
 			"click .view-candidates" 		: "candidates",
 			"click .close-candidates"		: "closeCandidates",
 			"click .view-profile"			: "profile",
@@ -824,55 +825,34 @@ define([
 		shareJobWithEmployees : function(event){
 			var item = $(event.target);
 			var isDisabled = $(item).hasClass("disabled")
-
 			if(!isDisabled){
-
-				var job = $(item).closest("#job-list.grid-list > li").data("guid");
-				var index = Utils.GetSelectedEmployer();
-
-				var share = new Object();
-					share.fromUser = new Object();
-					share.jobPosting = new Object();
-					share.employer = new Object();
-					
-					share.fromUser.guid = Utils.GetUserSession().guid;
-					share.jobPosting.guid = job
-					share.employer.guid = Utils.GetUserSession().employerIds[index];
-					share.type = 1;
-
-				var that = this;
-				var restURL = Utils.GetURL("/services/rest/share");
-				
-				$.ajax({
-					 headers: { 
-				        'Accept': 'application/json',
-				        'Content-Type': 'application/json' 
-				    },
-					url : restURL,
-					type : "POST",
-					data: JSON.stringify(share),
-	    			processData: false,
-	    			success : function(response){
-	    				Utils.ShowToast({ type : "success", message : "Job shared with all employees"});		
-	    			},
-	    			error : function(response){
-	    				Utils.ShowToast({message : "Error sharing job"});
-	    			}
-				});
-
-				
+				var job = $(item).closest("#job-list.grid-list > li").data("guid");	
+				this.shareJob(job,1);
 			}
-
 			event.stopPropagation();
 		},
 
 		shareJobWithFollowers : function(event){
 			var item = $(event.target);
 			var isDisabled = $(item).hasClass("disabled")
-
 			if(!isDisabled){
+				var job = $(item).closest("#job-list.grid-list > li").data("guid");	
+				this.shareJob(job,2);
+			}
+			event.stopPropagation();
+		},
 
-				var job = $(item).closest("#job-list.grid-list > li").data("guid");
+		shareJobWithConnections : function(event){
+			var item = $(event.target);
+			var isDisabled = $(item).hasClass("disabled")
+			if(!isDisabled){
+				var job = $(item).closest("#job-list.grid-list > li").data("guid");	
+				this.shareJob(job,3);
+			}
+			event.stopPropagation();
+		},
+
+		shareJob : function(jobGUID,shareType){
 				var index = Utils.GetSelectedEmployer();
 
 				var share = new Object();
@@ -881,9 +861,9 @@ define([
 					share.employer = new Object();
 
 					share.fromUser.guid = Utils.GetUserSession().guid;
-					share.jobPosting.guid = job
+					share.jobPosting.guid = jobGUID
 					share.employer.guid = Utils.GetUserSession().employerIds[index];
-					share.type = 2;
+					share.type = shareType;
 
 				var that = this;
 				var restURL = Utils.GetURL("/services/rest/share");
@@ -898,17 +878,12 @@ define([
 					data: JSON.stringify(share),
 	    			processData: false,
 	    			success : function(response){
-	    				Utils.ShowToast({ type : "success", message : "Job shared with all followers"});		
+	    				Utils.ShowToast({ type : "success", message : "Job shared successfully"});		
 	    			},
 	    			error : function(response){
 	    				Utils.ShowToast({message : "Error sharing job"});
 	    			}
 				});
-
-				
-			}
-
-			event.stopPropagation();
 		},
 
 		createConnection : function(event){

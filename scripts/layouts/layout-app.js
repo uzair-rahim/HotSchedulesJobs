@@ -308,9 +308,7 @@ define([
 				}
 
 				if(toConnections){
-					var connections = Utils.GetUserConnectionsList();
-					share.type = 0;
-					share.toUserGuids = connections;
+					share.type = 3;
 					deferred.push(
 						$.ajax({
 							 headers: { 

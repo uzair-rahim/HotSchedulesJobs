@@ -4,9 +4,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
+		"scripts/models/model-chat",
 		"hbs!templates/template-view-messages"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, App, Utils, Marionette, ModelChat, Template){
 	"use strict";
 
 	var ViewMessages = Marionette.ItemView.extend({
@@ -14,7 +15,8 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #profile" : "profile"
+			"click #full-message-list > li"	: "showFullChatMessage",
+			"click #send-new-full-reply"	: "sendReply"
 		},
 
 		initialize : function(){
@@ -22,14 +24,111 @@ define([
 			console.log("Messages view initialized...");
 		},
 
-		profile : function(){
-			App.router.navigate("profile/messages/jobs", true)
+		onShow : function(){
+			$(document).undelegate("#new-full-reply-text", "keyup");
+			$(document).delegate("#new-full-reply-text", "keyup", function(event){
+				var maxlength = 1000;						
+				if ($(this).val().length > maxlength) {  
+	            	$(this).val($(this).val().substring(0, maxlength));
+	        	}
+	        	var sendReplyButton = $(document).find("#send-new-full-reply");
+	        	if($(this).val().length > 0){
+	        		sendReplyButton.prop("disabled", false);
+	        	}else{
+	        		sendReplyButton.prop("disabled", true);
+	        	}
+
+	        	if(event.keyCode == 13){
+					$("#send-new-full-reply").click();
+				}
+
+			});
+		},
+
+		showFullChatMessage : function(event){
+				var that = this;
+				var index = Utils.GetSelectedEmployer();
+				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var chatGUID = $(event.target).closest("#full-message-list > li").attr("data-guid");
+				var item = $(event.target).closest("#full-message-list > li");
+				var isUnseen = item.hasClass("new");
+				var chat = new ModelChat();
+					chat.getEmployerChat(employerGUID,chatGUID,function(response){
+						that.appendChatView(response,chatGUID);
+						if(isUnseen){
+							chat.updateChatMessageAsSeenByEmployer(chatGUID, function(response){
+								item.removeClass("new");
+							});	
+						}
+					});
+		},
+
+		appendChatView : function(data,chatGUID){
+			var template = '<div class="message-view-body">' + Utils.GetChatViewTemplate(data) + '</div><div class="message-view-foot"><input type="text" id="new-full-reply-text" placeholder="Message..."/><button class="primary" id="send-new-full-reply" disabled="true">Send</button></div>';
+			var candidateName = data.candidate.firstname + ' ' + data.candidate.lastname;
+			var candidateWork = "";
+				if(data.candidate.primaryWorkHistory !== null){
+					candidateWork = "- "+data.candidate.primaryWorkHistory.jobs[0].jobName+" @ "+data.candidate.primaryWorkHistory.employer.name;
+				}
+
+			var fullMessages = $("#full-message-view");
+				fullMessages.find(".message-info-container").html('<div class="candidate-name">'+candidateName+'</div><div class="candidate-work">'+candidateWork+'</div>');
+
+				fullMessages.find(".message-view-container").html(template);
+				fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
+			var sendReplyButton = $(document).find("#send-new-full-reply");
+				sendReplyButton.attr("data-guid", chatGUID);
+		},
+
+		updateChatView : function(data){
+			var template = Utils.GetChatMessageTemplate(data);
+			var fullMessages = $("#full-message-view");
+			fullMessages.find(".chat-list > li").removeClass("new");
+			fullMessages.find(".chat-list").append(template);
+			fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
+		},
+
+		getEmployerChats : function(){
+			var index = Utils.GetSelectedEmployer();
+			var employerGUID = Utils.GetUserSession().employerIds[index];
+			var chat = new ModelChat();
+				chat.getEmployerChats(employerGUID, function(response){
+					var fullMessages = $("#full-message-view");
+					var fullMessagesBody = fullMessages.find(".message-list-container");
+					var template = Utils.GetChatListTemplate(response);
+					fullMessagesBody.html(template);
+				});
+		},
+
+		sendReply : function(event){
+			var that = this;
+			var sendButton = $(event.target);
+			var chatGUID = sendButton.attr("data-guid");
+			var textField = $("#new-full-reply-text");
+				
+			var message = new Object();
+				message.sender = new Object();
+				message.sender.guid = Utils.GetUserSession().guid;
+				message.chatMessageContent = new Object();
+				message.chatMessageContent.text = textField.val();
+				message.employerSeen = new Object();
+				message.employerSeen = true;
+			
+			var chat = new ModelChat();
+				chat.addChat(message,chatGUID, function(response){
+					that.updateChatView(response);
+					that.getEmployerChats();
+					textField.val("");
+					sendButton.prop("disabled", true);
+				});
 		},
 
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
+				jsonObject.messageList = new Object();
+				jsonObject.messageList = this.options.model;
 			return jsonObject;
 		}
 		
@@ -37,3 +136,5 @@ define([
 
 	return ViewMessages;
 });
+
+

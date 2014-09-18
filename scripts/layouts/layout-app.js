@@ -113,7 +113,7 @@ define([
 					});
 
 					$(document).undelegate("#new-reply-text", "keyup");
-					$(document).delegate("#new-reply-text", "keyup", function(){
+					$(document).delegate("#new-reply-text", "keyup", function(event){
 						var maxlength = 1000;						
 						if ($(this).val().length > maxlength) {  
 	            			$(this).val($(this).val().substring(0, maxlength));
@@ -124,7 +124,13 @@ define([
 	        			}else{
 	        				sendReplyButton.prop("disabled", true);
 	        			}
-					});
+
+	        			$("#new-reply-text").keyup(function(event){
+							if(event.keyCode == 13){
+								$("#send-new-reply").click();
+							}
+						});
+				});
 			},
 
 			detectDevice : function(){

@@ -26,6 +26,7 @@ define([
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-yelp-rating",
+		"scripts/models/model-chat",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-jobs-info",
 		"scripts/collections/collection-employer-profile",
@@ -34,7 +35,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -433,8 +434,14 @@ define([
 					this.setLayout();
 					this.setHeader("navigation");
 
-					var view = new ViewMessages();
-					that.layout.body.show(view);
+					var index = Utils.GetSelectedEmployer();
+					var employerGUID = Utils.GetUserSession().employerIds[index];
+
+					var chat = new ModelChat();
+						chat.getEmployerChats(employerGUID,function(data){
+							var view = new ViewMessages({model : data});
+							that.layout.body.show(view);
+						});
 				}else{
 					App.router.navigate("login", true);
 				}

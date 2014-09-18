@@ -84,12 +84,17 @@ define([
 		},
 
 		quickMessages : function(){
-			if(Utils.IsQuickMessageVisible()){
-				Utils.HideQuickMessage();	
+			var route = Backbone.history.fragment;
+			var windowWidth = $(window).width();
+			if(route == "messages" || windowWidth < 800){
+				this.route("messages");
 			}else{
-				this.getEmployerChats();
+				if(Utils.IsQuickMessageVisible()){
+					Utils.HideQuickMessage();	
+				}else{
+					this.getEmployerChats();
+				}
 			}
-			
 		},
 
 		getEmployerChats : function(){

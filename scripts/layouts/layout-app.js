@@ -421,7 +421,7 @@ define([
 				var isUnseen = item.hasClass("new");
 				var chat = new ModelChat();
 					chat.getEmployerChat(employerGUID,chatGUID,function(response){
-						that.updateChatView(response,chatGUID);
+						that.appendChatView(response,chatGUID);
 						if(isUnseen){
 							chat.updateChatMessageAsSeenByEmployer(chatGUID, function(response){
 								item.removeClass("new");
@@ -455,7 +455,7 @@ define([
 			
 				var chat = new ModelChat();
 					chat.addChat(message,chatGUID, function(response){
-						that.updateChatView(response,chatGUID);
+						that.updateChatView(response);
 						that.getEmployerChats();
 						textField.val("");
 						sendButton.prop("disabled", true);
@@ -475,7 +475,7 @@ define([
 					});
 			},
 
-			updateChatView : function(data,chatGUID){
+			appendChatView : function(data,chatGUID){
 				var template = Utils.GetChatViewTemplate(data);
 				var quickMessages = $("#quick-message-view");
 					quickMessages.find(".chat .dialog-head").text(data.candidate.firstname + " " + data.candidate.lastname);
@@ -484,6 +484,14 @@ define([
 					quickMessages.find(".chat .dialog-body").scrollTop(quickMessages.find(".chat .dialog-body").prop("scrollHeight"));
 				var sendReplyButton = $(document).find("#send-new-reply");
 					sendReplyButton.attr("data-guid", chatGUID);
+			},
+
+			updateChatView : function(data){
+				var template = Utils.GetChatMessageTemplate(data);
+				var quickMessages = $("#quick-message-view");
+				quickMessages.find(".chat .dialog-body .chat-list > li").removeClass("new");
+				quickMessages.find(".chat .dialog-body .chat-list").append(template);
+				quickMessages.find(".chat .dialog-body").scrollTop(quickMessages.find(".chat .dialog-body").prop("scrollHeight"));
 			},
 
 			serializeData : function(){

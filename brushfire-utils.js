@@ -746,6 +746,28 @@ define([
 					});
 					html += '</ul>';
 				return html;
+			},
+
+			GetChatMessageTemplate : function(data){
+				var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+				var html = '';
+				var date = new Date(data.created);
+				var msgDate = months[date.getUTCMonth()] + " " + date.getUTCDate();
+					html += '<li class="date"><span>'+msgDate+'</span></li>';
+					html += '<li>';
+						html += '<div class="sender-picture">';
+						if(data.sender.photo == null){
+							html += '<div class="photo"></div>';
+						}else{
+							html += '<div class="photo"><img src="'+data.sender.photo.url+'"/></div>';
+						}
+						html += '</div>';
+						html += '<div class="message">';
+							html += '<div class="name">'+data.sender.firstname+" "+data.sender.lastname+'</div>';
+							html += '<div class="text">'+data.chatMessageContent.text+'</div>';
+						html += '<div>';	
+					html += '</li>';
+				return html;
 			}
 			
 		});

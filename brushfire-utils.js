@@ -347,14 +347,17 @@ define([
 
 				var url = window.location.href;
 				var indexOfID = url.indexOf("?id=");
-				var id = url.substring(indexOfID+4); 
 
-				var StandaloneJobGUID = id;
-				
-				if(StandaloneJobGUID !== undefined){
-					return StandaloneJobGUID;
-				}else{
+				if(indexOfID == -1){
 					return false;
+				}else{
+					var id = url.substring(indexOfID+4); 
+					var StandaloneJobGUID = id;
+					if(StandaloneJobGUID !== undefined){
+						return StandaloneJobGUID;
+					}else{
+						return false;
+					}
 				}
 			},
 
@@ -725,6 +728,12 @@ define([
 					$.each(data.messages,function(){
 						var date = new Date(this.created);
 						var msgDate = months[date.getUTCMonth()] + " " + date.getUTCDate();
+						var hours = date.getHours();
+						var minutes = date.getMinutes();
+						var ampm = hours >= 12 ? 'pm' : 'am';
+						hours = hours % 12;
+						hours = hours ? hours : 12;
+						minutes = minutes < 10 ? '0'+minutes : minutes;
 						html += '<li class="date"><span>'+msgDate+'</span></li>';
 						if(this.employerSeen){
 							html += '<li>';
@@ -740,6 +749,7 @@ define([
 							html += '</div>';
 							html += '<div class="message">';
 								html += '<div class="name">'+this.sender.firstname+" "+this.sender.lastname+'</div>';
+								html += '<div class="time">'+hours+":"+minutes+ampm+'</div>';
 								html += '<div class="text">'+this.chatMessageContent.text+'</div>';
 							html += '<div>';	
 						html += '</li>';

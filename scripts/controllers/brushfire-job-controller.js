@@ -38,8 +38,10 @@ define([
 							layout.body.show(view);
 						},
 						error : function(){
-							console.log("Error fetching job...");
-							window.location.href = "index.jsp";
+							var data = new Object();
+								data.status = "UNPOSTED";
+							var view = new ViewJob({model : data});
+							layout.body.show(view);
 						}
 					});
 				}

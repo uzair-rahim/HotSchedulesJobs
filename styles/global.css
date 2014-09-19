@@ -2202,9 +2202,8 @@ ul.chat-list li > .message{
 ul.chat-list li > .message > .name{
 	display: block;
 	float: left;
-	clear: both;
 	margin: 5px 0 0 0;
-	width: calc(100% - 10px);
+	width: calc(100% - 60px);
 	color: #636970;
 	font-weight: bold;
 	line-height: 24px;
@@ -2216,6 +2215,14 @@ ul.chat-list li > .message > .name{
 
 ul.chat-list li.new > .message > .name{
 	color: #2f3b4b;
+}
+
+ul.chat-list li > .message > .time{
+	display: block;
+	float: right;
+	clear: right;
+	color: #959aa2;
+	margin: 10px 10px 0 0;
 }
 
 ul.chat-list li > .message > .text{

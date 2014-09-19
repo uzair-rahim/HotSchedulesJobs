@@ -25,7 +25,8 @@ define([
 				"profileSettings"		: "profileSettings",
 				"logout"				: "logout",
 				"support"				: "support",
-				"selectEmployer"		: "selectEmployer"
+				"selectEmployer"		: "selectEmployer",
+				"sso?*qp"				: "sso"
 			}
 
 		});

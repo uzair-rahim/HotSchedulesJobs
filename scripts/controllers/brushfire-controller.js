@@ -129,6 +129,11 @@ define([
 				}
 			},
 
+			sso : function(qp){
+				var params = Utils.GetQueryParameters(qp);
+				console.log(params);
+			},
+
 			forgotPassword : function(){
 				this.setLayout();
 				this.setHeader("heading");

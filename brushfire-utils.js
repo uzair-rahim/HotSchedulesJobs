@@ -16,6 +16,18 @@ define([
 				return "../services" + url;
 			},
 
+			// Parse Query Parameters
+			GetQueryParameters : function(queryString){
+				var query = queryString;
+				var data = query.split("&");
+				var result = {};
+				for(var i=0; i<data.length; i++) {
+					var item = data[i].split("=");
+					result[item[0]] = item[1];
+				}
+				return result;
+			},
+
 			// Check user session
 			CheckSession : function(){
 				console.log("Checking user session...");

@@ -131,7 +131,23 @@ define([
 
 			sso : function(qp){
 				var params = Utils.GetQueryParameters(qp);
-				console.log(params);
+
+				if(!params){
+					App.router.navigate("logout", true);
+				}else{
+					var user = new Object();
+					user.guid = params.u;
+					user.firstname = params.fn;
+					user.lastname = params.ln;
+					user.email = params.email;
+					user.verified = true;
+					user.employerIds = params.e;
+					user.roles = ["employerAdmin", "user"];
+					
+					Utils.CreateUserSession(user);
+					App.router.navigate("jobs", true);
+				}
+
 			},
 
 			forgotPassword : function(){

@@ -18,6 +18,9 @@ define([
 
 			// Parse Query Parameters
 			GetQueryParameters : function(queryString){
+				if(typeof queryString == "undefined"){
+					return false;
+				}
 				var query = queryString;
 				var data = query.split("&");
 				var result = {};

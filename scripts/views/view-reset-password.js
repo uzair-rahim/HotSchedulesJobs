@@ -57,10 +57,11 @@ define([
 				var restURL = Utils.GetURL("/services/rest/public/resetPassword/");
 
 				$.ajax({
-					url : restURL+that.userGUID+"/"+confirm,
+					url : restURL+that.userGUID,
+					data: '{"password" : "' + confirm + '"}',
 					type : "PUT",
-					dataType: "text",
-					contentType: false,
+					dataType: "json",
+					contentType: "application/json",
 	    			processData: false,
 	    			success : function(response){
 	    				Utils.ShowToast({message : "Password successfully saved"});

@@ -15,8 +15,10 @@ define([
 		className : "content",
 		template: Template,
 		events : {
-			"click #full-message-list > li"	: "showFullChatMessage",
-			"click #send-new-full-reply"	: "sendReply"
+			"click #full-message-list > li"				: "showFullChatMessage",
+			"click #full-message-view .message-head"	: "showFullChatList",
+			"click #send-new-full-reply"				: "sendReply",
+			
 		},
 
 		initialize : function(){
@@ -63,6 +65,18 @@ define([
 					});
 		},
 
+		showFullChatList : function(event){
+			var windowWidth = $(window).width();
+				if(windowWidth <= 700){
+					var fullMessages = $("#full-message-view");
+						fullMessages.animate({scrollLeft : fullMessages.width() * (-1)}, 150);;
+					var sendReplyButton = $(document).find("#send-new-full-reply");
+						sendReplyButton.attr("data-guid", "");
+					var textField = $("#new-full-reply-text");
+						textField.val("");
+				}
+		},
+
 		appendChatView : function(data,chatGUID){
 			var template = '<div class="message-view-body">' + Utils.GetChatViewTemplate(data) + '</div><div class="message-view-foot"><input type="text" id="new-full-reply-text" placeholder="Message..."/><button class="primary" id="send-new-full-reply" disabled="true">Send</button></div>';
 			var candidateName = data.candidate.firstname + ' ' + data.candidate.lastname;
@@ -73,9 +87,12 @@ define([
 
 			var fullMessages = $("#full-message-view");
 				fullMessages.find(".message-info-container").html('<div class="candidate-name">'+candidateName+'</div><div class="candidate-work">'+candidateWork+'</div>');
-
 				fullMessages.find(".message-view-container").html(template);
 				fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
+			var windowWidth = $(window).width();
+				if(windowWidth <= 700){
+					fullMessages.animate({scrollLeft : fullMessages.width()}, 150);;
+				}	
 			var sendReplyButton = $(document).find("#send-new-full-reply");
 				sendReplyButton.attr("data-guid", chatGUID);
 		},

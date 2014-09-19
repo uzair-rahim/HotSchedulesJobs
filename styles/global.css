@@ -3484,6 +3484,21 @@ ul.chat-list li.date span{
 	clear: both;
 	width: 100%;
 	height: calc(100% - 34px);
+	overflow: hidden;
+}
+
+.message-container > .scrollable{
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	height: 100%;
+}
+
+@media screen and (max-width: 700px){
+	.message-container .scrollable{
+		width: 200%;
+	}
 }
 
 .message-container .message-head{
@@ -3537,6 +3552,33 @@ ul.chat-list li.date span{
 	font-size: 14px;
 }
 
+@media screen and (max-width: 700px){
+	.message-container .message-head .message-search-container{
+		display: block;
+		float: left;
+		width: 50%;
+		border-right: none;
+	}
+
+	.message-container .message-head .message-search-container #search-messages-text{
+		width: calc(100% - 40px);
+	}
+
+	.message-container .message-head .message-info-container{
+		width: 50%;
+		height: 34px;
+		background-image: url("../images/icon-back-arrow.png");
+		background-repeat: no-repeat;
+		background-position: 12px 12px;
+		background-size: 14px auto;
+	}
+
+	.message-container .message-head .message-info-container .candidate-name{
+		text-indent: 0;
+		margin: 0 0 0 40px;
+	}
+}
+
 .message-container .message-body{
 	display: block;
 	float: left;
@@ -3574,6 +3616,17 @@ ul.chat-list li.date span{
 	height: 100%;
 	background-color: #f8f8f8;
 	overflow: hidden;
+}
+
+@media screen and (max-width: 700px){
+	.message-container .message-body .message-list-container{
+		width: 50%;
+		border-right: none;
+	}
+
+	.message-container .message-body .message-view-container{
+		width: 50%;
+	}
 }
 
 .message-container .message-body .message-view-container > p{

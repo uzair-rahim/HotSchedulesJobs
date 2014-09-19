@@ -86,7 +86,7 @@ define([
 		quickMessages : function(){
 			var route = Backbone.history.fragment;
 			var windowWidth = $(window).width();
-			if(route == "messages" || windowWidth < 800){
+			if(route == "messages" || windowWidth <= 700){
 				this.route("messages");
 			}else{
 				if(Utils.IsQuickMessageVisible()){

@@ -141,7 +141,7 @@ define([
 					user.lastname = params.ln;
 					user.email = params.email;
 					user.verified = true;
-					user.employerIds = params.e;
+					user.employerIds = [params.e];
 					user.roles = ["employerAdmin", "user"];
 					
 					Utils.CreateUserSession(user);

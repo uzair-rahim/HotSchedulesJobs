@@ -70,6 +70,22 @@ define([
 				});
 			},
 
+			getConnections : function(userGUID, callback){
+				var that = this;
+				var guid = this.attributes.guid;
+				var url = this.urlRoot() + "/" + userGUID + "/users";
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching user connections");
+					}
+				});
+			},
+
 			getReceivedRequests : function(userGUID, callback){
 				var that = this;
 				var url = this.urlRoot() + "/receivedRequests/" + userGUID;
@@ -98,6 +114,24 @@ define([
 					error : function(){
 						console.log("Error fetching sent connections requests");
 						Utils.ShowToast({message : "Error fetching sent connections requests"});
+					}
+				});
+			},
+
+			acceptConnection : function(connection, callback){
+				var that = this;
+				var url = this.urlRoot() + "/accept";
+				$.ajax({
+					type : "PUT",
+					url : url,
+					data : JSON.stringify(connection),
+					contentType : "application/json",
+					async : false,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error accepting connections request");
 					}
 				});
 			}

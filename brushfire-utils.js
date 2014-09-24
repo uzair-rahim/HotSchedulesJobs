@@ -154,24 +154,36 @@ define([
 				return JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
 			},
 
+			GetUserConnection : function(userGUID){
+				var connections = this.GetUserConnectionsList();
+				var retval = null;
+				$.each(connections,function(){
+					if(userGUID == this.toUserGUID || userGUID == this.fromUserGUID){
+						retval = this;
+					}
+				});
+
+				return retval;
+			},
+
 			// Add to User Connections List
-			AddToUserConnectionsList : function(userGUID){
+			AddToUserConnectionsList : function(connection){
 				var connections = JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
 				var connectionsArray = new Array();
 				$.each(connections, function(){
 					connectionsArray.push(this);
 				});
-				connectionsArray.push(userGUID);
+				connectionsArray.push(connection);
 				localStorage.setItem("BrushfireUserConnectionsList", JSON.stringify(connectionsArray));
 			},
 
 			// Remove from User Connections List
-			RemoveFromUserConnectionsList : function(userGUID){				
+			RemoveFromUserConnectionsList : function(connection){				
 				var connections = JSON.parse(localStorage.getItem("BrushfireUserConnectionsList"));
 					localStorage.removeItem("BrushfireUserConnectionsList");
 				var connectionsArray = new Array();
 				$.each(connections, function(){
-					if(this != userGUID){
+					if(this.guid != connection.guid){
 						connectionsArray.push(this);
 					}
 				});

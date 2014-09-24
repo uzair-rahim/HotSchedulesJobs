@@ -94,16 +94,20 @@ define([
 				var candidate = $(this).find("li.view-profile");
 				$.each(candidate, function(){
 					var userGUID = $(this).attr("data-user");
-					if(that.isUserConnected(userGUID)){
-						var connectionIcon = $(this).find(".user-connect");
-						connectionIcon.addClass("user-disconnect");
-						connectionIcon.removeClass("user-connect");
-					}
-
 					if(userGUID == loggedUserGUID){
 						var connectionIcon = $(this).find(".user-connect");
-						connectionIcon.addClass("user-connect-self");
-						connectionIcon.removeClass("user-connect");
+						connectionIcon.addClass("self");
+					}else{
+						var connection = that.isUserConnected(userGUID);
+						if(connection !== null){
+							var connectionIcon = $(this).find(".user-connect");
+								if(connection.state == "connected" || connection.state == "sent"){
+									connectionIcon.addClass("user-disconnect");
+									connectionIcon.removeClass("user-connect");
+								}else{
+									connectionIcon.addClass(connection.state);
+								}
+						}
 					}
 				});
 			});
@@ -111,10 +115,10 @@ define([
 
 		isUserConnected : function(userGUID){
 			var connections = Utils.GetUserConnectionsList();
-			var retval = false;
+			var retval = null;
 			$.each(connections, function(){
-				if(this == userGUID){
-					retval = true;
+				if(userGUID == this.toUserGUID || userGUID == this.fromUserGUID){
+					retval = this;
 				}
 			});
 
@@ -887,34 +891,80 @@ define([
 		},
 
 		createConnection : function(event){
-			var connection = new Object();
-				connection.fromUserGuid = Utils.GetUserSession().guid;
-				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
-
-			var icons = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .user-connect");	
-
+			var icon = $(event.target);
+			var isSelf = icon.hasClass("self");
+			var isReceivedRequest = icon.hasClass("received");
 			var network = new ModelNetwork();
+
+			if(isSelf){
+				event.stopPropagation();
+				return;
+			}
+			
+			if(isReceivedRequest){
+				var userGUID = icon.closest("li.view-profile").attr("data-user");
+				var connection = Utils.GetUserConnection(userGUID);
+				var acceptThisConnection = new Object();
+					acceptThisConnection.guid = connection.guid;
+					acceptThisConnection.toUserGuid = connection.toUserGUID;
+					acceptThisConnection.fromUserGuid = connection.fromUserGUID;
+
+				var icons = $("li.view-profile[data-user='"+connection.fromUserGUID+"'] .user-connect");
+
+				network.acceptConnection(acceptThisConnection, function(data){
+					icons.addClass("user-disconnect");
+					icons.removeClass("user-connect");
+					icons.removeClass("received");
+
+					var newConnection = new Object();
+						newConnection.guid = data.guid;
+						newConnection.fromUserGUID = data.fromUserGuid;
+						newConnection.toUserGUID = data.toUserGuid;
+						newConnection.state = "connected";
+					Utils.RemoveFromUserConnectionsList(connection);
+					Utils.AddToUserConnectionsList(newConnection);
+				});
+
+			}else{
+				var connection = new Object();
+					connection.fromUserGuid = Utils.GetUserSession().guid;
+					connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
+
+				var icons = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .user-connect");			
+
 				network.createConnection(connection, function(data){
 					icons.addClass("user-disconnect");
 					icons.removeClass("user-connect");
-					Utils.AddToUserConnectionsList(connection.toUserGuid);
-				});
+
+					var newConnection = new Object();
+						newConnection.guid = data.guid;
+						newConnection.fromUserGUID = data.fromUserGuid;
+						newConnection.toUserGUID = data.toUserGuid;
+						newConnection.state = "sent";
+					Utils.AddToUserConnectionsList(newConnection);
+				});	
+			}
 
 			event.stopPropagation();
 		},
 
 		deleteConnection : function(event){
-			var connection = new Object();
-				connection.fromUserGuid = Utils.GetUserSession().guid;
-				connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
+			var icon = $(event.target);
+			var userGUID = icon.closest("li.view-profile").attr("data-user");
+			var connection = Utils.GetUserConnection(userGUID);
 
-			var icons = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .user-disconnect");		
+			
+			var deleteThisConnection = new Object();
+				deleteThisConnection.fromUserGuid = connection.fromUserGUID;
+				deleteThisConnection.toUserGuid = connection.toUserGUID;
+
+			var icons = $("li.view-profile[data-user='"+userGUID+"'] .user-disconnect");
 			
 			var network = new ModelNetwork();
-				network.deleteConnection(connection, function(data){
+				network.deleteConnection(deleteThisConnection, function(data){
 					icons.addClass("user-connect");
 					icons.removeClass("user-disconnect");
-					Utils.RemoveFromUserConnectionsList(connection.toUserGuid);
+					Utils.RemoveFromUserConnectionsList(connection);
 				});
 
 			event.stopPropagation();

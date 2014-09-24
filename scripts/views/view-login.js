@@ -74,25 +74,40 @@ define([
 
 						var support = Utils.IsSupportUser(user.roles);	
 
-							var userModel = new ModelUser({guid : user.guid});
-							userModel.getNetworkUsers(function(data){
+							var networkModel = new ModelNetwork();
+							networkModel.getConnections(user.guid, function(data){
 								var connections = [];
 
 								$.each(data, function(){
-									connections.push(this.guid);
+									var connection = new Object();
+										connection.guid = this.guid;
+										connection.fromUserGUID = this.fromUserGuid;
+										connection.toUserGUID = this.toUserGuid;
+										connection.state = "connected";
+									connections.push(connection);
 								});
 
-								var networkModel = new ModelNetwork();
+								
 									networkModel.getReceivedRequests(user.guid, function(data){
 
 										$.each(data, function(){
-											connections.push(this.fromUserGuid);
+											var connection = new Object();
+												connection.guid = this.guid;
+												connection.fromUserGUID = this.fromUserGuid;
+												connection.toUserGUID = this.toUserGuid;
+												connection.state = "received";
+											connections.push(connection);
 										});
 
 										networkModel.getSentRequests(user.guid, function(data){
-											
+
 											$.each(data, function(){
-												connections.push(this.toUserGuid);
+												var connection = new Object();
+													connection.guid = this.guid;
+													connection.fromUserGUID = this.fromUserGuid;
+													connection.toUserGUID = this.toUserGuid;
+													connection.state = "sent";
+												connections.push(connection);
 											});
 
 											Utils.SetUserConnectionsList(connections);

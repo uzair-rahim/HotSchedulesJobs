@@ -41,9 +41,9 @@
 	<div id="job-footer">
 		<div id="hsp-logo"></div>
 		<div id="footer-links">
-			<a href="#">Learn More</a>
+			<a href="http://www.hotschedulespost.com" target="_blank">Learn More</a>
 			<a>|</a>
-			<a href="#">Other Great Products</a>
+			<a  href="http://www.redbookconnect.com" target="_blank">Other Great Products</a>
 			<a>&copy; 1999 - 2014 Red Book Connect LLC. All rights reserved.</a>	
 		</div>
 	</div>

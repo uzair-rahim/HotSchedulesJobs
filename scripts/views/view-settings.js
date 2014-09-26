@@ -1,12 +1,13 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-settings"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template){
 	"use strict";
 
 	var ViewSettings = Marionette.ItemView.extend({
@@ -20,6 +21,11 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Settings view initialized...");
+		},
+
+		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/settings');
 		},
 
 		saveSettings : function(){

@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -8,7 +9,7 @@ define([
 		"scripts/models/model-user",
 		"scripts/models/model-network"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork){
 	"use strict";
 
 	var ViewNetwork = Marionette.ItemView.extend({
@@ -54,6 +55,8 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/network');
 
 			var jobs = this.model.jobsinfo;
 

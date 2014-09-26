@@ -31,6 +31,8 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/view-login');
 
 			if(typeof Utils.GetRememberedEmail() !== "undefined"){
 				$("#remember-me-check").prop("checked", true);
@@ -41,9 +43,6 @@ define([
 					$("#login").click();
 				}
 			});
-			
-			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
-      		ga('send', 'pageview');
 		},
 
 		login : function(){

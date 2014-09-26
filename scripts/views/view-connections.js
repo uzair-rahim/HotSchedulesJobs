@@ -1,13 +1,14 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-connections",
 		"scripts/models/model-user"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser){
 	"use strict";
 
 	var ViewConnections = Marionette.ItemView.extend({
@@ -28,6 +29,8 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/connections');
 			$("#filter").hide();
 		},
 

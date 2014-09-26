@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -8,7 +9,7 @@ define([
 		"scripts/collections/collection-support-search",
 		"scripts/models/model-delete-admin"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, CollectionSupportSearch, DeleteAdmin){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, CollectionSupportSearch, DeleteAdmin){
 	"use strict";
 
 	var ViewSupport = Marionette.ItemView.extend({
@@ -41,6 +42,9 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/support');
+
 			$("#search-field").keyup(function(event){
 				if(event.keyCode == 13){
 					$("#search-button").click();

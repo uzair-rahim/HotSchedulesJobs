@@ -1,13 +1,14 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-job",
 		"async!https://maps.googleapis.com/maps/api/js?key=AIzaSyA6cyoae_8rRsygZxbPIiuNp220ipankW0&sensor=false"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, Async){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, Async){
 	"use strict";
 
 	var ViewJob = Marionette.ItemView.extend({
@@ -25,6 +26,8 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/job');
 
 			if(this.model.status == "POSTED"){
 				var mapLatLng = new google.maps.LatLng(this.model.employer.location.latitude,this.model.employer.location.longitude)

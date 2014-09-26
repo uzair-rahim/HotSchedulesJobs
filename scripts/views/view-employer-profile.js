@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -10,7 +11,7 @@ define([
 		"scripts/models/model-delete-admin",
 		"scripts/models/model-employer-logo"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, EmployerProfile, NewAdmin, DeleteAdmin, EmployerLogo){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, EmployerProfile, NewAdmin, DeleteAdmin, EmployerLogo){
 	"use strict";
 
 	var ViewEmployerProfile = Marionette.ItemView.extend({
@@ -38,6 +39,11 @@ define([
 			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
 
 			$(document.body).delegate("#save-logo", "click", this.startLogoUpload);
+		},
+
+		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/employer-profile');
 		},
 
 		uploadLogo : function(){

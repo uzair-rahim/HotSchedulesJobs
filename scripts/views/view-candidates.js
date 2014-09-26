@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -11,7 +12,7 @@ define([
 		"scripts/models/model-referral",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelCandidate, ModelReferral, CollectionConnections){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelCandidate, ModelReferral, CollectionConnections){
 	"use strict";
 
 	var ViewCandidates = Marionette.ItemView.extend({
@@ -45,6 +46,10 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/candidates');
+
+
 			if(this.options.mode === "child"){
 				$("#filter").hide();
 				this.numberOfJobs = 1;

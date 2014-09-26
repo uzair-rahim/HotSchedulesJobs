@@ -1,12 +1,13 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-forgot-password"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template){
 	"use strict";
 
 	var ViewForgotPassword = Marionette.ItemView.extend({
@@ -25,6 +26,9 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/forgot-password');
+      		
 			$("#emailaddress").keyup(function(event){
 				if(event.keyCode == 13){
 					$("#submit").click();

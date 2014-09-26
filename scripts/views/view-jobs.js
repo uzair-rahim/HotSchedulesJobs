@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -12,7 +13,7 @@ define([
 		"scripts/models/model-referral",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, CollectionConnections){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, CollectionConnections){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -80,6 +81,9 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/jobs');
+
 			$("#new-bonus, .bonus").keyup(function(){
     			var value = $(this).val();
     			value = value.replace(/[^0-9]+/g, '');

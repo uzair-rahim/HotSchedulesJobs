@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"vldt",
@@ -8,7 +9,7 @@ define([
 		"hbs!templates/template-view-signup",
 		"scripts/models/model-signup"
 	],
-	function($, Cookie, App, Utils, Vldt, Marionette, Template, ModelSignUp){
+	function($, Cookie, Analytics, App, Utils, Vldt, Marionette, Template, ModelSignUp){
 	"use strict";
 
 	var ViewSignup = Marionette.ItemView.extend({
@@ -25,6 +26,11 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Signup view initialized...");
+		},
+
+		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/signup');
 		},
 
 		signup : function(){

@@ -1,6 +1,7 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -8,7 +9,7 @@ define([
 		"scripts/collections/collection-businesses",
 		"scripts/models/model-business"
 	],
-	function($, Cookie, App, Utils, Marionette, Template, CollectionBusinesses, ModelBusiness){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, CollectionBusinesses, ModelBusiness){
 	"use strict";
 
 	var ViewFindBusiness = Marionette.ItemView.extend({
@@ -33,6 +34,11 @@ define([
 
 		onRender : function(){
 			$(document).find(".rbc-logo").remove();
+		},
+
+		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/find-business');
 		},
 
 		alertPrimaryAction : function(){

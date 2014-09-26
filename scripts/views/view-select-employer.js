@@ -1,11 +1,12 @@
 define([
 		"jquery",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-select-employer"
 	],
-	function($, App, Utils, Marionette, Template){
+	function($, Analytics, App, Utils, Marionette, Template){
 	"use strict";
 
 	var SelectEmployer = Marionette.ItemView.extend({
@@ -22,6 +23,9 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/select-employer');
+
 			var employers = Utils.GetAdminEmployers();
 			var alert = $(document).find("#app-alert-select-employer");
 

@@ -1,13 +1,14 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"scripts/models/model-chat",
 		"hbs!templates/template-view-messages"
 	],
-	function($, Cookie, App, Utils, Marionette, ModelChat, Template){
+	function($, Cookie, Analytics, App, Utils, Marionette, ModelChat, Template){
 	"use strict";
 
 	var ViewMessages = Marionette.ItemView.extend({
@@ -27,6 +28,9 @@ define([
 		},
 
 		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/messages');
+
 			$(document).undelegate("#new-full-reply-text", "keyup");
 			$(document).delegate("#new-full-reply-text", "keyup", function(event){
 				var maxlength = 1000;						

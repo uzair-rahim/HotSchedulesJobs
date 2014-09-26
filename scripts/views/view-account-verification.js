@@ -1,12 +1,13 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-account-verification"
 	],
-	function($, Cookie, App, Utils, Marionette, Template){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template){
 	"use strict";
 
 	var ViewAccountVerification = Marionette.ItemView.extend({
@@ -22,6 +23,11 @@ define([
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Account Verification view initialized...");
+		},
+
+		onShow : function(){
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview', '/account-verification');
 		},
 
 		continueFind : function(){

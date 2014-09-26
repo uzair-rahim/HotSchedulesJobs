@@ -12,6 +12,7 @@ require.config({
 		backbone		: "libraries/thirdparty/backbone",
 		wreqr			: "libraries/thirdparty/backbone.wreqr",
 		marionette		: "libraries/thirdparty/backbone.marionette",
+		analytics		: "libraries/thirdparty/analytics",
 		hbs 			: "libraries/thirdparty/hbs",
         Handlebars		: "libraries/thirdparty/hbs/handlebars",
 		i18nprecompile 	: "libraries/thirdparty/hbs/i18nprecompile",
@@ -56,6 +57,10 @@ require.config({
 		marionette:{
 			deps:["backbone", "wreqr"],
 			exports: "Marionette"
+		},
+
+		analytics : {
+			exports : "ga"
 		},
 
 		Handlebars:{

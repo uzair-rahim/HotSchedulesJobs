@@ -2,6 +2,7 @@ define([
 		"jquery",
 		"jqueryui",
 		"jquerycookie",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
@@ -10,7 +11,7 @@ define([
 		"scripts/models/model-user",
 		"scripts/models/model-network"
 	],
-	function($, jqueryUI, Cookie, App, Utils, Marionette, Template, ModelAuthenticate, ModelUser, ModelNetwork){
+	function($, jqueryUI, Cookie, Analytics, App, Utils, Marionette, Template, ModelAuthenticate, ModelUser, ModelNetwork){
 	"use strict";
 
 	var ViewLogin = Marionette.ItemView.extend({
@@ -40,6 +41,9 @@ define([
 					$("#login").click();
 				}
 			});
+			
+			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
+      		ga('send', 'pageview');
 		},
 
 		login : function(){

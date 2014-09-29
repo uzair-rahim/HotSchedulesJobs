@@ -61,6 +61,9 @@
 								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 							</div>
+							<div class="candidate-status">
+								<button>Candidate</button>
+							</div>
 							<div class="candidate-archive"></div>
 							<div class="candidate-chat"></div>
 							<div class="user-connect"></div>

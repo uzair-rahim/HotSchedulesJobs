@@ -165,7 +165,7 @@ ul.grid-list > li .candidates-info{
 	border-right: 1px dotted #bbbbbb;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 590px){
 	ul.grid-list > li .candidates-info{
 		display: none;
 	}
@@ -298,7 +298,7 @@ ul.grid-list > li .candidate-select{
 	margin: 18px 5px 0 10px;
 }
 
-@media screen and (max-width: 510px){
+@media screen and (max-width: 600px){
 	ul.grid-list > li .candidate-select{
 		display: none;
 	}
@@ -369,7 +369,7 @@ ul.grid-list > li .candidate-info .candidate-job{
 	text-transform: capitalize;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 890px){
 	ul.grid-list > li .candidate-info{
 		border-right: none;
 		width: 155px;
@@ -381,6 +381,23 @@ ul.grid-list > li .candidate-info .candidate-job{
 		width: 155px;
 	}
 }
+
+ul.grid-list > li .candidate-status{
+	display: block;
+	float: right;
+	margin: 10px 5px;
+}
+
+ul.grid-list > li .candidate-status button{
+	width: 89px;	
+}
+
+@media screen and (max-width: 420px){
+	ul.grid-list > li .candidate-status{
+		display: none;
+	}
+}
+
 
 ul.grid-list > li .candidate-referral{
 	display: block;
@@ -404,7 +421,7 @@ ul.grid-list > li .candidate-referral:hover{
 	background-image: url("../images/icon-referral-hover.png");
 }
 
-@media screen and (max-width: 615px){
+@media screen and (max-width: 705px){
 	ul.grid-list > li .candidate-referral{
 		display: none;
 	}
@@ -508,7 +525,7 @@ ul.grid-list > li .candidate-endorse:hover{
 	color: #007bff;
 }
 
-@media screen and (max-width: 490px){
+@media screen and (max-width: 580px){
 	ul.grid-list > li .candidate-endorse{
 		display: none;
 	}
@@ -553,7 +570,7 @@ ul.grid-list > li .candidate-network.has-connections span{
 	color: #2d3c4b;
 }
 
-@media screen and (max-width: 540px){
+@media screen and (max-width: 630px){
 	ul.grid-list > li .candidate-network{
 		display: none;
 	}
@@ -670,7 +687,7 @@ ul.grid-list > li .user-connect.received:hover{
 }
 
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 490px){
 	ul.grid-list > li .user-connect,
 	ul.grid-list > li .user-disconnect,
 	ul.grid-list > li .user-connect.self,

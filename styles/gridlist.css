@@ -386,12 +386,12 @@ ul.grid-list > li .candidate-referral{
 	display: block;
 	float: right;
 	margin: 5px 5px 0 0;
-	width: 45px;
+	width: 60px;
 	height: 40px;
 	line-height: 42px;
 	color: #969ba2;
 	font-size: 12px;
-	text-indent: 50px;
+	text-indent: 48px;
 	background-image: url("../images/icon-referral.png");
 	background-repeat: no-repeat;
 	background-position: 0 8px;
@@ -400,100 +400,16 @@ ul.grid-list > li .candidate-referral{
 }
 
 ul.grid-list > li .candidate-referral:hover{
+	color: #007bff;
 	background-image: url("../images/icon-referral-hover.png");
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 615px){
 	ul.grid-list > li .candidate-referral{
 		display: none;
 	}
 }
 
-/*ul.grid-list > li .candidate-referral{
-	display: block;
-	float: left;
-	margin: 5px 0;
-	width: 270px;
-	height: 40px;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-ul.grid-list > li .candidate-referral .date{
-	display: block;
-	float: left;
-	max-width: 80px;
-	height: 40px;
-	line-height: 40px;
-	color: #2d3c4b;
-	font-size: 12px;
-	text-indent: 10px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-ul.grid-list > li .candidate-referral .date.new{
-	font-weight: bold;
-}
-
-ul.grid-list > li .candidate-referral .referred-by{
-	display: block;
-	float: left;
-	width: 190px;
-	height: 40px;
-	line-height: 40px;
-	color: #2d3c4b;
-	font-size: 12px;
-	text-indent: 10px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-ul.grid-list > li .candidate-referral .referred-by .picture{
-	display: block;
-	float: left;
-	width: 20px;
-	height: 20px;
-	line-height: 20px;
-	text-indent: 0;
-	margin: 8px 0 0 4px;
-	border-radius: 10px;
-	background-color: #fafbfc;
-	border: 1px solid #e5e5e5;
-	background-image: url("../images/default-avatar.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 20px auto;
-	overflow: hidden;
-}
-
-ul.grid-list > li .candidate-referral .referred-by .picture img{
-	width: 20px;
-	height: 20px;
-}
-
-ul.grid-list > li .candidate-referral .referred-by .name{
-	display: block;
-	float: left;
-	width: 160px;
-	height: 40px;
-	line-height: 40px;
-	color: #2d3c4b;
-	font-size: 12px;
-	text-indent: 10px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	cursor: pointer;
-}
-
-@media screen and (max-width: 960px){
-	ul.grid-list > li .candidate-referral{
-		display: none;
-	}
-}*/
 
 ul.grid-list > li .candidate-message{
 	display: block;
@@ -571,7 +487,7 @@ ul.grid-list > li .candidate-endorse{
 	display: block;
 	float: right;
 	margin: 5px 0;
-	width: 40px;
+	width: 50px;
 	height: 40px;
 	line-height: 42px;
 	color: #969ba2;
@@ -589,9 +505,10 @@ ul.grid-list > li .candidate-endorse{
 
 ul.grid-list > li .candidate-endorse:hover{
 	background-image: url("../images/icon-endorsements-hover.png");
+	color: #007bff;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 490px){
 	ul.grid-list > li .candidate-endorse{
 		display: none;
 	}
@@ -755,7 +672,9 @@ ul.grid-list > li .user-connect.received:hover{
 
 @media screen and (max-width: 400px){
 	ul.grid-list > li .user-connect,
-	ul.grid-list > li .user-disconnect{
+	ul.grid-list > li .user-disconnect,
+	ul.grid-list > li .user-connect.self,
+	ul.grid-list > li .user-connect.received{
 		display: none;
 	}
 }

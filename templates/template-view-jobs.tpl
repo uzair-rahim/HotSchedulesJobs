@@ -136,9 +136,9 @@
 								<div class="candidate-chat"></div>
 								<div class="user-connect"></div>
 								<!--<div class="candidate-rating"></div>-->
-								<div class="candidate-endorse"></div>
+								<div class="candidate-endorse">{{user.endorsementCount}}</div>
 								<div class="candidate-network sync"></div>
-								<div class="candidate-referral"></div>
+								<div class="candidate-referral">{{referralCount}}</div>
 								<div class="hourly-profile">
 									<div class="about-section">
 										<label>About</label>

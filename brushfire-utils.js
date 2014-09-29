@@ -750,8 +750,7 @@ define([
 
 			GetChatViewTemplate : function(data){
 				var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-				var html = '<div class="job-info"><span>For:</span> '+data.jobPosting.jobName+'</div>';
-				 	html += '<ul class="chat-list">';
+				var html = '<ul class="chat-list">';
 					$.each(data.messages,function(){
 						var date = new Date(this.created);
 						var msgDate = months[date.getUTCMonth()] + " " + date.getUTCDate();

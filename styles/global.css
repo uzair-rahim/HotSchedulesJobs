@@ -383,26 +383,21 @@ input[type="password"]::selection{
 
 
 .form-container{
-	position: absolute;
 	display: block;
-	float: left;
 	width: 320px;
-	top: 0;
-	left: 50%;
-	margin: 110px 0 0 -160px;
+	margin: 110px auto 0 auto;
 	overflow: hidden;
 }
 
 .form-container.wide{
 	width: 600px;
-	margin: 110px 0 0 -300px;
 }
 
 @media screen and (max-width: 640px){
 	.form-container,
 	.form-container.wide{
 		width: 300px;
-		margin: 30px 0 0 -150px;
+		margin: 30px auto 0 auto;
 	}
 }
 

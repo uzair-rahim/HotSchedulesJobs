@@ -21,6 +21,21 @@ define([
 
 			urlRoot : function(){
 				return Utils.GetURL("/services/rest/employer");
+			},
+
+			getInterestedUsersCount : function(employerGUID,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + employerGUID + "/interestedUsers/count";
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching interested users count");
+					}
+				});
 			}
 
 		});

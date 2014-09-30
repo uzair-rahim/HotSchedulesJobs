@@ -11,9 +11,10 @@ define([
 		"scripts/models/model-job",
 		"scripts/models/model-candidate",
 		"scripts/models/model-referral",
+		"scripts/models/model-employer",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, CollectionConnections){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, ModelEmployer, CollectionConnections){
 	"use strict";
 
 	var ViewJobs = Marionette.ItemView.extend({
@@ -115,6 +116,19 @@ define([
 					}
 				});
 			});
+
+			// Show intersted user count if there are no jobs for the employer
+			var jobs = this.model.job;
+			if(jobs.length === 0){
+				var index = Utils.GetSelectedEmployer();
+				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var employer = new ModelEmployer();
+					employer.getInterestedUsersCount(employerGUID,function(data){
+						if(data.length !== 0){
+							
+						}
+					});
+			}
 		},
 
 		isUserConnected : function(userGUID){

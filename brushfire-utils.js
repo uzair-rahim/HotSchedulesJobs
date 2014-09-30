@@ -327,6 +327,7 @@ define([
 
 			HideAlert : function(){
 				$(document).find("#app-alert").removeClass("show");
+				$(document).find("#app-alert .alert-action #primary-action").attr("class", " ");
 				$(document).find("#app-alert .alert-action").removeClass("single");
 				$(document).find("#app-modal").removeClass("show");
 			},

@@ -8,17 +8,19 @@ define([
 		"hbs!templates/template-view-candidates",
 		"scripts/models/model-user",
 		"scripts/models/model-network",
+		"scripts/models/model-job",
 		"scripts/models/model-candidate",
 		"scripts/models/model-referral",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelCandidate, ModelReferral, CollectionConnections){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, CollectionConnections){
 	"use strict";
 
 	var ViewCandidates = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
 		template: Template,
+		candidateGUID : null,
 		numberOfCalls : 0,
 		events : {
 			"click #breadcrumb li" 			: "back",
@@ -37,12 +39,33 @@ define([
 			"click .candidate-network"		: "candidateNetwork",
 			"click .candidate-endorse"		: "candidateEndorsements",
 			"click .user-connect"			: "createConnection",
-			"click .user-disconnect"		: "deleteConnection"
+			"click .user-disconnect"		: "deleteConnection",
+			"click .candidate-status"		: "confirmCandidateStatusChange"
 		},
 
 		initialize : function(){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Candidates view initialized...");
+			this.listenTo(App, "alertPrimaryAction", this.alertPrimaryAction);
+			this.listenTo(App, "alertSecondaryAction", this.alertSecondaryAction);
+		},
+
+		alertPrimaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "hire":
+					this.updateCandidateStatus();
+				break;
+			}
+		},
+
+		alertSecondaryAction : function(){
+			var listener = $("#app-alert").attr("data-listener");
+			switch(listener){
+				case "hire":
+					Utils.HideAlert();
+				break;
+			}
 		},
 
 		onShow : function(){
@@ -552,6 +575,48 @@ define([
 				});
 
 			event.stopPropagation();
+		},
+
+		confirmCandidateStatusChange : function(event){
+			var item = $(event.target);
+			var isHired = item.hasClass("create");
+			var messageText = "Are you sure you want to hire this candidate?";
+			var buttonType = "primary";
+			if(isHired){
+				messageText = "This candidate will no longer be marked has hired";
+				buttonType = "destroy";
+			}
+
+			var candidate = $(item).closest("li.view-profile").data("guid");
+				this.candidateGUID = candidate;
+			Utils.ShowAlert({listener : "hire", primary : true, primaryType : buttonType, primaryText : "Confirm", title : "Hire Candidate", message : messageText });
+			event.stopPropagation();
+		},
+
+		updateCandidateStatus : function(){
+			var candidateStatusButton = $('li.view-profile[data-guid="'+this.candidateGUID+'"]').find(".candidate-status button");
+			var candidateStatus = candidateStatusButton.hasClass("create");
+			var candidateGUID = this.candidateGUID;
+			var status = "";
+
+			var candidateObject = new Object();
+				candidateObject.hired = !candidateStatus;
+
+			var job = new ModelJob();
+				job.updateCandidateHired(candidateGUID,candidateObject,function(data){
+					if(candidateStatus){
+						candidateStatusButton.text("Candidate");
+						candidateStatusButton.removeClass("create");
+						status = "candidate";
+					}else{
+						candidateStatusButton.text("Hired");
+						candidateStatusButton.addClass("create");
+						status = "hired";
+					}
+					Utils.HideAlert();
+				});
+
+			ga("send", "event", "button", "click", status);
 		},
 
 		serializeData : function(){

@@ -21,6 +21,7 @@ define([
 		tagName : "div",
 		className : "content",
 		jobGUID : null,
+		candidateGUID : null,
 		numberOfCalls : 0,
 		template: Template,
 		events : {
@@ -53,7 +54,8 @@ define([
 			"click .candidate-archive"		: "candidateArchive",
 			"click .candidate-network"		: "candidateNetwork",
 			"click .user-connect"			: "createConnection",
-			"click .user-disconnect"		: "deleteConnection"
+			"click .user-disconnect"		: "deleteConnection",
+			"click .candidate-status"		: "confirmCandidateStatusChange"
 		},
 
 		initialize : function(){
@@ -69,6 +71,9 @@ define([
 				case "delete":
 					this.completeDeleteJob();
 				break;
+				case "hire":
+					this.updateCandidateStatus();
+				break;
 			}
 		},
 
@@ -77,6 +82,9 @@ define([
 			switch(listener){
 				case "delete":
 					this.cancelDeleteJob();
+				break;
+				case "hire":
+					Utils.HideAlert();
 				break;
 			}
 		},
@@ -986,6 +994,48 @@ define([
 				});
 
 			event.stopPropagation();
+		},
+
+		confirmCandidateStatusChange : function(event){
+			var item = $(event.target);
+			var isHired = item.hasClass("create");
+			var messageText = "Are you sure you want to hire this candidate?";
+			var buttonType = "primary";
+			if(isHired){
+				messageText = "This candidate will no longer be marked has hired";
+				buttonType = "destroy";
+			}
+
+			var candidate = $(item).closest("li.view-profile").data("guid");
+				this.candidateGUID = candidate;
+			Utils.ShowAlert({listener : "hire", primary : true, primaryType : buttonType, primaryText : "Confirm", title : "Hire Candidate", message : messageText });
+			event.stopPropagation();
+		},
+
+		updateCandidateStatus : function(){
+			var candidateStatusButton = $('li.view-profile[data-guid="'+this.candidateGUID+'"]').find(".candidate-status button");
+			var candidateStatus = candidateStatusButton.hasClass("create");
+			var candidateGUID = this.candidateGUID;
+			var status = "";
+
+			var candidateObject = new Object();
+				candidateObject.hired = !candidateStatus;
+
+			var job = new ModelJob();
+				job.updateCandidateHired(candidateGUID,candidateObject,function(data){
+					if(candidateStatus){
+						candidateStatusButton.text("Candidate");
+						candidateStatusButton.removeClass("create");
+						status = "candidate";
+					}else{
+						candidateStatusButton.text("Hired");
+						candidateStatusButton.addClass("create");
+						status = "hired";
+					}
+					Utils.HideAlert();
+				});
+
+			ga("send", "event", "button", "click", status);
 		},
 
 		serializeData : function(){

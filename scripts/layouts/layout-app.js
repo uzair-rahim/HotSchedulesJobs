@@ -353,7 +353,7 @@ define([
 
 			sendMessage : function(event){
 				var email = $(event.target).attr("data-email");
-				window.location.href = "mailto:"+email;
+				window.open("mailto:"+email);
 			},
 
 			sendNewMessage : function(){

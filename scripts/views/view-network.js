@@ -191,7 +191,7 @@ define([
 
 		networkMessage : function(event){
 			var email = $(event.target).closest("li.view-profile").data("email");
-			window.location.href = "mailto:"+email;
+			window.open("mailto:"+email);
 			event.stopPropagation();
 		},
 
@@ -205,7 +205,7 @@ define([
 			});
 
 			var emails = addresses.join(",");
-			window.location.href = "mailto:"+manager+"?bcc="+emails;
+			window.open("mailto:"+manager+"?bcc="+emails);
 
 			this.disableToolbarButtons();
 		},

@@ -198,8 +198,8 @@
 		<p>Simply download the HotSchedules Post FREE app, sign-up and go.</p>
 		<div id="google-play" class="google-hspost-help"></div><div id="app-store" class="ios-hspost-help"></div>
 		<h6>Have more questions?</h6>
-		<p>We're happy to help. Email us at <a href="mailto:customercare@redbookconnect.com" id="customercare" tabIndex="-1">customercare@redbookconnect.com</a></p>
+		<p>We're happy to help. Email us at <a href="mailto:customercare@redbookconnect.com" id="customercare" tabIndex="-1" target="_blank">customercare@redbookconnect.com</a></p>
 		<p>Or call us at <a href="tel:+1-877-720-8578" id="phone" tabIndex="-1">877-720-8578</a></p>
-		<p>For additional information go to the <a href="https://hotschedulespost-redbookconnect.rightanswers.com/portal/public/" id="supportSite" tabIndex="-1">HotSchedules Support Site</a>.</p>
+		<p>For additional information go to the <a href="https://hotschedulespost-redbookconnect.rightanswers.com/portal/public/" id="supportSite" tabIndex="-1" target="_blank">HotSchedules Support Site</a>.</p>
 	</div>
 </div>

@@ -25,7 +25,7 @@ define([
 
 			getInterestedUsersCount : function(employerGUID,callback){
 				var that = this;
-				var url = this.urlRoot() + "/" + employerGUID + "/interestedUsers/count";
+				var url = this.urlRoot() + "/" + employerGUID + "/interestedUsersWithJobTypes/count";
 				$.ajax({
 					type : "GET",
 					url : url,

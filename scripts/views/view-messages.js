@@ -38,7 +38,8 @@ define([
 	            	$(this).val($(this).val().substring(0, maxlength));
 	        	}
 	        	var sendReplyButton = $(document).find("#send-new-full-reply");
-	        	if($(this).val().length > 0){
+	        	var replyText = $.trim($(this).val());
+	        	if(replyText.length > 0){
 	        		sendReplyButton.prop("disabled", false);
 	        	}else{
 	        		sendReplyButton.prop("disabled", true);

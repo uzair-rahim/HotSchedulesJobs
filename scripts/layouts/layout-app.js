@@ -47,7 +47,9 @@ define([
 				"click #see-all-messages"				: "seeAllMessages",
 				"click #quick-message-list > li"		: "showQuickChatMessage",
 				"click #quick-message-view #back"		: "showQuickChatList",
-				"click #send-new-reply"					: "sendReply"
+				"click #send-new-reply"					: "sendReply",
+				"click #create-new-job"					: "createNewJob",
+				"click #dismiss-new-job-request"		: "dismissNewJob"
 			},
 
 			initialize : function(){
@@ -119,7 +121,8 @@ define([
 	            			$(this).val($(this).val().substring(0, maxlength));
 	        			}
 	        			var sendReplyButton = $(document).find("#send-new-reply");
-	        			if($(this).val().length > 0){
+	        			var replyText = $.trim($(this).val());
+	        			if(replyText.length > 0){
 	        				sendReplyButton.prop("disabled", false);
 	        			}else{
 	        				sendReplyButton.prop("disabled", true);
@@ -131,6 +134,7 @@ define([
 							}
 						});
 				});
+
 			},
 
 			detectDevice : function(){
@@ -358,7 +362,7 @@ define([
 
 			sendNewMessage : function(){
 				var recipients = Utils.GetNewMessageRecipients();
-				var message = $("#new-message-text").val();
+				var message = $.trim($("#new-message-text").val());
 				if(recipients.length === 0){
 					Utils.ShowToast({type : "error", message : "Must select at least one recipient"});
 				}else if(message === ""){
@@ -498,6 +502,18 @@ define([
 				quickMessages.find(".chat .dialog-body .chat-list > li").removeClass("new");
 				quickMessages.find(".chat .dialog-body .chat-list").append(template);
 				quickMessages.find(".chat .dialog-body").scrollTop(quickMessages.find(".chat .dialog-body").prop("scrollHeight"));
+			},
+
+			createNewJob : function(){
+				var addNewJobButton = $(document).find("#add-new-job");
+					addNewJobButton.click();
+					this.dismissNewJob();
+			},
+
+			dismissNewJob : function(){
+				var alertDialog = $(document).find("#app-alert-new-job-request");
+					alertDialog.removeClass("show");
+				$(document).find(".view-modal").remove();
 			},
 
 			serializeData : function(){

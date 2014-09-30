@@ -804,6 +804,21 @@ define([
 						html += '<div>';	
 					html += '</li>';
 				return html;
+			},
+
+			ShowNewJobRequestDialog : function(data){
+				var app = $(document).find(".app");
+				var alertDialog = $(document).find("#app-alert-new-job-request");
+				var template = "";
+
+				$.each(data, function(){
+					template += '<div class="requested-job"><strong>' + this.count + ' ' + this.type + '</strong> want to work for you.</div>'
+				});
+
+				alertDialog.find(".alert-body").html(template);
+				alertDialog.addClass("show");
+				app.append('<div class="view-modal"></div>');
+				
 			}
 			
 		});

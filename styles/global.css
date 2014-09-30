@@ -1881,6 +1881,13 @@ input[type="password"]::selection{
 	}
 }
 
+.app-alert .alert-body .requested-job{
+	display: block;
+	float: left;
+	font-size: 14px;
+	margin: 5px 20px;
+}
+
 /* Dialogs */
 
 .dialog{

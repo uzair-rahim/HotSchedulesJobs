@@ -185,6 +185,15 @@
 		</div>
 	</div>
 </div>
+<!-- New Job Alert-->
+<div id="app-alert-new-job-request" class="app-alert">
+	<div class="alert-title">New Job Requests!</div>
+	<div class="alert-body"></div>
+	<div class="alert-action">
+		<button id="create-new-job" class="primary">Create New Job</button>
+		<button id="dismiss-new-job-request">Dismiss</button>
+	</div>
+</div>
 <!--App Help -->
 <div id="app-help" tabIndex="-1">
 	<div class="header">

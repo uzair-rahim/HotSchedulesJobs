@@ -111,8 +111,10 @@
 						{{else}}
 							<li class="share-with-followers disabled">Share with Followers</li>
 						{{/if_not_eq}}
+						<!--
 						<li class="divider"></li>
 						<li class="delete-job">Delete</li>
+						-->
 					</ul>
 				</div>
 			</div>

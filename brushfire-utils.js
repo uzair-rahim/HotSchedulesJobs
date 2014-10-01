@@ -825,7 +825,11 @@ define([
 				var template = "";
 
 				$.each(data, function(){
-					template += '<div class="requested-job"><strong>' + this.count + ' ' + this.type + '</strong> want to work for you.</div>'
+					var plural = " was";
+					if(this.count > 1){
+						plural = "s were";
+					}
+					template += '<div class="requested-job"><strong>' + this.count + ' ' + this.type + '</strong> job'+plural+' requested from you.</div>';
 				});
 
 				alertDialog.find(".alert-body").html(template);

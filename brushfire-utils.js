@@ -724,18 +724,26 @@ define([
 							html += '<li class="new" data-guid="'+this.guid+'">';
 						}
 						html += '<div class="candidate-picture">';
-							if(this.candidate.photo !== null){
-								html += '<img src="'+this.candidate.photo.url+'"/>';
-							}
+							$.each(this.participants,function(){
+								if(this.user !== null){
+									if(this.user.photo !== null){
+										html += '<img src="'+this.user.photo.url+'"/>';
+									}
+								}
+							});
 						html += '</div>';
 						html += '<div class="candidate-info">';
 							html += '<div class="candidate-profile">';
-								html += this.candidate.firstname + " " + this.candidate.lastname;
-								if(this.candidate.primaryWorkHistory !== null){
-									html += '<span>';
-									html += "- " + this.candidate.primaryWorkHistory.jobs[0].jobName + " @ " + this.candidate.primaryWorkHistory.employer.name;
-									html += '</span>';	
+								$.each(this.participants,function(){
+									if(this.user !== null){
+										html += this.user.firstname + " " + this.user.lastname;
+										if(this.user.primaryWorkHistory !== null){
+											html += '<span>';
+											html += "- " + this.user.primaryWorkHistory.jobs[0].jobName + " @ " + this.user.primaryWorkHistory.employer.name;
+											html += '</span>';	
+										}
 									}
+								});
 							html += '</div>';
 							html += '<div class="candidate-message">';
 									html += this.latestMessage.chatMessageContent.text;
@@ -790,6 +798,9 @@ define([
 				var html = '';
 				var date = new Date(data.created);
 				var msgDate = months[date.getUTCMonth()] + " " + date.getUTCDate();
+				var hours = date.getHours();
+				var minutes = date.getMinutes();
+				var ampm = hours >= 12 ? 'pm' : 'am';
 					html += '<li class="date"><span>'+msgDate+'</span></li>';
 					html += '<li>';
 						html += '<div class="sender-picture">';
@@ -801,6 +812,7 @@ define([
 						html += '</div>';
 						html += '<div class="message">';
 							html += '<div class="name">'+data.sender.firstname+" "+data.sender.lastname+'</div>';
+							html += '<div class="time">'+hours+":"+minutes+ampm+'</div>';
 							html += '<div class="text">'+data.chatMessageContent.text+'</div>';
 						html += '<div>';	
 					html += '</li>';

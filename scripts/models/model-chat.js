@@ -30,7 +30,10 @@ define([
 					success : function(response){
 						callback(response);
 					},
-					error : function(){
+					error : function(data){
+						if(data.responseJSON.errorCode === 23){
+							Utils.ShowToast({ type : "error", message : "Invalid message, please try again"})
+						}
 						console.log("Error creating chat");
 					}
 				});
@@ -97,9 +100,13 @@ define([
 					success : function(response){
 						callback(response);
 					},
-					error : function(){
+					error : function(data){
+						if(data.responseJSON.errorCode === 23){
+							Utils.ShowToast({ type : "error", message : "Invalid message, please try again"})
+						}else{
+							Utils.HideQuickMessage();	
+						}
 						console.log("Error sending reply to chat");
-						Utils.HideQuickMessage();
 					}
 				});
 			}

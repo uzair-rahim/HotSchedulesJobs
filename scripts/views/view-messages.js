@@ -84,14 +84,19 @@ define([
 
 		appendChatView : function(data,chatGUID){
 			var template = '<div class="message-view-body">' + Utils.GetChatViewTemplate(data) + '</div><div class="message-view-foot"><input type="text" id="new-full-reply-text" placeholder="Message..."/><button class="primary" id="send-new-full-reply" disabled="true">Send</button></div>';
-			var candidateName = data.candidate.firstname + ' ' + data.candidate.lastname;
-			var candidateWork = "";
-				if(data.candidate.primaryWorkHistory !== null){
-					candidateWork = "- "+data.candidate.primaryWorkHistory.jobs[0].jobName+" @ "+data.candidate.primaryWorkHistory.employer.name;
+			var userName = "";
+			var userWork = "";
+			$.each(data.participants,function(){
+				if(this.user !== null){
+					userName = this.user.firstname + ' ' + this.user.lastname;
+					if(this.user.primaryWorkHistory !== null){
+						userWork = "- "+this.user.primaryWorkHistory.jobs[0].jobName+" @ "+this.user.primaryWorkHistory.employer.name;
+					}
 				}
-
+			});
+			
 			var fullMessages = $("#full-message-view");
-				fullMessages.find(".message-info-container").html('<div class="candidate-name">'+candidateName+'</div><div class="candidate-work">'+candidateWork+'</div>');
+				fullMessages.find(".message-info-container").html('<div class="candidate-name">'+userName+'</div><div class="candidate-work">'+userWork+'</div>');
 				fullMessages.find(".message-view-container").html(template);
 				fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
 			var windowWidth = $(window).width();

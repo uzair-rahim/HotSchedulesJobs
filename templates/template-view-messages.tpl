@@ -26,12 +26,20 @@
 								<li class="new" data-guid="{{this.guid}}">
 							{{/if_eq}}
 								<div class="candidate-picture">
-									{{#isNotNull this.candidate.photo}}
-										<img src="{{this.candidate.photo.url}}"/>
-									{{/isNotNull}}
+									{{#each this.participants}}
+										{{#isNotNull this.user}}
+											{{#isNotNull this.user.photo}}
+												<img src="{{this.user.photo.url}}"/>
+											{{/isNotNull}}	
+										{{/isNotNull}}
+									{{/each}}
 								</div>
 								<div class="candidate-info">
-									<div class="candidate-profile">{{this.candidate.firstname}} {{this.candidate.lastname}}</div>
+									{{#each this.participants}}
+										{{#isNotNull this.user}}
+											<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}}</div>			
+										{{/isNotNull}}
+									{{/each}}									
 									<div class="candidate-message">{{this.latestMessage.chatMessageContent.text}}</div>
 								</div>
 							</li>

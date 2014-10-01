@@ -368,8 +368,28 @@ define([
 				}else if(message === ""){
 					Utils.ShowToast({type : "error", message : "Message cannot be empty"});
 				}else{
+					var index = Utils.GetSelectedEmployer();
+					var employerGUID = Utils.GetUserSession().employerIds[index];
 					var users = Utils.GetNewMessageRecipients();
 
+					var data = new Object();
+						data.participants = new Array();
+						data.messages = new Array();
+
+					
+
+					$.each(users,function(){
+						var participant = new Object();
+							participant.user = new Object();
+							participant.user.guid = this;
+						data.participants.push(participant);	
+					});
+
+					var participant = new Object();
+						participant.employer = new Object();
+						participant.employer.guid = employerGUID;
+					data.participants.push(participant);
+						
 					var message = new Object();
 						message.sender = new Object();
 						message.sender.guid = Utils.GetUserSession().guid;
@@ -378,20 +398,10 @@ define([
 						message.employerSeen = new Object();
 						message.employerSeen = true;
 
-					var data = new Object();
-						data.jobPosting = new Object();
-						data.jobPosting.guid = Utils.GetJobPostingGUID();
-						data.candidate = new Object();
-						data.messages = new Array();
-						data.messages.push(message);
-						
+					data.messages.push(message);
 
-					var dataArray = new Array();	
-
-					$.each(users, function(){
-						data.candidate.guid = this;
+					var dataArray = new Array();
 						dataArray.push(data);
-					});
 
 					var chat = new ModelChat();
 						chat.createChat(dataArray, function(response){
@@ -488,7 +498,12 @@ define([
 			appendChatView : function(data,chatGUID){
 				var template = Utils.GetChatViewTemplate(data);
 				var quickMessages = $("#quick-message-view");
-					quickMessages.find(".chat .dialog-head").text(data.candidate.firstname + " " + data.candidate.lastname);
+					$.each(data.participants,function(){
+						if(this.user !== null){
+							quickMessages.find(".chat .dialog-head").text(this.user.firstname + " " + this.user.lastname);	
+						}
+					});
+					
 					quickMessages.find(".mask").animate({scrollLeft : quickMessages.width()}, 150);
 					quickMessages.find(".chat .dialog-body").html(template);
 					quickMessages.find(".chat .dialog-body").scrollTop(quickMessages.find(".chat .dialog-body").prop("scrollHeight"));

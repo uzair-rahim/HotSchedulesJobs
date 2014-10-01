@@ -123,13 +123,17 @@ define([
 				chat.getEmployerChats(employerGUID, archived, function(response){
 					var fullMessages = $("#full-message-view");
 					var fullMessagesBody = fullMessages.find(".message-list-container");
-					var template = Utils.GetChatListTemplate(response);
+					var folder = "inbox";
+					if(archived){
+						folder = "archived";
+					}
+					var template = Utils.GetChatListTemplate(response,folder);
 					fullMessagesBody.html(template);
 					if(updateView){
 						var fullMessageInfo = $(".message-info-container");
 							fullMessageInfo.html("");
 						var fullMessageView = $(".message-view-container");
-						fullMessageView.html('<p class="light">This blank message helps protect your privacy. Select a message from the list to view details</p>');
+							fullMessageView.html('');
 					}
 				});
 		},

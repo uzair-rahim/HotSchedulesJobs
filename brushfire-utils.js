@@ -710,11 +710,15 @@ define([
 				});
 			},
 
-			GetChatListTemplate : function(data){
+			GetChatListTemplate : function(data,type){
 				var html = '';
 
 				if(data.length == 0){
-					html = '<div class="empty-body">No Messages</div>';
+					if(type === "archived"){
+						html = '<div class="empty-body">No Archived Messages</div>';
+					}else{
+						html = '<div class="empty-body">No Messages</div>';	
+					}
 				}else{
 					html = '<ul id="quick-message-list" class="messages-list">';
 					$.each(data,function(){

@@ -489,7 +489,7 @@ define([
 					chat.getEmployerChats(employerGUID, 0, function(response){
 						var dialog = $(document).find("#quick-message-view");
 						var dialogBody = dialog.find(".inbox .dialog-body");
-						var template = Utils.GetChatListTemplate(response);
+						var template = Utils.GetChatListTemplate(response,"inbox");
 						dialogBody.html(template);
 						Utils.ShowQuickMessage();
 					});

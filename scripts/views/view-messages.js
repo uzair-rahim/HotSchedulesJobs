@@ -19,6 +19,7 @@ define([
 			"click #full-message-list > li"				: "showFullChatMessage",
 			"click #full-message-view .message-head"	: "showFullChatList",
 			"click #send-new-full-reply"				: "sendReply",
+			"click .segmented-control .tab.unselected"	: "messageFolder"
 			
 		},
 
@@ -115,15 +116,19 @@ define([
 			fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
 		},
 
-		getEmployerChats : function(){
+		getEmployerChats : function(archived){
 			var index = Utils.GetSelectedEmployer();
 			var employerGUID = Utils.GetUserSession().employerIds[index];
 			var chat = new ModelChat();
-				chat.getEmployerChats(employerGUID, function(response){
+				chat.getEmployerChats(employerGUID, archived, function(response){
 					var fullMessages = $("#full-message-view");
 					var fullMessagesBody = fullMessages.find(".message-list-container");
 					var template = Utils.GetChatListTemplate(response);
 					fullMessagesBody.html(template);
+					var fullMessageInfo = $(".message-info-container");
+					fullMessageInfo.html("");
+					var fullMessageView = $(".message-view-container");
+					fullMessageView.html('<p class="light">This blank message helps protect your privacy. Select a message from the list to view details</p>');
 				});
 		},
 
@@ -144,11 +149,26 @@ define([
 			var chat = new ModelChat();
 				chat.addChat(message,chatGUID, function(response){
 					that.updateChatView(response);
-					that.getEmployerChats();
+					that.getEmployerChats(0);
 					textField.val("");
 					sendButton.prop("disabled", true);
 				});
 		},
+
+		messageFolder : function(event){
+			$(".message-folder-container .segmented-control .tab").addClass("unselected");
+			var tab = $(event.target);
+				tab.removeClass("unselected");
+			var archived = 0;
+				if(tab.attr("id") === "archived-messages"){
+					archived = 1;
+				}
+
+			var index = Utils.GetSelectedEmployer();
+			var employerGUID = Utils.GetUserSession().employerIds[index];	
+			this.getEmployerChats(archived);
+
+		},		
 
 		serializeData : function(){
 			var jsonObject = new Object();

@@ -459,7 +459,7 @@ define([
 					var employerGUID = Utils.GetUserSession().employerIds[index];
 
 					var chat = new ModelChat();
-						chat.getEmployerChats(employerGUID,function(data){
+						chat.getEmployerChats(employerGUID,0,function(data){
 							var view = new ViewMessages({model : data});
 							that.layout.body.show(view);
 						});

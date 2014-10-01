@@ -486,7 +486,7 @@ define([
 				var index = Utils.GetSelectedEmployer();
 				var employerGUID = Utils.GetUserSession().employerIds[index];
 				var chat = new ModelChat();
-					chat.getEmployerChats(employerGUID, function(response){
+					chat.getEmployerChats(employerGUID, 0, function(response){
 						var dialog = $(document).find("#quick-message-view");
 						var dialogBody = dialog.find(".inbox .dialog-body");
 						var template = Utils.GetChatListTemplate(response);

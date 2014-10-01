@@ -116,7 +116,7 @@ define([
 			fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
 		},
 
-		getEmployerChats : function(archived){
+		getEmployerChats : function(archived,updateView){
 			var index = Utils.GetSelectedEmployer();
 			var employerGUID = Utils.GetUserSession().employerIds[index];
 			var chat = new ModelChat();
@@ -125,10 +125,12 @@ define([
 					var fullMessagesBody = fullMessages.find(".message-list-container");
 					var template = Utils.GetChatListTemplate(response);
 					fullMessagesBody.html(template);
-					var fullMessageInfo = $(".message-info-container");
-					fullMessageInfo.html("");
-					var fullMessageView = $(".message-view-container");
-					fullMessageView.html('<p class="light">This blank message helps protect your privacy. Select a message from the list to view details</p>');
+					if(updateView){
+						var fullMessageInfo = $(".message-info-container");
+							fullMessageInfo.html("");
+						var fullMessageView = $(".message-view-container");
+						fullMessageView.html('<p class="light">This blank message helps protect your privacy. Select a message from the list to view details</p>');
+					}
 				});
 		},
 
@@ -149,7 +151,7 @@ define([
 			var chat = new ModelChat();
 				chat.addChat(message,chatGUID, function(response){
 					that.updateChatView(response);
-					that.getEmployerChats(0);
+					that.getEmployerChats(0,false);
 					textField.val("");
 					sendButton.prop("disabled", true);
 				});
@@ -166,7 +168,7 @@ define([
 
 			var index = Utils.GetSelectedEmployer();
 			var employerGUID = Utils.GetUserSession().employerIds[index];	
-			this.getEmployerChats(archived);
+			this.getEmployerChats(archived,true);
 
 		},		
 

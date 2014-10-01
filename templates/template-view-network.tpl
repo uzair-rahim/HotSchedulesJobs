@@ -10,7 +10,7 @@
 </div>
 
 <div id="toolbar" class="hideable-toolbar">
-	<button id="send-message" class="primary" disabled>Send Message</button>
+	<button id="send-chat" class="primary" disabled>Send Message</button>
 	<button id="share-job" disabled>Share Job</button>
 </div>
 
@@ -50,7 +50,7 @@
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
-				<div class="candidate-message"></div>
+				<div class="candidate-chat"></div>
 				<div class="user-connect"></div>
 				<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
 				<div class="candidate-network sync"></div>
@@ -91,7 +91,7 @@
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
-				<div class="candidate-message"></div>
+				<div class="candidate-chat"></div>
 				<div class="user-connect"></div>
 				<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
 				<div class="candidate-network sync"></div>
@@ -121,6 +121,7 @@
 	<ul id="endorsements-list" class="grid-list top">
 		{{#each endorsements}}
 			<li class="view-profile" data-email="{{this.attributes.email}}" data-guid="{{this.attributes.guid}}">
+				<input class="candidate-select" type="checkbox"/>
 				<div class="candidate-picture">
 					{{#hasPhoto this.attributes.photo}}
 						<img src="{{this.attributes.photo.url}}"/>
@@ -130,7 +131,7 @@
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
-				<!--<div class="candidate-message"></div>-->
+				<div class="candidate-chat"></div>
 				<div class="user-connect"></div>
 				<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
 				<div class="candidate-network sync"></div>

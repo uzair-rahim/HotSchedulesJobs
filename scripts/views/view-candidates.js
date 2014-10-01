@@ -239,8 +239,8 @@ define([
 			var isChecked = $(event.target).prop("checked");
 
 			if(isChecked){
-				var jobPostingGUID = $(event.target).closest("ul.grid-list").attr("data-guid");
-				$("ul.grid-list:not([data-guid='"+jobPostingGUID+"'])").find(".candidate-select").prop("disabled", true);
+				var userGUID = $(event.target).closest("li.view-profile").attr("data-user");
+				$('li.view-profile[data-user="'+userGUID+'"]').find(".candidate-select:not(:checked)").prop("disabled", true);
 			}
 
 			var count = $(".candidate-select:checked").length;

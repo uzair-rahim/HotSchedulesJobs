@@ -25,8 +25,9 @@ define([
 			"click #clear"				: "clearAllFilter",
 			"click .view-profile"		: "profile",
 			"click .candidate-select"	: "networkSelect",
+			"click .candidate-chat"		: "networkChat",
 			"click .candidate-message"	: "networkMessage",
-			"click #send-message"		: "sendBulkMessage",
+			"click #send-chat"			: "sendBulkChat",
 			"click .candidate-network"	: "networkConnections",
 			"click .candidate-endorse"	: "networkEndorsements",
 			"click #share-job"			: "shareJob",
@@ -178,14 +179,37 @@ define([
 		},
 
 		networkSelect : function(event){
+			var isChecked = $(event.target).prop("checked");
+
+			if(isChecked){
+				var userGUID = $(event.target).closest("li.view-profile").attr("data-guid");
+				$('li.view-profile[data-guid="'+userGUID+'"]').find(".candidate-select:not(:checked)").prop("disabled", true);
+			}
+
 			var count = $(".candidate-select:checked").length;
 			if(count > 0){
-				$("#send-message").prop("disabled",false);
+				$("#send-chat").prop("disabled",false);
 				$("#share-job").prop("disabled",false);
 			}else{
-				$("#send-message").prop("disabled",true);
-				$("#share-job").prop("disabled",true);
+				this.disableToolbarButtons();
 			}
+			event.stopPropagation();
+		},
+
+		networkChat : function(event){
+			var user = $(event.target).closest("li.view-profile");
+			var userName = user.find(".candidate-info .candidate-name").text();
+			var userGUID = user.attr("data-guid");
+
+			var recipient = new Object();
+				recipient.name = userName;
+				recipient.guid = userGUID;
+
+			var recipients = new Array();
+				recipients.push(recipient);
+
+			Utils.AddRecipientToNewMessage(recipients);
+			Utils.ShowSendNewMessage();
 			event.stopPropagation();
 		},
 
@@ -195,18 +219,19 @@ define([
 			event.stopPropagation();
 		},
 
-		sendBulkMessage : function(event){
-			var manager = Utils.GetUserSession().email;
-			var addresses = [];
+		sendBulkChat : function(event){	
+			var candidates = $(".candidate-select:checked");
+			var recipients = new Array();
 
-			$(".candidate-select:checked").each(function(){
-				var email = $(this).closest("li.view-profile").data("email");
-				addresses.push(email);
+			$.each(candidates, function(){
+				var recipient = new Object();
+					recipient.name = $(this).closest("li.view-profile").find(".candidate-info .candidate-name").text();
+					recipient.guid = $(this).closest("li.view-profile").attr("data-guid");
+				recipients.push(recipient);
 			});
 
-			var emails = addresses.join(",");
-			window.open("mailto:"+manager+"?bcc="+emails);
-
+			Utils.AddRecipientToNewMessage(recipients);
+			Utils.ShowSendNewMessage();
 			this.disableToolbarButtons();
 		},
 
@@ -360,9 +385,10 @@ define([
 		},
 
 		disableToolbarButtons : function(){
+			$("#send-chat").prop("disabled", true);
+			$("#archive-candidates").prop("disabled", true);
 			$(".candidate-select").prop("checked", false);
-			$("#share-job").prop("disabled", true);
-			$("#send-message").prop("disabled", true);
+			$(".candidate-select").prop("disabled", false);
 		},
 
 		createConnection : function(event){

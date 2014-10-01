@@ -372,37 +372,34 @@ define([
 					var employerGUID = Utils.GetUserSession().employerIds[index];
 					var users = Utils.GetNewMessageRecipients();
 
-					var data = new Object();
-						data.participants = new Array();
-						data.messages = new Array();
-
-					
+					var dataArray = new Array();
 
 					$.each(users,function(){
-						var participant = new Object();
-							participant.user = new Object();
-							participant.user.guid = this;
-						data.participants.push(participant);	
-					});
+						var data = new Object();
+							data.participants = new Array();
+							data.messages = new Array();
 
-					var participant = new Object();
-						participant.employer = new Object();
-						participant.employer.guid = employerGUID;
-					data.participants.push(participant);
-						
-					var message = new Object();
-						message.sender = new Object();
-						message.sender.guid = Utils.GetUserSession().guid;
-						message.chatMessageContent = new Object();
-						message.chatMessageContent.text = $("#new-message-text").val();
-						message.employerSeen = new Object();
-						message.employerSeen = true;
+						var user = new Object();
+							user = { "user" : { guid : this} };
+							data.participants.push(user);
 
-					data.messages.push(message);
+						var employer = new Object();
+							employer = { "employer" : {guid : employerGUID} };
+							data.participants.push(employer);
 
-					var dataArray = new Array();
+						var message = new Object();
+							message.sender = new Object();
+							message.sender.guid = Utils.GetUserSession().guid;
+							message.chatMessageContent = new Object();
+							message.chatMessageContent.text = $("#new-message-text").val();
+							message.employerSeen = new Object();
+							message.employerSeen = true;	
+
+						data.messages.push(message);	
 						dataArray.push(data);
 
+					});
+					
 					var chat = new ModelChat();
 						chat.createChat(dataArray, function(response){
 							Utils.ShowToast({type : "success", message : "Message sent successfully"});

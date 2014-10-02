@@ -44,10 +44,19 @@
 									<div class="candidate-info">
 										{{#each this.participants}}
 											{{#isNotNull this.user}}
-												<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}}</div>			
+												<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}} <span>{{this.user.primaryWorkHistory.jobs.[0].jobName}} @ {{this.user.primaryWorkHistory.employer.name}}</span></div>			
 											{{/isNotNull}}
 										{{/each}}									
 										<div class="candidate-message">{{this.latestMessage.chatMessageContent.text}}</div>
+										{{#each this.participants}}
+											{{#isNotNull this.employer}}
+												{{#if_eq archived true}}
+													<div class="unarchive-message" data-guid="{{this.guid}}"></div>
+												{{else}}
+													<div class="archive-message" data-guid="{{this.guid}}"></div>
+												{{/if_eq}}
+											{{/isNotNull}}
+										{{/each}}									
 									</div>
 								</li>
 							{{/each}}

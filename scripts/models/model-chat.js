@@ -39,9 +39,9 @@ define([
 				});
 			},
 
-			getEmployerChats : function(employerGUID,archived,all,callback){
+			getEmployerChats : function(employerGUID,archived,withRepliesOnly,callback){
 				var that = this;
-				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived="+archived+"&withRepliesOnly="+all;
+				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived="+archived+"&withRepliesOnly="+withRepliesOnly;
 				$.ajax({
 					type : "GET",
 					url : url,
@@ -107,6 +107,24 @@ define([
 							Utils.HideQuickMessage();	
 						}
 						console.log("Error sending reply to chat");
+					}
+				});
+			},
+
+			updateChatParticipant : function(chatGUID,participantGUID,chatParticipant,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + chatGUID + "/participant/" + participantGUID;
+				$.ajax({
+					type : "PUT",
+					url : url,
+					contentType : "application/json",
+					data : JSON.stringify(chatParticipant),
+					async: false,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error updating chat participant");
 					}
 				});
 			}

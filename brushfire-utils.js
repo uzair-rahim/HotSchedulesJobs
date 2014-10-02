@@ -752,6 +752,15 @@ define([
 							html += '<div class="candidate-message">';
 									html += this.latestMessage.chatMessageContent.text;
 							html += '</div>';
+							$.each(this.participants,function(){
+								if(this.employer !== null){
+									if(this.archived){
+										html += '<div class="unarchive-message" data-guid="'+this.guid+'"></div>';	
+									}else{
+										html += '<div class="archive-message" data-guid="'+this.guid+'"></div>';	
+									}
+								}
+							});
 						html += '</div>';		
 						html += '</li>';
 					});

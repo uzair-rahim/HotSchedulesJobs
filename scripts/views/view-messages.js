@@ -19,7 +19,9 @@ define([
 			"click #full-message-list > li"				: "showFullChatMessage",
 			"click #full-message-view .message-head"	: "showFullChatList",
 			"click #send-new-full-reply"				: "sendReply",
-			"click .segmented-control .tab.unselected"	: "messageFolder"
+			"click .segmented-control .tab.unselected"	: "messageFolder",
+			"click .archive-message"					: "archiveMessage",
+			"click .unarchive-message"					: "unarchiveMessage",
 			
 		},
 
@@ -171,10 +173,45 @@ define([
 				}
 
 			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];	
+			var employerGUID = Utils.GetUserSession().employerIds[index];
 			this.getEmployerChats(archived,true);
 
-		},		
+		},
+
+		archiveMessage : function(event){
+			var chatGUID = $(event.target).closest(".messages-list > li").attr("data-guid");
+			var participantGUID = $(event.target).attr("data-guid");
+			var index = Utils.GetSelectedEmployer();
+			var employerGUID = Utils.GetUserSession().employerIds[index];
+			this.updateChatParticipant(chatGUID,participantGUID,employerGUID,true);
+			ga("send", "event", "archive-message", "click");
+			event.stopPropagation();
+		},
+
+		unarchiveMessage : function(event){
+			var chatGUID = $(event.target).closest(".messages-list > li").attr("data-guid");
+			var participantGUID = $(event.target).attr("data-guid");
+			var index = Utils.GetSelectedEmployer();
+			var employerGUID = Utils.GetUserSession().employerIds[index];
+			this.updateChatParticipant(chatGUID,participantGUID,employerGUID,false);
+			ga("send", "event", "unarchive-message", "click");	
+			event.stopPropagation();
+		},
+
+		updateChatParticipant : function(chatGUID,participantGUID,employerGUID,type){
+			var chatParticipant = new Object();
+				chatParticipant = {
+					"guid" : participantGUID,
+					"archived" : type,
+					"employer" : {
+						"guid" : employerGUID
+					}
+				}
+			var chat = new ModelChat();
+				chat.updateChatParticipant(chatGUID,participantGUID,chatParticipant,function(response){
+					Backbone.history.loadUrl(Backbone.history.fragment);
+				});
+		},
 
 		serializeData : function(){
 			var jsonObject = new Object();

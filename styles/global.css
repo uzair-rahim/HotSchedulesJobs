@@ -2054,6 +2054,11 @@ input[type="password"]::selection{
 	overflow: hidden;
 }
 
+#quick-message-view .archive-message,
+#quick-message-view .unarchive-message{
+	display: none;
+}
+
 ul.messages-list{
 	display: block;
 	float: left;
@@ -2114,7 +2119,7 @@ ul.messages-list li .candidate-info .candidate-profile{
 	display: block;
 	float: left;
 	clear: both;
-	width: calc(100% - 10px);
+	width: calc(100% - 50px);
 	color: #303c4c;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -2136,7 +2141,7 @@ ul.messages-list li .candidate-info .candidate-message{
 	display: block;
 	float: left;
 	clear: both;
-	width: calc(100% - 10px);
+	width: calc(100% - 40px);
 	color: #636971;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -2145,6 +2150,23 @@ ul.messages-list li .candidate-info .candidate-message{
 
 ul.messages-list li:hover .candidate-info .candidate-message{
 	color: #7897b3;
+}
+
+ul.messages-list li .candidate-info .archive-message,
+ul.messages-list li .candidate-info .unarchive-message{
+	display: block;
+	float: left;
+	width: 20px;
+	height: 14px;
+	background-image: url("../images/icon-archive-blue.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 14px auto;
+	cursor: pointer;
+}
+
+ul.messages-list li .candidate-info .unarchive-message{
+	background-image: url("../images/icon-unarchive-blue.png");
 }
 
 ul.messages-list li.new .candidate-info .candidate-profile,

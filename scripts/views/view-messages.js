@@ -6,219 +6,132 @@ define([
 		"utils",
 		"marionette",
 		"scripts/models/model-chat",
+		"scripts/views/view-messages-list",
+		"scripts/views/view-messages-view",
 		"hbs!templates/template-view-messages"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, ModelChat, Template){
+	function($, Cookie, Analytics, App, Utils, Marionette, ModelChat, ViewMessagesList, ViewMessageView, Template){
 	"use strict";
 
 	var ViewMessages = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
+		messagesList : null,
+		messagesListContainer : null,
+		messageView : null,
+		messageViewContainer : null,
 		template: Template,
 		events : {
-			"click #full-message-list > li"				: "showFullChatMessage",
-			"click #full-message-view .message-head"	: "showFullChatList",
-			"click #send-new-full-reply"				: "sendReply",
-			"click .segmented-control .tab.unselected"	: "messageFolder",
-			"click .archive-message"					: "archiveMessage",
-			"click .unarchive-message"					: "unarchiveMessage",
-			
+			"click .segmented-control .tab.unselected" : "selectMessagesFolder"
 		},
 
 		initialize : function(){
-			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Messages view initialized...");
+			_.bindAll.apply(_, [this].concat(_.functions(this)));
 		},
 
 		onShow : function(){
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/messages');
-
-			$(document).undelegate("#new-full-reply-text", "keyup");
-			$(document).delegate("#new-full-reply-text", "keyup", function(event){
-				var maxlength = 1000;						
-				if ($(this).val().length > maxlength) {  
-	            	$(this).val($(this).val().substring(0, maxlength));
-	        	}
-	        	var sendReplyButton = $(document).find("#send-new-full-reply");
-	        	var replyText = $.trim($(this).val());
-	        	if(replyText.length > 0){
-	        		sendReplyButton.prop("disabled", false);
-	        	}else{
-	        		sendReplyButton.prop("disabled", true);
-	        	}
-
-	        	if(event.keyCode == 13){
-					$("#send-new-full-reply").click();
-				}
-
-			});
+      		this.appendMessagesList();
+      		this.appendMessageView();
 		},
 
-		showFullChatMessage : function(event){
-				var that = this;
-				var index = Utils.GetSelectedEmployer();
-				var employerGUID = Utils.GetUserSession().employerIds[index];
-				var chatGUID = $(event.target).closest("#full-message-list > li").attr("data-guid");
-				var item = $(event.target).closest("#full-message-list > li");
-				var isUnseen = item.hasClass("new");
-				var chat = new ModelChat();
-					chat.getEmployerChat(employerGUID,chatGUID,function(response){
-						that.appendChatView(response,chatGUID);
-						if(isUnseen){
-							chat.updateChatMessageAsSeenByEmployer(chatGUID, function(response){
-								item.removeClass("new");
-							});	
-						}
-					});
-		},
-
-		showFullChatList : function(event){
-			var windowWidth = $(window).width();
-				if(windowWidth <= 700){
-					var fullMessages = $("#full-message-view");
-						fullMessages.animate({scrollLeft : fullMessages.width() * (-1)}, 150);;
-					var sendReplyButton = $(document).find("#send-new-full-reply");
-						sendReplyButton.attr("data-guid", "");
-					var textField = $("#new-full-reply-text");
-						textField.val("");
-				}
-		},
-
-		appendChatView : function(data,chatGUID){
-			var template = '<div class="message-view-body">' + Utils.GetChatViewTemplate(data) + '</div><div class="message-view-foot"><input type="text" id="new-full-reply-text" placeholder="Message..."/><button class="primary" id="send-new-full-reply" disabled="true">Send</button></div>';
-			var userName = "";
-			var userWork = "";
-			$.each(data.participants,function(){
-				if(this.user !== null){
-					userName = this.user.firstname + ' ' + this.user.lastname;
-					if(this.user.primaryWorkHistory !== null){
-						userWork = "- "+this.user.primaryWorkHistory.jobs[0].jobName+" @ "+this.user.primaryWorkHistory.employer.name;
-					}
-				}
-			});
+		appendMessagesList : function(){
+			this.messagesList = new ViewMessagesList({model : this.options.model});
+			this.messagesListContainer = $(document).find(".message-list-container");
+			$(this.messagesListContainer).find(".messages-list").remove();
+			this.messagesListContainer.append(this.messagesList.render().el);
 			
-			var fullMessages = $("#full-message-view");
-				fullMessages.find(".message-info-container").html('<div class="candidate-name">'+userName+'</div><div class="candidate-work">'+userWork+'</div>');
-				fullMessages.find(".message-view-container").html(template);
-				fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
-			var windowWidth = $(window).width();
-				if(windowWidth <= 700){
-					fullMessages.animate({scrollLeft : fullMessages.width()}, 150);;
-				}	
-			var sendReplyButton = $(document).find("#send-new-full-reply");
-				sendReplyButton.attr("data-guid", chatGUID);
+			this.listenTo(this.messagesList,"selectChat",this.selectChat);
+			this.listenTo(this.messagesList,"archiveChat",this.archiveChat);
+			this.listenTo(this.messagesList,"unarchiveChat",this.unarchiveChat);
+			this.listenTo(this.messagesList,"noMessage",this.noMessage);
 		},
 
-		updateChatView : function(data){
-			var template = Utils.GetChatMessageTemplate(data);
-			var fullMessages = $("#full-message-view");
-			fullMessages.find(".chat-list > li").removeClass("new");
-			fullMessages.find(".chat-list").append(template);
-			fullMessages.find(".message-view-container .message-view-body").scrollTop(fullMessages.find(".message-view-container .message-view-body").prop("scrollHeight"));
+		appendMessageView : function(haveChats,chat){
+			var haveChats = typeof numberOfChats === "undefined" ? false : false;
+			var chat = typeof chat === "undefined" ? null : null;
+			var chatModel = new Object();
+				chatModel = {
+					"haveChats" : haveChats,
+					"chats" : chat
+				}
+			this.messageView = new ViewMessageView({model : chatModel});
+			this.messageViewContainer = $(document).find(".message-body");
+			$(this.messageViewContainer).find(".message-view-container").remove();
+			this.messageViewContainer.append(this.messageView.render().el);
 		},
 
-		getEmployerChats : function(archived,updateView){
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
-			var chat = new ModelChat();
-				chat.getEmployerChats(employerGUID, archived, 0, function(response){
-					var fullMessages = $("#full-message-view");
-					var fullMessagesBody = fullMessages.find(".messages-list");
-					var folder = "inbox";
-					if(archived){
-						folder = "archived";
-					}
-					var template = Utils.GetChatListTemplate(response,folder);
-					fullMessagesBody.html(template);
-					if(updateView){
-						var fullMessageInfo = $(".message-info-container");
-							fullMessageInfo.html("");
-						var fullMessageView = $(".message-view-container");
-							fullMessageView.html('');
-					}
-				});
-		},
-
-		sendReply : function(event){
-			var that = this;
-			var sendButton = $(event.target);
-			var chatGUID = sendButton.attr("data-guid");
-			var textField = $("#new-full-reply-text");
-				
-			var message = new Object();
-				message.sender = new Object();
-				message.sender.guid = Utils.GetUserSession().guid;
-				message.chatMessageContent = new Object();
-				message.chatMessageContent.text = textField.val();
-				message.employerSeen = new Object();
-				message.employerSeen = true;
-			
-			var chat = new ModelChat();
-				chat.addChat(message,chatGUID, function(response){
-					that.updateChatView(response);
-					that.getEmployerChats(0,false);
-					textField.val("");
-					sendButton.prop("disabled", true);
-				});
-		},
-
-		messageFolder : function(event){
+		selectMessagesFolder : function(event){
 			$(".message-folder-container .segmented-control .tab").addClass("unselected");
 			var tab = $(event.target);
 				tab.removeClass("unselected");
-			var archived = 0;
-				if(tab.attr("id") === "archived-messages"){
-					archived = 1;
-				}
 
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
-			this.getEmployerChats(archived,true);
-
+			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var withRepliesOnly = 0;
+			var archived = (tab.attr("id") === "inbox-messages") ? 0 : 1;
+			
+			var that = this;	
+			var chat = new ModelChat();
+				chat.getEmployerChats(employerGUID,archived,withRepliesOnly,function(response){
+					that.options.model = response;
+					that.appendMessagesList();
+				});	
 		},
 
-		archiveMessage : function(event){
-			var chatGUID = $(event.target).closest(".messages-list > li").attr("data-guid");
-			var participantGUID = $(event.target).attr("data-guid");
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
-			this.updateChatParticipant(chatGUID,participantGUID,employerGUID,true);
-			ga("send", "event", "archive-message", "click");
-			event.stopPropagation();
+		selectChat : function(chatGUID){
+			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var that = this;
+			var chat = new ModelChat();
+				chat.getEmployerChat(employerGUID,chatGUID,function(response){
+					console.log(response);
+					that.appendMessageView(that.options.model.length, response)
+				});
 		},
 
-		unarchiveMessage : function(event){
-			var chatGUID = $(event.target).closest(".messages-list > li").attr("data-guid");
-			var participantGUID = $(event.target).attr("data-guid");
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
-			this.updateChatParticipant(chatGUID,participantGUID,employerGUID,false);
-			ga("send", "event", "unarchive-message", "click");	
-			event.stopPropagation();
-		},
-
-		updateChatParticipant : function(chatGUID,participantGUID,employerGUID,type){
+		archiveChat : function(chatGUID,participantGUID){
+			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
 			var chatParticipant = new Object();
 				chatParticipant = {
 					"guid" : participantGUID,
-					"archived" : type,
+					"archived" : true,
 					"employer" : {
 						"guid" : employerGUID
 					}
 				}
+			var that = this;	
 			var chat = new ModelChat();
 				chat.updateChatParticipant(chatGUID,participantGUID,chatParticipant,function(response){
-					Backbone.history.loadUrl(Backbone.history.fragment);
+					that.messagesList.removeChatFromList(chatGUID);
 				});
+		},
+
+		unarchiveChat : function(chatGUID,participantGUID){
+			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var chatParticipant = new Object();
+				chatParticipant = {
+					"guid" : participantGUID,
+					"archived" : false,
+					"employer" : {
+						"guid" : employerGUID
+					}
+				}
+			var that = this;	
+			var chat = new ModelChat();
+				chat.updateChatParticipant(chatGUID,participantGUID,chatParticipant,function(response){
+					that.messagesList.removeChatFromList(chatGUID);
+				});
+		},
+
+		noMessage : function(){
+			alert("No Message");
 		},
 
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
 				jsonObject.breadcrumb = App.getTrail();
-				jsonObject.messageList = new Object();
-				jsonObject.messageList = this.options.model;
 			return jsonObject;
 		}
 		

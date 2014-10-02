@@ -1881,6 +1881,11 @@ input[type="password"]::selection{
 	}
 }
 
+#app-alert-new-job-request .alert-body{
+	overflow: auto;
+	max-height: 110px;
+}
+
 .app-alert .alert-body .requested-job{
 	display: block;
 	float: left;

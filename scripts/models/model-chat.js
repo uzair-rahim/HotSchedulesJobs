@@ -39,9 +39,9 @@ define([
 				});
 			},
 
-			getEmployerChats : function(employerGUID,archived,callback){
+			getEmployerChats : function(employerGUID,archived,all,callback){
 				var that = this;
-				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived="+archived;
+				var url = this.urlRoot() + "/employer/" + employerGUID +"?archived="+archived+"&withRepliesOnly="+all;
 				$.ajax({
 					type : "GET",
 					url : url,

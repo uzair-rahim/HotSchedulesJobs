@@ -120,9 +120,9 @@ define([
 			var index = Utils.GetSelectedEmployer();
 			var employerGUID = Utils.GetUserSession().employerIds[index];
 			var chat = new ModelChat();
-				chat.getEmployerChats(employerGUID, archived, function(response){
+				chat.getEmployerChats(employerGUID, archived, 0, function(response){
 					var fullMessages = $("#full-message-view");
-					var fullMessagesBody = fullMessages.find(".message-list-container");
+					var fullMessagesBody = fullMessages.find(".messages-list");
 					var folder = "inbox";
 					if(archived){
 						folder = "archived";

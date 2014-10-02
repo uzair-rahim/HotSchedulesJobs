@@ -21,37 +21,39 @@
 				<div class="message-search-container">
 					<input type="text" placeholder="Search" id="search-messages-text"/>
 				</div>
-				{{#if_eq messageList.length 0}}
+				<div class="messages-list">
+					{{#if_eq messageList.length 0}}
 					<div class="empty-body">No Messages</div>
-				{{else}}
-					<ul id="full-message-list" class="messages-list">
-						{{#each messageList}}
-							{{#if_eq this.latestMessage.employerSeen true}}
-								<li data-guid="{{this.guid}}">
-							{{else}}
-								<li class="new" data-guid="{{this.guid}}">
-							{{/if_eq}}
-								<div class="candidate-picture">
-									{{#each this.participants}}
-										{{#isNotNull this.user}}
-											{{#isNotNull this.user.photo}}
-												<img src="{{this.user.photo.url}}"/>
-											{{/isNotNull}}	
-										{{/isNotNull}}
-									{{/each}}
-								</div>
-								<div class="candidate-info">
-									{{#each this.participants}}
-										{{#isNotNull this.user}}
-											<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}}</div>			
-										{{/isNotNull}}
-									{{/each}}									
-									<div class="candidate-message">{{this.latestMessage.chatMessageContent.text}}</div>
-								</div>
-							</li>
-						{{/each}}
-					<ul>
-				{{/if_eq}}
+					{{else}}
+						<ul id="full-message-list" class="messages-list">
+							{{#each messageList}}
+								{{#if_eq this.latestMessage.employerSeen true}}
+									<li data-guid="{{this.guid}}">
+								{{else}}
+									<li class="new" data-guid="{{this.guid}}">
+								{{/if_eq}}
+									<div class="candidate-picture">
+										{{#each this.participants}}
+											{{#isNotNull this.user}}
+												{{#isNotNull this.user.photo}}
+													<img src="{{this.user.photo.url}}"/>
+												{{/isNotNull}}	
+											{{/isNotNull}}
+										{{/each}}
+									</div>
+									<div class="candidate-info">
+										{{#each this.participants}}
+											{{#isNotNull this.user}}
+												<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}}</div>			
+											{{/isNotNull}}
+										{{/each}}									
+										<div class="candidate-message">{{this.latestMessage.chatMessageContent.text}}</div>
+									</div>
+								</li>
+							{{/each}}
+						<ul>
+					{{/if_eq}}
+				</div>
 			</div>
 			<div class="message-view-container">
 				{{#if_eq messageList.length 0}}

@@ -814,6 +814,9 @@ define([
 				var hours = date.getHours();
 				var minutes = date.getMinutes();
 				var ampm = hours >= 12 ? 'pm' : 'am';
+				hours = hours % 12;
+				hours = hours ? hours : 12;
+				minutes = minutes < 10 ? '0'+minutes : minutes;
 					html += '<li class="date"><span>'+msgDate+'</span></li>';
 					html += '<li>';
 						html += '<div class="sender-picture">';

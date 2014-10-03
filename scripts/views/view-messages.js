@@ -22,7 +22,8 @@ define([
 		messageViewContainer : null,
 		template: Template,
 		events : {
-			"click .segmented-control .tab.unselected" : "selectMessagesFolder"
+			"click .segmented-control .tab.unselected"	: "selectMessagesFolder",
+			"click #full-message-view .message-head"	: "showFullChatList"
 		},
 
 		initialize : function(){
@@ -34,7 +35,7 @@ define([
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/messages');
       		this.appendMessagesList();
-      		this.appendMessageView();
+      		this.appendMessageView(this.options.model.length > 0,null);
 		},
 
 		appendMessagesList : function(){
@@ -50,17 +51,16 @@ define([
 		},
 
 		appendMessageView : function(haveChats,chat){
-			var haveChats = typeof numberOfChats === "undefined" ? false : false;
-			var chat = typeof chat === "undefined" ? null : null;
 			var chatModel = new Object();
 				chatModel = {
 					"haveChats" : haveChats,
-					"chats" : chat
+					"chat" : chat
 				}
 			this.messageView = new ViewMessageView({model : chatModel});
 			this.messageViewContainer = $(document).find(".message-body");
 			$(this.messageViewContainer).find(".message-view-container").remove();
 			this.messageViewContainer.append(this.messageView.render().el);
+			this.messageView.scrollToBottom();
 		},
 
 		selectMessagesFolder : function(event){
@@ -77,17 +77,33 @@ define([
 				chat.getEmployerChats(employerGUID,archived,withRepliesOnly,function(response){
 					that.options.model = response;
 					that.appendMessagesList();
+					that.updateMessageInfo("","");
+					that.appendMessageView(that.options.model.length > 0, null);
 				});	
 		},
 
-		selectChat : function(chatGUID){
+		selectChat : function(chatGUID,userName,userWork){
 			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
 			var that = this;
 			var chat = new ModelChat();
 				chat.getEmployerChat(employerGUID,chatGUID,function(response){
-					console.log(response);
-					that.appendMessageView(that.options.model.length, response)
+					that.updateMessageInfo(userName,userWork);
+					that.appendMessageView(true, response)
+					var windowWidth = $(window).width();
+						if(windowWidth <= 700){
+							var fullMessages = $("#full-message-view");
+								fullMessages.animate({scrollLeft : fullMessages.width()}, 150);;
+						}	
+
 				});
+		},
+
+		showFullChatList : function(){
+			var windowWidth = $(window).width();
+			if(windowWidth <= 700){
+				var fullMessages = $("#full-message-view");
+					fullMessages.animate({scrollLeft : fullMessages.width() * (-1)}, 150);
+			}
 		},
 
 		archiveChat : function(chatGUID,participantGUID){
@@ -103,7 +119,9 @@ define([
 			var that = this;	
 			var chat = new ModelChat();
 				chat.updateChatParticipant(chatGUID,participantGUID,chatParticipant,function(response){
+					that.updateMessageInfo("","");
 					that.messagesList.removeChatFromList(chatGUID);
+					that.messageView.clearView(that.messagesList.hasChats());
 				});
 		},
 
@@ -120,12 +138,19 @@ define([
 			var that = this;	
 			var chat = new ModelChat();
 				chat.updateChatParticipant(chatGUID,participantGUID,chatParticipant,function(response){
+					that.updateMessageInfo("","");
 					that.messagesList.removeChatFromList(chatGUID);
+					that.messageView.clearView(that.messagesList.hasChats());
 				});
 		},
 
 		noMessage : function(){
-			alert("No Message");
+			this.messageView.noMessage();
+		},
+
+		updateMessageInfo : function(userName,userWork){
+			$(".message-info-container .candidate-name").text(userName);
+			$(".message-info-container .candidate-work").text(userWork);
 		},
 
 		serializeData : function(){

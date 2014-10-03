@@ -16,7 +16,11 @@
 			<div class="candidate-info">
 				{{#each this.participants}}
 					{{#isNotNull this.user}}
-						<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}} <span>{{this.user.primaryWorkHistory.jobs.[0].jobName}} @ {{this.user.primaryWorkHistory.employer.name}}</span></div>			
+						<div class="candidate-profile">{{this.user.firstname}} {{this.user.lastname}}
+							{{#isNotNull this.user.primaryWorkHistory}}
+								<span>{{this.user.primaryWorkHistory.jobs.[0].jobName}} @ {{this.user.primaryWorkHistory.employer.name}}</span>
+							{{/isNotNull}}
+						</div>			
 					{{/isNotNull}}
 				{{/each}}									
 				<div class="candidate-message">{{this.latestMessage.chatMessageContent.text}}</div>

@@ -14,7 +14,10 @@
 					<div id="archived-messages" class="tab right unselected">Archived</div>
 				</div>
 			</div>
-			<div class="message-info-container"></div>
+			<div class="message-info-container">
+				<div class="candidate-name"></div>
+				<div class="candidate-work"></div>
+			</div>
 		</div>
 		<div class="message-body">
 			<div class="message-list-container">

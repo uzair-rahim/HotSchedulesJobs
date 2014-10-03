@@ -82,7 +82,8 @@ define([
 				});	
 		},
 
-		selectChat : function(chatGUID,userName,userWork){
+		selectChat : function(chatGUID,isNew,userName,userWork){
+			ga("send", "event", "view-message", "click");
 			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
 			var that = this;
 			var chat = new ModelChat();
@@ -93,7 +94,13 @@ define([
 						if(windowWidth <= 700){
 							var fullMessages = $("#full-message-view");
 								fullMessages.animate({scrollLeft : fullMessages.width()}, 150);;
-						}	
+						}
+						if(isNew){
+							chat.updateChatMessageAsSeenByEmployer(chatGUID,function(response){
+								//
+							});
+						}
+						
 
 				});
 		},
@@ -107,6 +114,7 @@ define([
 		},
 
 		archiveChat : function(chatGUID,participantGUID){
+			ga("send", "event", "archive-message", "click");
 			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
 			var chatParticipant = new Object();
 				chatParticipant = {
@@ -126,6 +134,7 @@ define([
 		},
 
 		unarchiveChat : function(chatGUID,participantGUID){
+			ga("send", "event", "unarchive-message", "click");
 			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
 			var chatParticipant = new Object();
 				chatParticipant = {

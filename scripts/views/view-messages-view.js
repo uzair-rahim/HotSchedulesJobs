@@ -65,6 +65,7 @@ define([
 		},
 
 		sendReply : function(){
+			ga("send", "event", "send-reply-to-chat", "click");
 			var chatGUID = this.options.model.chat.guid;
 			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
 			var userGUID = Utils.GetUserSession().guid;
@@ -86,7 +87,12 @@ define([
 				chat.addChat(message,chatGUID,function(response){
 					that.options.model.chat.messages.push(response);
 					that.render();
+					that.markAsSeen();
 				});
+		},
+
+		markAsSeen : function(){
+			$(".chat-list li").removeClass("new");
 		},
 		
 		serializeData : function(){

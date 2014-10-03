@@ -4,7 +4,7 @@
 			<ul class="chat-list">
 				{{#each chat.messages}}
 					<li class="date"><span>{{dateConverter created "month date"}}</span></li>
-					<li>
+					<li class="{{#if_eq employerSeen false}}new{{/if_eq}}">
 						<div class="sender-picture">
 							<div class="photo">
 								{{#isNotNull sender.photo}}

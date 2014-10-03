@@ -254,6 +254,7 @@ define([
 		},
 
 		candidateChat : function(event){
+			ga("send", "event", "send-message-candidate", "click");
 			var candidate = $(event.target).closest("li.view-profile");
 			var jobPostingGUID = $(event.target).closest("ul#candidates-list").attr("data-guid");
 			var candidateName = candidate.find(".candidate-info .candidate-name").text();
@@ -272,7 +273,8 @@ define([
 			event.stopPropagation();
 		},
 
-		sendBulkChat : function(event){	
+		sendBulkChat : function(event){
+			ga("send", "event", "send-bulk-message-candidate", "click");
 			var candidates = $(".candidate-select:checked");
 			var jobPostingGUID = $(".candidate-select:checked").closest("ul.grid-list").attr("data-guid");
 			var recipients = new Array();

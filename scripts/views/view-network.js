@@ -197,6 +197,7 @@ define([
 		},
 
 		networkChat : function(event){
+			ga("send", "event", "send-message-network", "click");
 			var user = $(event.target).closest("li.view-profile");
 			var userName = user.find(".candidate-info .candidate-name").text();
 			var userGUID = user.attr("data-guid");
@@ -220,6 +221,7 @@ define([
 		},
 
 		sendBulkChat : function(event){	
+			ga("send", "event", "send-bulk-message-network", "click");
 			var candidates = $(".candidate-select:checked");
 			var recipients = new Array();
 

@@ -84,6 +84,7 @@ define([
 		},
 
 		quickMessages : function(){
+			ga("send", "event", "quick-message", "click");
 			var route = Backbone.history.fragment;
 			var windowWidth = $(window).width();
 			if(route == "messages" || windowWidth <= 700){

@@ -28,6 +28,7 @@ define([
 
 		selectChat : function(event){
 			var chat = $(event.target).closest("li");
+				chat.removeClass("new");
 			var chatGUID = chat.data("guid");
 			var userName = chat.find(".candidate-profile").html();
 			var userWork = chat.find(".candidate-profile span").text()

@@ -169,7 +169,16 @@
 			<div class="card">
 				<div class="inner-frame">
 					<div class="title">Unsubscribed</div>
-					<div class="message"><span>Samuel.Davidson@rbc.com</span> has been successfully unsubscribed from the HotSchedules Post mailing list.</div>
+					<div class="message">
+						<%
+							if(request.getParameter("email") == null ){
+								out.println("You have");
+							}else{
+								out.println("<span>"+request.getParameter("email")+" has</span>");
+							}
+						%>
+						been successfully unsubscribed from the HotSchedules Post mailing list.
+					</div>
 				</div>
 			</div>
 			<div class="footer">

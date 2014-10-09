@@ -236,6 +236,10 @@ define([
 						type : "POST",
 						success : function(response){
 							console.log("Job successfully saved");
+							ga('send', 'event', 'button', 'click', 'add job');
+							if(that.job.referralBonus !== ""){
+								ga('send', 'event', 'input field', 'changed', 'referral bonus', that.job.referralBonus);
+							}
 							var jobGUID = response.attributes.guid;
 							Utils.ShowSharePostedJobAlert(jobGUID);	
 							App.router.controller.jobs();
@@ -379,6 +383,7 @@ define([
 						model.save(update,{
 							type : "PUT",
 							success : function(){
+								ga('send', 'event', 'button', 'click', 'edit job');
 								console.log("Job successfully saved");
 								App.router.controller.jobs();
 							},
@@ -645,6 +650,7 @@ define([
 					candidate.save(update, {
 						success : function(){
 							console.log("Candidate successfully marked as archived...");
+							ga('send', 'event', 'button', 'click', 'archive candidate');
 							App.router.controller.jobs();
 						},
 						error : function(){
@@ -697,6 +703,7 @@ define([
 		},
 
 		archiveCandidates : function(){
+			ga('send', 'event', 'button', 'click', 'bulk archive candidate');
 			this.numberOfCalls = $(".candidate-select:checked").length;
 			this.bulkArchive();
 		},
@@ -765,6 +772,7 @@ define([
 				this.updateJobStatus(job,"post");
 			}
 	
+			ga('send', 'event', 'button', 'click', 'post job');
 			event.stopPropagation();
 		},
 
@@ -776,6 +784,8 @@ define([
 			if(currentState !== "UNPOSTED"){
 				this.updateJobStatus(job,"unpost");
 			}
+
+			ga('send', 'event', 'button', 'click', 'unpost job');
 			
 			event.stopPropagation();
 		},
@@ -803,6 +813,7 @@ define([
 				type : "DELETE",
 				dataType : "text",
 				success : function(){
+					ga('send', 'event', 'button', 'click', 'delete job');
 					App.router.controller.jobs();
 				},
 				error : function(){
@@ -851,6 +862,8 @@ define([
 				$(document).find("#app-modal").addClass("show");
 			}
 
+			ga('send', 'event', 'button', 'click', 'copy job link');
+
 			event.stopPropagation();
 		},
 
@@ -861,6 +874,7 @@ define([
 				var job = $(item).closest("#job-list.grid-list > li").data("guid");	
 				this.shareJob(job,1);
 			}
+			ga('send', 'event', 'button', 'click', 'share job with employees');
 			event.stopPropagation();
 		},
 
@@ -871,6 +885,7 @@ define([
 				var job = $(item).closest("#job-list.grid-list > li").data("guid");	
 				this.shareJob(job,2);
 			}
+			ga('send', 'event', 'button', 'click', 'share job with followers');
 			event.stopPropagation();
 		},
 
@@ -881,6 +896,7 @@ define([
 				var job = $(item).closest("#job-list.grid-list > li").data("guid");	
 				this.shareJob(job,3);
 			}
+			ga('send', 'event', 'button', 'click', 'share job with connections');
 			event.stopPropagation();
 		},
 
@@ -1004,7 +1020,7 @@ define([
 			var messageText = "Are you sure you want to hire this candidate?";
 			var buttonType = "primary";
 			if(isHired){
-				messageText = "This candidate will no longer be marked has hired";
+				messageText = "This candidate will no longer be marked as hired";
 				buttonType = "destroy";
 			}
 

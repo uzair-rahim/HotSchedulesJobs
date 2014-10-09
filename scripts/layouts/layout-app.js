@@ -1,13 +1,14 @@
 define([
 		"jquery",
 		"jqueryui",
+		"analytics",
 		"app",
 		"utils",
 		"marionette",
 		"scripts/models/model-chat",
 		"hbs!templates/template-layout-app"
 	],
-	function($, JQueryUI, App, Utils, Marionette, ModelChat, Template){
+	function($, JQueryUI, Analytics, App, Utils, Marionette, ModelChat, Template){
 		"use strict";
 
 		var LayoutApp = Marionette.Layout.extend({
@@ -278,6 +279,7 @@ define([
 					var restURL = Utils.GetURL("/services/rest/share");
 
 				if(toCurrentEmployees){
+					ga("send", "event", "shared-job", "click", "employees");
 					share.type = 1;
 					deferred.push(
 						$.ajax({
@@ -298,6 +300,7 @@ define([
 				}
 
 				if(toFollowers){
+					ga("send", "event", "shared-job", "click", "followers");
 					share.type = 2;
 					deferred.push(
 						$.ajax({
@@ -318,6 +321,7 @@ define([
 				}
 
 				if(toConnections){
+					ga("send", "event", "shared-job", "click", "connections");
 					share.type = 3;
 					deferred.push(
 						$.ajax({
@@ -425,6 +429,7 @@ define([
 			},
 
 			seeAllMessages : function(){
+				ga('send', 'event', 'button', 'click', 'see all messages');
 				Utils.HideQuickMessage();
 				App.router.navigate("messages", true);
 			},

@@ -232,6 +232,7 @@ define([
 
 			}
 
+			ga('send', 'event', 'button', 'click', 'view candidate profile');
 			event.stopPropagation();
 		},
 
@@ -270,6 +271,7 @@ define([
 			Utils.AddRecipientToNewMessage(recipients);
 			Utils.SetJobPostingGUID(jobPostingGUID);
 			Utils.ShowSendNewMessage();
+			ga('send', 'event', 'button', 'click', 'send candidate message');
 			event.stopPropagation();
 		},
 
@@ -290,6 +292,7 @@ define([
 			Utils.SetJobPostingGUID(jobPostingGUID);
 			Utils.ShowSendNewMessage();
 			this.disableToolbarButtons();
+			ga('send', 'event', 'button', 'click', 'send bulk messages');
 		},
 
 		candidateArchive : function(event){
@@ -321,6 +324,7 @@ define([
 						}
 					});
 
+			ga('send', 'event', 'button', 'click', 'archive candidate');
 			event.stopPropagation();
 			
 		},
@@ -354,6 +358,7 @@ define([
 						}
 					});
 
+			ga('send', 'event', 'button', 'click', 'unarchive candidate');
 			event.stopPropagation();
 			
 		},
@@ -368,6 +373,7 @@ define([
 					Utils.ShowSharedConnections(data);
 				});
 
+			ga('send', 'event', 'button', 'click', 'candidate network');
 			event.stopPropagation();
 		},
 
@@ -382,7 +388,7 @@ define([
 					Utils.ShowReferrals(data);
 				});
 
-
+			ga('send', 'event', 'button', 'click', 'candidate referrals');
 			event.stopPropagation();
 		},
 
@@ -395,6 +401,7 @@ define([
 					Utils.ShowEndorsements(data);
 				});
 
+			ga('send', 'event', 'button', 'click', 'candidate endorsements');
 			event.stopPropagation();
 		},
 
@@ -440,6 +447,8 @@ define([
 			}else{
 				Backbone.history.loadUrl();
 			}
+
+			ga('send', 'event', 'button', 'click', 'bulk archive candidates');
 		},
 
 		showFilter : function(){
@@ -534,6 +543,7 @@ define([
 					Utils.AddToUserConnectionsList(newConnection);
 				});
 
+				ga('send', 'event', 'button', 'click', 'accept connection request from candidate');
 			}else{
 				var connection = new Object();
 					connection.fromUserGuid = Utils.GetUserSession().guid;
@@ -552,6 +562,8 @@ define([
 						newConnection.state = "sent";
 					Utils.AddToUserConnectionsList(newConnection);
 				});	
+
+				ga('send', 'event', 'button', 'click', 'create new connection with candidate');
 			}
 
 			event.stopPropagation();
@@ -576,6 +588,7 @@ define([
 					Utils.RemoveFromUserConnectionsList(connection);
 				});
 
+			ga('send', 'event', 'button', 'click', 'delete connection with candidate');
 			event.stopPropagation();
 		},
 
@@ -585,7 +598,7 @@ define([
 			var messageText = "Are you sure you want to hire this candidate?";
 			var buttonType = "primary";
 			if(isHired){
-				messageText = "This candidate will no longer be marked has hired";
+				messageText = "This candidate will no longer be marked as hired";
 				buttonType = "destroy";
 			}
 

@@ -175,6 +175,7 @@ define([
 				$(allProfiles).removeClass("show");
 			}
 
+			ga('send', 'event', 'button', 'click', 'view network profile');
 			event.stopPropagation();
 		},
 
@@ -211,6 +212,7 @@ define([
 
 			Utils.AddRecipientToNewMessage(recipients);
 			Utils.ShowSendNewMessage();
+			ga('send', 'event', 'button', 'click', 'send network message');
 			event.stopPropagation();
 		},
 
@@ -221,7 +223,7 @@ define([
 		},
 
 		sendBulkChat : function(event){	
-			ga("send", "event", "send-bulk-message-network", "click");
+			ga("send", "event", "button", "click", "send bulk message to network");
 			var candidates = $(".candidate-select:checked");
 			var recipients = new Array();
 
@@ -247,6 +249,7 @@ define([
 					Utils.ShowSharedConnections(data);
 				});
 
+			ga('send', 'event', 'button', 'click', 'view network connections');
 			event.stopPropagation();
 		},
 
@@ -259,6 +262,7 @@ define([
 					Utils.ShowEndorsements(data);
 				});
 
+			ga('send', 'event', 'button', 'click', 'view network endorsements');
 			event.stopPropagation();
 		},
 
@@ -338,6 +342,8 @@ define([
 			var alert = $("#app-alert-share-job");
 			$(alert).addClass("show");
 			$(document).find("#app-modal").addClass("show");
+
+			ga('send', 'event', 'button', 'click', 'share job with network');
 
 		},
 
@@ -428,6 +434,7 @@ define([
 					Utils.AddToUserConnectionsList(newConnection);
 				});
 
+				ga('send', 'event', 'button', 'click', 'accept connection request from network');
 			}else{
 				var connection = new Object();
 					connection.fromUserGuid = Utils.GetUserSession().guid;
@@ -446,6 +453,8 @@ define([
 						newConnection.state = "sent";
 					Utils.AddToUserConnectionsList(newConnection);
 				});	
+
+				ga('send', 'event', 'button', 'click', 'send connection request to network');
 			}
 
 			event.stopPropagation();
@@ -470,6 +479,7 @@ define([
 					Utils.RemoveFromUserConnectionsList(connection);
 				});
 
+			ga('send', 'event', 'button', 'click', 'delete connection from network');
 			event.stopPropagation();
 		},
 

@@ -77,7 +77,7 @@
 			</div>
 			<!--<div class="share-info">0 shares</div>-->
 			<div class="bonus-info {{hasNewCandidates this}}">{{#isNotNull referralBonus}}${{referralBonus}}{{else}}No{{/isNotNull}} Ref. Bonus</div>
-			<div class="posted-info {{hasNewCandidates this}}">Posted {{dateConverter created}}</div>
+			<div class="posted-info {{hasNewCandidates this}}">Posted {{dateConverter created "mm/dd/yyyy"}}</div>
 			<div class="job-actions">				
 				<div class="custom-select" data-index="0" data-value="{{status}}">
 					<button class="custom-select-button job-status">{{#isNotNull status}}{{status}}{{else}}Unposted{{/isNotNull}}</button>

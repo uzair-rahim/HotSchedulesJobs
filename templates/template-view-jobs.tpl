@@ -7,8 +7,6 @@
 </div>
 <div id="toolbar">
 	<button id="add-new-job" class="primary">Add New Job</button>
-	<button id="send-chat" disabled>{{language.sendMessage}}</button>
-	<button id="archive-candidates" disabled>{{language.archiveCandidates}}</button>
 </div>
 
 <div id="add-job" class="job-information">
@@ -86,7 +84,6 @@
 						<li class="unpost-job">Unposted</li>
 						<li class="edit-job">Edit</li>
 						<li class="divider"></li>
-
 						{{#if_not_eq status "UNPOSTED"}}
 							{{#isNotNull tinyurl}}
 								<li class="copy-tiny-url" data-url="{{tinyurl}}">Copy Job Link</li>
@@ -119,58 +116,6 @@
 				</div>
 			</div>
 			<div class="count {{hasNewCandidates this}}">{{totalUnarchivedCandidatesByJob this}}</div>
-			{{#if_not_eq this.candidates.length 0}}
-				<ul id="candidates-list" class="grid-list sub">
-					{{#each this.candidates}}
-						{{#if_eq this.archived false}}
-							<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" data-email="{{user.email}}">
-								<input class="candidate-select" type="checkbox"/>
-								<div class="candidate-picture">
-									{{#isNotNull this.user.photo}}
-										<img src="{{this.user.photo.url}}"/>
-									{{/isNotNull}}
-								</div>
-								<div class="candidate-info">
-									<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
-									<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
-								</div>
-								<div class="candidate-status">
-									{{#if_eq hired true}}
-										<button class="create">Hired</button>
-									{{else}}
-										<button>Candidate</button>
-									{{/if_eq}}
-								</div>
-								<div class="candidate-archive"></div>
-								<div class="candidate-chat"></div>
-								<div class="user-connect"></div>
-								<!--<div class="candidate-rating"></div>-->
-								<div class="candidate-endorse">{{user.endorsementCount}}</div>
-								<div class="candidate-network sync"></div>
-								<div class="candidate-referral">{{referralCount}}</div>
-								<div class="hourly-profile">
-									<div class="about-section">
-										<label>About</label>
-										{{#isNotNull user.about}}
-											<div class="about">{{user.about}}</div>
-										{{else}}
-											<div class="about">Not Available</div>
-										{{/isNotNull}}
-									</div>
-									<div class="history-section">
-										<label>Work History</label>
-										<ul class="work-history"></ul>
-									</div>
-								</div>
-							</li>
-						{{/if_eq}}
-					{{/each}}
-					<li class="foot">
-						<a class="view-candidates" id="{{../guid}}">View All Candidates</a>
-						<a class="close-candidates">Close</a>
-					</li>
-				</ul>
-			{{/if_not_eq}}
 			<div class="edit-mode job-information">
 				<div class="details">
 					<div class="input-container position">

@@ -402,17 +402,17 @@ ul.grid-list > li .candidate-status button{
 ul.grid-list > li .candidate-referral{
 	display: block;
 	float: right;
-	margin: 5px 5px 0 0;
-	width: 60px;
-	height: 40px;
-	line-height: 42px;
+	margin: 0;
+	width: 50px;
+	height: 50px;
+	line-height: 80px;
 	color: #969ba2;
 	font-size: 12px;
-	text-indent: 48px;
+	text-align: center;
 	background-image: url("../images/icon-referral.png");
 	background-repeat: no-repeat;
-	background-position: 0 8px;
-	background-size: 40px auto;
+	background-position: center 8px;
+	background-size: 38px auto;
 	cursor: pointer;
 }
 
@@ -503,20 +503,17 @@ ul.grid-list > li .candidate-unarchive:hover{
 ul.grid-list > li .candidate-endorse{
 	display: block;
 	float: right;
-	margin: 5px 0;
-	width: 50px;
-	height: 40px;
-	line-height: 42px;
+	margin: 0;
+	width: 40px;
+	height: 50px;
+	line-height: 80px;
 	color: #969ba2;
 	font-size: 12px;
-	text-indent: 40px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	text-align: center;
 	background-image: url("../images/icon-endorsements.png");
 	background-repeat: no-repeat;
-	background-position: 12px 10px;
-	background-size: auto 20px;
+	background-position: center 6px;
+	background-size: 22px auto;
 	cursor: pointer;
 }
 
@@ -534,20 +531,18 @@ ul.grid-list > li .candidate-endorse:hover{
 ul.grid-list > li .candidate-network{
 	display: block;
 	float: right;
-	margin: 5px 0;
-	width: 100px;
-	height: 40px;
-	line-height: 42px;
+	margin: 0;
+	width: 50px;
+	height: 50px;
+	line-height: 80px;
 	color: #969ba2;
 	font-size: 12px;
-	text-indent: 50px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	text-align: center;
 	background-image: url("../images/icon-network-gray.png");
 	background-repeat: no-repeat;
-	background-position: 0 0;
-	background-size: 40px auto;
+	background-position: center -2px;
+	background-size: 38px auto;
+	cursor: pointer;
 }
 
 ul.grid-list > li .candidate-network:hover,
@@ -557,7 +552,7 @@ ul.grid-list > li .candidate-network.has-connections{
 }
 
 ul.grid-list > li .candidate-network.sync{
-	width: 45px;
+	
 }
 
 ul.grid-list > li .candidate-network span{

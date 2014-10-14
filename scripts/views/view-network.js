@@ -176,7 +176,7 @@ define([
 						});
 					}else{
 						$(list).remove();
-						$(item).find(".hourly-profile .history-section").append("<div class='history'>Not Available</div>");
+						$(item).find(".hourly-profile .history-section").html("<label>Work History</label><div class='history'>Not Available</div>");
 					}
 
 					$(item).addClass("expanded");	

@@ -320,8 +320,11 @@ define([
 		},
 
 		candidates : function(event){
-			var guid = $(event.target).closest("li").attr("data-guid");
-			App.router.navigate("candidates/job/"+guid, true);
+			var noCandidates = $(event.target).hasClass("no");
+			if(!noCandidates){
+				var guid = $(event.target).closest("li").attr("data-guid");
+				App.router.navigate("candidates/job/"+guid, true);
+			}
 			event.stopPropagation();
 		},
 

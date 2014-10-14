@@ -67,6 +67,11 @@ define([
 							user.verified = response.attributes.verified;
 							user.employerIds = response.attributes.employerIds;
 							user.roles = response.attributes.roles;
+
+						var userModel = new ModelUser();
+							userModel.getUserEventByType(user.guid,0,function(response){
+								user.training = response.completed;
+							});	
 						
 							Utils.CreateUserSession(user);
 							Utils.RememberUserEmail(checked, user.email);
@@ -120,6 +125,8 @@ define([
 
 									});
 							});
+
+
 					},
 
 					error : function(){

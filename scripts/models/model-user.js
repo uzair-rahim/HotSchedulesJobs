@@ -94,7 +94,40 @@ define([
 						Utils.ShowToast({message : "Error fetching user endorsements"});
 					}
 				});
+			},
+
+			getUserEventByType : function(userGUID,type,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + userGUID + "/events?type=" + type;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching user events");
+					}
+				});
+			},
+
+			updateUserEvent : function(userGUID,eventGUID,event){
+				var that = this;
+				var url = this.urlRoot() + "/" + userGUID + "/events/" + eventGUID;
+				$.ajax({
+					type : "PUT",
+					url : url,
+					contentType : "application/json",
+					data : JSON.stringify(chat),
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error updating user event");
+					}
+				});
 			}
+
 
 		});
 

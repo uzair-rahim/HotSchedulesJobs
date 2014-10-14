@@ -1898,6 +1898,82 @@ input[type="password"]::selection{
 	margin: 5px 20px;
 }
 
+
+.app-alert.training{
+	width: 440px;
+	margin: -175px 0 0 -220px;
+}
+
+.app-alert.training .training-image{
+	display: block;
+	float: left;
+	margin: 10px 25px 20px 25px;
+	width: calc(100% - 32px);
+	height: 50px;
+	border: 1px solid #dddddd;
+}
+
+.app-alert.training .alert-body p{
+	color: #2f3b4b;
+	font-size: 14px;
+	margin: 10px 25px;
+}
+
+.app-alert.training .alert-body p strong{
+	color: #2f3b4b;
+	font-size: 14px;
+}
+
+.app-alert.training .alert-body ul{
+	margin: 10px 25px;
+	list-style-type: disc;
+}
+
+.app-alert.training .alert-body ul li{
+	color: #2f3b4b;
+	font-size: 14px;
+	margin: 5px 15px;
+}
+.app-alert.training .alert-body ul li span{
+	color: #969ba2;
+	font-size: 14px;
+}
+
+@media screen and (max-width: 460px){
+	.app-alert.training{
+		width: 300px;
+		margin-left: -150px;
+	}
+
+	.app-alert.training .alert-body p{
+		font-size: 13px;
+	}
+
+	.app-alert.training .alert-body p strong{
+		font-size: 13px;
+	}
+
+	.app-alert.training .alert-body ul li{
+		font-size: 13px;
+	}
+	.app-alert.training .alert-body ul li span{
+		font-size: 13px;
+	}
+}
+
+.app-alert.training .alert-action button{
+	width: auto;
+	float: right;
+}
+
+.app-alert.training .alert-action button.close-training{
+	float: left;
+}
+
+.app-alert.training .alert-action button.primary{
+	margin: 5px 13px;
+}
+
 /* Dialogs */
 
 .dialog{

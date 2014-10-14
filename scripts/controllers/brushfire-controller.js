@@ -23,6 +23,7 @@ define([
 		"scripts/views/view-employer-profile",
 		"scripts/views/view-support",
 		"scripts/views/view-select-employer",
+		"scripts/views/view-training",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-yelp-rating",
@@ -35,7 +36,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ViewTraining, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -250,6 +251,10 @@ define([
 
 							var view = new ViewJobs({model : models});
 								that.layout.body.show(view);
+								if(!Utils.GetUserSession().training){
+									that.training();
+								}
+								
 						});	
 					}
 
@@ -604,6 +609,13 @@ define([
 				}else{
 					App.router.navigate("login", true);
 				}
+			},
+
+			training : function(){
+				var training = new ViewTraining();
+				var container = this.layout.el;
+					$(container).append(training.render().el);
+
 			},
 
 			selectEmployer : function(){

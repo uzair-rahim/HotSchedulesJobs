@@ -98,7 +98,7 @@
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
-				<<div class="user-actions">
+				<div class="user-actions">
 					<div class="custom-select user-dropdown" data-index="0" data-value="">
 						<button class="custom-select-button">Chat</button>
 						<ul class="custom-select-list user-dropdown">
@@ -147,9 +147,8 @@
 				</div>
 				<div class="user-actions">
 					<div class="custom-select user-dropdown" data-index="0" data-value="">
-						<button class="custom-select-button">Chat</button>
+						<button class="custom-select-button">Connect</button>
 						<ul class="custom-select-list user-dropdown">
-							<li class="chat-candidate">Chat</li>
 							<li class="connect-candidate">Connect</li>
 						</ul>
 					</div>

@@ -61,17 +61,30 @@
 								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 							</div>
-							<div class="candidate-status">
-								{{#if_eq hired true}}
-									<button class="create">Hired</button>
-								{{else}}
-									<button>Candidate</button>
-								{{/if_eq}}
+							<div class="user-actions">
+								<div class="custom-select user-dropdown" data-index="0" data-value="">
+									{{#if_eq hired true}}
+										<button class="custom-select-button create">Hired</button>
+									{{else}}
+										<button class="custom-select-button">Candidate</button>
+									{{/if_eq}}
+									<ul class="custom-select-list user-dropdown">
+									{{#if_eq hired true}}
+										<li class="hire-candidate hired">Candidate</li>
+									{{else}}
+										<li class="hire-candidate">Hire</li>
+									{{/if_eq}}
+										<li class="archive-candidate">Archive</li>
+										<li class="divider"></li>
+										<li class="chat-candidate">Chat</li>
+										<li class="connect-candidate">Connect</li>
+									</ul>
+								</div>
 							</div>
-							<div class="candidate-archive"></div>
-							<div class="candidate-chat"></div>
+							<!--
 							<div class="user-connect"></div>
-							<!--<div class="candidate-rating"></div>-->
+							<div class="candidate-rating"></div>
+							-->
 							<div class="candidate-endorse">{{user.endorsementCount}}</div>
 							<div class="candidate-network sync">0</div>
 							<div class="candidate-referral">{{referralCount}}</div>
@@ -115,7 +128,14 @@
 								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
 								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
 							</div>
-							<div class="candidate-unarchive"></div>
+							<div class="user-actions">
+								<div class="custom-select user-dropdown" data-index="0" data-value="">
+									<button class="custom-select-button">Archived</button>
+									<ul class="custom-select-list user-dropdown">
+										<li class="unarchive-candidate">Unrchive</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 					{{/if_eq}}
 				{{/each}}

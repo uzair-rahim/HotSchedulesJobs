@@ -29,18 +29,19 @@ define([
 			"click #cancel-filter"			: "hideFilter",
 			"click #search-filter"			: "searchFilter",
 			"click #clear"					: "clearAllFilter",
+			"click .user-dropdown button"	: "userActions",
 			"click .view-profile"			: "profile",
 			"click .candidate-referral"		: "candidateReferral",
 			"click .candidate-select"		: "candidateSelect",
-			"click .candidate-chat"			: "candidateChat",
+			"click .chat-candidate"			: "candidateChat",
 			"click #send-chat"				: "sendBulkChat",
-			"click .candidate-archive"		: "candidateArchive",
-			"click .candidate-unarchive"	: "candidateUnarchive",
+			"click .archive-candidate"		: "candidateArchive",
+			"click .unarchive-candidate"	: "candidateUnarchive",
 			"click .candidate-network"		: "candidateNetwork",
 			"click .candidate-endorse"		: "candidateEndorsements",
-			"click .user-connect"			: "createConnection",
-			"click .user-disconnect"		: "deleteConnection",
-			"click .candidate-status"		: "confirmCandidateStatusChange"
+			"click .connect-candidate"		: "createConnection",
+			"click .disconnect-candidate"	: "deleteConnection",
+			"click .hire-candidate"			: "confirmCandidateStatusChange"
 		},
 
 		initialize : function(){
@@ -87,17 +88,19 @@ define([
 				$.each(candidate, function(){
 					var userGUID = $(this).attr("data-user");
 					if(userGUID == loggedUserGUID){
-						var connectionIcon = $(this).find(".user-connect");
-						connectionIcon.addClass("self");
+						var connectionItem = $(this).find(".connect-candidate");
+						connectionItem.addClass("disabled");
 					}else{
 						var connection = that.isUserConnected(userGUID);
 						if(connection !== null){
-							var connectionIcon = $(this).find(".user-connect");
+							var connectionItem = $(this).find(".connect-candidate");
 								if(connection.state == "connected" || connection.state == "sent"){
-									connectionIcon.addClass("user-disconnect");
-									connectionIcon.removeClass("user-connect");
+									connectionItem.text("Disconnect");
+									connectionItem.addClass("disconnect-candidate");
+									connectionItem.removeClass("connect-candidate");
 								}else{
-									connectionIcon.addClass(connection.state);
+									connectionItem.text("Accept Connection Request");
+									connectionItem.addClass(connection.state);
 								}
 						}
 					}
@@ -131,6 +134,18 @@ define([
 			if(goBack !== 0){
 				window.history.go(goBack);
 			}
+		},
+
+		userActions : function(event){
+			$(".custom-select-list").removeClass("show");
+			$(".custom-select-list.user-dropdown").click(function(){
+				$(".custom-select-list").removeClass("show");
+			});
+
+			var list = $(event.target).next();
+			$(list).addClass("show");
+
+			event.stopPropagation();
 		},
 
 		profile : function(event){
@@ -509,9 +524,9 @@ define([
 		},
 
 		createConnection : function(event){
-			var icon = $(event.target);
-			var isSelf = icon.hasClass("self");
-			var isReceivedRequest = icon.hasClass("received");
+			var link = $(event.target);
+			var isSelf = link.hasClass("self");
+			var isReceivedRequest = link.hasClass("received");
 			var network = new ModelNetwork();
 
 			if(isSelf){
@@ -520,19 +535,20 @@ define([
 			}
 			
 			if(isReceivedRequest){
-				var userGUID = icon.closest("li.view-profile").attr("data-user");
+				var userGUID = link.closest("li.view-profile").attr("data-user");
 				var connection = Utils.GetUserConnection(userGUID);
 				var acceptThisConnection = new Object();
 					acceptThisConnection.guid = connection.guid;
 					acceptThisConnection.toUserGuid = connection.toUserGUID;
 					acceptThisConnection.fromUserGuid = connection.fromUserGUID;
 
-				var icons = $("li.view-profile[data-user='"+connection.fromUserGUID+"'] .user-connect");
+				var links = $("li.view-profile[data-user='"+connection.fromUserGUID+"'] .connect-candidate");
 
 				network.acceptConnection(acceptThisConnection, function(data){
-					icons.addClass("user-disconnect");
-					icons.removeClass("user-connect");
-					icons.removeClass("received");
+					links.addClass("disconnect-candidate");
+					links.removeClass("connect-candidate");
+					links.removeClass("received");
+					links.text("Disconnect");
 
 					var newConnection = new Object();
 						newConnection.guid = data.guid;
@@ -549,11 +565,12 @@ define([
 					connection.fromUserGuid = Utils.GetUserSession().guid;
 					connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
 
-				var icons = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .user-connect");			
+				var links = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .connect-candidate");			
 
 				network.createConnection(connection, function(data){
-					icons.addClass("user-disconnect");
-					icons.removeClass("user-connect");
+					links.addClass("disconnect-candidate");
+					links.removeClass("connect-candidate");
+					links.text("Disconnect");
 
 					var newConnection = new Object();
 						newConnection.guid = data.guid;
@@ -570,8 +587,8 @@ define([
 		},
 
 		deleteConnection : function(event){
-			var icon = $(event.target);
-			var userGUID = icon.closest("li.view-profile").attr("data-user");
+			var link = $(event.target);
+			var userGUID = link.closest("li.view-profile").attr("data-user");
 			var connection = Utils.GetUserConnection(userGUID);
 
 			
@@ -579,22 +596,24 @@ define([
 				deleteThisConnection.fromUserGuid = connection.fromUserGUID;
 				deleteThisConnection.toUserGuid = connection.toUserGUID;
 
-			var icons = $("li.view-profile[data-user='"+userGUID+"'] .user-disconnect");
+			var links = $("li.view-profile[data-user='"+userGUID+"'] .disconnect-candidate");
 			
 			var network = new ModelNetwork();
 				network.deleteConnection(deleteThisConnection, function(data){
-					icons.addClass("user-connect");
-					icons.removeClass("user-disconnect");
+					links.addClass("connect-candidate");
+					links.removeClass("disconnect-candidate");
+					links.text("Connect");
 					Utils.RemoveFromUserConnectionsList(connection);
 				});
 
 			ga('send', 'event', 'button', 'click', 'delete connection with candidate');
+
 			event.stopPropagation();
 		},
 
 		confirmCandidateStatusChange : function(event){
 			var item = $(event.target);
-			var isHired = item.hasClass("create");
+			var isHired = item.hasClass("hired");
 			var messageText = "Are you sure you want to hire this candidate?";
 			var buttonType = "primary";
 			if(isHired){
@@ -609,8 +628,9 @@ define([
 		},
 
 		updateCandidateStatus : function(){
-			var candidateStatusButton = $('li.view-profile[data-guid="'+this.candidateGUID+'"]').find(".candidate-status button");
-			var candidateStatus = candidateStatusButton.hasClass("create");
+			var candidateStatusButton = $('li.view-profile[data-guid="'+this.candidateGUID+'"]').find(".user-dropdown button");
+			var candidateStatusLink = $('li.view-profile[data-guid="'+this.candidateGUID+'"]').find(".hire-candidate");
+			var candidateStatus = candidateStatusLink.hasClass("hired");
 			var candidateGUID = this.candidateGUID;
 			var status = "";
 
@@ -622,10 +642,14 @@ define([
 					if(candidateStatus){
 						candidateStatusButton.text("Candidate");
 						candidateStatusButton.removeClass("create");
+						candidateStatusLink.text("Hire");
+						candidateStatusLink.removeClass("hired");
 						status = "candidate";
 					}else{
 						candidateStatusButton.text("Hired");
 						candidateStatusButton.addClass("create");
+						candidateStatusLink.text("Candidate");
+						candidateStatusLink.addClass("hired");
 						status = "hired";
 					}
 					Utils.HideAlert();

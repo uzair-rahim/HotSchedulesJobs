@@ -264,31 +264,39 @@ ul.grid-list > li .bonus-info.new{
 	}
 }
 
-ul.grid-list > li .job-actions{
+ul.grid-list > li .job-actions,
+ul.grid-list > li .user-actions{
 	display: block;
 	float: right;
 	margin: 5px 0;
 	width: 110px;
 	height: 40px;
-	overflow: hidden;
 	white-space: nowrap;
 }
 
-ul.grid-list > li .job-actions button{
+ul.grid-list > li .job-actions button,
+ul.grid-list > li .user-actions button{
 	margin: 5px;
 	float: right;
+}
+
+ul.grid-list > li .user-actions button{
+	min-width: 89px;
 }
 
 ul.grid-list > li .job-actions button:first-child{
 	width: 100px;
 }
 
-@media screen and (max-width: 660px){
-	
-}
 
 ul.grid-list > li .job-actions .custom-select-list.job-status{
-	margin-left: -47px;
+	margin-left: -51px;
+	max-height: 200px;
+}
+
+ul.grid-list > li .user-actions .custom-select-list.user-dropdown{
+	right: 15px;
+	min-width: 110px;
 	max-height: 200px;
 }
 
@@ -379,22 +387,6 @@ ul.grid-list > li .candidate-info .candidate-job{
 	ul.grid-list > li .candidate-info .candidate-name,
 	ul.grid-list > li .candidate-info .candidate-job{
 		width: 155px;
-	}
-}
-
-ul.grid-list > li .candidate-status{
-	display: block;
-	float: right;
-	margin: 10px 5px;
-}
-
-ul.grid-list > li .candidate-status button{
-	width: 89px;	
-}
-
-@media screen and (max-width: 420px){
-	ul.grid-list > li .candidate-status{
-		display: none;
 	}
 }
 

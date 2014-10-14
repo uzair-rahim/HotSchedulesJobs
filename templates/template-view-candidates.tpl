@@ -81,10 +81,6 @@
 									</ul>
 								</div>
 							</div>
-							<!--
-							<div class="user-connect"></div>
-							<div class="candidate-rating"></div>
-							-->
 							<div class="candidate-endorse">{{user.endorsementCount}}</div>
 							<div class="candidate-network sync">0</div>
 							<div class="candidate-referral">{{referralCount}}</div>
@@ -132,7 +128,7 @@
 								<div class="custom-select user-dropdown" data-index="0" data-value="">
 									<button class="custom-select-button">Archived</button>
 									<ul class="custom-select-list user-dropdown">
-										<li class="unarchive-candidate">Unrchive</li>
+										<li class="unarchive-candidate">Unarchive</li>
 									</ul>
 								</div>
 							</div>

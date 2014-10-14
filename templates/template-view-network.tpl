@@ -50,8 +50,15 @@
 					<div class="candidate-name">{{this.attributes.firstname}} {{this.attributes.lastname}}</div>
 					<div class="candidate-job">{{#hasPrimaryWorkHistory this.attributes.primaryWorkHistory}}{{this.attributes.primaryWorkHistory.jobs.[0].jobName}} @ {{this.attributes.primaryWorkHistory.employer.name}}{{else}}{{../../language.notAvailable}}{{/hasPrimaryWorkHistory}}</div>
 				</div>
-				<div class="candidate-chat"></div>
-				<div class="user-connect"></div>
+				<div class="user-actions">
+					<div class="custom-select user-dropdown" data-index="0" data-value="">
+						<button class="custom-select-button">Chat</button>
+						<ul class="custom-select-list user-dropdown">
+							<li class="chat-candidate">Chat</li>
+							<li class="connect-candidate">Connect</li>
+						</ul>
+					</div>
+				</div>
 				<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
 				<div class="candidate-network sync"></div>
 				<div class="hourly-profile">

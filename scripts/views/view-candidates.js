@@ -525,11 +525,11 @@ define([
 
 		createConnection : function(event){
 			var link = $(event.target);
-			var isSelf = link.hasClass("self");
+			var isDisabled = link.hasClass("disabled");
 			var isReceivedRequest = link.hasClass("received");
 			var network = new ModelNetwork();
 
-			if(isSelf){
+			if(isDisabled){
 				event.stopPropagation();
 				return;
 			}

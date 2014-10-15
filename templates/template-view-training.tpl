@@ -5,7 +5,7 @@
 	<div class="alert-title">Post A Job</div>
 	<div class="alert-body">
 		<div class="training-image job"></div>
-		<p>Click <strong>"Add New Job"</strong> (upper left corner) from the the Jobs Page to post an open position at your store</p>
+		<p>Click <strong>"Add New Job"</strong> (upper left corner) from the the Jobs Page to post an open position at your store.</p>
 		<ul>
 			<li>Select Position</li>
 			<li>Set the wage</li>
@@ -23,7 +23,7 @@
 	<div class="alert-title">Spread The Word</div>
 	<div class="alert-body">
 		<div class="training-image word"></div>
-		<p>Attract great talent by sharing your posted jobs with the others, from the Jobs Page. You can share your jobs with...</p>
+		<p>Attract great talent by sharing your posted jobs with others, from the Jobs Page. You can share your jobs with...</p>
 		<ul>
 			<li>Connection <span>(People in your network)</span></li>
 			<li>Employees <span>(People who work for you)</span></li>
@@ -42,13 +42,13 @@
 	<div class="alert-title">Hire Great Talent</div>
 	<div class="alert-body">
 		<div class="training-image talent"></div>
-		<p>Click <strong>"Candidates"</strong> (top left corner) to review applicant for jobs you've posted. You can select the right candidate for each position by...</p>
+		<p>Click <strong>"Candidates"</strong> (top left corner) to review applicants for jobs you've posted. You can select the right candidate for each position by...</p>
 		<ul>
 			<li>Reviewing their profile <span>(work history, mutual connections, etc)</span></li>
 			<li>Targeted communication <span>(view the messages section)</span></li>
 			<li>Inviting them in for an interview</li>
 		</ul>
-		<p>You can also click "Hire" to indicate who you're onboarding</p>
+		<p>You can also click "Hire" to indicate who you're onboarding.</p>
 	</div>
 	<div class="alert-action">
 		<button class="close-training">Close</button>

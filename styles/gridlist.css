@@ -1,3 +1,19 @@
+#employees-list-container,
+#followers-list-container,
+#endorsements-list-container{
+	display: block;
+	float: left;
+	width: 100%;
+	overflow: hidden;
+}
+
+#employees-list-container.collapsed,
+#followers-list-container.collapsed,
+#endorsements-list-container.collapsed{
+	height: 32px;
+	margin-bottom: 19px;
+}
+
 .grid-list-head{
 	display: block;
 	float: left;
@@ -15,9 +31,29 @@
 	white-space: nowrap;
 }
 
-@media screen and (max-width: 510px){
+.grid-list-head.collapsed{
+	background-image: url("../images/icon-caret-down.png");
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: auto 15px;
+}
+
+.grid-list-head:hover{
+	background-color: #fcfcfc;
+	cursor: pointer;
+}
+
+.grid-list-head.expanded{
+	background-image: url("../images/icon-caret-up.png");
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: auto 15px;
+}
+
+@media screen and (max-width: 600px){
 	.grid-list-head:first-of-type{
 		margin-top: 20px;
+		font-size: 14px;
 	}
 }
 
@@ -380,13 +416,13 @@ ul.grid-list > li .candidate-info .candidate-job{
 @media screen and (max-width: 890px){
 	ul.grid-list > li .candidate-info{
 		border-right: none;
-		width: 155px;
+		width: 145px;
 
 	}
 
 	ul.grid-list > li .candidate-info .candidate-name,
 	ul.grid-list > li .candidate-info .candidate-job{
-		width: 155px;
+		width: 145px;
 	}
 }
 

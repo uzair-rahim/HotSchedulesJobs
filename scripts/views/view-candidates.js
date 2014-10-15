@@ -614,16 +614,18 @@ define([
 		confirmCandidateStatusChange : function(event){
 			var item = $(event.target);
 			var isHired = item.hasClass("hired");
+			var messageTitle = "Hire Candidate";
 			var messageText = "Are you sure you want to hire this candidate?";
 			var buttonType = "primary";
 			if(isHired){
+				messageTitle = "Change Status";
 				messageText = "This candidate will no longer be marked as hired";
 				buttonType = "destroy";
 			}
 
 			var candidate = $(item).closest("li.view-profile").data("guid");
 				this.candidateGUID = candidate;
-			Utils.ShowAlert({listener : "hire", primary : true, primaryType : buttonType, primaryText : "Confirm", title : "Hire Candidate", message : messageText });
+			Utils.ShowAlert({listener : "hire", primary : true, primaryType : buttonType, primaryText : "Confirm", title : messageTitle , message : messageText });
 			event.stopPropagation();
 		},
 

@@ -378,8 +378,6 @@ define([
 					var jobtypes = new ModelJobTypes();
 					var jobsinfo = new CollectionJobsInfo();
 					var employees = new CollectionEmployees({guid : userGuid});
-					var followers = new CollectionFollowers({guid : userGuid});
-					var endorsements = new CollectionEndorsements({guid : userGuid});
 					var models = new Object();
 
 
@@ -412,24 +410,6 @@ define([
 							},
 							error : function(){
 								Utils.ShowToast({ message : "Error fetching employees..."});
-							}
-						}),
-
-						followers.fetch({
-							success : function(response){
-								models.followers = response.models;
-							},
-							error : function(){
-								Utils.ShowToast({ message : "Error fetching followers..."});
-							}
-						}),
-
-						endorsements.fetch({
-							success : function(response){
-								models.endorsements = response.models;
-							},
-							error : function(){
-								Utils.ShowToast({ message : "Error fetching endorsements..."});
 							}
 						})
 

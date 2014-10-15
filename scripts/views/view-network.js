@@ -7,9 +7,11 @@ define([
 		"marionette",
 		"hbs!templates/template-view-network",
 		"scripts/models/model-user",
-		"scripts/models/model-network"
+		"scripts/models/model-network",
+		"scripts/collections/collection-employees",
+		"scripts/collections/collection-followers"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, CollectionFollowers, CollectionEndorsers){
 	"use strict";
 
 	var ViewNetwork = Marionette.ItemView.extend({
@@ -33,7 +35,8 @@ define([
 			"click .candidate-endorse"		: "networkEndorsements",
 			"click #share-job"				: "shareJob",
 			"click .connect-candidate"		: "createConnection",
-			"click .disconnect-candidate"	: "deleteConnection"
+			"click .disconnect-candidate"	: "deleteConnection",
+			"click .grid-list-head"			: "expandCollapseSection"
 
 		},
 
@@ -409,7 +412,7 @@ define([
 
 		disableToolbarButtons : function(){
 			$("#send-chat").prop("disabled", true);
-			$("#archive-candidates").prop("disabled", true);
+			$("#share-job").prop("disabled", true);
 			$(".candidate-select").prop("checked", false);
 			$(".candidate-select").prop("disabled", false);
 		},
@@ -501,14 +504,75 @@ define([
 			event.stopPropagation();
 		},
 
+		expandCollapseSection : function(event){
+			var header = $(event.target);
+			var id = $(header).attr("id");
+			var section = $(header).parent();
+			var isCollapsed = $(header).hasClass("collapsed");
+			var hasData = $(section).find(".grid-list").html() !== "";
+
+			if(isCollapsed){
+				$(header).addClass("expanded");
+				$(header).removeClass("collapsed");
+				$(section).removeClass("collapsed");
+
+				if(!hasData){
+					switch(id){
+						case "followers":
+							this.getFollowers();
+						break;
+						case "endorsers":
+							this.getEndorsers();
+						break;
+					}
+				}
+
+			}else{
+				$(header).addClass("collapsed");
+				$(header).removeClass("expanded");
+				$(section).addClass("collapsed");
+			}
+
+			event.stopPropagation();
+		},
+
+		getFollowers : function(){
+			var that = this;
+			var index = Utils.GetSelectedEmployer();
+			var employerGuid = Utils.GetUserSession().employerIds[index];
+			var followers = new CollectionFollowers({guid : employerGuid});
+
+			followers.fetch({
+				success : function(response){
+					that.model.followers = response.models;
+					that.render();
+				}
+			});
+		},
+
+		getEndorsers : function(){
+			var that = this;
+			var index = Utils.GetSelectedEmployer();
+			var employerGuid = Utils.GetUserSession().employerIds[index];
+			var endorsers = new CollectionEndorsers({guid : employerGuid});
+
+			endorsers.fetch({
+				success : function(response){
+					that.model.endorsements = response.models;
+					that.render();
+				}
+			});
+		},
+
 		serializeData : function(){
 			var jsonObject = new Object();
+				jsonObject.language = App.Language;
+				jsonObject.breadcrumb = App.getTrail();
+				jsonObject.jobtypes = this.model.jobtypes;
 				jsonObject.employees = this.model.employees;
 				jsonObject.followers = this.model.followers;
 				jsonObject.endorsements = this.model.endorsements;
-				jsonObject.jobtypes = this.model.jobtypes;
-				jsonObject.language = App.Language;
-				jsonObject.breadcrumb = App.getTrail();
+				console.log(jsonObject);
 			return jsonObject;
 		}
 		

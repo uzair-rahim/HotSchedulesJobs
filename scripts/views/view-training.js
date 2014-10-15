@@ -33,13 +33,13 @@ define([
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/training');
 
-      		var training = Utils.GetUserSession().training;
+      		var training = localStorage.getItem("training");
 
-      		if(!training){
-      			var trainingEventGUID = Utils.GetUserSession().trainingEventGUID;
+      		if(training == "null"){
+      			var trainingEventGUID = localStorage.getItem("trainingEventGUID");
       			var date = new Date();
       			var data = {
-      				"guid" : localStorage.getItem("trainingEventGUID"),
+      				"guid" : trainingEventGUID,
       				"completed" : date.getTime()
       			}
 

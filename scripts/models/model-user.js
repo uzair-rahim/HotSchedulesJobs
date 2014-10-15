@@ -111,14 +111,14 @@ define([
 				});
 			},
 
-			updateUserEvent : function(userGUID,eventGUID,event){
+			updateUserEvent : function(userGUID,eventGUID,event, callback){
 				var that = this;
 				var url = this.urlRoot() + "/" + userGUID + "/events/" + eventGUID;
 				$.ajax({
 					type : "PUT",
 					url : url,
 					contentType : "application/json",
-					data : JSON.stringify(chat),
+					data : JSON.stringify(event),
 					success : function(response){
 						callback(response);
 					},

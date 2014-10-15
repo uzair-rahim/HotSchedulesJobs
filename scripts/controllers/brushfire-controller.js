@@ -251,7 +251,7 @@ define([
 
 							var view = new ViewJobs({model : models});
 								that.layout.body.show(view);
-								if(!Utils.GetUserSession().training){
+								if(localStorage.getItem("training") == "null"){
 									that.training();
 								}
 								

@@ -1,7 +1,7 @@
 <div class="view-modal"></div>
 
 
-<div id="app-alert-training-job" class="app-alert training">
+<div id="app-alert-training-job" class="app-alert training show">
 	<div class="alert-title">Post A Job</div>
 	<div class="alert-body">
 		<div class="training-image job"></div>
@@ -34,14 +34,14 @@
 	<div class="alert-action">
 		<button class="close-training">Close</button>
 		<button id="continue-word" class="primary">Continue</button>
-		<button id="back-work">Back</button>
+		<button id="back-word">Back</button>
 	</div>
 </div>
 
-<div id="app-alert-training-talent" class="app-alert training show">
+<div id="app-alert-training-talent" class="app-alert training">
 	<div class="alert-title">Hire Great Talent</div>
 	<div class="alert-body">
-		<div class="training-image word"></div>
+		<div class="training-image talent"></div>
 		<p>Click <strong>"Candidates"</strong> (top left corner) to review applicant for jobs you've posted. You can select the right candidate for each position by...</p>
 		<ul>
 			<li>Reviewing their profile <span>(work history, mutual connections, etc)</span></li>

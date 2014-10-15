@@ -47,7 +47,6 @@ define([
 					guid				: "",
 					email				: "",
 					verified			: false,
-					training			: false,
 					employerIds			: "",
 					roles				: [],
 					adminEmployers		: []

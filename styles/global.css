@@ -1913,6 +1913,24 @@ input[type="password"]::selection{
 	border: 1px solid #dddddd;
 }
 
+.app-alert.training .training-image.job{
+	background-image: url("../images/training-job.jpg");
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.app-alert.training .training-image.word{
+	background-image: url("../images/training-word.jpg");
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.app-alert.training .training-image.talent{
+	background-image: url("../images/training-talent.jpg");
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
 .app-alert.training .alert-body p{
 	color: #2f3b4b;
 	font-size: 14px;

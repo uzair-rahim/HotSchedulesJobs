@@ -20,6 +20,7 @@
 			{{/each}}
 		</div>
 	<li class="divider"></li>
+	<li id="getting-started">Getting Started</li>
 	<li id="terms-conditions">Terms and Conditions</li>
 	<li id="logout">Logout</li>
 </ul>

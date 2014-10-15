@@ -25,6 +25,7 @@ define([
 			"click #profile-settings" 	: "profileSettings",
 			"click #stores-list" 		: "switchStore",
 			"click #terms-conditions" 	: "termsAndCondition",
+			"click #getting-started" 	: "gettingStarted",
 			"click #logout" 			: "logout"
 		},
 
@@ -139,6 +140,10 @@ define([
 
 		termsAndCondition : function(){
 			Utils.ShowTermsAndConditions({inApp : true, secondaryButtonText : "OK"});
+		},
+
+		gettingStarted : function(){
+			App.router.controller.training();
 		},
 
 		logout : function(){

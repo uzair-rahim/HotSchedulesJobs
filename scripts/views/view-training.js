@@ -5,9 +5,10 @@ define([
 		"app",
 		"utils",
 		"marionette",
-		"hbs!templates/template-view-training"
+		"hbs!templates/template-view-training",
+		"scripts/models/model-user"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, Template){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser){
 	"use strict";
 
 	var ViewTraining = Marionette.ItemView.extend({
@@ -15,7 +16,12 @@ define([
 		className : "",
 		template: Template,
 		events : {
-			
+			"click .close-training"	: "closeTraining",
+			"click #continue-job"	: "showShareTraining",
+			"click #continue-word"	: "showTalentTraining",
+			"click #back-word"		: "showJobTraining",
+			"click #back-talent"	: "showShareTraining",
+			"click #finish-talent"	: "closeTraining"
 		},
 
 		initialize : function(){
@@ -23,9 +29,44 @@ define([
 			console.log("Training view initialized...");
 		},
 
-		onShow : function(){
+		onRender : function(){
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/training');
+
+      		var training = Utils.GetUserSession().training;
+
+      		if(!training){
+      			var trainingEventGUID = Utils.GetUserSession().trainingEventGUID;
+      			var date = new Date();
+      			var data = {
+      				"guid" : localStorage.getItem("trainingEventGUID"),
+      				"completed" : date.getTime()
+      			}
+
+      			var user = new ModelUser();
+      				user.updateUserEvent(Utils.GetUserSession().guid, data.guid, data, function(response){
+      					localStorage.setItem("training", date.getTime());	
+      				});
+      		}
+		},
+
+		closeTraining : function(){
+			this.remove();
+		},
+
+		showJobTraining : function(){
+			$(".app-alert.training").removeClass("show");
+			$("#app-alert-training-job").addClass("show");
+		},
+
+		showShareTraining : function(){
+			$(".app-alert.training").removeClass("show");
+			$("#app-alert-training-spread").addClass("show");
+		},
+
+		showTalentTraining : function(){
+			$(".app-alert.training").removeClass("show");
+			$("#app-alert-training-talent").addClass("show");
 		},
 
 		serializeData : function(){

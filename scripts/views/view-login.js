@@ -68,64 +68,67 @@ define([
 							user.employerIds = response.attributes.employerIds;
 							user.roles = response.attributes.roles;
 
-						var userModel = new ModelUser();
-							userModel.getUserEventByType(user.guid,0,function(response){
-								user.training = response.completed;
-							});	
-						
-							Utils.CreateUserSession(user);
-							Utils.RememberUserEmail(checked, user.email);
-
 						var adminEmployers = response.attributes.adminEmployers;
 							Utils.SetAdminEmployers(adminEmployers);	
 							Utils.SetSelectedEmployer(0);
 
-						var support = Utils.IsSupportUser(user.roles);	
+						var userModel = new ModelUser();
+							userModel.getUserEventByType(user.guid,0,function(response){
+								localStorage.setItem("training", response.completed);
+								localStorage.setItem("trainingEventGUID", response.guid);
 
-							var networkModel = new ModelNetwork();
-							networkModel.getConnections(user.guid, function(data){
-								var connections = [];
+								Utils.CreateUserSession(user);
+								Utils.RememberUserEmail(checked, user.email);
 
-								$.each(data, function(){
-									var connection = new Object();
-										connection.guid = this.guid;
-										connection.fromUserGUID = this.fromUserGuid;
-										connection.toUserGUID = this.toUserGuid;
-										connection.state = "connected";
-									connections.push(connection);
-								});
+							var support = Utils.IsSupportUser(user.roles);	
 
-								
-									networkModel.getReceivedRequests(user.guid, function(data){
+								var networkModel = new ModelNetwork();
+								networkModel.getConnections(user.guid, function(data){
+									var connections = [];
 
-										$.each(data, function(){
-											var connection = new Object();
-												connection.guid = this.guid;
-												connection.fromUserGUID = this.fromUserGuid;
-												connection.toUserGUID = this.toUserGuid;
-												connection.state = "received";
-											connections.push(connection);
-										});
+									$.each(data, function(){
+										var connection = new Object();
+											connection.guid = this.guid;
+											connection.fromUserGUID = this.fromUserGuid;
+											connection.toUserGUID = this.toUserGuid;
+											connection.state = "connected";
+										connections.push(connection);
+									});
 
-										networkModel.getSentRequests(user.guid, function(data){
+									
+										networkModel.getReceivedRequests(user.guid, function(data){
 
 											$.each(data, function(){
 												var connection = new Object();
 													connection.guid = this.guid;
 													connection.fromUserGUID = this.fromUserGuid;
 													connection.toUserGUID = this.toUserGuid;
-													connection.state = "sent";
+													connection.state = "received";
 												connections.push(connection);
 											});
 
-											Utils.SetUserConnectionsList(connections);
-											that.routeUser(support,user);
+											networkModel.getSentRequests(user.guid, function(data){
+
+												$.each(data, function(){
+													var connection = new Object();
+														connection.guid = this.guid;
+														connection.fromUserGUID = this.fromUserGuid;
+														connection.toUserGUID = this.toUserGuid;
+														connection.state = "sent";
+													connections.push(connection);
+												});
+
+												Utils.SetUserConnectionsList(connections);
+												that.routeUser(support,user);
+
+											});
 
 										});
+								});
 
-									});
-							});
 
+
+							});	
 
 					},
 

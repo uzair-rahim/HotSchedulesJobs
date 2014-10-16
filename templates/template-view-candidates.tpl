@@ -82,7 +82,7 @@
 								</div>
 							</div>
 							<div class="candidate-endorse">{{user.endorsementCount}}</div>
-							<div class="candidate-network sync">0</div>
+							<div class="candidate-network sync">{{#if_gt user.sharedNetworkConnectionCount 500}}500+{{else}}{{user.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 							<div class="candidate-referral">{{referralCount}}</div>
 							<div class="hourly-profile">
 								<div class="about-section">

@@ -8,8 +8,8 @@ define([
 		"hbs!templates/template-view-network",
 		"scripts/models/model-user",
 		"scripts/models/model-network",
-		"scripts/collections/collection-employees",
-		"scripts/collections/collection-followers"
+		"scripts/collections/collection-followers",
+		"scripts/collections/collection-endorsements"
 	],
 	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, CollectionFollowers, CollectionEndorsers){
 	"use strict";
@@ -572,7 +572,6 @@ define([
 				jsonObject.employees = this.model.employees;
 				jsonObject.followers = this.model.followers;
 				jsonObject.endorsements = this.model.endorsements;
-				console.log(jsonObject);
 			return jsonObject;
 		}
 		

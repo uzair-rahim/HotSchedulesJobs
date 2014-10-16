@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
-				<div class="candidate-network sync"></div>
+				<div class="candidate-network sync">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>
@@ -105,7 +105,7 @@
 						</div>
 					</div>
 					<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
-					<div class="candidate-network sync"></div>
+					<div class="candidate-network sync">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 					<div class="hourly-profile">
 						<div class="about-section">
 							<label>About</label>
@@ -153,7 +153,7 @@
 						</div>
 					</div>
 					<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
-					<div class="candidate-network sync"></div>
+					<div class="candidate-network sync">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 					<div class="hourly-profile">
 						<div class="about-section">
 							<label>About</label>

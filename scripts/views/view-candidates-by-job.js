@@ -5,19 +5,18 @@ define([
 		"app",
 		"utils",
 		"marionette",
-		"hbs!templates/template-view-candidates",
+		"hbs!templates/template-view-candidates-by-job",
 		"scripts/models/model-user",
 		"scripts/models/model-network",
 		"scripts/models/model-job",
 		"scripts/models/model-candidate",
 		"scripts/models/model-referral",
-		"scripts/models/model-employer",
 		"scripts/collections/collection-connections"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, ModelEmployer, CollectionConnections){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, ModelUser, ModelNetwork, ModelJob, ModelCandidate, ModelReferral, CollectionConnections){
 	"use strict";
 
-	var ViewCandidates = Marionette.ItemView.extend({
+	var ViewCandidatesByJob = Marionette.ItemView.extend({
 		tagName : "div",
 		className : "content",
 		template: Template,
@@ -43,8 +42,6 @@ define([
 			"click .connect-candidate"		: "createConnection",
 			"click .disconnect-candidate"	: "deleteConnection",
 			"click .hire-candidate"			: "confirmCandidateStatusChange",
-			"click #show-more-unarchived"	: "showMoreUnarchivedCandidates",
-			"click #show-more-archived"		: "showMoreArchivedCandidates",
 			"click .grid-list-head"			: "expandCollapseSection"
 		},
 
@@ -160,7 +157,6 @@ define([
 
 				var item = $(event.target).closest("#candidates-list > li");
 				var userGuid = $(item).attr("data-user");
-				var jobGuid = $(item).attr("data-job");
 				var job = $(item).closest("#candidates-list");
 				var isNewCandidate = $(item).find(".candidate-name").hasClass("new");
 				var allItems = $("#candidates-list > li");
@@ -217,13 +213,13 @@ define([
 
 						if(isNewCandidate){
 							$(item).find("*").removeClass("new");
-							//$(job).find(".candidates-list li:eq("+$(item).index()+")").removeClass("new");
+							$(job).find(".candidates-list li:eq("+$(item).index()+")").removeClass("new");
 
 							var request = new Object();
 							var update = new Object();
 
 							request.type = "update";
-							request.jobGuid = jobGuid;
+							request.jobGuid = $(job).attr("data-guid");
 							request.guid = $(item).attr("data-guid");
 
 							update.id = $(item).attr("data-id");;
@@ -277,7 +273,7 @@ define([
 		candidateChat : function(event){
 			ga("send", "event", "send-message-candidate", "click");
 			var candidate = $(event.target).closest("li.view-profile");
-			var jobPostingGUID = $(event.target).closest("li.view-profile").attr("data-job");
+			var jobPostingGUID = $(event.target).closest("ul#candidates-list").attr("data-guid");
 			var candidateName = candidate.find(".candidate-info .candidate-name").text();
 			var candidateGUID = candidate.attr("data-user");
 
@@ -298,7 +294,7 @@ define([
 		sendBulkChat : function(event){
 			ga("send", "event", "send-bulk-message-candidate", "click");
 			var candidates = $(".candidate-select:checked");
-			var jobPostingGUID = $(".candidate-select:checked").closest("li.view-profile").attr("data-job");
+			var jobPostingGUID = $(".candidate-select:checked").closest("ul.grid-list").attr("data-guid");
 			var recipients = new Array();
 
 			$.each(candidates, function(){
@@ -318,13 +314,13 @@ define([
 		candidateArchive : function(event){
 
 			var candidate = $(event.target).closest("#candidates-list > li");
-			var job = $(candidate).closest("li.view-profile");
+			var job = $(candidate).closest("#candidates-list");
 			var seen = $(candidate).find(".candidate-info .candidate-name").hasClass("new");
 			var request = new Object();
 			var update = new Object();
 
 				request.type = "update";
-				request.jobGuid = $(job).attr("data-job");
+				request.jobGuid = $(job).attr("data-guid");
 				request.guid = $(candidate).attr("data-guid");
 
 				update.id = $(candidate).attr("data-id");;
@@ -352,7 +348,7 @@ define([
 		candidateUnarchive : function(event){
 
 			var candidate = $(event.target).closest("#archived-candidates-list > li");
-			var job = $(candidate).closest("li.view-profile");
+			var job = $(candidate).closest(".view-profile");
 			var seen = $(candidate).closest(".view-profile").find(".candidate-info .candidate-name").hasClass("new");
 			var request = new Object();
 			var update = new Object();
@@ -399,9 +395,9 @@ define([
 
 		candidateReferral : function(event){
 			var user = $(event.target).closest(".view-profile");
-			var job = $(event.target).closest("li.view-profile");
+			var job = $(event.target).closest("#candidates-list");
 			var userGUID = $(user).attr("data-user");
-			var jobPostingGUID = $(job).attr("data-job");
+			var jobPostingGUID = $(job).attr("data-guid");
 
 			var referral = new ModelReferral();
 				referral.getReferralsList(jobPostingGUID, userGUID, function(data){
@@ -434,10 +430,10 @@ define([
 			if(this.numberOfCalls > 0){
 				var that = this;
 				var element = $(".candidate-select[type='checkbox']:checked:eq("+(this.numberOfCalls-1)+")");
-				var job = $(element).closest("li.view-profile");
+				var job = $(element).closest("#candidates-list");
 
-				var jobGuid = $(job).attr("data-job");
-				var id =  $(job).attr("data-jobID");
+				var jobGuid = $(job).attr("data-guid");
+				var id =  $(job).attr("data-id");
 				var guid =  $(element).closest(".view-profile").attr("data-guid");
 				var seen = $(element).closest(".view-profile").find(".candidate-info .candidate-name").hasClass("new");
 
@@ -496,8 +492,8 @@ define([
 			var isCheckboxSelected = $(checkboxes).length > 0;
 			var isArchivedCandidatesSelected = archivedCheckbox.length > 0;
 
-			var candidatesList = $("#candidates-list-container li.view-profile");
-			var archivedCandidatesList = $("#archived-candidates-list-container");			
+			var candidatesList = $(".candidates-list-container .candidate-section");
+			var archivedCandidatesList = $(".archived-candidates-list-container");			
 
 			if(isCheckboxSelected){
 				$(document).find(candidatesList).hide();
@@ -505,12 +501,12 @@ define([
 
 				$(checkboxes).each(function(){
 					var id = $(this).attr("id");
-					console.log(id);
-					$("li.view-profile[data-jobType='"+id+"']").show();
+					console.log(id)
+					$(".candidate-section[id='"+id+"']").show();
 				});
 
 			}else{
-				$("li.view-profile").show();
+				$(".candidate-section").show();
 			}
 
 			if(isArchivedCandidatesSelected){
@@ -667,63 +663,23 @@ define([
 
 		expandCollapseSection : function(event){
 			var header = $(event.target);
-			var id = $(header).attr("id");
 			var section = $(header).parent();
 			var isCollapsed = $(header).hasClass("collapsed");
-			var hasData = $(section).find(".grid-list li.view-profile").length !== 0
 
 			if(isCollapsed){
 				$(header).addClass("expanded");
 				$(header).removeClass("collapsed");
 				$(section).removeClass("collapsed");
+				$(section).parent().removeClass("collapsed");
 
 			}else{
 				$(header).addClass("collapsed");
 				$(header).removeClass("expanded");
 				$(section).addClass("collapsed");
+				$(section).parent().addClass("collapsed");
 			}
 
 			event.stopPropagation();
-		},
-
-		showMoreUnarchivedCandidates : function(){
-			var startIndex = $("#candidates-list > li.view-profile").length;
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
-
-			var that = this;
-			var employer = new ModelEmployer();
-			employer.getCandidatesByEmployerGUID(employerGUID,startIndex,15,0,function(response){
-				if(response.length === 0){
-					$("#show-more-unarchived").remove()
-				}else{
-					$.each(response, function(){
-						that.model.candidates.push(this);
-					});
-					that.render();
-				}
-			});
-			
-		},
-
-		showMoreArchivedCandidates : function(){
-			var startIndex = $("#archived-candidates-list > li.view-profile").length;
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
-
-			var that = this;
-			var employer = new ModelEmployer();
-
-			employer.getCandidatesByEmployerGUID(employerGUID,startIndex,15,1,function(response){
-				if(response.length === 0){
-					$("#show-more-archived").remove()
-				}else{
-					$.each(response, function(){
-						that.model.archived.push(this);
-					});
-					that.render();
-				}
-			});
 		},
 
 		serializeData : function(){
@@ -734,15 +690,13 @@ define([
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
 				jsonObject.jobtypes = this.model.jobtypes;
-				jsonObject.candidates = this.model.candidates;
-				jsonObject.archived = this.model.archived;
+				jsonObject.jobs = this.model.jobs;
 				jsonObject.sub = mode;
 				jsonObject.breadcrumb = App.getTrail();
-				console.log(jsonObject)
 			return jsonObject;
 		}
 		
 	});
 
-	return ViewCandidates;
+	return ViewCandidatesByJob;
 });

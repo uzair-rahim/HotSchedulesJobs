@@ -15,6 +15,7 @@ define([
 		"scripts/views/view-support-nav",
 		"scripts/views/view-jobs",
 		"scripts/views/view-candidates",
+		"scripts/views/view-candidates-by-job",
 		"scripts/views/view-profile",
 		"scripts/views/view-connections",
 		"scripts/views/view-network",
@@ -25,6 +26,7 @@ define([
 		"scripts/views/view-select-employer",
 		"scripts/views/view-training",
 		"scripts/models/model-jobtypes",
+		"scripts/models/model-employer",
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-yelp-rating",
 		"scripts/models/model-chat",
@@ -36,7 +38,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ViewTraining, ModelJobTypes, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ViewTraining, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -274,39 +276,35 @@ define([
 					App.clearTrail();
 					App.pushTrail(App.Language.candidates);
 
+					var index = Utils.GetSelectedEmployer();
+					var employerGUID = Utils.GetUserSession().employerIds[index];
 					var jobtypes = new ModelJobTypes();
-					var jobs = new CollectionJobs();
+					var employer = new ModelEmployer();
 					var models = new Object();
 
-					$.when(
-						jobtypes.fetch({
-							success : function(jobtypesResponse){
-								console.log("Job Types fetched successfully...");
-								models.jobtypes = jobtypesResponse.attributes;
-							},
-							error : function(){
-								console.log("Error fetching Job Types...");
-								Utils.ShowToast({ message : "Error fetching Job Types..."});
-							}
-						}),
-						jobs.fetch({
-							success : function(collection, jobsResponse){
-								console.log("Jobs fetched successfully...");
-								models.jobs = jobsResponse;
-							},
-							error : function(){
-								console.log("Error fetching Jobs...");
-								Utils.ShowToast({ message : "Error fetching Jobs..."});
-							}
-						})
+					employer.getCandidatesByEmployerGUID(employerGUID,0,15,0,function(response){
+						models.candidates = response;
 
-					).then(function(){
-						that.removeBackground();
-						that.setLayout();
-						that.setHeader("navigation");
+						employer.getCandidatesByEmployerGUID(employerGUID,0,15,1,function(response){
+							models.archived = response;
 
-						var view = new ViewCandidates({model : models});
-							that.layout.body.show(view);
+							jobtypes.fetch({
+								success : function(jobtypesResponse){
+									console.log("Job Types fetched successfully...");
+									models.jobtypes = jobtypesResponse.attributes;
+									that.removeBackground();
+									that.setLayout();
+									that.setHeader("navigation");
+
+									var view = new ViewCandidates({model : models});
+										that.layout.body.show(view);
+								},
+								error : function(){
+									console.log("Error fetching Job Types...");
+									Utils.ShowToast({ message : "Error fetching Job Types..."});
+								}
+							});
+						});
 					});
 				}else{
 					App.router.navigate("login", true);
@@ -355,7 +353,7 @@ define([
 						that.setLayout();
 						that.setHeader("navigation");
 
-						var view = new ViewCandidates({model : models, mode : "child"});
+						var view = new ViewCandidatesByJob({model : models, mode : "child"});
 							that.layout.body.show(view);
 					});
 

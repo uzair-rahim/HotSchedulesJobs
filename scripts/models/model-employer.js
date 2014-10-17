@@ -36,6 +36,21 @@ define([
 						console.log("Error fetching interested users count");
 					}
 				});
+			},
+
+			getCandidatesByEmployerGUID : function(employerGUID,start,rows,archived,callback){
+				var that = this;
+				var url = this.urlRoot() + "/" + employerGUID + "/candidates?start=" + start + "&rows=" + rows + "&archived=" + archived;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(){
+						console.log("Error fetching candidates");
+					}
+				});
 			}
 
 		});

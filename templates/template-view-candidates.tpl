@@ -42,100 +42,113 @@
 	</div>
 </div>
 
-<div class="candidates-list-container">
-	{{#each jobs}}
-		<div class="candidate-section" id="{{jobType.guid}}">
-			{{#hasUnarchivedCandidates this}}
-				<div class="grid-list-head">{{jobName}} ({{totalUnarchivedCandidatesByJob this}})</div>
-				<ul id="candidates-list" class="grid-list" data-id="{{id}}" data-guid="{{guid}}">
-				{{#each candidates}}
-					{{#if_eq archived false}}
-						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" data-email="{{user.email}}">
-							<input class="candidate-select" type="checkbox"/>
-							<div class="candidate-picture">
-								{{#isNotNull this.user.photo}}
-									<img src="{{this.user.photo.url}}"/>
-								{{/isNotNull}}
-							</div>
-							<div class="candidate-info">
-								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
-								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
-							</div>
-							<div class="user-actions">
-								<div class="custom-select user-dropdown" data-index="0" data-value="">
-									{{#if_eq hired true}}
-										<button class="custom-select-button create">Hired</button>
-									{{else}}
-										<button class="custom-select-button">Candidate</button>
-									{{/if_eq}}
-									<ul class="custom-select-list user-dropdown">
-									{{#if_eq hired true}}
-										<li class="hire-candidate hired">Candidate</li>
-									{{else}}
-										<li class="hire-candidate">Hire</li>
-									{{/if_eq}}
-										<li class="archive-candidate">Archive</li>
-										<li class="divider"></li>
-										<li class="chat-candidate">Chat</li>
-										<li class="connect-candidate">Connect</li>
-									</ul>
-								</div>
-							</div>
-							<div class="candidate-endorse">{{user.endorsementCount}}</div>
-							<div class="candidate-network sync">{{#if_gt user.sharedNetworkConnectionCount 500}}500+{{else}}{{user.sharedNetworkConnectionCount}}{{/if_gt}}</div>
-							<div class="candidate-referral">{{referralCount}}</div>
-							<div class="hourly-profile">
-								<div class="about-section">
-									<label>About</label>
-									{{#isNotNull user.about}}
-										<div class="about">{{user.about}}</div>
-									{{else}}
-										<div class="about">Not Available</div>
-									{{/isNotNull}}
-								</div>
-								<div class="history-section">
-									<label>Work History</label>
-									<ul class="work-history"></ul>
-								</div>
-							</div>
-						</li>
-					{{/if_eq}}
-				{{/each}}
-				</ul>
-			{{/hasUnarchivedCandidates}}
-		</div>
-	{{/each}}
+{{#if_gt candidates.length 0}}
+<div id="candidates-list-container">
+	<div id="recent" class="grid-list-head expanded">Recent Candidates</div>
+	<ul id="candidates-list" class="grid-list">
+		{{#each candidates}}
+			<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" data-email="{{user.email}}" data-job="{{jobPosting.guid}}" data-jobID="{{jobPosting.id}}" data-jobType="{{jobPosting.jobType.guid}}">
+				<input class="candidate-select" type="checkbox"/>
+				<div class="candidate-picture">
+					{{#isNotNull this.user.photo}}
+						<img src="{{this.user.photo.url}}"/>
+					{{/isNotNull}}
+				</div>
+				<div class="candidate-info">
+					<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
+					<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
+				</div>
+				<div class="jobposting-info">
+					<div class="name">{{jobPosting.jobName}}</div>
+				</div>
+				<div class="user-actions">
+					<div class="custom-select user-dropdown" data-index="0" data-value="">
+						{{#if_eq hired true}}
+							<button class="custom-select-button create">Hired</button>
+						{{else}}
+							<button class="custom-select-button">Candidate</button>
+						{{/if_eq}}
+						<ul class="custom-select-list user-dropdown">
+							{{#if_eq hired true}}
+								<li class="hire-candidate hired">Candidate</li>
+							{{else}}
+								<li class="hire-candidate">Hire</li>
+							{{/if_eq}}
+							<li class="archive-candidate">Archive</li>
+							<li class="divider"></li>
+							<li class="chat-candidate">Chat</li>
+							<li class="connect-candidate">Connect</li>
+						</ul>
+					</div>
+				</div>	
+				<div class="candidate-endorse">{{user.endorsementCount}}</div>
+				<div class="candidate-network sync">{{#if_gt user.sharedNetworkConnectionCount 500}}500+{{else}}{{user.sharedNetworkConnectionCount}}{{/if_gt}}</div>
+				<div class="candidate-referral">{{referralCount}}</div>
+				<div class="hourly-profile">
+					<div class="about-section">
+						<label>About</label>
+						{{#isNotNull user.about}}
+							<div class="about">{{user.about}}</div>
+						{{else}}
+							<div class="about">Not Available</div>
+						{{/isNotNull}}
+					</div>
+					<div class="history-section">
+						<label>Work History</label>
+						<ul class="work-history"></ul>
+					</div>
+				</div>
+			</li>
+		{{/each}}
+		<li id="show-more-unarchived" class="foot"><a>Show More Candidates</a></li>
+	</ul>
 </div>
+{{/if_gt}}
 
-{{#anyArchivedCandidates jobs sub}}
-	<div class="archived-candidates-list-container">
-		<div class="grid-list-head">{{language.archived}} ({{totalArchivedCandidates jobs sub}})</div>
-		<ul id="archived-candidates-list" class="grid-list">
-			{{#each jobs}}
-				{{#each candidates}}				
-					{{#if_eq archived true}}
-						<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-job="{{../../guid}}" data-email="{{user.email}}">
-							<div class="candidate-picture">
-								{{#isNotNull this.user.photo}}
-									<img src="{{this.user.photo.url}}"/>
-								{{/isNotNull}}
-							</div>
-							<div class="candidate-info">
-								<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
-								<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
-							</div>
-							<div class="user-actions">
-								<div class="custom-select user-dropdown" data-index="0" data-value="">
-									<button class="custom-select-button">Archived</button>
-									<ul class="custom-select-list user-dropdown">
-										<li class="unarchive-candidate">Unarchive</li>
-									</ul>
-								</div>
-							</div>
-						</li>
-					{{/if_eq}}
-				{{/each}}
-			{{/each}}
-		</ul>
-	</div>
-{{/anyArchivedCandidates}}
+
+{{#if_gt archived.length 0}}
+<div id="archived-candidates-list-container">
+	<div id="archived" class="grid-list-head expanded">Archived Candidates</div>
+	<ul id="archived-candidates-list" class="grid-list">
+		{{#each archived}}
+			<li class="view-profile" data-id="{{id}}" data-guid="{{guid}}" data-user="{{user.guid}}" data-email="{{user.email}}" data-job="{{jobPosting.guid}}" data-jobID="{{jobPosting.id}}">
+				<div class="candidate-picture">
+					{{#isNotNull this.user.photo}}
+						<img src="{{this.user.photo.url}}"/>
+					{{/isNotNull}}
+				</div>
+				<div class="candidate-info">
+					<div class="candidate-name {{#if_eq seen false}}new{{/if_eq}}">{{user.firstname}} {{user.lastname}}</div>
+					<div class="candidate-job">{{#hasPrimaryWorkHistory user.primaryWorkHistory}}{{user.primaryWorkHistory.jobs.[0].jobName}} @ {{user.primaryWorkHistory.employer.name}}{{else}}Not Available{{/hasPrimaryWorkHistory}}</div>
+				</div>
+				<div class="jobposting-info">
+					<div class="name">{{jobPosting.jobName}}</div>
+				</div>
+				<div class="user-actions">
+					<div class="custom-select user-dropdown" data-index="0" data-value="">
+						<button class="custom-select-button">Archived</button>
+						<ul class="custom-select-list user-dropdown">
+							<li class="unarchive-candidate">Unarchive</li>
+						</ul>
+					</div>
+				</div>	
+				<div class="hourly-profile">
+					<div class="about-section">
+						<label>About</label>
+						{{#isNotNull user.about}}
+							<div class="about">{{user.about}}</div>
+						{{else}}
+							<div class="about">Not Available</div>
+						{{/isNotNull}}
+					</div>
+					<div class="history-section">
+						<label>Work History</label>
+						<ul class="work-history"></ul>
+					</div>
+				</div>
+			</li>
+		{{/each}}
+		<li id="show-more-archived" class="foot"><a>Show More Archived Candidates</a></li>
+	</ul>
+</div>
+{{/if_gt}}

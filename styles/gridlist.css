@@ -1,3 +1,5 @@
+#candidates-list-container,
+#archived-candidates-list-container,
 #employees-list-container,
 #followers-list-container,
 #endorsements-list-container{
@@ -7,6 +9,8 @@
 	overflow: hidden;
 }
 
+#candidates-list-container.collapsed,
+#archived-candidates-list-container.collapsed,
 #employees-list-container.collapsed,
 #followers-list-container.collapsed,
 #endorsements-list-container.collapsed{
@@ -120,10 +124,7 @@ ul.grid-list > li.expanded:hover{
 
 ul.grid-list > li.foot{
 	height: 24px;
-}
-
-ul.grid-list > li.foot:hover{
-	background-color: #ffffff;
+	background-color: #f7fafc;
 }
 
 ul.grid-list > li.foot a{
@@ -426,6 +427,28 @@ ul.grid-list > li .candidate-info .candidate-job{
 	}
 }
 
+ul.grid-list > li .jobposting-info{
+	display: block;
+	float: left;
+	width: 150px;
+	margin: 4px 0 0 0;
+	line-height: 42px;
+	text-indent: 10px;
+	border-right: 1px dotted #bbbbbb
+}
+
+@media screen and (max-width: 890px){
+	ul.grid-list > li .jobposting-info{
+		margin: 4px 0 0 10px;
+		border-left: 1px dotted #bbbbbb
+	}
+}
+
+@media screen and (max-width: 500px){
+	ul.grid-list > li .jobposting-info{
+		display: none;
+	}
+}
 
 ul.grid-list > li .candidate-referral{
 	display: block;

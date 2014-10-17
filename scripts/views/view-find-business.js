@@ -7,9 +7,10 @@ define([
 		"marionette",
 		"hbs!templates/template-view-find-business",
 		"scripts/collections/collection-businesses",
-		"scripts/models/model-business"
+		"scripts/models/model-business",
+		"scripts/models/model-user"
 	],
-	function($, Cookie, Analytics, App, Utils, Marionette, Template, CollectionBusinesses, ModelBusiness){
+	function($, Cookie, Analytics, App, Utils, Marionette, Template, CollectionBusinesses, ModelBusiness, ModelUser){
 	"use strict";
 
 	var ViewFindBusiness = Marionette.ItemView.extend({
@@ -157,10 +158,20 @@ define([
 							user.verified = true;
 							user.roles = response.attributes.admins[0].user.roles;
 
-						Utils.CreateUserSession(user);
-						Utils.SetSelectedEmployer(0);
-						Utils.ShowToast({message : "Welcome to HotSchedules Post"});
-						App.router.navigate("jobs", true);
+						var userModel = new ModelUser();
+							userModel.getUserEventByType(user.guid,0,function(response){
+								localStorage.setItem("training", response.completed);
+								localStorage.setItem("trainingEventGUID", response.guid);	
+
+								Utils.CreateUserSession(user);
+								Utils.SetSelectedEmployer(0);
+								Utils.ShowToast({message : "Welcome to HotSchedules Post"});
+								App.router.navigate("jobs", true);
+
+							});
+
+						
+
 
 					},
 					error : function(){

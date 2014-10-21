@@ -29,13 +29,25 @@
 			</div>
 		{{/if_eq}}
 		<div id="job-apps">
-			{{#if_eq job.status "POSTED"}}
-				<div id="job-message">Interested in this job? You can get it and more here...</div>
-			{{else}}
-				<div id="job-message">Looking for a restaurant job? You can find'em here...</div>
+		    {{#if_eq job.appliedFor "SUCCESSFUL"}}
+		        <div id="job-message">You have successfully submitted yourself to this job!</div>
+		    {{else}}
+		        {{#if_eq job.appliedFor "FAILED"}}
+		            {{#if_eq job.status "POSTED"}}
+		                <div id="job-message">Sorry, there was a problem submitting your application to this job. You can try again here...</div>
+		            {{else}}
+		                <div id="job-message">Sorry, this job is no longer available. You can find your next job here...</div>
+		            {{/if_eq}}
+		        {{else}}
+                    {{#if_eq job.status "POSTED"}}
+                        <div id="job-message">Interested in this job? You can get it and more here...</div>
+                    {{else}}
+                        <div id="job-message">Looking for a restaurant job? You can find'em here...</div>
+                    {{/if_eq}}
+                {{/if_eq}}
+			    <div id="google-play" class="google-hspost-scheme"></div>
+			    <div id="app-store" class="ios-hspost-scheme"></div>
 			{{/if_eq}}
-			<div id="google-play" class="google-hspost-scheme"></div>
-			<div id="app-store" class="ios-hspost-scheme"></div>
 		</div>
 	</div>
 	<div id="job-footer">

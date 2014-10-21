@@ -16,13 +16,50 @@
     <script type="text/javascript">
       var CONTEXT_ROOT = '<%= request.getContextPath() %>'; 
     </script>
+    <script type="text/javascript" src="libraries/thirdparty/analytics.js"></script>
+    		<script type="text/javascript">
+            function detectDevice(){
+                var agent = navigator.userAgent;
+
+                if(agent.match(/Android/i)){
+                    return "Android";
+                }else if(agent.match(/iPhone|iPad|iPod/i)){
+                    return "iOS";
+                }else if(agent.match(/IEMobile/i)){
+                    return "WindowsMobile";
+                }else{
+                    return "Unknown";
+                }
+
+            }
+
+    <%
+        String jobpostingguid = request.getParameter("id");
+        String jobpostingempguid = request.getParameter("employer");
+        String appliedFor = Boolean.toString(request.getParameter("appliedFor") != null);
+    %>
+
+            function redirectForMobile(){
+                if ('<%=appliedFor%>' === 'true') {
+                    ga('send', 'pageview', '/job-applied-for');
+                }
+                var device = detectDevice();
+                if(device === "Android"){
+                    var url = 'intent://?jobpostingguid=<%=jobpostingguid%>&jobpostingempguid=<%=jobpostingempguid%>#Intent;package=com.hotschedules.brushfire;scheme=hotschedulespost;end';
+                    window.location = url;
+                } else if(device === "iOS") {
+                    var url = 'hotschedulespost://jobpostingguid=<%=jobpostingguid%>&jobpostingempguid=<%=jobpostingempguid%>';
+                    window.location = url;
+                }
+            }
+            </script>
     <script>var requirejs = {
         baseUrl: '@BaseURL@',
         urlArgs: 'vjj=@Version@'
         };</script>
     <script src="libraries/thirdparty/require.js" data-main="brushfire-job-config"></script>
   </head>
-  <body>
+  <body onload="redirectForMobile()">
     <div id="brushfire"></div>
   </body>
 </html>

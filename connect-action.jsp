@@ -160,6 +160,7 @@
 				}
 			}
 		</style>
+		 <script type="text/javascript" src="libraries/thirdparty/analytics.js"></script>
 		<script type="text/javascript">
         function detectDevice(){
             var agent = navigator.userAgent;
@@ -181,6 +182,7 @@
 %>
 
         function redirectForMobile(){
+            ga('send', 'pageview');
             var device = detectDevice();
             if(device === "Android"){
                 var url = 'intent://?viewprofile=<%=user%>#Intent;package=com.hotschedules.brushfire;scheme=hotschedulespost;end';

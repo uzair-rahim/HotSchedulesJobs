@@ -22,7 +22,10 @@ define([
 
 				Utils.ResetLayout();
 
-				var jobGUID = Utils.GetStandaloneJobGUID();
+                var qs = window.location.href.split('?')[1];
+                var args = Utils.GetQueryParameters(qs);
+				var jobGUID = args.id;
+				var appliedFor = args.appliedFor;
 
 				if(!jobGUID){
 					window.location.href = "index.jsp";
@@ -34,7 +37,8 @@ define([
 						url : restURL + jobGUID + "/data",
 						type : "GET",
 						success : function(response){
-							var view = new ViewJob({model : response});
+						    response.appliedFor = appliedFor;
+						    var view = new ViewJob({model : response});
 							layout.body.show(view);
 						},
 						error : function(){

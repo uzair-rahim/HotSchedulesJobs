@@ -3380,6 +3380,21 @@ ul.chat-list li.date span{
 	font-weight: lighter;
 }
 
+#job-applied-for {
+    clear: both;
+    color: #555555;
+    display: block;
+    float: left;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: lighter;
+    line-height: 20px;
+    margin: 0px 0;
+    text-align: center;
+    width: 100%;
+}
+
 #job-apps #google-play,
 #job-apps #app-store{
 	display: block;

@@ -11,7 +11,7 @@ define([
 		"scripts/models/model-user",
 		"scripts/models/model-network"
 	],
-	function($, jqueryUI, Cookie, Analytics, App, Utils, Marionette, Template, ModelAuthenticate, ModelUser, ModelNetwork){
+	function($, jqueryUI, Cookie, Analytics, App, Utils, Marionette, Template, Authenticate, ModelUser, ModelNetwork){
 	"use strict";
 
 	var ViewLogin = Marionette.ItemView.extend({
@@ -34,7 +34,8 @@ define([
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/view-login');
 
-			if(typeof Utils.GetRememberedEmail() !== "undefined"){
+      		if(App.session.isRememberMe()){
+				$("#emailaddress").val(App.session.getEmail());
 				$("#remember-me-check").prop("checked", true);
 			}
 
@@ -48,96 +49,93 @@ define([
 		login : function(){
 			console.log("Login...");
 
-			var emailField = $("#emailaddress").val();
-			var passwordField = $("#password").val();
-			var checked = $("#remember-me-check").prop("checked");
+			var formEmail = $("#emailaddress").val();
+			var formPassword = $("#password").val();
 
-			var that = this;
-			var authObject = {emailaddress : emailField, password : passwordField};
-			var auth = new ModelAuthenticate();
-				auth.save(authObject, {
-					success : function(response){
-						console.log("User successfully authenticated...");
+			var credentials = {
+				emailaddress : formEmail,
+				password 	 : formPassword
+			}
 
-						var user = new Object();
-							user.guid = response.attributes.guid;
-							user.firstname = response.attributes.firstname;
-							user.lastname = response.attributes.lastname;
-							user.email = response.attributes.email;
-							user.verified = response.attributes.verified;
-							user.employerIds = response.attributes.employerIds;
-							user.roles = response.attributes.roles;
+			var options = {
+				success : function(response){
+					var user = new Object();
+						user = auth.getUser();
+						user.logged = true;
+						user.expired = false;
+						user.remember = $("#remember-me-check").prop("checked");
+						
+					App.session.set(user);
 
-						var adminEmployers = response.attributes.adminEmployers;
-							Utils.SetAdminEmployers(adminEmployers);	
-							Utils.SetSelectedEmployer(0);
+					var userModel = new ModelUser();
+					userModel.getUserEventByType(user.guid,0,function(response){
+						App.session.set("trainingCompleted", response.completed);
+						App.session.set("trainingEventGUID", response.guid);
 
-						var userModel = new ModelUser();
-							userModel.getUserEventByType(user.guid,0,function(response){
-								localStorage.setItem("training", response.completed);
-								localStorage.setItem("trainingEventGUID", response.guid);
+						var networkModel = new ModelNetwork();
+						networkModel.getConnections(user.guid, function(data){
+							var connections = [];
 
-								Utils.CreateUserSession(user);
-								Utils.RememberUserEmail(checked, user.email);
+							$.each(data, function(){
+								var connection = new Object();
+								connection.guid = this.guid;
+								connection.fromUserGUID = this.fromUserGuid;
+								connection.toUserGUID = this.toUserGuid;
+								connection.state = "connected";
+								connections.push(connection);
+							});
 
-							var support = Utils.IsSupportUser(user.roles);	
+									
+							networkModel.getReceivedRequests(user.guid, function(data){
+								$.each(data, function(){
+									var connection = new Object();
+									connection.guid = this.guid;
+									connection.fromUserGUID = this.fromUserGuid;
+									connection.toUserGUID = this.toUserGuid;
+									connection.state = "received";
+									connections.push(connection);
+								});
 
-								var networkModel = new ModelNetwork();
-								networkModel.getConnections(user.guid, function(data){
-									var connections = [];
-
+								networkModel.getSentRequests(user.guid, function(data){
 									$.each(data, function(){
 										var connection = new Object();
-											connection.guid = this.guid;
-											connection.fromUserGUID = this.fromUserGuid;
-											connection.toUserGUID = this.toUserGuid;
-											connection.state = "connected";
+										connection.guid = this.guid;
+										connection.fromUserGUID = this.fromUserGuid;
+										connection.toUserGUID = this.toUserGuid;
+										connection.state = "sent";
 										connections.push(connection);
 									});
 
-									
-										networkModel.getReceivedRequests(user.guid, function(data){
+									Utils.SetUserConnectionsList(connections);
 
-											$.each(data, function(){
-												var connection = new Object();
-													connection.guid = this.guid;
-													connection.fromUserGUID = this.fromUserGuid;
-													connection.toUserGUID = this.toUserGuid;
-													connection.state = "received";
-												connections.push(connection);
-											});
-
-											networkModel.getSentRequests(user.guid, function(data){
-
-												$.each(data, function(){
-													var connection = new Object();
-														connection.guid = this.guid;
-														connection.fromUserGUID = this.fromUserGuid;
-														connection.toUserGUID = this.toUserGuid;
-														connection.state = "sent";
-													connections.push(connection);
-												});
-
-												Utils.SetUserConnectionsList(connections);
-												that.routeUser(support,user);
-
-											});
-
-										});
 								});
 
+							});
 
+						});
 
-							});	
+					});
 
-					},
+					App.router.controller.redirectOnLogin();
 
-					error : function(){
-						console.log("Error authenticating user...");
-						$(".form-container").effect("shake");
-						Utils.ShowToast({message : "Invalid email address or password"});
+				},
+				error : function(model, errors){
+					if(typeof(errors.responseJSON) !== "undefined"){
+						var error = errors.responseJSON;
+						Utils.ShowToast({message : error.errorMsg});
 					}
-				});
+				}
+			}
+
+			var auth = new Authenticate();
+			auth.set(credentials, {validate:true});
+			
+			if(auth.validationError){
+				Utils.ShowToast({message : auth.validationError[0].message});
+			}else{
+				auth.save(credentials, options);
+			}
+
 		},
 
 		signup : function(){
@@ -180,7 +178,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
-				jsonObject.userEmail = Utils.GetRememberedEmail();
+				jsonObject.userEmail = App.session.getEmail();
 			return jsonObject;
 		}
 		

@@ -80,7 +80,7 @@ define([
 				this.numberOfJobs = 1;
 			}
 
-			var loggedUserGUID = Utils.GetUserSession().guid;
+			var loggedUserGUID = App.sessin.get("guid");
 			var candidatesList = $(".grid-list");
 			var that = this;
 
@@ -381,7 +381,7 @@ define([
 	
 		candidateNetwork : function(event){
 			var user = $(event.target).closest(".view-profile");
-			var guid1 = Utils.GetUserSession().guid;
+			var guid1 = App.session.get("guid");
 			var guid2 = $(user).attr("data-user");	
 
 			var network = new ModelNetwork();
@@ -563,7 +563,7 @@ define([
 				ga('send', 'event', 'button', 'click', 'accept connection request from candidate');
 			}else{
 				var connection = new Object();
-					connection.fromUserGuid = Utils.GetUserSession().guid;
+					connection.fromUserGuid = App.session.get("guid");
 					connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
 
 				var links = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .connect-candidate");			
@@ -684,9 +684,7 @@ define([
 
 		serializeData : function(){
 			var mode = false;
-
 			if(this.options.mode === "child"){ mode = true; }
-
 			var jsonObject = new Object();
 				jsonObject.language = App.Language;
 				jsonObject.jobtypes = this.model.jobtypes;

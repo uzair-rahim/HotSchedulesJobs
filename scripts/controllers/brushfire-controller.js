@@ -10,9 +10,6 @@ define([
 		"scripts/views/view-find-business",
 		"scripts/views/view-add-business",
 		"scripts/views/view-account-verification",
-		"scripts/views/view-head",
-		"scripts/views/view-nav",
-		"scripts/views/view-support-nav",
 		"scripts/views/view-jobs",
 		"scripts/views/view-candidates",
 		"scripts/views/view-candidates-by-job",
@@ -25,11 +22,13 @@ define([
 		"scripts/views/view-support",
 		"scripts/views/view-select-employer",
 		"scripts/views/view-training",
+		"scripts/models/model-user",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer",
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-yelp-rating",
 		"scripts/models/model-chat",
+		"scripts/collections/collection-employers",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-jobs-info",
 		"scripts/collections/collection-employer-profile",
@@ -38,7 +37,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewHead, ViewNav, ViewSupportNav, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ViewTraining, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -47,46 +46,6 @@ define([
 
 			setLayout : function(){
 				console.log("Setting layout...");
-
-				if(this.layout === null){
-					this.layout = new LayoutApp();
-					App.body.show(this.layout);
-				}
-
-				if(Utils.CheckSession()){
-					var nav = new ViewNav();
-					this.layout.head.show(nav);
-				}else{
-					var head = new ViewHead();
-					this.layout.head.show(head);
-				}
-			},
-
-			setHeader : function(checkFor){
-				console.log("Setting header...");
-
-				var currentHead = this.layout.head.currentView.el.className;
-				$("#app-help").show();
-
-				switch(checkFor){
-					case "heading" :
-						if(currentHead !== "heading"){
-							var head = new ViewHead();
-							this.layout.head.show(head);
-						}
-					break;
-					case "navigation" :
-						if(currentHead !== "navigation"){
-							var nav = new ViewNav();
-							this.layout.head.show(nav);
-						}
-					break;
-					case "support" :
-						var nav = new ViewSupportNav();
-						this.layout.head.show(nav);
-						$("#app-help").hide();
-					break;
-				}				
 			},
 
 			setBackground : function(){
@@ -94,6 +53,7 @@ define([
 
 				if(!$(app).hasClass("background")){
 					$(app).addClass("background");
+					$(app).addClass("portal");
 				}
 			},
 
@@ -102,6 +62,7 @@ define([
 
 				if($(app).hasClass("background")){
 					$(app).removeClass("background");
+					$(app).removeClass("portal");
 				}
 			},
 
@@ -110,7 +71,7 @@ define([
 
 				this.setLayout();
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.router.navigate("jobs", true);	
 				}else{
 					App.router.navigate("login", true);	
@@ -120,15 +81,14 @@ define([
 
 			login : function(){
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.router.navigate("jobs", true);	
 				}else{
 					this.setLayout();
-					this.setHeader("heading");
 					this.setBackground();
 				
 					var view = new ViewLogin();
-					this.layout.body.show(view);
+					App.layout.body.show(view);
 				}
 			},
 
@@ -155,52 +115,47 @@ define([
 
 			forgotPassword : function(){
 				this.setLayout();
-				this.setHeader("heading");
 				this.setBackground();
 				
 				var view = new ViewForgotPassword();
-				this.layout.body.show(view);
+				App.layout.body.show(view);
 			},
 
 			signup : function(){
 				this.setLayout();
-				this.setHeader("heading");
 				this.setBackground();
 
 				var view = new ViewSignup();
-				this.layout.body.show(view);
+				App.layout.body.show(view);
 			},
 
 			findBusiness : function(){
 				this.setLayout();
-				this.setHeader("heading");
 				this.setBackground();
 
 				var view = new ViewFindBusiness();
-				this.layout.body.show(view);
+				App.layout.body.show(view);
 			},
 
 			addBusiness : function(){
 				this.setLayout();
-				this.setHeader("heading");
 				this.setBackground();
 
 				var view = new ViewAddBusiness();
-				this.layout.body.show(view);
+				App.layout.body.show(view);
 			},
 
 			accountVerification : function(){
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && !App.session.isVerified()){
 
 					this.setLayout();
-					this.setHeader("heading");
 					this.setBackground();
 
 					var user = Utils.GetUserSession();
 
 					var view = new ViewAccountVerification({model : user});
-					this.layout.body.show(view);
+					App.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -208,9 +163,9 @@ define([
 
 			jobs : function(){
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 
-					var hasEmployerID = Utils.GetUserSession().employerIds.length > 0
+					var hasEmployerID = App.session.getEmployers().length > 0
 
 					if(!hasEmployerID){
 						App.router.navigate("logout", true);
@@ -249,10 +204,9 @@ define([
 						).then(function(){
 							that.removeBackground();
 							that.setLayout();
-							that.setHeader("navigation");
 
 							var view = new ViewJobs({model : models});
-								that.layout.body.show(view);
+								App.layout.body.show(view);
 								if(localStorage.getItem("training") == "null"){
 									that.training();
 								}
@@ -269,7 +223,7 @@ define([
 
 			candidates : function(){
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 
 					var that = this;
 
@@ -277,7 +231,7 @@ define([
 					App.pushTrail(App.Language.candidates);
 
 					var index = Utils.GetSelectedEmployer();
-					var employerGUID = Utils.GetUserSession().employerIds[index];
+					var employerGUID = this.getEmployerGUID();
 					var jobtypes = new ModelJobTypes();
 					var employer = new ModelEmployer();
 					var models = new Object();
@@ -294,10 +248,8 @@ define([
 									models.jobtypes = jobtypesResponse.attributes;
 									that.removeBackground();
 									that.setLayout();
-									that.setHeader("navigation");
-
 									var view = new ViewCandidates({model : models});
-										that.layout.body.show(view);
+										App.layout.body.show(view);
 								},
 								error : function(){
 									console.log("Error fetching Job Types...");
@@ -316,13 +268,13 @@ define([
 
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.clearTrail();
 					App.pushTrail(App.Language.jobs);
 					App.pushTrail(App.Language.candidates);
 
 					var jobtypes = new ModelJobTypes();
-					var jobs = new CollectionJobs({guid : id});
+					var jobs = new CollectionJobs();
 					var models = new Object();
 						models.jobs = new Object();
 
@@ -351,10 +303,9 @@ define([
 					).then(function(){
 						that.removeBackground();
 						that.setLayout();
-						that.setHeader("navigation");
 
 						var view = new ViewCandidatesByJob({model : models, mode : "child"});
-							that.layout.body.show(view);
+							App.layout.body.show(view);
 					});
 
 				}else{
@@ -367,15 +318,13 @@ define([
 
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.clearTrail();
 					App.pushTrail(App.Language.network);
 
-					var index = Utils.GetSelectedEmployer();
-					var userGuid = Utils.GetUserSession().employerIds[index];
 					var jobtypes = new ModelJobTypes();
 					var jobsinfo = new CollectionJobsInfo();
-					var employees = new CollectionEmployees({guid : userGuid});
+					var employees = new CollectionEmployees();
 					var models = new Object();
 
 
@@ -414,10 +363,9 @@ define([
 					).then(function(){
 						that.removeBackground();
 						that.setLayout();
-						that.setHeader("navigation");
 
 						var view = new ViewNetwork({model : models});
-							that.layout.body.show(view);
+							App.layout.body.show(view);
 					});
 
 
@@ -430,21 +378,19 @@ define([
 				
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.clearTrail();
 					App.pushTrail(App.Language.messages);
 
 					this.removeBackground();
 					this.setLayout();
-					this.setHeader("navigation");
 
-					var index = Utils.GetSelectedEmployer();
-					var employerGUID = Utils.GetUserSession().employerIds[index];
+					var employerGUID = this.getEmployerGUID();
 
 					var chat = new ModelChat();
 						chat.getEmployerChats(employerGUID,0,0,function(data){
 							var view = new ViewMessages({model : data});
-							that.layout.body.show(view);
+							App.layout.body.show(view);
 						});
 				}else{
 					App.router.navigate("login", true);
@@ -455,13 +401,12 @@ define([
 
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.clearTrail();
 					App.pushTrail("Account Settings");
 
 					this.removeBackground();
 					this.setLayout();
-					this.setHeader("navigation");
 
 					var session = Utils.GetUserSession();
 					var user = new Object();
@@ -471,7 +416,7 @@ define([
 						user.emailaddress = session.email;
 
 					var view = new ViewSettings({model : user});
-					that.layout.body.show(view);
+					App.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -481,68 +426,56 @@ define([
 
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.clearTrail();
 					App.pushTrail("Profile Settings");
 
 					this.removeBackground();
 					this.setLayout();
-					this.setHeader("navigation");
 
+					var employerGUID = App.router.controller.getEmployerGUID();
 
-					var employerGUIDs = Utils.GetUserSession().employerIds;
+					var employerPPA = new ModelEmployerPPA();
+					var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUID});
+					var employerProfiles = new CollectionEmployerProfiles({guid : employerGUID});
+					var models = new Object();
 
-					if(employerGUIDs.length != 0){
-						var index = Utils.GetSelectedEmployer();
-						var employerPPA = new ModelEmployerPPA();
-						var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUIDs[index]});
-						var employerProfiles = new CollectionEmployerProfiles({guid : employerGUIDs[index]});
-						var models = new Object();
+					$.when(
+						employerPPA.fetch({
+							success : function(response){
+								models.ppa = response.attributes;
+							},
+							error : function(){
+								console.log("Error fetching employer ppa...")
+								Utils.ShowToast({ message : "Error fetching employer ppa..."});
+							}
+						}),
 
-						$.when(
-							employerPPA.fetch({
-								success : function(response){
-									models.ppa = response.attributes;
-								},
-								error : function(){
-									console.log("Error fetching employer ppa...")
-									Utils.ShowToast({ message : "Error fetching employer ppa..."});
-								}
+						employerYelpRating.fetch({
+							success : function(response){
+								models.rating = response.attributes;
+							},
+							error : function(){
+								console.log("Error fetching employer yelp rating...")
+								Utils.ShowToast({ message : "Error fetching employer yelp rating..."});
+							}
+						}),
 
-							}),
+						employerProfiles.fetch({
+							success : function(response){
+								var modelProfiles = response.models;
+									models.profile = response.models[0].attributes;
+							},
+							error : function(){
+								console.log("Error fetching employer profiles...")
+								Utils.ShowToast({ message : "Error fetching employer profiles..."});
+							}
+						})
 
-							employerYelpRating.fetch({
-								success : function(response){
-									models.rating = response.attributes;
-								},
-								error : function(){
-									console.log("Error fetching employer yelp rating...")
-									Utils.ShowToast({ message : "Error fetching employer yelp rating..."});
-								}
-
-							}),
-
-							employerProfiles.fetch({
-								success : function(response){
-									var modelProfiles = response.models;
-										models.profile = response.models[0].attributes;
-								},
-								error : function(){
-									console.log("Error fetching employer profiles...")
-									Utils.ShowToast({ message : "Error fetching employer profiles..."});
-								}
-							})
-
-						).then(function(){
-							var view = new ViewEmployerProfile({model : models});
-							that.layout.body.show(view);
-						});
-
-					}else{
-						var view = new ViewEmployerProfile();
-							that.layout.body.show(view);
-					}
-
+					).then(function(){
+						var view = new ViewEmployerProfile({model : models});
+						App.layout.body.show(view);
+					});
 
 				}else{
 					App.router.navigate("login", true);
@@ -553,15 +486,14 @@ define([
 
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					App.pushTrail(App.Language.profile);
 
 					this.removeBackground();
 					this.setLayout();
-					this.setHeader("navigation");
 
 					var view = new ViewProfile();
-					that.layout.body.show(view);
+					App.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -570,16 +502,15 @@ define([
 			support : function(){
 				var that = this;
 
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					var roles = Utils.GetUserSession().roles;
 					var support = Utils.IsSupportUser(roles);
 					if(support){
 						this.removeBackground();
 						this.setLayout();
-						this.setHeader("support");
 
 						var view = new ViewSupport();
-						that.layout.body.show(view);
+						App.layout.body.show(view);
 					}else{
 						App.router.navigate("logout", true);
 					}
@@ -591,32 +522,71 @@ define([
 
 			training : function(){
 				var training = new ViewTraining();
-				var container = this.layout.el;
+				var container = App.layout.el;
 					$(container).append(training.render().el);
 
 			},
 
 			selectEmployer : function(){
 				var that = this;
-				if(Utils.CheckSession()){
+				if(App.session.isLoggedIn() && App.session.isVerified()){
 					this.removeBackground();
 					this.setLayout();
-					this.setHeader("navigation");
 
 					var view = new ViewSelectEmployer();
-					that.layout.body.show(view);
+					App.layout.body.show(view);
 				}else{
 					App.router.navigate("login", true);
 				}
 			},
 
 			logout : function(){
-				Utils.DeleteUserSession();
 				Utils.RemoveAdminEmployers();
 				Utils.RemoveSharedConnectionName();
 				Utils.RemoveSelectedEmployer();
 				Utils.RemoveUserConnectionsList();
+				App.session.set({logged : false, expired : false});
 				App.router.navigate("login", true);
+			},
+
+			// Processes
+
+			redirectOnLogin : function(){
+				if(App.session.isVerified()){
+					var userGUID = App.session.get("guid");
+					var user = new ModelUser({guid : userGUID});
+						user.getProfilePhoto(function(data){
+							// Set photo in session
+							App.session.set("photo", data);
+							// If user is user then...
+							if(App.session.isUser()){
+								// ...go to search jobs screen
+								App.router.navigate("findBusiness", true);
+							}else if(App.session.isSupport()){
+								App.router.navigate("support", true);
+							}else{
+								// ...get all employers and go to default
+								var userEmployers = App.session.getEmployers();
+								var collection = new CollectionEmployers();
+									collection.getEmployers(userEmployers, function(){
+										App.session.set({employers : collection.models});
+										App.menu.render();
+										var route = Utils.GetDefaultRoute();
+										App.router.navigate(route, true);
+									});
+							}
+						});
+
+				}else{
+					App.router.navigate("accountVerification", true);
+				}
+			},
+
+			getEmployerGUID : function(){
+				var selectedEmployer = App.session.get("selectedEmployer");
+				var employers = App.session.get("employers");
+				var guid = employers[selectedEmployer].guid;
+				return guid;
 			}
 			
 		});

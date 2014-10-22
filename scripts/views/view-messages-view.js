@@ -67,8 +67,8 @@ define([
 		sendReply : function(){
 			ga("send", "event", "send-reply-to-chat", "click");
 			var chatGUID = this.options.model.chat.guid;
-			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
-			var userGUID = Utils.GetUserSession().guid;
+			var employerGUID = App.router.controller.getEmployerGUID();
+			var userGUID = App.session.get("guid")
 			var text = $("#new-full-reply-text").val();
 
 			var message = new Object();

@@ -82,8 +82,7 @@ define([
 			// Show intersted user count if there are no jobs for the employer
 			var jobs = this.model.jobs;
 			if(jobs.length === 0){
-				var index = Utils.GetSelectedEmployer();
-				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var employerGUID = App.router.controller.getEmployerGUID();
 				var employer = new ModelEmployer();
 					employer.getInterestedUsersCount(employerGUID,function(data){
 						if(data.length !== 0){
@@ -123,7 +122,6 @@ define([
 			}else if(bonus !== "" && !wholeNumber.test(bonus)){
 				Utils.ShowToast({message : "Invalid bonus amount"});
 			}else{
-				var index = Utils.GetSelectedEmployer();
 				var job = new Object();	
 					job.shifts = new Object();
 					job.jobType = new Object();
@@ -137,9 +135,9 @@ define([
 					job.updatedBy.id = 0;
 					job.createdBy.id = 0;
 					job.shifts = [{id : 0}];
-					job.updatedBy.guid = Utils.GetUserSession().guid;
-					job.createdBy.guid = Utils.GetUserSession().guid;
-					job.employer.guid = Utils.GetUserSession().employerIds[index];
+					job.updatedBy.guid = App.session.get("guid");
+					job.createdBy.guid = App.session.get("guid");
+					job.employer.guid = App.router.controller.getEmployerGUID();
 
 					job.jobName = $("#new-position button").text();
 					job.description = $("#new-description").val();
@@ -261,7 +259,7 @@ define([
 					update.createdBy = job.createdBy;
 
 					update.updatedBy.id = job.updatedBy.id
-					update.updatedBy.guid = Utils.GetUserSession().guid;
+					update.updatedBy.guid = App.session.get("guid");
 
 					update.shifts = [{id : 0}];
 
@@ -478,16 +476,14 @@ define([
 		},
 
 		shareJob : function(jobGUID,shareType){
-				var index = Utils.GetSelectedEmployer();
-
 				var share = new Object();
 					share.fromUser = new Object();
 					share.jobPosting = new Object();
 					share.employer = new Object();
 
-					share.fromUser.guid = Utils.GetUserSession().guid;
+					share.fromUser.guid = App.session.get("guid");
 					share.jobPosting.guid = jobGUID
-					share.employer.guid = Utils.GetUserSession().employerIds[index];
+					share.employer.guid = App.router.controller.getEmployerGUID();
 					share.type = shareType;
 
 				var that = this;

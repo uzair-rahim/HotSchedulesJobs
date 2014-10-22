@@ -44,7 +44,7 @@ define([
       			}
 
       			var user = new ModelUser();
-      				user.updateUserEvent(Utils.GetUserSession().guid, data.guid, data, function(response){
+      				user.updateUserEvent(App.session.get("guid"), data.guid, data, function(response){
       					localStorage.setItem("training", date.getTime());	
       				});
       		}

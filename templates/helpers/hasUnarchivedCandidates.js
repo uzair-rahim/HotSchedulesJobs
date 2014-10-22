@@ -3,7 +3,6 @@ define([
 ],
 	function (Handlebars){
 		function hasUnarchivedCandidates(context, options){
-			
 			var count = 0;
 			var candidates = context.candidates;
 

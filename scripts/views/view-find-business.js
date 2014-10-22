@@ -125,7 +125,7 @@ define([
 			businessObject.phone = $(business).find("input[name='phone']").val();
 			
 			// Employer admin
-			businessObject.admins = [ {user: {guid: Utils.GetUserSession().guid}} ];
+			businessObject.admins = [ {user: {guid: App.session.get("guid")}} ];
 			
 			// Employer Location
 			businessObject.location             = new Object();

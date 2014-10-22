@@ -95,9 +95,7 @@ define([
 
 		startLogoUpload : function(event){
 
-			var employerGUIDs = Utils.GetUserSession().employerIds;
-			var index = Utils.GetSelectedEmployer();
-			var guid = employerGUIDs[index];
+			var guid = App.router.controller.getEmployerGUID();
 
 			var container = $(document).find(".resize-logo-container");
 			var containerX = $(container).offset().left;
@@ -191,9 +189,8 @@ define([
 
 			if($(logoImage).length > 0){
 				
-				var employerGUIDs = Utils.GetUserSession().employerIds;
-				var index = Utils.GetSelectedEmployer();
-				var logo = new EmployerLogo({id : 0, guid : employerGUIDs[index]});
+				var employerGUID = App.router.controller.getEmployerGUID();
+				var logo = new EmployerLogo({id : 0, guid : employerGUID});
 
 				logo.destroy({
 					dataType : "text",
@@ -224,11 +221,10 @@ define([
 
 			var that = this;
 
-			var employerGUIDs = Utils.GetUserSession().employerIds;
-			var userGUID = Utils.GetUserSession().guid;
+			var employerGUID = App.router.controller.getEmployerGUID();
+			var userGUID = App.session.get("guid");
 			var self = this.adminUserGUID == userGUID;
-			var index = Utils.GetSelectedEmployer();
-			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUIDs[index], admin : this.adminGUID});
+			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUID, admin : this.adminGUID});
 		
 				deleteAdmin.destroy({
 					dataType : "text",
@@ -324,10 +320,9 @@ define([
 
 					employer.location = address;
 
-					var employerGUIDs = Utils.GetUserSession().employerIds;
-					var index = Utils.GetSelectedEmployer();
+					var employerGUID = App.router.controller.getEmployerGUID();
 
-					var profile = new EmployerProfile({guid : employerGUIDs[index]});
+					var profile = new EmployerProfile({guid : employerGUID});
 
 					profile.save(employer, {
 						success : function(){
@@ -379,9 +374,8 @@ define([
 				return false;
 
 			}else{
-				var employerGUIDs = Utils.GetUserSession().employerIds;
-				var index = Utils.GetSelectedEmployer();
-				var newAdmin = new NewAdmin({guid : employerGUIDs[index]});
+				var employerGUID = App.router.controller.getEmployerGUID();
+				var newAdmin = new NewAdmin({guid : employerGUID});
 					newAdmin.unset("guid");
 				var email = $("#admin-email").val();
 

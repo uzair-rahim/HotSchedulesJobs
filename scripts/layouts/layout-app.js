@@ -13,9 +13,10 @@ define([
 
 		var LayoutApp = Marionette.Layout.extend({
 			tagName : "div",
-			className : "app",
+			className : "app portal",
 			template : Template,
 			regions : {
+				menu : "#app-menu",
 				head : "#app-head",
 				body : "#app-body"
 			},
@@ -50,7 +51,8 @@ define([
 				"click #quick-message-view #back"		: "showQuickChatList",
 				"click #send-new-reply"					: "sendReply",
 				"click #create-new-job"					: "createNewJob",
-				"click #dismiss-new-job-request"		: "dismissNewJob"
+				"click #dismiss-new-job-request"		: "dismissNewJob",
+				"click #app-head .icon" 				: "showHideMenu",
 			},
 
 			initialize : function(){
@@ -138,6 +140,57 @@ define([
 
 			},
 
+			showHideMenu : function(){
+				var menu = $(document).find("#app-menu");
+				var main = $(document).find("#app-main");
+				var isVisible = $(menu).hasClass("show");
+				if(isVisible){
+					$(menu).removeClass("show");
+					$(main).removeClass("collapse");
+				}else{
+					$(menu).addClass("show");
+					$(main).addClass("collapse");
+				}
+			},
+
+			hideMenu : function(){
+				var menu = $(document).find("#app-menu");
+				var main = $(document).find("#app-main");
+				$(menu).removeClass("show");
+				$(main).removeClass("collapse");
+			},
+
+			showHideNotifications : function(){
+				var notifications = $(document).find("#app-notifications");
+				var isVisible = $(notifications).hasClass("show");
+				if(isVisible){
+					$(notifications).removeClass("show");
+				}else{
+					$(notifications).addClass("show");
+				}
+			},
+
+			hideNotifications : function(){
+				var notifications = $(document).find("#app-notifications");
+				$(notifications).removeClass("show");
+			},
+
+			toggleLayout : function(state){
+				var app = $(document).find(".app");
+				switch(state){
+					case "app":
+						$(app).removeClass("portal");
+					break;
+					case "portal":
+						$(app).addClass("portal");
+					break;
+				}
+
+				// Hide the notification flyout
+				var notifications = $(document).find("#app-notifications");
+				$(notifications).removeClass("show");
+			},
+
 			detectDevice : function(){
 				var agent = navigator.userAgent;
 
@@ -161,15 +214,15 @@ define([
 			},
 
 			primaryAction : function(){
-				App.trigger("alertPrimaryAction");
+				this.options.app.trigger("alertPrimaryAction");
 			},
 
 			secondaryAction : function(){
-				App.trigger("alertSecondaryAction");
+				this.options.app.trigger("alertSecondaryAction");
 			},
 
 			sendShareJob : function(){
-				App.trigger("sendShareJob");
+				this.options.app.trigger("sendShareJob");
 			},
 
 			closeHelp : function(){
@@ -250,7 +303,7 @@ define([
 					alertDialog.attr("data-job", "");
 				$(alertDialog).removeClass("show");
 				$(document).find(".view-modal").remove();
-				App.router.controller.jobs();
+				this.options.app.router.controller.jobs();
 			},
 
 			sendSharePostedJob : function(){
@@ -273,7 +326,7 @@ define([
 					
 					share.fromUser.guid = Utils.GetUserSession().guid;
 					share.jobPosting.guid = jobGUID;
-					share.employer.guid = Utils.GetUserSession().employerIds[index];
+					share.employer.guid = App.router.controller.getEmployerGUID();
 
 					var that = this;
 					var restURL = Utils.GetURL("/services/rest/share");
@@ -356,7 +409,7 @@ define([
 				$(alertDialog).removeClass("show");
 				$(alertDialog).find(".custom-select-list").html("");
 				$(alertDialog).find(".custom-select").attr("data-index", 0);
-				App.router.navigate("jobs", true);
+				this.options.app.router.navigate("jobs", true);
 			},
 
 			sendMessage : function(event){
@@ -372,8 +425,7 @@ define([
 				}else if(message === ""){
 					Utils.ShowToast({type : "error", message : "Message cannot be empty"});
 				}else{
-					var index = Utils.GetSelectedEmployer();
-					var employerGUID = Utils.GetUserSession().employerIds[index];
+					var employerGUID = App.router.controller.getEmployerGUID();
 					var users = Utils.GetNewMessageRecipients();
 
 					var dataArray = new Array();
@@ -393,7 +445,7 @@ define([
 
 						var message = new Object();
 							message.sender = new Object();
-							message.sender.guid = Utils.GetUserSession().guid;
+							message.sender.guid = App.session.get("guid");
 							message.chatMessageContent = new Object();
 							message.chatMessageContent.text = $("#new-message-text").val();
 							message.employerSeen = new Object();
@@ -431,13 +483,12 @@ define([
 			seeAllMessages : function(){
 				ga('send', 'event', 'button', 'click', 'see all messages');
 				Utils.HideQuickMessage();
-				App.router.navigate("messages", true);
+				this.options.app.router.navigate("messages", true);
 			},
 
 			showQuickChatMessage : function(event){
 				var that = this;
-				var index = Utils.GetSelectedEmployer();
-				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var employerGUID = App.router.controller.getEmployerGUID();
 				var chatGUID = $(event.target).closest("#quick-message-list > li").attr("data-guid");
 				var item = $(event.target).closest("#quick-message-list > li");
 				var isUnseen = item.hasClass("new");
@@ -469,7 +520,7 @@ define([
 				
 				var message = new Object();
 					message.sender = new Object();
-					message.sender.guid = Utils.GetUserSession().guid;
+					message.sender.guid = App.session.get("guid");
 					message.chatMessageContent = new Object();
 					message.chatMessageContent.text = textField.val();
 					message.employerSeen = new Object();
@@ -485,8 +536,7 @@ define([
 			},
 
 			getEmployerChats : function(){
-				var index = Utils.GetSelectedEmployer();
-				var employerGUID = Utils.GetUserSession().employerIds[index];
+				var employerGUID = App.router.controller.getEmployerGUID();
 				var chat = new ModelChat();
 					chat.getEmployerChats(employerGUID, 0, 1, function(response){
 						var dialog = $(document).find("#quick-message-view");
@@ -535,7 +585,7 @@ define([
 
 			serializeData : function(){
 				var jsonObject = new Object();
-					jsonObject.language = App.Language;
+					jsonObject.language = this.options.app.Language;
 				return jsonObject;
 			}
 		});

@@ -60,7 +60,7 @@ define([
 		},
 
 		sendBulkMessage : function(event){
-			var manager = Utils.GetUserSession().email;
+			var manager = App.session.get("email");
 			var addresses = [];
 
 			$(".candidate-select:checked").each(function(){

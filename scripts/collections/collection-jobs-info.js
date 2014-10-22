@@ -1,9 +1,10 @@
 define([
+	"app",
 	"backbone",
 	"utils",
 	"scripts/models/model-job"
 	],
-	function(Backbone, Utils, Job){
+	function(App, Backbone, Utils, Job){
 	"use strict";
 
 	var JobsInfo = Backbone.Collection.extend({
@@ -14,9 +15,7 @@ define([
 		},
 		
 		url : function(){
-			var user= Utils.GetUserSession();
-			var index = Utils.GetSelectedEmployer();
-			var url = this.urlRoot() + user.employerIds[index] + "/jobpostingsinfo";
+			var url = this.urlRoot() + App.router.controller.getEmployerGUID() + "/jobpostingsinfo";
 			return url;
 		},
 

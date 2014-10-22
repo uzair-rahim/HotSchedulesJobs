@@ -1,31 +1,51 @@
 define([
-	"backbone",
-	"utils",
-	"scripts/models/model-employer"
+		"backbone",
+		"utils",
+		"../models/model-employer"
 	],
 	function(Backbone, Utils, Employer){
-	"use strict";
+		"use strict";
 
-	var Employers = Backbone.Collection.extend({
-		model : Employer,
+		var Employers = Backbone.Collection.extend({
+			model : Employer,
 
-		urlRoot : function(){
-			return Utils.GetURL("/services/rest/employer");
-		},
-		
-		url : function(){
-			var url = this.urlRoot();
-			return url;
-		},
+			initialize : function(options){
+				console.log("Employers collection initialized...");
+			},
 
-		initialize : function(options){
-			_.bindAll.apply(_, [this].concat(_.functions(this)));
-			console.log("Employers collection initialized....");
-		}
+			urlRoot : function(){
+				return Utils.GetURL("/services/rest/employer");
+			},
 
-	});
+			url : function(){
+				var url = this.urlRoot();
+				return url;
+			},
 
-	return Employers;
+			getEmployers : function(guids, callback){
+				var that = this;
+				var deferred = [];
+
+				for(var i = 0; i < guids.length; i++){
+					var url = this.urlRoot() + "/" + guids[i];
+					deferred.push(
+						$.ajax({
+							url : url,
+							success : function(response){
+								that.models.push(response);
+							}
+						})
+					);
+				}
+
+				$.when.apply($, deferred).done(function(){
+					callback();
+				});
+			}
+			
+		});
+
+		return Employers;
 
 	}
 );

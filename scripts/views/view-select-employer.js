@@ -26,7 +26,7 @@ define([
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/select-employer');
 
-			var employers = Utils.GetAdminEmployers();
+			var employers = App.session.get("employers");
 			var alert = $(document).find("#app-alert-select-employer");
 
 			$(alert).find(".custom-select button").text(employers[0].name);

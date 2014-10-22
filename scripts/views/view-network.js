@@ -77,7 +77,7 @@ define([
 				}
 			}
 
-			var loggedUserGUID = Utils.GetUserSession().guid;
+			var loggedUserGUID = App.session.get("guid");
 			var networkList = $(".grid-list");
 			var that = this;
 
@@ -259,7 +259,7 @@ define([
 
 		networkConnections : function(event){
 			var user = $(event.target).closest(".view-profile");
-			var guid1 = Utils.GetUserSession().guid;
+			var guid1 = App.session.get("guid");
 			var guid2 = $(user).attr("data-guid");	
 
 			var network = new ModelNetwork();
@@ -366,7 +366,6 @@ define([
 		},
 
 		sendShareJob : function(){
-			var index = Utils.GetSelectedEmployer();
 			var jobIndex = $("#select-share-job").attr("data-index");
 			var jobGuid = this.model.jobsinfo[jobIndex].attributes.guid;
 			var employeeGuids = this.employeesGuids;
@@ -377,8 +376,8 @@ define([
 				share.jobPosting = new Object();
 				share.employer = new Object();
 
-				share.fromUser.guid = Utils.GetUserSession().guid;
-				share.employer.guid = Utils.GetUserSession().employerIds[index];
+				share.fromUser.guid = App.session.get("guid");
+				share.employer.guid = App.router.controller.getEmployerGUID();
 				share.jobPosting.guid = jobGuid
 				share.toEmployeeGuids = employeeGuids;
 				share.toFollowerGuids = followerGuids;
@@ -456,7 +455,7 @@ define([
 				ga('send', 'event', 'button', 'click', 'accept connection request from network');
 			}else{
 				var connection = new Object();
-					connection.fromUserGuid = Utils.GetUserSession().guid;
+					connection.fromUserGuid = App.session.get("guid");
 					connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-guid");
 
 				var links = $("li.view-profile[data-guid='"+connection.toUserGuid+"'] .connect-candidate");			
@@ -538,8 +537,7 @@ define([
 
 		getFollowers : function(){
 			var that = this;
-			var index = Utils.GetSelectedEmployer();
-			var employerGuid = Utils.GetUserSession().employerIds[index];
+			var employerGuid = App.router.controller.getEmployerGUID();
 			var followers = new CollectionFollowers({guid : employerGuid});
 
 			followers.fetch({
@@ -552,8 +550,7 @@ define([
 
 		getEndorsers : function(){
 			var that = this;
-			var index = Utils.GetSelectedEmployer();
-			var employerGuid = Utils.GetUserSession().employerIds[index];
+			var employerGuid = App.router.controller.getEmployerGUID();
 			var endorsers = new CollectionEndorsers({guid : employerGuid});
 
 			endorsers.fetch({

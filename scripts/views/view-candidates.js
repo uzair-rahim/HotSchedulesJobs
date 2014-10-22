@@ -83,7 +83,7 @@ define([
 				this.numberOfJobs = 1;
 			}
 
-			var loggedUserGUID = Utils.GetUserSession().guid;
+			var loggedUserGUID = App.session.get("guid");
 			var candidatesList = $(".grid-list");
 			var that = this;
 
@@ -385,7 +385,7 @@ define([
 	
 		candidateNetwork : function(event){
 			var user = $(event.target).closest(".view-profile");
-			var guid1 = Utils.GetUserSession().guid;
+			var guid1 = App.session.get("guid");
 			var guid2 = $(user).attr("data-user");	
 
 			var network = new ModelNetwork();
@@ -567,7 +567,7 @@ define([
 				ga('send', 'event', 'button', 'click', 'accept connection request from candidate');
 			}else{
 				var connection = new Object();
-					connection.fromUserGuid = Utils.GetUserSession().guid;
+					connection.fromUserGuid = App.session.get("guid");
 					connection.toUserGuid = $(event.target).closest("li.view-profile").attr("data-user");
 
 				var links = $("li.view-profile[data-user='"+connection.toUserGuid+"'] .connect-candidate");			
@@ -688,8 +688,7 @@ define([
 
 		showMoreUnarchivedCandidates : function(){
 			var startIndex = $("#candidates-list > li.view-profile").length;
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
+			var employerGUID = App.router.controller.getEmployerGUID();
 
 			var that = this;
 			var employer = new ModelEmployer();
@@ -708,8 +707,7 @@ define([
 
 		showMoreArchivedCandidates : function(){
 			var startIndex = $("#archived-candidates-list > li.view-profile").length;
-			var index = Utils.GetSelectedEmployer();
-			var employerGUID = Utils.GetUserSession().employerIds[index];
+			var employerGUID = App.router.controller.getEmployerGUID();
 
 			var that = this;
 			var employer = new ModelEmployer();
@@ -738,7 +736,6 @@ define([
 				jsonObject.archived = this.model.archived;
 				jsonObject.sub = mode;
 				jsonObject.breadcrumb = App.getTrail();
-				console.log(jsonObject)
 			return jsonObject;
 		}
 		

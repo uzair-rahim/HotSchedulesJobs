@@ -27,8 +27,7 @@ define([
 			AppConfig : {
 				// Menu
 				gettingStarted	: true,
-				dashboard		: false,
-				notification	: true,
+				notification	: false,
 				candidates		: true,
 				jobs			: true,
 				network			: true,
@@ -47,7 +46,7 @@ define([
 				if(this.AppConfig.dashboard){
 					return "dashboard";
 				}else{
-					return 	"jobs";
+					return 	"selectEmployer";
 				}
 			},
 
@@ -65,41 +64,6 @@ define([
 				}
 				return result;
 			},
-
-			// Set Admin Employers
-			SetAdminEmployers : function(employers){
-				localStorage.setItem("BrushfireAdminEmployers", JSON.stringify(employers));
-			},
-
-			// Get Admin Employers
-			GetAdminEmployers : function(){
-				return JSON.parse(localStorage.getItem("BrushfireAdminEmployers"));
-			},
-
-			// Remove Admin Employers
-			RemoveAdminEmployers : function(){
-				localStorage.removeItem("BrushfireAdminEmployers")
-			},
-
-			// Set Selected Employer
-			SetSelectedEmployer : function(index){
-				localStorage.setItem("BrushfireSelectedEmployer", index);
-			},
-
-			// Get Selected Employer
-			GetSelectedEmployer : function(){
-				var index = parseInt(localStorage.getItem("BrushfireSelectedEmployer"));
-				if(isNaN(index)) {
-			    	index = 0;
-				}
-				return index;
-			},
-
-			// Remove Selected Employer
-			RemoveSelectedEmployer : function(index){
-				localStorage.removeItem("BrushfireSelectedEmployer")
-			},
-
 			
 			// Set Shared Connection Name
 			SetSharedConnectionName : function(name){

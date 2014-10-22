@@ -72,7 +72,8 @@ define([
 				this.setLayout();
 
 				if(App.session.isLoggedIn() && App.session.isVerified()){
-					App.router.navigate("jobs", true);	
+					App.router.navigate("jobs", true);
+					this.setMenuSelection("#menu-jobs");	
 				}else{
 					App.router.navigate("login", true);	
 				}
@@ -210,6 +211,7 @@ define([
 								if(localStorage.getItem("training") == "null"){
 									that.training();
 								}
+								that.setMenuSelection("#menu-jobs");	
 								
 						});	
 					}
@@ -230,7 +232,6 @@ define([
 					App.clearTrail();
 					App.pushTrail(App.Language.candidates);
 
-					var index = Utils.GetSelectedEmployer();
 					var employerGUID = this.getEmployerGUID();
 					var jobtypes = new ModelJobTypes();
 					var employer = new ModelEmployer();
@@ -250,6 +251,7 @@ define([
 									that.setLayout();
 									var view = new ViewCandidates({model : models});
 										App.layout.body.show(view);
+										that.setMenuSelection("#menu-candidates");	
 								},
 								error : function(){
 									console.log("Error fetching Job Types...");
@@ -293,6 +295,7 @@ define([
 							success : function(collection, jobsResponse){
 								console.log("Jobs fetched successfully...");
 								models.jobs.jobs = jobsResponse;
+								that.setMenuSelection("#menu-candidates");
 							},
 							error : function(){
 								console.log("Error fetching Jobs...");
@@ -366,6 +369,7 @@ define([
 
 						var view = new ViewNetwork({model : models});
 							App.layout.body.show(view);
+							that.setMenuSelection("#menu-network");	
 					});
 
 
@@ -391,6 +395,7 @@ define([
 						chat.getEmployerChats(employerGUID,0,0,function(data){
 							var view = new ViewMessages({model : data});
 							App.layout.body.show(view);
+							that.setMenuSelection("#menu-messages");
 						});
 				}else{
 					App.router.navigate("login", true);
@@ -417,6 +422,7 @@ define([
 
 					var view = new ViewSettings({model : user});
 					App.layout.body.show(view);
+					that.setMenuSelection("#menu-settings");	
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -475,6 +481,7 @@ define([
 					).then(function(){
 						var view = new ViewEmployerProfile({model : models});
 						App.layout.body.show(view);
+						that.setMenuSelection("#menu-settings");	
 					});
 
 				}else{
@@ -530,20 +537,22 @@ define([
 			selectEmployer : function(){
 				var that = this;
 				if(App.session.isLoggedIn() && App.session.isVerified()){
-					this.removeBackground();
-					this.setLayout();
+					if(App.session.get("employers").length > 1){
+						this.removeBackground();
+						this.setLayout();
 
-					var view = new ViewSelectEmployer();
-					App.layout.body.show(view);
+						var view = new ViewSelectEmployer();
+						App.layout.body.show(view);
+					}else{
+						App.router.navigate("jobs", true);	
+					}
 				}else{
 					App.router.navigate("login", true);
 				}
 			},
 
 			logout : function(){
-				Utils.RemoveAdminEmployers();
 				Utils.RemoveSharedConnectionName();
-				Utils.RemoveSelectedEmployer();
 				Utils.RemoveUserConnectionsList();
 				App.session.set({logged : false, expired : false});
 				App.router.navigate("login", true);
@@ -587,7 +596,11 @@ define([
 				var employers = App.session.get("employers");
 				var guid = employers[selectedEmployer].guid;
 				return guid;
-			}
+			},
+
+			setMenuSelection : function(item){
+				App.menu.setSelection(item);
+			},
 			
 		});
 

@@ -54,12 +54,19 @@ define([
 		App.on("initialize:after", function(){
 			console.log("Brushfire initialized...");
 			App.body.show(App.layout);
-			App.appendMenu();
+			
+			if(App.session.get("logged")){
+				App.appendMenu();
+			}
+
+			this.listenTo(App.session, "loggedChanged", App.appendMenu);
 		});
 
 		// Append Menu
 		App.appendMenu = function(){
-			App.layout.menu.show(App.menu);
+			if(App.session.get("logged")){
+				App.layout.menu.show(App.menu);
+			}
 		}
 
 		// On App start

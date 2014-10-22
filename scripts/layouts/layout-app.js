@@ -318,7 +318,6 @@ define([
 
 				var deferred = [];
 
-				var index = Utils.GetSelectedEmployer();
 					var share = new Object();
 					share.fromUser = new Object();
 					share.jobPosting = new Object();
@@ -405,7 +404,7 @@ define([
 			setEmployer : function(){
 				var alertDialog = $(document).find("#app-alert-select-employer");
 				var index = $(alertDialog).find(".custom-select").attr("data-index");
-				Utils.SetSelectedEmployer(index);
+				this.options.app.session.set("selectedEmployer", index);
 				$(alertDialog).removeClass("show");
 				$(alertDialog).find(".custom-select-list").html("");
 				$(alertDialog).find(".custom-select").attr("data-index", 0);

@@ -1436,12 +1436,13 @@ input[type="password"]::selection{
 
 
 #app-body{
+	position: relative;
 	display: block;
 	float: left;
 	clear: both;
 	width: 100%;
 	height: calc(100% - 40px);
-	overflow: hidden;
+	overflow: auto;
 }
 
 .content {

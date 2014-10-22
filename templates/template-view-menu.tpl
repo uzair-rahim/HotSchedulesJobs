@@ -5,7 +5,7 @@
 			{{/ifEmployerHasLogo}}
 		</div>
 	<div class="user-name">{{user.firstname}} {{user.lastname}}</div>
-	<div class="employer-name more">{{getEmployerName user selectedEmployer}}</div>
+	<div class="employer-name {{#if_gt user.employers.length 1}}more{{/if_gt}}">{{getEmployerName user selectedEmployer}}</div>
 	{{#if_gt user.employers.length 1}}
 		<ul class="employers-list transition">
 			{{#each user.employers}}
@@ -23,11 +23,13 @@
 		<label>Getting Started</label>
 	</li>
 	<li class="divider"></li>
+	{{#if_true config.notification}}
 	<li id="menu-notifications">
 		<label>Notifications</label>
 		<div class="count">{{notificationsCount}}</div>
 	</li>
 	<li class="divider"></li>
+	{{/if_true}}
 	<li id="menu-candidates">
 		<label>Candidates</label>
 	</li>

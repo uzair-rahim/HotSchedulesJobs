@@ -198,7 +198,7 @@ define([
 			if(App.menu.el.innerHTML !== "" && !employerName){
 				var employers = App.session.attributes.employers;
 				var employersList = $(document).find(".employers-list");
-				if(employers.length > 1 && employersList.hasClass("show")){
+				if(employers !== null && employers.length > 1 && employersList.hasClass("show")){
 					App.menu.showSwitchEmployer();
 				}
 			}

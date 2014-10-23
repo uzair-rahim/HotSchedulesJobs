@@ -554,7 +554,7 @@ define([
 			logout : function(){
 				Utils.RemoveSharedConnectionName();
 				Utils.RemoveUserConnectionsList();
-				App.session.set({logged : false, expired : false});
+				App.session.set({logged : false, expired : false, employers : null});
 				App.router.navigate("login", true);
 			},
 

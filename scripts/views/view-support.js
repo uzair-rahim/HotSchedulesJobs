@@ -242,7 +242,6 @@ define([
 	    			},2000)
 	    		},
 	    		error : function(response){
-	    			console.log(response);
 	    			Utils.ShowToast({message : "Error removing employer"});
 	    		}
 			});

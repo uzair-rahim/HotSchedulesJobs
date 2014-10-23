@@ -505,7 +505,6 @@ define([
 
 				$(checkboxes).each(function(){
 					var id = $(this).attr("id");
-					console.log(id);
 					$("li.view-profile[data-jobType='"+id+"']").show();
 				});
 

@@ -501,7 +501,6 @@ define([
 
 				$(checkboxes).each(function(){
 					var id = $(this).attr("id");
-					console.log(id)
 					$(".candidate-section[id='"+id+"']").show();
 				});
 

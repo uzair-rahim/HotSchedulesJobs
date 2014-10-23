@@ -74,7 +74,6 @@ define([
 	    				},3000)
 	    			},
 	    			error : function(response){
-	    				console.log(response);
 	    				Utils.ShowToast({message : "Error resetting password"});
 	    				$("#password").val("");
 						$("#confirm").val("");

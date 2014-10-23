@@ -95,7 +95,7 @@ define([
 
 		startLogoUpload : function(event){
 
-			var guid = App.router.controller.getEmployerGUID();
+			var guid = App.session.getEmployerGUID();
 
 			var container = $(document).find(".resize-logo-container");
 			var containerX = $(container).offset().left;
@@ -189,7 +189,7 @@ define([
 
 			if($(logoImage).length > 0){
 				
-				var employerGUID = App.router.controller.getEmployerGUID();
+				var employerGUID = App.session.getEmployerGUID();
 				var logo = new EmployerLogo({id : 0, guid : employerGUID});
 
 				logo.destroy({
@@ -221,7 +221,7 @@ define([
 
 			var that = this;
 
-			var employerGUID = App.router.controller.getEmployerGUID();
+			var employerGUID = App.session.getEmployerGUID();
 			var userGUID = App.session.get("guid");
 			var self = this.adminUserGUID == userGUID;
 			var deleteAdmin = new DeleteAdmin({id : this.adminID, guid : employerGUID, admin : this.adminGUID});
@@ -320,7 +320,7 @@ define([
 
 					employer.location = address;
 
-					var employerGUID = App.router.controller.getEmployerGUID();
+					var employerGUID = App.session.getEmployerGUID();
 
 					var profile = new EmployerProfile({guid : employerGUID});
 
@@ -374,7 +374,7 @@ define([
 				return false;
 
 			}else{
-				var employerGUID = App.router.controller.getEmployerGUID();
+				var employerGUID = App.session.getEmployerGUID();
 				var newAdmin = new NewAdmin({guid : employerGUID});
 					newAdmin.unset("guid");
 				var email = $("#admin-email").val();

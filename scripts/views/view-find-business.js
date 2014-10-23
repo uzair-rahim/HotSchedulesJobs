@@ -145,34 +145,20 @@ define([
 				modelBusiness.save(businessObject, {
 					success : function(response){
 						console.log("Business successfully saved...");
-
-						Utils.DeleteUserSession();
 						
-						var user = new Object();
-							user.guid = response.attributes.admins[0].user.guid;
-							user.firstname = response.attributes.admins[0].user.firstname;
-							user.lastname = response.attributes.admins[0].user.lastname;
-							user.email = response.attributes.admins[0].user.emails[0].email;
-							user.employerIds = new Array();	
-							user.employerIds[0] = response.attributes.guid;
-							user.verified = true;
-							user.roles = response.attributes.admins[0].user.roles;
+						var employers = [response.attributes.guid];
+						var roles = [response.attributes.admins[0].user.roles];
+							App.session.set("verified",true);
+							App.session.set("employers",true);
+							App.session.set("roles", roles);
 
 						var userModel = new ModelUser();
 							userModel.getUserEventByType(user.guid,0,function(response){
-								localStorage.setItem("training", response.completed);
-								localStorage.setItem("trainingEventGUID", response.guid);	
-
-								Utils.CreateUserSession(user);
-								Utils.SetSelectedEmployer(0);
+								App.session.set("trainingCompleted",response.completed);
+								App.session.set("trainingEventGUID",response.guid);
 								Utils.ShowToast({message : "Welcome to HotSchedules Post"});
 								App.router.navigate("jobs", true);
-
 							});
-
-						
-
-
 					},
 					error : function(){
 						Utils.ShowToast({message : "There was an error..."});

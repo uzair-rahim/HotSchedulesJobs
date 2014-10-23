@@ -688,7 +688,7 @@ define([
 
 		showMoreUnarchivedCandidates : function(){
 			var startIndex = $("#candidates-list > li.view-profile").length;
-			var employerGUID = App.router.controller.getEmployerGUID();
+			var employerGUID = App.session.getEmployerGUID();
 
 			var that = this;
 			var employer = new ModelEmployer();
@@ -707,7 +707,7 @@ define([
 
 		showMoreArchivedCandidates : function(){
 			var startIndex = $("#archived-candidates-list > li.view-profile").length;
-			var employerGUID = App.router.controller.getEmployerGUID();
+			var employerGUID = App.session.getEmployerGUID();
 
 			var that = this;
 			var employer = new ModelEmployer();

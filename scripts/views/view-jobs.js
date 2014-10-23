@@ -82,7 +82,7 @@ define([
 			// Show intersted user count if there are no jobs for the employer
 			var jobs = this.model.jobs;
 			if(jobs.length === 0){
-				var employerGUID = App.router.controller.getEmployerGUID();
+				var employerGUID = App.session.getEmployerGUID();
 				var employer = new ModelEmployer();
 					employer.getInterestedUsersCount(employerGUID,function(data){
 						if(data.length !== 0){
@@ -137,7 +137,7 @@ define([
 					job.shifts = [{id : 0}];
 					job.updatedBy.guid = App.session.get("guid");
 					job.createdBy.guid = App.session.get("guid");
-					job.employer.guid = App.router.controller.getEmployerGUID();
+					job.employer.guid = App.session.getEmployerGUID();
 
 					job.jobName = $("#new-position button").text();
 					job.description = $("#new-description").val();
@@ -483,7 +483,7 @@ define([
 
 					share.fromUser.guid = App.session.get("guid");
 					share.jobPosting.guid = jobGUID
-					share.employer.guid = App.router.controller.getEmployerGUID();
+					share.employer.guid = App.session.getEmployerGUID();
 					share.type = shareType;
 
 				var that = this;

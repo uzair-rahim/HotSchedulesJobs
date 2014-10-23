@@ -232,7 +232,7 @@ define([
 					App.clearTrail();
 					App.pushTrail(App.Language.candidates);
 
-					var employerGUID = this.getEmployerGUID();
+					var employerGUID = App.session.getEmployerGUID();
 					var jobtypes = new ModelJobTypes();
 					var employer = new ModelEmployer();
 					var models = new Object();
@@ -389,7 +389,7 @@ define([
 					this.removeBackground();
 					this.setLayout();
 
-					var employerGUID = this.getEmployerGUID();
+					var employerGUID = App.session.getEmployerGUID();
 
 					var chat = new ModelChat();
 						chat.getEmployerChats(employerGUID,0,0,function(data){
@@ -439,7 +439,7 @@ define([
 					this.removeBackground();
 					this.setLayout();
 
-					var employerGUID = App.router.controller.getEmployerGUID();
+					var employerGUID = App.session.getEmployerGUID();
 
 					var employerPPA = new ModelEmployerPPA();
 					var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUID});
@@ -510,7 +510,7 @@ define([
 				var that = this;
 
 				if(App.session.isLoggedIn() && App.session.isVerified()){
-					var roles = Utils.GetUserSession().roles;
+					var roles = App.session.get("roles");
 					var support = Utils.IsSupportUser(roles);
 					if(support){
 						this.removeBackground();
@@ -589,13 +589,6 @@ define([
 				}else{
 					App.router.navigate("accountVerification", true);
 				}
-			},
-
-			getEmployerGUID : function(){
-				var selectedEmployer = App.session.get("selectedEmployer");
-				var employers = App.session.get("employers");
-				var guid = employers[selectedEmployer].guid;
-				return guid;
 			},
 
 			setMenuSelection : function(item){

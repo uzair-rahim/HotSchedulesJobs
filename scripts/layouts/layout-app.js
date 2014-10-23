@@ -323,9 +323,9 @@ define([
 					share.jobPosting = new Object();
 					share.employer = new Object();
 					
-					share.fromUser.guid = Utils.GetUserSession().guid;
+					share.fromUser.guid = App.session.get("guid");
 					share.jobPosting.guid = jobGUID;
-					share.employer.guid = App.router.controller.getEmployerGUID();
+					share.employer.guid = App.session.getEmployerGUID();
 
 					var that = this;
 					var restURL = Utils.GetURL("/services/rest/share");
@@ -424,7 +424,7 @@ define([
 				}else if(message === ""){
 					Utils.ShowToast({type : "error", message : "Message cannot be empty"});
 				}else{
-					var employerGUID = App.router.controller.getEmployerGUID();
+					var employerGUID = App.session.getEmployerGUID();
 					var users = Utils.GetNewMessageRecipients();
 
 					var dataArray = new Array();
@@ -487,7 +487,7 @@ define([
 
 			showQuickChatMessage : function(event){
 				var that = this;
-				var employerGUID = App.router.controller.getEmployerGUID();
+				var employerGUID = App.session.getEmployerGUID();
 				var chatGUID = $(event.target).closest("#quick-message-list > li").attr("data-guid");
 				var item = $(event.target).closest("#quick-message-list > li");
 				var isUnseen = item.hasClass("new");
@@ -535,7 +535,7 @@ define([
 			},
 
 			getEmployerChats : function(){
-				var employerGUID = App.router.controller.getEmployerGUID();
+				var employerGUID = App.session.getEmployerGUID();
 				var chat = new ModelChat();
 					chat.getEmployerChats(employerGUID, 0, 1, function(response){
 						var dialog = $(document).find("#quick-message-view");

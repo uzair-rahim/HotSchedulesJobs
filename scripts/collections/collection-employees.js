@@ -15,7 +15,7 @@ define([
 		},
 		
 		url : function(){
-			var url = this.urlRoot() + "/"+App.router.controller.getEmployerGUID()+"/employees";
+			var url = this.urlRoot() + "/"+App.session.getEmployerGUID()+"/employees";
 			return url;
 		},
 

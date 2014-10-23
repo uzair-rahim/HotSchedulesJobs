@@ -113,15 +113,16 @@ define([
 									
 									var user = new Object();
 									user.guid = response.attributes.guid;
+									user.verified = response.attributes.verified;
 									user.firstname = response.attributes.firstname;
 									user.lastname = response.attributes.lastname;
+									user.photo = response.attributes.photo;
 									user.email = response.attributes.email;
-									user.verified = response.attributes.verified;
-									user.employerIds = response.attributes.employerIds;
+									user.employers = response.attributes.employerIds;
 									user.roles = response.attributes.roles;
 
-									Utils.CreateUserSession(user);
-
+									App.session.removeUserSession();
+									App.session.set(user);
 									App.router.navigate("accountVerification", true);
 								}
 							},

@@ -126,6 +126,10 @@ define([
 				return this.attributes.selectedEmployer;
 			},
 
+			getEmployerGUID : function(){
+				return this.attributes.employers[this.attributes.selectedEmployer].guid;
+			},
+
 			getEmail : function(){
 				return this.attributes.email;
 			},

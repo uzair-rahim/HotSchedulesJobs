@@ -377,7 +377,7 @@ define([
 				share.employer = new Object();
 
 				share.fromUser.guid = App.session.get("guid");
-				share.employer.guid = App.router.controller.getEmployerGUID();
+				share.employer.guid = App.session.getEmployerGUID();
 				share.jobPosting.guid = jobGuid
 				share.toEmployeeGuids = employeeGuids;
 				share.toFollowerGuids = followerGuids;
@@ -537,7 +537,7 @@ define([
 
 		getFollowers : function(){
 			var that = this;
-			var employerGuid = App.router.controller.getEmployerGUID();
+			var employerGuid = App.session.getEmployerGUID();
 			var followers = new CollectionFollowers({guid : employerGuid});
 
 			followers.fetch({
@@ -550,7 +550,7 @@ define([
 
 		getEndorsers : function(){
 			var that = this;
-			var employerGuid = App.router.controller.getEmployerGUID();
+			var employerGuid = App.session.getEmployerGUID();
 			var endorsers = new CollectionEndorsers({guid : employerGuid});
 
 			endorsers.fetch({

@@ -43,10 +43,9 @@ define([
 
 				var that = this;
 				var restURL = Utils.GetURL("/services/rest/user/");
-				var user = Utils.GetUserSession();
 				
 				$.ajax({
-					url : restURL+user.guid+"/verify",
+					url : restURL+App.session.get("guid")+"/verify",
 					type : "POST",
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					data : {"verificationCode" : pin},
@@ -68,10 +67,9 @@ define([
 		resendPIN : function(){
 			var that = this;
 			var restURL = Utils.GetURL("/services/rest/user/");
-			var user = Utils.GetUserSession();
 			
 			$.ajax({
-				url : restURL+user.guid+"/resendEmail",
+				url : restURL+App.session.get("guid")+"/resendEmail",
 				type : "GET",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	    		success : function(){

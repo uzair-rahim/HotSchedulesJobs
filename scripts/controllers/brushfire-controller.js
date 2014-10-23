@@ -413,12 +413,11 @@ define([
 					this.removeBackground();
 					this.setLayout();
 
-					var session = Utils.GetUserSession();
 					var user = new Object();
-						user.guid = session.guid;
-						user.firstname = session.firstname;
-						user.lastname = session.lastname;
-						user.emailaddress = session.email;
+						user.guid = App.session.get("guid");
+						user.firstname = App.session.get("firstname");
+						user.lastname = App.session.get("lastname");
+						user.emailaddress = App.session.get("email");
 
 					var view = new ViewSettings({model : user});
 					App.layout.body.show(view);

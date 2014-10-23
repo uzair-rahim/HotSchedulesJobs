@@ -54,6 +54,13 @@
 	background-size: auto 15px;
 }
 
+@media screen and (max-width: 800px){
+	#app-main.collapse .grid-list-head:first-of-type{
+		margin-top: 20px;
+		font-size: 14px;
+	}
+}
+
 @media screen and (max-width: 600px){
 	.grid-list-head:first-of-type{
 		margin-top: 20px;
@@ -178,6 +185,19 @@ ul.grid-list > li .job-info .job-shift{
 	text-overflow: ellipsis;
 }
 
+@media screen and (max-width: 700px){
+	#app-main.collapse ul.grid-list > li .job-info{
+		border-right: none;
+		width: 165px;
+
+	}
+
+	#app-main.collapse ul.grid-list li .job-info .job-name,
+	#app-main.collapse ul.grid-list li .job-info .job-shift{
+		width: 165px;
+	}
+}
+
 @media screen and (max-width: 500px){
 	ul.grid-list > li .job-info{
 		border-right: none;
@@ -200,6 +220,13 @@ ul.grid-list > li .candidates-info{
 	overflow: hidden;
 	white-space: nowrap;
 	border-right: 1px dotted #bbbbbb;
+}
+
+
+@media screen and (max-width: 790px){
+	#app-main.collapse ul.grid-list > li .candidates-info{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 590px){
@@ -244,6 +271,14 @@ ul.grid-list > li .share-info{
 	background-size: auto 20px;
 }
 
+
+
+@media screen and (max-width: 1000px){
+	#app-main.collapse ul.grid-list > li .share-info{
+		display: none;
+	}
+}
+
 @media screen and (max-width: 800px){
 	ul.grid-list > li .share-info{
 		display: none;
@@ -267,6 +302,12 @@ ul.grid-list > li .posted-info{
 
 ul.grid-list > li .posted-info.new{
 	font-weight: bold;
+}
+
+@media screen and (max-width: 980px){
+	#app-main.collapse ul.grid-list > li .posted-info{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 780px){
@@ -293,6 +334,12 @@ ul.grid-list > li .bonus-info{
 
 ul.grid-list > li .bonus-info.new{
 	font-weight: bold;
+}
+
+@media screen and (max-width: 1100px){
+	#app-main.collapse ul.grid-list > li .bonus-info{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 900px){
@@ -341,6 +388,14 @@ ul.grid-list > li .candidate-select{
 	display: block;
 	float: left;
 	margin: 18px 5px 0 10px;
+}
+
+
+
+@media screen and (max-width: 800px){
+	#app-main.collapse ul.grid-list > li .candidate-select{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 600px){
@@ -414,6 +469,19 @@ ul.grid-list > li .candidate-info .candidate-job{
 	text-transform: capitalize;
 }
 
+@media screen and (max-width: 1090px){
+	#app-main.collapse ul.grid-list > li .candidate-info{
+		border-right: none;
+		width: 145px;
+
+	}
+
+	#app-main.collapse ul.grid-list > li .candidate-info .candidate-name,
+	#app-main.collapse ul.grid-list > li .candidate-info .candidate-job{
+		width: 145px;
+	}
+}
+
 @media screen and (max-width: 890px){
 	ul.grid-list > li .candidate-info{
 		border-right: none;
@@ -435,6 +503,19 @@ ul.grid-list > li .jobposting-info{
 	line-height: 42px;
 	text-indent: 10px;
 	border-right: 1px dotted #bbbbbb
+}
+
+@media screen and (max-width: 1090px){
+	#app-main.collapse ul.grid-list > li .jobposting-info{
+		margin: 4px 0 0 10px;
+		border-left: 1px dotted #bbbbbb
+	}
+}
+
+@media screen and (max-width: 700px){
+	#app-main.collapse ul.grid-list > li .jobposting-info{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 890px){
@@ -470,6 +551,12 @@ ul.grid-list > li .candidate-referral{
 ul.grid-list > li .candidate-referral:hover{
 	color: #007bff;
 	background-image: url("../images/icon-referral-hover.png");
+}
+
+@media screen and (max-width: 905px){
+	#app-main.collapse ul.grid-list > li .candidate-referral{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 705px){
@@ -573,6 +660,12 @@ ul.grid-list > li .candidate-endorse:hover{
 	color: #007bff;
 }
 
+@media screen and (max-width: 780px){
+	#app-main.collapse ul.grid-list > li .candidate-endorse{
+		display: none;
+	}
+}
+
 @media screen and (max-width: 580px){
 	ul.grid-list > li .candidate-endorse{
 		display: none;
@@ -616,6 +709,12 @@ ul.grid-list > li .candidate-network.has-connections span{
 	color: #2d3c4b;
 }
 
+@media screen and (max-width: 830px){
+	#app-main.collapse ul.grid-list > li .candidate-network{
+		display: none;
+	}
+}
+
 @media screen and (max-width: 630px){
 	ul.grid-list > li .candidate-network{
 		display: none;
@@ -643,6 +742,12 @@ ul.grid-list > li .count{
 ul.grid-list > li .count.new{
 	color: #3e92ce;
 	border: 1px solid #3e92ce;
+}
+
+@media screen and (max-width: 700px){
+	#app-main.collpase ul.grid-list > li .count{
+		display: block;
+	}
 }
 
 @media screen and (max-width: 500px){
@@ -683,6 +788,12 @@ ul.grid-list > li .candidate-rating.two{
 
 ul.grid-list > li .candidate-rating.one{
 	background-position: -88px 0;
+}
+
+@media screen and (max-width: 900px){
+	#app-main.collpase ul.grid-list > li .candidate-rating{
+		display: none;
+	}
 }
 
 @media screen and (max-width: 700px){
@@ -732,6 +843,15 @@ ul.grid-list > li .user-connect.received:hover{
 	background-image: url("../images/icon-plus-hover.png");
 }
 
+
+@media screen and (max-width: 690px){
+	#app-main.collpase ul.grid-list > li .user-connect,
+	#app-main.collpase ul.grid-list > li .user-disconnect,
+	#app-main.collpase ul.grid-list > li .user-connect.self,
+	#app-main.collpase ul.grid-list > li .user-connect.received{
+		display: none;
+	}
+}
 
 @media screen and (max-width: 490px){
 	ul.grid-list > li .user-connect,
@@ -785,6 +905,23 @@ ul.grid-list > li .user-connect.received:hover{
 
 #search-button{
 	margin-top: 2px; 
+}
+
+@media screen and (max-width: 730px){
+
+	#app-main.collapse #search-field{
+		width: calc(100% - 137px);
+		margin-right: 0;
+	}
+
+	#app-main.collapse #search-button{
+		margin: 10px 5px; 
+		width: 100%;
+	}
+
+	#app-main.collapse #toolbar.support{
+		height: 60px;
+	}
 }
 
 @media screen and (max-width: 530px){
@@ -884,6 +1021,28 @@ ul.grid-list.support > li button{
 	display: block;
 	float: right;
 	margin: 10px;
+}
+
+@media screen and (max-width: 850px){
+	#app-main.collapse ul.grid-list.support > li .info .name{
+		font-size: 12px;
+		margin-top: 10px;
+	}
+
+	#app-main.collapse ul.grid-list.support > li .info .employer{
+		font-size: 12px;
+	}
+
+	#app-main.collapse ul.grid-list.support > li .info .email,
+	#app-main.collapse ul.grid-list.support > li .info .address{
+		font-size: 12px;
+	}
+
+	#app-main.collapse ul.grid-list.support > li button{
+		margin: 10px 0px;
+		font-size: 12px;
+		padding: 6px 8px;
+	}
 }
 
 @media screen and (max-width: 650px){

@@ -323,9 +323,9 @@ define([
 					share.jobPosting = new Object();
 					share.employer = new Object();
 					
-					share.fromUser.guid = App.session.get("guid");
+					share.fromUser.guid = this.options.app.session.get("guid");
 					share.jobPosting.guid = jobGUID;
-					share.employer.guid = App.session.getEmployerGUID();
+					share.employer.guid = this.options.app.session.getEmployerGUID();
 
 					var that = this;
 					var restURL = Utils.GetURL("/services/rest/share");

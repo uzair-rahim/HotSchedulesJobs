@@ -785,6 +785,7 @@ input[type="password"]::selection{
 	width: calc(100% - 56px);
 	margin: 0 0 20px 30px;
 	font-size: 14px;
+	white-space: normal;
 }
 
 .form-container .login-form p b{
@@ -1532,6 +1533,16 @@ input[type="password"]::selection{
 	
 }
 
+@media screen and (max-width: 800px){
+	#app-main.collapse #toolbar #send-message,
+	#app-main.collapse #toolbar #send-chat,
+	#app-main.collapse #toolbar #archive-candidates,
+	#app-main.collapse #toolbar.hideable-toolbar{
+		display: none;
+	}	
+}
+
+
 @media screen and (max-width: 600px){
 	#toolbar #send-message,
 	#toolbar #send-chat,
@@ -1540,10 +1551,6 @@ input[type="password"]::selection{
 		display: none;
 	}	
 }
-
-
-
-
 
 #app-toast{
 	position: absolute;
@@ -2710,6 +2717,7 @@ ul.chat-list li > .message > .text{
 	width: calc(100% - 10px);
 	color: #959aa2;
 	font-size: 12px;
+	white-space: normal;
 }
 
 ul.chat-list li.new > .message > .text{
@@ -2945,6 +2953,24 @@ ul.chat-list li.date span{
 	margin: 10px 0 10px 20px;
 	max-width: 440px;
 	width: 100%;
+}
+
+@media screen and (max-width: 1210px){
+	#app-main.collapse .hourly-profile > .about-section{
+		margin: 10px;
+		clear: both;
+		max-width: 100%;
+		width: calc(100% - 20px);
+		height: auto;
+	}
+
+	#app-main.collapse .hourly-profile > .history-section{
+		margin: 10px;
+		clear: both;
+		max-width: 100%;
+		width: calc(100% - 20px);
+		height: auto;
+	}
 }
 
 @media screen and (max-width: 1010px){
@@ -3421,6 +3447,43 @@ ul.chat-list li.date span{
 	margin-left: 1px;
 }
 
+@media screen and (max-width: 1210px){
+	#app-main.collapse .profile-info{
+		clear: both;
+		width: calc(100% - 20px);
+		margin: 0 0 20px 0;
+		border-right: none;
+	}
+
+	#app-main.collapse .profile-admins{
+		clear: both;
+		width: calc(100% - 20px);
+	}	
+
+	#app-main.collapse .profile-info .employer-profile-container{
+		width: calc(100% - 4px);
+
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container{
+		width: 484px;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-half{
+		width: 241px;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-third{
+		clear: left;
+		width: 143px;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.zip{
+		clear: right;
+	}
+
+}
+
 @media screen and (max-width: 1010px){
 	.profile-info{
 		clear: both;
@@ -3454,6 +3517,40 @@ ul.chat-list li.date span{
 
 	.profile-info .employer-profile-container .field-container.zip{
 		clear: right;
+	}
+
+}
+
+@media screen and (max-width: 710px){
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container{
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-half{
+		clear: both;
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-third{
+		clear: both;
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.two-third{
+		clear: both;
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.zip{
+		width: calc(100% - 95px);
+		clear: right;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container input[type="text"],
+	#app-main.collapse .profile-info .employer-profile-container .field-container input[type="password"],
+	#app-main.collapse .profile-info .employer-profile-container .field-container textarea{
+		width: calc(100% - 15px);
 	}
 
 }
@@ -3995,6 +4092,13 @@ ul.chat-list li.date span{
 	height: 100%;
 }
 
+
+@media screen and (max-width: 900px){
+	#app-main.collapse .message-container .scrollable{
+		width: 200%;
+	}
+}
+
 @media screen and (max-width: 700px){
 	.message-container .scrollable{
 		width: 200%;
@@ -4045,6 +4149,29 @@ ul.chat-list li.date span{
 	color: #969ba2;
 	line-height: 49px;
 	font-size: 14px;
+}
+
+@media screen and (max-width: 900px){
+	#app-main.collapse .message-container .message-head .message-folder-container{
+		display: block;
+		float: left;
+		width: 50%;
+		border-right: none;
+	}
+
+	#app-main.collapse .message-container .message-head .message-info-container{
+		width: 50%;
+		height: 34px;
+		background-image: url("../images/icon-back-arrow.png");
+		background-repeat: no-repeat;
+		background-position: 12px 12px;
+		background-size: 14px auto;
+	}
+
+	#app-main.collapse .message-container .message-head .message-info-container .candidate-name{
+		text-indent: 0;
+		margin: 0 0 0 40px;
+	}
 }
 
 @media screen and (max-width: 700px){
@@ -4121,6 +4248,18 @@ ul.chat-list li.date span{
 	height: 100%;
 	background-color: #f8f8f8;
 	overflow: hidden;
+}
+
+@media screen and (max-width: 900px){
+
+	#app-main.collapse .message-container .message-body .message-list-container{
+		width: 50%;
+		border-right: none;
+	}
+
+	#app-main.collapse .message-container .message-body .message-view-container{
+		width: 50%;
+	}
 }
 
 @media screen and (max-width: 700px){

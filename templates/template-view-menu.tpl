@@ -46,6 +46,10 @@
 	<li id="menu-settings">
 		<label>Settings</label>
 	</li>
+	<li class="divider"></li>
+	<li id="menu-terms">
+		<label>Terms & Conditions</label>
+	</li>
 	<li id="menu-logout">
 		<label>Logout</label>
 	</li>

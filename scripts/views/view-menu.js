@@ -12,16 +12,17 @@ define([
 		className : "",
 		template: Template,
 		events : {
-			"click .employer-name"		: "showSwitchEmployer",
-			"click .employers-list li"	: "switchEmployer",
-			"click #menu-notifications" : "notifications",
-			"click #menu-dashboard"		: "dashboard",
-			"click #menu-jobs"		 	: "jobs",
-			"click #menu-candidates" 	: "candidates",
-			"click #menu-network"	 	: "network",
-			"click #menu-messages"	 	: "messages",
-			"click #menu-settings"	 	: "settings",
-			"click #menu-logout"	 	: "logout"
+			"click .employer-name"			: "showSwitchEmployer",
+			"click .employers-list li"		: "switchEmployer",
+			"click #menu-getting-started"	: "gettingStarted",
+			"click #menu-notifications" 	: "notifications",
+			"click #menu-jobs"		 		: "jobs",
+			"click #menu-candidates" 		: "candidates",
+			"click #menu-network"	 		: "network",
+			"click #menu-messages"	 		: "messages",
+			"click #menu-settings"	 		: "settings",
+			"click #menu-terms"				: "termsAndConditions",
+			"click #menu-logout"	 		: "logout"
 		},
 
 		initialize : function(){
@@ -62,6 +63,11 @@ define([
 
 		},
 
+		gettingStarted : function(){
+			this.hideMenuAndAutoNotifaction();
+			this.options.app.router.controller.training();
+		},
+
 		notifications : function(){
 			this.hideMenuAndAutoNotifaction();
 		},
@@ -90,6 +96,10 @@ define([
 		settings : function(){
 			this.hideMenuAndNotification();
 			this.options.app.router.navigate("profileSettings", true);
+		},
+
+		termsAndConditions : function(){
+			Utils.ShowTermsAndConditions({inApp : true, secondaryButtonText : "OK"});
 		},
 
 		logout : function(){

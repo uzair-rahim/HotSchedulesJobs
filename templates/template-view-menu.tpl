@@ -30,11 +30,11 @@
 	</li>
 	<li class="divider"></li>
 	{{/if_true}}
-	<li id="menu-candidates">
-		<label>Candidates</label>
-	</li>
 	<li id="menu-jobs">
 		<label>Jobs</label>
+	</li>
+	<li id="menu-candidates">
+		<label>Candidates</label>
 	</li>
 	<li id="menu-network">
 		<label>Network</label>
@@ -43,8 +43,11 @@
 		<label>Messages</label>
 	</li>
 	<li class="divider"></li>
-	<li id="menu-settings">
-		<label>Settings</label>
+	<li id="menu-account-settings">
+		<label>Account Settings</label>
+	</li>
+	<li id="menu-profile-settings">
+		<label>Profile Settings</label>
 	</li>
 	<li class="divider"></li>
 	<li id="menu-terms">

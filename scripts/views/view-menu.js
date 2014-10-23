@@ -20,7 +20,8 @@ define([
 			"click #menu-candidates" 		: "candidates",
 			"click #menu-network"	 		: "network",
 			"click #menu-messages"	 		: "messages",
-			"click #menu-settings"	 		: "settings",
+			"click #menu-account-settings"	: "accountSettings",
+			"click #menu-profile-settings"	: "profileSettings",
 			"click #menu-terms"				: "termsAndConditions",
 			"click #menu-logout"	 		: "logout"
 		},
@@ -64,7 +65,7 @@ define([
 		},
 
 		gettingStarted : function(){
-			this.hideMenuAndAutoNotifaction();
+			this.hideMenuAndNotification();
 			this.options.app.router.controller.training();
 		},
 
@@ -93,7 +94,12 @@ define([
 			this.options.app.router.navigate("messages", true);
 		},
 
-		settings : function(){
+		accountSettings : function(){
+			this.hideMenuAndNotification();
+			this.options.app.router.navigate("accountSettings", true);
+		},
+
+		profileSettings : function(){
 			this.hideMenuAndNotification();
 			this.options.app.router.navigate("profileSettings", true);
 		},

@@ -145,19 +145,18 @@ define([
 				modelBusiness.save(businessObject, {
 					success : function(response){
 						console.log("Business successfully saved...");
-						
 						var employers = [response.attributes.guid];
-						var roles = [response.attributes.admins[0].user.roles];
-							App.session.set("verified",true);
-							App.session.set("employers",true);
+						var roles = response.attributes.admins[0].user.roles
+							App.session.set("employers",employers);
 							App.session.set("roles", roles);
 
 						var userModel = new ModelUser();
-							userModel.getUserEventByType(user.guid,0,function(response){
-								App.session.set("trainingCompleted",response.completed);
+							userModel.getUserEventByType(App.session.get("guid"),0,function(response){
+								App.session.set("trainingCompleted",response.completed !== null);
 								App.session.set("trainingEventGUID",response.guid);
-								Utils.ShowToast({message : "Welcome to HotSchedules Post"});
-								App.router.navigate("jobs", true);
+								App.session.set("logged",true);
+								App.session.set("verified",true);
+								App.router.controller.redirectOnLogin();
 							});
 					},
 					error : function(){

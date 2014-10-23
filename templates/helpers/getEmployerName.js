@@ -3,8 +3,12 @@ define([
 	], function (Handlebars) {
 	
 		function getEmployerName(user, selected) {
-			var employer = user.employers[selected];
-			return employer.name;
+			if(user.employers.length > 0){
+				var employer = user.employers[selected];
+				return employer.name;
+			}else{
+				return "";
+			}
 		}
 	
 	Handlebars.registerHelper("getEmployerName", getEmployerName);

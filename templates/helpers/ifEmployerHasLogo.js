@@ -4,11 +4,14 @@ define([
 	
 		function ifEmployerHasLogo(user, selected, options) {
 			var employer = user.employers[selected];
-			var logo = employer.logo;
-			if(logo === null || typeof(logo) === "undefined") {
+			if(employer === null || typeof(employer) === "undefined"){
 				return options.inverse(this);
 			}else{
-				return options.fn(this);
+				if(employer.logo === null || typeof(employer.logo) === "undefined") {
+					return options.inverse(this);
+				}else{
+					return options.fn(this);
+				}
 			}
 		}
 	

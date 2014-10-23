@@ -33,10 +33,10 @@ define([
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/training');
 
-      		var training = localStorage.getItem("training");
+      		var training = App.session.get("trainingCompleted");
 
-      		if(training == "null"){
-      			var trainingEventGUID = localStorage.getItem("trainingEventGUID");
+      		if(!App.session.get("trainingCompleted")){
+      			var trainingEventGUID = App.session.get("trainingEventGUID");
       			var date = new Date();
       			var data = {
       				"guid" : trainingEventGUID,
@@ -45,7 +45,7 @@ define([
 
       			var user = new ModelUser();
       				user.updateUserEvent(App.session.get("guid"), data.guid, data, function(response){
-      					localStorage.setItem("training", date.getTime());	
+      					App.session.get("trainingCompleted",true);
       				});
       		}
 		},

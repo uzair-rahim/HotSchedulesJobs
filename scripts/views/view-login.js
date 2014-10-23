@@ -61,7 +61,6 @@ define([
 				success : function(response){
 					var user = new Object();
 						user = auth.getUser();
-						user.logged = true;
 						user.expired = false;
 						user.remember = $("#remember-me-check").prop("checked");
 						
@@ -69,7 +68,7 @@ define([
 
 					var userModel = new ModelUser();
 					userModel.getUserEventByType(user.guid,0,function(response){
-						App.session.set("trainingCompleted", response.completed);
+						App.session.set("trainingCompleted", response.completed !== null);
 						App.session.set("trainingEventGUID", response.guid);
 
 						var networkModel = new ModelNetwork();

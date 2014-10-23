@@ -147,13 +147,13 @@ define([
 			},
 
 			accountVerification : function(){
-
-				if(App.session.isLoggedIn() && !App.session.isVerified()){
+				if(!App.session.isVerified()){
 
 					this.setLayout();
 					this.setBackground();
 
-					var user = Utils.GetUserSession();
+					var user = new Object();
+						user.email = App.session.get("email");
 
 					var view = new ViewAccountVerification({model : user});
 					App.layout.body.show(view);
@@ -422,7 +422,7 @@ define([
 
 					var view = new ViewSettings({model : user});
 					App.layout.body.show(view);
-					that.setMenuSelection("#menu-settings");	
+					that.setMenuSelection("#menu-account-settings");	
 				}else{
 					App.router.navigate("login", true);
 				}
@@ -481,7 +481,7 @@ define([
 					).then(function(){
 						var view = new ViewEmployerProfile({model : models});
 						App.layout.body.show(view);
-						that.setMenuSelection("#menu-settings");	
+						that.setMenuSelection("#menu-profile-settings");	
 					});
 
 				}else{
@@ -562,6 +562,7 @@ define([
 
 			redirectOnLogin : function(){
 				if(App.session.isVerified()){
+					var that = this;
 					var userGUID = App.session.get("guid");
 					var user = new ModelUser({guid : userGUID});
 						user.getProfilePhoto(function(data){
@@ -572,16 +573,21 @@ define([
 								// ...go to search jobs screen
 								App.router.navigate("findBusiness", true);
 							}else if(App.session.isSupport()){
+								App.session.set("logged", true);
 								App.router.navigate("support", true);
 							}else{
 								// ...get all employers and go to default
 								var userEmployers = App.session.getEmployers();
 								var collection = new CollectionEmployers();
 									collection.getEmployers(userEmployers, function(){
+										App.session.set("logged", true);
 										App.session.set({employers : collection.models});
 										App.menu.render();
 										var route = Utils.GetDefaultRoute();
 										App.router.navigate(route, true);
+										if(!App.session.get("trainingCompleted")){
+											that.training();
+										}
 									});
 							}
 						});

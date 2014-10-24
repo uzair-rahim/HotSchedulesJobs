@@ -121,7 +121,7 @@ define([
 				error : function(model, errors){
 					if(typeof(errors.responseJSON) !== "undefined"){
 						var error = errors.responseJSON;
-						Utils.ShowToast({message : error.errorMsg});
+						Utils.ShowToast({type : "error", message : error.errorMsg});
 					}
 				}
 			}
@@ -130,7 +130,7 @@ define([
 			auth.set(credentials, {validate:true});
 			
 			if(auth.validationError){
-				Utils.ShowToast({message : auth.validationError[0].message});
+				Utils.ShowToast({type : "error", message : auth.validationError[0].message});
 			}else{
 				auth.save(credentials, options);
 			}

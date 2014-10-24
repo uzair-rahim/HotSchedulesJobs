@@ -46,7 +46,7 @@ define([
 				if(this.AppConfig.dashboard){
 					return "dashboard";
 				}else{
-					return 	"selectEmployer";
+					return 	"jobs";
 				}
 			},
 

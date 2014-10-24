@@ -9,8 +9,8 @@
 	</div>
 	<div id="app-notifications" class="transition height-hack"></div>
 	<div id="app-body"></div>
+	<div id="app-toast"></div>
 </div>
-<div id="app-toast"></div>
 <!--General Purpose Alert-->
 <div id="app-alert" class="app-alert">
 	<div class="alert-title">Alert Title</div>

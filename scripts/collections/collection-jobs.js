@@ -15,13 +15,24 @@ define([
 		},
 		
 		url : function(){
-			var url = this.urlRoot() + "list/" + App.session.getEmployerGUID();
+			var url = this.urlRoot();
+
+			if(typeof this.guid !== "undefined"){
+				url += this.guid;
+			}else{
+				url += "list/" + App.session.getEmployerGUID();
+			}
+
 			return url;
 		},
 
 		initialize : function(options){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Jobs collection initialized....");
+
+			if(typeof options !== "undefined"){
+				this.guid = options.guid;	
+			}
 		}
 
 	});

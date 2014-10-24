@@ -169,6 +169,13 @@ define([
 
 			isSupport : function(){
 				return this.getRole() === "support";
+			},
+
+			endSession : function(){
+				this.attributes.logged = false;
+				this.attributes.expired = false;
+				this.attributes.employers = null;
+				this.updateUserSession();
 			}
 
 		});

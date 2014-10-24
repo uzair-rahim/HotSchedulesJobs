@@ -80,7 +80,7 @@ define([
 				this.numberOfJobs = 1;
 			}
 
-			var loggedUserGUID = App.sessin.get("guid");
+			var loggedUserGUID = App.session.get("guid");
 			var candidatesList = $(".grid-list");
 			var that = this;
 

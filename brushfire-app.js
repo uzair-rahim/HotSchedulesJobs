@@ -114,6 +114,7 @@ define([
 				break;
 				case 403 : 
 					Utils.ShowToast({message : "Access Denied"});
+					App.session.set("expired", true);
 					App.router.navigate("logout", true);
 				break;
 				case 500 :

@@ -99,17 +99,40 @@ define([
 				if(!params){
 					App.router.navigate("logout", true);
 				}else{
+					App.session.removeUserSession();
+
 					var user = new Object();
-					user.guid = params.u;
-					user.firstname = params.fn;
-					user.lastname = params.ln;
-					user.email = params.email;
-					user.verified = true;
-					user.employerIds = [params.e];
-					user.roles = ["employerAdmin", "user"];
+						user.guid = params.u;
+						user.firstname = params.fn;
+						user.lastname = params.ln;
+						user.email = params.email;
+						user.verified = true;
+						user.logged = true;
+						user.employers = [params.e];
+						user.roles = ["employerAdmin", "user"];
+
+					var collection = new CollectionEmployers();
+						collection.getEmployers(user.employers, function(){
+							
+							user.employers = collection.models;
+
+							var userModel = new ModelUser();
+								userModel.getUserEventByType(user.guid,0,function(response){
+								user.trainingCompleted = response.completed !== null;
+								user.trainingEventGUID = response.guid;
+
+								App.session.set(user);		
+								App.menu.render();
+
+								App.router.navigate("jobs", true);
+								if(!App.session.get("trainingCompleted")){
+									that.training();
+								}
+
+							});
+
+						});
 					
-					Utils.CreateUserSession(user);
-					App.router.navigate("jobs", true);
 				}
 
 			},
@@ -276,7 +299,7 @@ define([
 					App.pushTrail(App.Language.candidates);
 
 					var jobtypes = new ModelJobTypes();
-					var jobs = new CollectionJobs();
+					var jobs = new CollectionJobs({guid : id});
 					var models = new Object();
 						models.jobs = new Object();
 
@@ -553,7 +576,7 @@ define([
 			logout : function(){
 				Utils.RemoveSharedConnectionName();
 				Utils.RemoveUserConnectionsList();
-				App.session.set({logged : false, expired : false, employers : null});
+				App.session.endSession();
 				App.router.navigate("login", true);
 			},
 

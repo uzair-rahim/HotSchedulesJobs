@@ -2876,6 +2876,8 @@ ul.chat-list li.date span{
 .job-information > .details > .input-container > input.bonus{
 	width: 45px;
 	text-indent: 8px;
+	clear: both;
+	float: left;
 }
 
 .job-information > .details > .input-container .custom-select{

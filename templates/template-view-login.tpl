@@ -2,7 +2,7 @@
 <div class="form-container">
 	<div class="login-form">
 		<div class="logo"></div>
-		<input type="email" id="emailaddress" placeholder="Email Address" value="{{userEmail}}"/>
+		<input type="email" id="emailaddress" placeholder="Email Address"/>
 		<input type="password" id="password" placeholder="Password"/>
 		<button id="login">Login</button>
 		<div class="remember-me">

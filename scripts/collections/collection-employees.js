@@ -1,9 +1,10 @@
 define([
+	"app",
 	"backbone",
 	"utils",
 	"scripts/models/model-business"
 	],
-	function(Backbone, Utils, ModelBusiness){
+	function(App, Backbone, Utils, ModelBusiness){
 	'use strict';
 
 	var Employees = Backbone.Collection.extend({
@@ -14,13 +15,12 @@ define([
 		},
 		
 		url : function(){
-			var url = this.urlRoot() + "/"+this.guid+"/employees";
+			var url = this.urlRoot() + "/"+App.session.getEmployerGUID()+"/employees";
 			return url;
 		},
 
 		initialize : function(options){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
-			this.guid = options.guid;
 		}
 		
 	});

@@ -8,15 +8,28 @@ define([
 		"wreqr",
 		"marionette",
 		"hbs/handlebars",
-		"scripts/models/model-language"
+		"scripts/models/model-language",
+		"scripts/models/model-session",
+		"scripts/layouts/layout-app",
+		"scripts/views/view-menu"
 	],
-	function($, Cookie, _, Modernizr, Utils, Backbone, Wreqr, Marionette, Handlebars, ModelLanguage){
+	function($, Cookie, _, Modernizr, Utils, Backbone, Wreqr, Marionette, Handlebars, ModelLanguage, Session, Layout, Menu){
 		"use strict";
 
 		var App = new Marionette.Application();
 		
-			App.Language = new Object();
-			App.Breadcrumb = new Array();
+		App.Language = new Object();
+		App.Breadcrumb = new Array();
+
+		// Session
+		App.session = new Session();
+		App.session.getUserSession();
+
+		// Layout
+		App.layout = new Layout({app : App});
+
+		// Menu
+		App.menu = new Menu({app : App});
 
 		// Add regions to the App
 		App.addRegions({
@@ -40,7 +53,21 @@ define([
 		// After the App is initialized
 		App.on("initialize:after", function(){
 			console.log("Brushfire initialized...");
+			App.body.show(App.layout);
+			
+			if(App.session.get("logged")){
+				App.appendMenu();
+			}
+
+			this.listenTo(App.session, "loggedChanged", App.appendMenu);
 		});
+
+		// Append Menu
+		App.appendMenu = function(){
+			if(App.session.get("logged")){
+				App.layout.menu.show(App.menu);
+			}
+		}
 
 		// On App start
 		App.on("start", function(){
@@ -87,6 +114,7 @@ define([
 				break;
 				case 403 : 
 					Utils.ShowToast({message : "Access Denied"});
+					App.session.set("expired", true);
 					App.router.navigate("logout", true);
 				break;
 				case 500 :
@@ -110,8 +138,8 @@ define([
 
 		// When navigating away from the app
 		$(window).on('beforeunload', function(){
-      		if(!Utils.GetUserSession().verified){
-      			Utils.DeleteUserSession();	
+      		if(!App.session.isVerified()){
+      			App.session.removeUserSession();	
       		}
 		});
 
@@ -160,6 +188,23 @@ define([
 		App.getTrailLength = function(){
 			return App.Breadcrumb.length;
 		}
+
+		// Global Click Handler
+		$(document).on("click", function(event){
+			var element = $(event.target);
+
+			// Hide the Employer Switch Drop Down when user clicks anywhere in the document
+			var employerName = element.hasClass("employer-name");
+			
+			if(App.menu.el.innerHTML !== "" && !employerName){
+				var employers = App.session.attributes.employers;
+				var employersList = $(document).find(".employers-list");
+				if(employers !== null && employers.length > 1 && employersList.hasClass("show")){
+					App.menu.showSwitchEmployer();
+				}
+			}
+			
+		});
 
 		return App;
 	}

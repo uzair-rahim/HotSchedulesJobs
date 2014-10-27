@@ -32,25 +32,12 @@ define([
 		onRender : function(){
 			ga('create', 'UA-52257201-1', 'hotschedulespost.com');
       		ga('send', 'pageview', '/training');
-
-      		var training = localStorage.getItem("training");
-
-      		if(training == "null"){
-      			var trainingEventGUID = localStorage.getItem("trainingEventGUID");
-      			var date = new Date();
-      			var data = {
-      				"guid" : trainingEventGUID,
-      				"completed" : date.getTime()
-      			}
-
-      			var user = new ModelUser();
-      				user.updateUserEvent(Utils.GetUserSession().guid, data.guid, data, function(response){
-      					localStorage.setItem("training", date.getTime());	
-      				});
-      		}
 		},
 
 		closeTraining : function(){
+			if(!App.session.get("trainingCompleted")){
+				this.markComplete();
+			}
 			this.remove();
 		},
 
@@ -67,6 +54,22 @@ define([
 		showTalentTraining : function(){
 			$(".app-alert.training").removeClass("show");
 			$("#app-alert-training-talent").addClass("show");
+		},
+
+		markComplete : function(){
+			var training = App.session.get("trainingCompleted");
+      		var trainingEventGUID = App.session.get("trainingEventGUID");
+
+      		var date = new Date();
+      		var data = {
+      			"guid" : trainingEventGUID,
+      			"completed" : date.getTime()
+      		}
+
+      		var user = new ModelUser();
+      			user.updateUserEvent(App.session.get("guid"), data.guid, data, function(response){
+      				App.session.get("trainingCompleted",true);
+      			});
 		},
 
 		serializeData : function(){

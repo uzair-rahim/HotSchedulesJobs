@@ -78,7 +78,6 @@ define([
 
 			if(!vldtFind){
 				var errors = vldt.getErrors();
-				console.log(vldt.getErrors());
 
 				for(var key in errors){
 					if(errors[key] === false){
@@ -125,7 +124,7 @@ define([
 			businessObject.phone = $(business).find("input[name='phone']").val();
 			
 			// Employer admin
-			businessObject.admins = [ {user: {guid: Utils.GetUserSession().guid}} ];
+			businessObject.admins = [ {user: {guid: App.session.get("guid")}} ];
 			
 			// Employer Location
 			businessObject.location             = new Object();
@@ -145,34 +144,19 @@ define([
 				modelBusiness.save(businessObject, {
 					success : function(response){
 						console.log("Business successfully saved...");
-
-						Utils.DeleteUserSession();
-						
-						var user = new Object();
-							user.guid = response.attributes.admins[0].user.guid;
-							user.firstname = response.attributes.admins[0].user.firstname;
-							user.lastname = response.attributes.admins[0].user.lastname;
-							user.email = response.attributes.admins[0].user.emails[0].email;
-							user.employerIds = new Array();	
-							user.employerIds[0] = response.attributes.guid;
-							user.verified = true;
-							user.roles = response.attributes.admins[0].user.roles;
+						var employers = [response.attributes.guid];
+						var roles = response.attributes.admins[0].user.roles
+							App.session.set("employers",employers);
+							App.session.set("roles", roles);
 
 						var userModel = new ModelUser();
-							userModel.getUserEventByType(user.guid,0,function(response){
-								localStorage.setItem("training", response.completed);
-								localStorage.setItem("trainingEventGUID", response.guid);	
-
-								Utils.CreateUserSession(user);
-								Utils.SetSelectedEmployer(0);
-								Utils.ShowToast({message : "Welcome to HotSchedules Post"});
-								App.router.navigate("jobs", true);
-
+							userModel.getUserEventByType(App.session.get("guid"),0,function(response){
+								App.session.set("trainingCompleted",response.completed !== null);
+								App.session.set("trainingEventGUID",response.guid);
+								App.session.set("logged",true);
+								App.session.set("verified",true);
+								App.router.controller.redirectOnLogin();
 							});
-
-						
-
-
 					},
 					error : function(){
 						Utils.ShowToast({message : "There was an error..."});

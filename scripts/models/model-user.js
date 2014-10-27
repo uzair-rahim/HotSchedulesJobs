@@ -43,6 +43,26 @@ define([
 				return Utils.GetURL("/services/rest/user");
 			},
 
+			getProfilePhoto : function(callback){
+				var url = this.urlRoot() + "/" + this.attributes.guid + "/profilePhoto" ;
+				$.ajax({
+					type : "GET",
+					url : url,
+					success : function(response){
+						callback(response);
+					},
+					error : function(response){
+						var error = response.responseJSON;
+						switch(error.errorCode){
+							case 4:
+								callback(null);
+							break;
+						}
+
+					}
+				});
+			},
+
 			getWorkHistory : function(callback){
 				var that = this;
 				var guid = this.attributes.guid;

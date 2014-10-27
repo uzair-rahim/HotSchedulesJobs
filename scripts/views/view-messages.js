@@ -68,7 +68,7 @@ define([
 			var tab = $(event.target);
 				tab.removeClass("unselected");
 
-			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var employerGUID = App.session.getEmployerGUID();
 			var withRepliesOnly = 0;
 			var archived = (tab.attr("id") === "inbox-messages") ? 0 : 1;
 			
@@ -84,7 +84,7 @@ define([
 
 		selectChat : function(chatGUID,isNew,userName,userWork){
 			ga("send", "event", "view-message", "click");
-			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var employerGUID = App.session.getEmployerGUID();
 			var that = this;
 			var chat = new ModelChat();
 				chat.getEmployerChat(employerGUID,chatGUID,function(response){
@@ -115,7 +115,7 @@ define([
 
 		archiveChat : function(chatGUID,participantGUID){
 			ga("send", "event", "archive-message", "click");
-			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var employerGUID = App.session.getEmployerGUID();
 			var chatParticipant = new Object();
 				chatParticipant = {
 					"guid" : participantGUID,
@@ -135,7 +135,7 @@ define([
 
 		unarchiveChat : function(chatGUID,participantGUID){
 			ga("send", "event", "unarchive-message", "click");
-			var employerGUID = Utils.GetUserSession().employerIds[Utils.GetSelectedEmployer()];
+			var employerGUID = App.session.getEmployerGUID();
 			var chatParticipant = new Object();
 				chatParticipant = {
 					"guid" : participantGUID,

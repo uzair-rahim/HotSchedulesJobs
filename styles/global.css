@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,400italic,400,300);
 
+.transition{ -webkit-transition: all 300ms; -moz-transition: all 300ms; -o-transition: all 300ms; -ms-transition: all 300ms; transition: all 300ms; -webkit-backface-visibility: hidden;}
+.no-transition{ -webkit-transition: none; -moz-transition: none; -o-transition: none; -ms-transition: none; transition: none;}
+.height-hack{ padding-bottom: 5000px; margin-bottom: -5000px; }
+
 a{
 	color: #3e92ce;
 	text-decoration: underline;
@@ -349,6 +353,7 @@ input[type="password"]::selection{
 	display: block;
 	float: left;
 	clear: both;
+	min-width: 320px;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
@@ -361,30 +366,373 @@ input[type="password"]::selection{
 	background-size: cover;
 }
 
-#app-head{
-	display: block;
-	float: left;
-	clear: both;
-	width: 100%;
-	height: 40px;
-	overflow: hidden;
-}
+	#app-menu{
+		position: relative;
+		display: block;
+		float: left;
+		width: 200px;
+		height: 100%;
+		background-color: #333333;
+		box-shadow: inset -2px 0 3px 0 rgba(0,0,0,0.30);
+		overflow: auto;
+		white-space: nowrap;
+	}
 
-.heading{
-	display: block;
-	float: left;
-	clear: both;
-	width: 100%;
-	height: 100%;
-	color: #ffffff;
-	text-align: center;
-	font-size: 18px;
-	line-height: 40px;
-	font-weight: lighter;
-	white-space: nowrap;
-	overflow: hidden;
-	background-color: rgba(255,170,0, 0.8);
-}
+	@media screen and (max-width: 1024px){
+		#app-menu{
+			width: 0px;
+		}
+	}
+
+	#app-menu.show{
+		width: 200px;
+	}
+
+	.app.portal #app-menu{
+		width: 0px;
+	}
+
+		#app-menu .user-info{
+			display: block;
+			float: left;
+			clear: both;
+			width: 200px;
+			margin: 10px 0;
+			padding: 0 0 8px 0;
+			border-bottom: 1px dotted #444444;
+		}
+
+			#app-menu .user-info > .employer-logo,
+			#app-menu .user-info > .user-photo{
+				display: block;
+				float: left;
+				clear: both;
+				width: 78px;
+				height: 78px;
+				margin: 0 60px;
+				border-radius: 50%;
+				border: 1px solid #323232;
+				background-color: #434343;
+				background-image: url("../images/icon-location-dark.svg");
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 40px;
+				overflow: hidden;
+			}
+
+				#app-menu .user-info > .user-photo{
+					background-image: url("../images/icon-user-dark.svg");
+					background-position: center 8px;
+					background-size: 76px;
+				}
+
+				#app-menu .user-info > .employer-logo > img,
+				#app-menu .user-info > .user-photo > img{
+					display: block;
+					float: left;
+					width: 78px;
+					height: 78px;
+				}
+
+			#app-menu .user-info > .user-name{
+				display: block;
+				float: left;
+				width: calc(100% - 30px);
+				margin: 8px 15px 0 15px;
+				color: #eeeeee;
+				font-family: "Roboto", sans-serif;
+				font-size: 13px;
+				line-height: 18px;
+				font-weight: 300;
+				text-align: center;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			#app-menu .user-info > .employer-name{
+				display: block;
+				float: left;
+				width: calc(100% - 30px);
+				margin: 0 15px 0 15px;
+				color: #ff9f00;
+				font-family: "Roboto", sans-serif;
+				font-size: 13px;
+				line-height: 18px;
+				font-weight: 300;
+				text-align: center;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			#app-menu .user-info > .employer-name.more{
+				width: calc(100% - 48px);
+				padding: 0 18px 0 0;
+				background-image: url("../images/icon-employer-switch-arrow.svg");
+				background-repeat: no-repeat;
+				background-position: right 1px;
+				background-size: 18px;
+			}
+
+				#app-menu .user-info > .employer-name.more:hover{
+					color: #faa21c;
+				}
+
+			#app-menu .user-info > .employers-list{
+				position: absolute;
+				display: block;
+				float: left;
+				opacity: 0;
+				width: 190px;
+				height: 0;
+				max-height: 200px;
+				top: 140px;
+				left: 5px;
+				background-color: #ffffff;
+				border-radius: 1px;
+				box-shadow: 0 1px 4px 0 rgba(0,0,0,1);
+				overflow: auto;
+				white-space: nowrap;
+			}
+
+			#app-menu .user-info > .employers-list.show{
+				opacity: 1;
+				height: auto;
+			}
+
+				#app-menu .user-info > .employers-list li{
+					display: block;
+					float: left;
+					clear: both;
+					width: 100%;
+					color: #222222;
+					text-indent: 10px;
+					font-family: "Roboto", sans-serif;
+					font-size: 12px;
+					line-height: 36px;
+					font-weight: 300;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+
+					#app-menu .user-info > .employers-list li.selected{
+						color: #ff9f00;
+					}
+
+					#app-menu .user-info > .employers-list li:hover{
+						background-color: #ff9f00;
+						color: #ffffff;
+					}
+
+		#app-menu ul.menu-list{
+			display: block;
+			float: left;
+			clear: both;
+			width: 100%;
+		}
+
+		#app-menu ul.menu-list li{
+			display: block;
+			float: left;
+			clear: both;
+			width: 100%;
+		}
+
+			#app-menu ul.menu-list li label{
+				display: block;
+				float: left;
+				clear: both;
+				width: calc(100% - 36px);
+				line-height: 42px;
+				color: #cccccc;
+				font-family: "Roboto" sans-serif;
+				font-size: 16px;
+				font-weight: 300;
+				text-indent: 10px;
+				border-left: 2px solid transparent;
+			}
+
+				#app-menu ul.menu-list li:hover label{
+					color: #ffffff;
+				}
+
+				#app-menu ul.menu-list li.selected label{
+					color: #ffffff;
+					border-left-color: #ff9f00;
+				}
+
+				#app-menu ul.menu-list li.highlighted label{
+					color: #faa21c;
+				}
+
+			#app-menu ul.menu-list li div.count{
+				display: block;
+				float: right;
+				width: 34px;
+				line-height: 42px;
+				color: #ff0066;
+				text-align: center;
+				font-family: "Roboto" sans-serif;
+				font-size: 12px;
+			}
+
+			#app-menu ul.menu-list li div.count.zero{
+				color: #888888;
+			}
+
+		#app-menu ul.menu-list li.divider{
+			background-image: none;
+			line-height: 0;
+			height: 0px;
+			border-bottom: 1px dotted #444444;
+			border-top: 1px dotted #222222;
+		}
+
+	#app-main{
+		position: relative;
+		display: block;
+		float: left;
+		width: calc(100% - 200px);
+		height: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	@media screen and (max-width: 1024px){
+		#app-main{
+			width: 100%;
+		}
+	}
+
+	#app-main.collapse{
+		width: calc(100% - 200px);
+	}
+
+	.app.portal #app-main{
+		width: 100%;
+		background-image: url("../images/background.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+	}
+
+		#app-head{
+			display: block;
+			float: left;
+			clear: both;
+			width: 100%;
+			height: 40px;
+			background-color: #333333;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+			#app-head > .icon{
+				display: none;
+				float: left;
+				width: 40px;
+				height: 40px;
+				background-image: url("../images/icon-menu.png");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 40px auto;
+			}
+
+			@media screen and (max-width: 1024px){
+				#app-head > .icon{
+					display: block;
+				}
+
+				.app.portal #app-head > .icon{
+					display: none;
+				}
+			}
+
+			#app-head > .logo{
+				display: block;
+				float: left;
+				width: 40px;
+				height: 40px;
+				background-image: url("../images/HSPostEmblem.png");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 24px auto;
+			}
+
+			@media screen and (max-width: 1024px){
+				#app-head > .logo{
+					display: none;
+				}
+
+				.app.portal #app-head > .logo{
+					display: block;
+				}
+			}
+
+			#app-head > .heading{
+				display: block;
+				float: left;
+				line-height: 40px;
+				font-family: "Roboto", sans-serif;
+				font-weight: 300;
+				font-size: 14px;
+				color: #ffffff;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			@media screen and (max-width: 465px){
+				#app-main.collapse #app-head > .heading{
+					width: 50%;
+				}
+			}
+
+			#app-head > .message{
+				display: none;
+				width: 320px;
+				height: 40px;
+				margin: 0 auto;
+				line-height: 40px;
+				font-family: "Roboto", sans-serif;
+				font-weight: 300;
+				font-size: 14px;
+				color: #ffffff;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			.app.portal #app-head > .message{
+				display: block;
+			}
+
+			@media screen and (max-width: 800px){
+				#app-head > .message,
+				.app.portal #app-head > .message{
+					display: none;
+				}
+			}
+
+			#app-notifications{
+				position: relative;
+				display: block;
+				float: right;
+				right: 0;
+				width: 0;
+				background-color: #f2f2f2;	
+				box-shadow: inset 2px 0 3px 0 rgba(0,0,0,0.05);
+				z-index: 9995;
+			}
+
+			#app-notifications.show{
+				width: 259px;
+			}
+
+			@media screen and (max-width: 460px){
+				#app-notifications.show{
+					width: 100%;
+				}
+			}
 
 
 .form-container{
@@ -437,6 +785,7 @@ input[type="password"]::selection{
 	width: calc(100% - 56px);
 	margin: 0 0 20px 30px;
 	font-size: 14px;
+	white-space: normal;
 }
 
 .form-container .login-form p b{
@@ -1088,12 +1437,13 @@ input[type="password"]::selection{
 
 
 #app-body{
+	position: relative;
 	display: block;
 	float: left;
 	clear: both;
 	width: 100%;
 	height: calc(100% - 40px);
-	overflow: hidden;
+	overflow: auto;
 }
 
 .content {
@@ -1183,6 +1533,16 @@ input[type="password"]::selection{
 	
 }
 
+@media screen and (max-width: 800px){
+	#app-main.collapse #toolbar #send-message,
+	#app-main.collapse #toolbar #send-chat,
+	#app-main.collapse #toolbar #archive-candidates,
+	#app-main.collapse #toolbar.hideable-toolbar{
+		display: none;
+	}	
+}
+
+
 @media screen and (max-width: 600px){
 	#toolbar #send-message,
 	#toolbar #send-chat,
@@ -1191,10 +1551,6 @@ input[type="password"]::selection{
 		display: none;
 	}	
 }
-
-
-
-
 
 #app-toast{
 	position: absolute;
@@ -2361,6 +2717,7 @@ ul.chat-list li > .message > .text{
 	width: calc(100% - 10px);
 	color: #959aa2;
 	font-size: 12px;
+	white-space: normal;
 }
 
 ul.chat-list li.new > .message > .text{
@@ -2519,6 +2876,8 @@ ul.chat-list li.date span{
 .job-information > .details > .input-container > input.bonus{
 	width: 45px;
 	text-indent: 8px;
+	clear: both;
+	float: left;
 }
 
 .job-information > .details > .input-container .custom-select{
@@ -2596,6 +2955,24 @@ ul.chat-list li.date span{
 	margin: 10px 0 10px 20px;
 	max-width: 440px;
 	width: 100%;
+}
+
+@media screen and (max-width: 1210px){
+	#app-main.collapse .hourly-profile > .about-section{
+		margin: 10px;
+		clear: both;
+		max-width: 100%;
+		width: calc(100% - 20px);
+		height: auto;
+	}
+
+	#app-main.collapse .hourly-profile > .history-section{
+		margin: 10px;
+		clear: both;
+		max-width: 100%;
+		width: calc(100% - 20px);
+		height: auto;
+	}
 }
 
 @media screen and (max-width: 1010px){
@@ -3072,6 +3449,43 @@ ul.chat-list li.date span{
 	margin-left: 1px;
 }
 
+@media screen and (max-width: 1210px){
+	#app-main.collapse .profile-info{
+		clear: both;
+		width: calc(100% - 20px);
+		margin: 0 0 20px 0;
+		border-right: none;
+	}
+
+	#app-main.collapse .profile-admins{
+		clear: both;
+		width: calc(100% - 20px);
+	}	
+
+	#app-main.collapse .profile-info .employer-profile-container{
+		width: calc(100% - 4px);
+
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container{
+		width: 484px;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-half{
+		width: 241px;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-third{
+		clear: left;
+		width: 143px;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.zip{
+		clear: right;
+	}
+
+}
+
 @media screen and (max-width: 1010px){
 	.profile-info{
 		clear: both;
@@ -3105,6 +3519,40 @@ ul.chat-list li.date span{
 
 	.profile-info .employer-profile-container .field-container.zip{
 		clear: right;
+	}
+
+}
+
+@media screen and (max-width: 710px){
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container{
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-half{
+		clear: both;
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.one-third{
+		clear: both;
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.two-third{
+		clear: both;
+		width: calc(100% - 0px);
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container.zip{
+		width: calc(100% - 95px);
+		clear: right;
+	}
+
+	#app-main.collapse .profile-info .employer-profile-container .field-container input[type="text"],
+	#app-main.collapse .profile-info .employer-profile-container .field-container input[type="password"],
+	#app-main.collapse .profile-info .employer-profile-container .field-container textarea{
+		width: calc(100% - 15px);
 	}
 
 }
@@ -3646,6 +4094,13 @@ ul.chat-list li.date span{
 	height: 100%;
 }
 
+
+@media screen and (max-width: 900px){
+	#app-main.collapse .message-container .scrollable{
+		width: 200%;
+	}
+}
+
 @media screen and (max-width: 700px){
 	.message-container .scrollable{
 		width: 200%;
@@ -3696,6 +4151,29 @@ ul.chat-list li.date span{
 	color: #969ba2;
 	line-height: 49px;
 	font-size: 14px;
+}
+
+@media screen and (max-width: 900px){
+	#app-main.collapse .message-container .message-head .message-folder-container{
+		display: block;
+		float: left;
+		width: 50%;
+		border-right: none;
+	}
+
+	#app-main.collapse .message-container .message-head .message-info-container{
+		width: 50%;
+		height: 34px;
+		background-image: url("../images/icon-back-arrow.png");
+		background-repeat: no-repeat;
+		background-position: 12px 12px;
+		background-size: 14px auto;
+	}
+
+	#app-main.collapse .message-container .message-head .message-info-container .candidate-name{
+		text-indent: 0;
+		margin: 0 0 0 40px;
+	}
 }
 
 @media screen and (max-width: 700px){
@@ -3772,6 +4250,18 @@ ul.chat-list li.date span{
 	height: 100%;
 	background-color: #f8f8f8;
 	overflow: hidden;
+}
+
+@media screen and (max-width: 900px){
+
+	#app-main.collapse .message-container .message-body .message-list-container{
+		width: 50%;
+		border-right: none;
+	}
+
+	#app-main.collapse .message-container .message-body .message-view-container{
+		width: 50%;
+	}
 }
 
 @media screen and (max-width: 700px){

@@ -1,9 +1,10 @@
 define([
+	"app",
 	"backbone",
 	"utils",
 	"scripts/models/model-job"
 	],
-	function(Backbone, Utils, Job){
+	function(App, Backbone, Utils, Job){
 	"use strict";
 
 	var Jobs = Backbone.Collection.extend({
@@ -14,17 +15,12 @@ define([
 		},
 		
 		url : function(){
-			var user= Utils.GetUserSession();
 			var url = this.urlRoot();
-			var index = Utils.GetSelectedEmployer();
-			if (isNaN(index)) {
-			    index = 0;
-			}
-			
+
 			if(typeof this.guid !== "undefined"){
 				url += this.guid;
 			}else{
-				url += "list/" + user.employerIds[index];
+				url += "list/" + App.session.getEmployerGUID();
 			}
 
 			return url;
@@ -33,7 +29,7 @@ define([
 		initialize : function(options){
 			_.bindAll.apply(_, [this].concat(_.functions(this)));
 			console.log("Jobs collection initialized....");
-			
+
 			if(typeof options !== "undefined"){
 				this.guid = options.guid;	
 			}

@@ -46,7 +46,6 @@ define([
 			if(!vldtRegister){
 
 				var errors = vldt.getErrors();
-				console.log(vldt.getErrors());
 
 				for(var key in errors){
 					if(errors[key] === false){

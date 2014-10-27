@@ -1,19 +1,53 @@
 define([
 		"jquery",
 		"jquerycookie",
+		"app",
 		"backbone"
 	],
-	function($, Cookie, Backbone){
+	function($, Cookie, App, Backbone){
 		var BrushfireUtils = Backbone.Model.extend({
 
 			CONTEXT : CONTEXT_ROOT,
 			recipientsGUIDS : [],
 			jobPostingGUID : null,
 
+			// Regular Expressions
+			RegularExpressions : {
+				alpha 			: /^[A-Za-z]/,
+				alphanumeric 	: /^[A-Za-z0-9]/,
+				date 			: /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/,
+				email 			: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/,
+				numeric 		: /^[0-9]+$/,
+				phone 			: /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/,
+				wholenumber 	: /^\d+$/,
+				zip 			: /(^\d{5}$)|(^\d{5}-\d{4}$)/
+			},
+
+			// App Configurations
+			AppConfig : {
+				// Menu
+				gettingStarted	: true,
+				notification	: false,
+				candidates		: true,
+				jobs			: true,
+				network			: true,
+				messages		: true,
+				settings		: true
+			},
+
 			// Get URL
 			GetURL : function(url){
 				//return this.CONTEXT + url;
 				return "../services" + url;
+			},
+
+			// Get Default Route
+			GetDefaultRoute : function(){
+				if(this.AppConfig.dashboard){
+					return "dashboard";
+				}else{
+					return 	"jobs";
+				}
 			},
 
 			// Parse Query Parameters
@@ -30,104 +64,6 @@ define([
 				}
 				return result;
 			},
-
-			// Check user session
-			CheckSession : function(){
-				console.log("Checking user session...");
-				var BrushfireSession = $.cookie("BrushfireSession");
-				return BrushfireSession !== undefined;
-			},
-
-			// Create user session
-			CreateUserSession : function(options){
-				console.log("Create user session...");
-				var defaults = {
-					firstname			: "",
-					lastname			: "",
-					guid				: "",
-					email				: "",
-					verified			: false,
-					employerIds			: "",
-					roles				: [],
-					adminEmployers		: []
-				}
-
-				for(var key in defaults){
-					if(typeof(options[key]) === "undefined"){
-						options[key] = defaults[key];
-					}
-				}
-
-				$.cookie("BrushfireSession", JSON.stringify(options));
-			},
-
-			// Delete user session
-			DeleteUserSession : function(){
-				console.log("Deleting user session...");
-				$.removeCookie("BrushfireSession");
-				$.removeCookie("BrushfireSession", { path : "/"});
-			},
-
-			// Get user session
-			GetUserSession : function(){
-				console.log("Getting user session...");
-
-				var BrushfireSession = $.cookie("BrushfireSession");
-				if(BrushfireSession !== undefined){
-					return JSON.parse(BrushfireSession);
-				}else{
-					return false;
-				}
-			},
-
-			// Remember User's Email Address on Login
-			RememberUserEmail : function(check, email){
-				if(check){
-					$.cookie("BrushfireUserEmail", email);
-				}else{
-					$.removeCookie("BrushfireUserEmail");
-				}
-			},
-
-			// Get Remembered Email Address
-			GetRememberedEmail : function(){
-				return $.cookie("BrushfireUserEmail");
-			},
-
-			// Set Admin Employers
-			SetAdminEmployers : function(employers){
-				localStorage.setItem("BrushfireAdminEmployers", JSON.stringify(employers));
-			},
-
-			// Get Admin Employers
-			GetAdminEmployers : function(){
-				return JSON.parse(localStorage.getItem("BrushfireAdminEmployers"));
-			},
-
-			// Remove Admin Employers
-			RemoveAdminEmployers : function(){
-				localStorage.removeItem("BrushfireAdminEmployers")
-			},
-
-			// Set Selected Employer
-			SetSelectedEmployer : function(index){
-				localStorage.setItem("BrushfireSelectedEmployer", index);
-			},
-
-			// Get Selected Employer
-			GetSelectedEmployer : function(){
-				var index = parseInt(localStorage.getItem("BrushfireSelectedEmployer"));
-				if(isNaN(index)) {
-			    	index = 0;
-				}
-				return index;
-			},
-
-			// Remove Selected Employer
-			RemoveSelectedEmployer : function(index){
-				localStorage.removeItem("BrushfireSelectedEmployer")
-			},
-
 			
 			// Set Shared Connection Name
 			SetSharedConnectionName : function(name){

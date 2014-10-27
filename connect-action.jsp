@@ -179,15 +179,25 @@
 
 <%
     String user = request.getParameter("user");
+    String stopRedirect = Boolean.toString(request.getParameter("stopRedirect") != null);
 %>
 
         function redirectForMobile(){
+            if ('<%=stopRedirect%>' === 'true') {
+                var wrapper_div = document.getElementById('wrapper_div');
+                wrapper_div.style.display = 'block';
+                return;
+            }
+            var saveUrl = window.location;
             ga('send', 'pageview');
             var device = detectDevice();
             if(device === "Android"){
                 var url = 'intent://?viewprofile=<%=user%>#Intent;package=com.hotschedules.brushfire;scheme=hotschedulespost;end';
                 window.location = url;
             } else if(device === "iOS") {
+                setTimeout(function () {
+                    window.location = saveUrl + '&stopRedirect=true';
+                }, 20);
                 var url = 'hotschedulespost://?viewprofile=<%=user%>';
                 window.location = url;
             } else {

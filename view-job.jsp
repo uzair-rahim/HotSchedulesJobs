@@ -17,7 +17,7 @@
       var CONTEXT_ROOT = '<%= request.getContextPath() %>'; 
     </script>
     <script type="text/javascript" src="libraries/thirdparty/analytics.js"></script>
-    		<script type="text/javascript">
+            <script type="text/javascript">
             function detectDevice(){
                 var agent = navigator.userAgent;
 
@@ -37,9 +37,14 @@
         String jobpostingguid = request.getParameter("id");
         String jobpostingempguid = request.getParameter("employer");
         String appliedFor = Boolean.toString(request.getParameter("appliedFor") != null);
+        String stopRedirect = Boolean.toString(request.getParameter("stopRedirect") != null);
     %>
 
             function redirectForMobile(){
+                if ('<%=stopRedirect%>' === 'true') {
+                    return;
+                }
+                var saveUrl = window.location;
                 if ('<%=appliedFor%>' === 'true') {
                     ga('send', 'pageview', '/job-applied-for');
                 }
@@ -48,7 +53,10 @@
                     var url = 'intent://?jobpostingguid=<%=jobpostingguid%>&jobpostingempguid=<%=jobpostingempguid%>#Intent;package=com.hotschedules.brushfire;scheme=hotschedulespost;end';
                     window.location = url;
                 } else if(device === "iOS") {
-                    var url = 'hotschedulespost://jobpostingguid=<%=jobpostingguid%>&jobpostingempguid=<%=jobpostingempguid%>';
+                    setTimeout(function () {
+                        window.location = saveUrl + '&stopRedirect=true';
+                    }, 20);
+                    var url = 'hotschedulespost://?jobpostingguid=<%=jobpostingguid%>&jobpostingempguid=<%=jobpostingempguid%>';
                     window.location = url;
                 }
             }

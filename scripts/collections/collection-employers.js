@@ -1,7 +1,7 @@
 define([
 		"backbone",
 		"utils",
-		"../models/model-employer"
+		"scripts/models/model-employer"
 	],
 	function(Backbone, Utils, Employer){
 		"use strict";

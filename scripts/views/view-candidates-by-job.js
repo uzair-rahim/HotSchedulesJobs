@@ -626,6 +626,7 @@ define([
 			var candidate = $(item).closest("li.view-profile").data("guid");
 				this.candidateGUID = candidate;
 			Utils.ShowAlert({listener : "hire", primary : true, primaryType : buttonType, primaryText : "Confirm", title : messageTitle , message : messageText });
+			ga("send", "event", "button", "click", "confirm hire");
 			event.stopPropagation();
 		},
 

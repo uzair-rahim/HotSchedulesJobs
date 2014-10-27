@@ -98,8 +98,7 @@ define([
 	    		var jobPostingGUID = Utils.GetStandaloneJobGUID();
 	    		var jobPostingEmployerGUID = this.model.employer.guid;
 	    		var url = "hotschedulespost://?jobpostingguid="+jobPostingGUID+"&jobpostingempguid="+jobPostingEmployerGUID;
-
-	    		window.location = url
+                window.location = url
 			}else{
 				window.location = Utils.GetStoreLinks().apple;
 			}

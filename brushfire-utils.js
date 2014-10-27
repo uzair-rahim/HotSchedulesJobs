@@ -309,20 +309,15 @@ define([
 			GetStandaloneJobGUID : function(){
 				console.log("Getting Standalone Job GUID...");
 
-				var url = window.location.href;
-				var indexOfID = url.indexOf("?id=");
+				var qs = window.location.href.split('?')[1];
+                var args = this.GetQueryParameters(qs);
+                var id = args.id;
+                if (id !== undefined) {
+                    return id;
+                } else {
+                    return false;
+                }
 
-				if(indexOfID == -1){
-					return false;
-				}else{
-					var id = url.substring(indexOfID+4); 
-					var StandaloneJobGUID = id;
-					if(StandaloneJobGUID !== undefined){
-						return StandaloneJobGUID;
-					}else{
-						return false;
-					}
-				}
 			},
 
 			// Show Help Content

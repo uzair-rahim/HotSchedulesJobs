@@ -106,6 +106,7 @@ define([
 									});
 
 									Utils.SetUserConnectionsList(connections);
+									App.router.controller.redirectOnLogin();
 
 								});
 
@@ -114,8 +115,6 @@ define([
 						});
 
 					});
-
-					App.router.controller.redirectOnLogin();
 
 				},
 				error : function(model, errors){

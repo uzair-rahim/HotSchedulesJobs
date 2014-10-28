@@ -131,7 +131,7 @@
 
 <div id="endorsements-list-container">
 	{{#if_gt endorsements.length 0}}
-		<div id="endorsers" class="grid-list-head expanded">People Who Endorsed Your Business ({{endorsements.length}})</div>
+		<div id="endorsers" class="grid-list-head expanded">People Endorsed Your Business ({{endorsements.length}})</div>
 		<ul id="endorsements-list" class="grid-list top">
 			{{#each endorsements}}
 				<li class="view-profile" data-email="{{this.attributes.email}}" data-guid="{{this.attributes.guid}}">

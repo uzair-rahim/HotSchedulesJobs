@@ -6,6 +6,7 @@
 	display: block;
 	float: left;
 	width: 100%;
+	min-width: 320px;
 	overflow: hidden;
 }
 
@@ -16,6 +17,28 @@
 #endorsements-list-container.collapsed{
 	height: 32px;
 	margin-bottom: 19px;
+}
+
+@media screen and (max-width: 800px){
+	#app-main.collapse #candidates-list-container.collapsed,
+	#app-main.collapse #archived-candidates-list-container.collapsed,
+	#app-main.collapse #employees-list-container.collapsed,
+	#app-main.collapse #followers-list-container.collapsed,
+	#app-main.collapse #endorsements-list-container.collapsed{
+		height: 51px;
+		margin-bottom: 0;
+	}
+}
+
+@media screen and (max-width: 600px){
+	#candidates-list-container.collapsed,
+	#archived-candidates-list-container.collapsed,
+	#employees-list-container.collapsed,
+	#followers-list-container.collapsed,
+	#endorsements-list-container.collapsed{
+		height: 51px;
+		margin-bottom: 0;
+	}
 }
 
 .grid-list-head{

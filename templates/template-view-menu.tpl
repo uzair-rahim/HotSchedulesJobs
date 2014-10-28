@@ -1,11 +1,11 @@
 <div class="user-info">
 		<div class="employer-logo">
-			{{#ifEmployerHasLogo user selectedEmployer}}
-				<img src="{{getEmployerLogo user selectedEmployer}}"/>
-			{{/ifEmployerHasLogo}}
+			{{#isNotNull employerLogo}}
+				<img src="{{employerLogo.url}}"/>
+			{{/isNotNull}}
 		</div>
 	<div class="user-name">{{user.firstname}} {{user.lastname}}</div>
-	<div class="employer-name {{#if_gt user.employers.length 1}}more{{/if_gt}}">{{getEmployerName user selectedEmployer}}</div>
+	<div class="employer-name {{#if_gt user.employers.length 1}}more{{/if_gt}}">{{employerName}}</div>
 	{{#if_gt user.employers.length 1}}
 		<ul class="employers-list transition">
 			{{#each user.employers}}

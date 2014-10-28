@@ -168,7 +168,18 @@ define([
 		},
 
 		getSelectedEmployer : function(){
-			return this.options.app.session.attributes.selectedEmployer;
+			var model = this.options.app.session.attributes;
+			return model.selectedEmployer;
+		},
+
+		getEmployerName : function(){
+			var model = this.options.app.session.attributes;
+			return model.employers[this.getSelectedEmployer()].name;
+		},
+
+		getEmployerLogo : function(){
+			var model = this.options.app.session.attributes;
+			return model.employers[this.getSelectedEmployer()].logo;
 		},
 
 		setSelection : function(item){
@@ -184,6 +195,8 @@ define([
 				jsonObject.user = this.getUser();
 				jsonObject.user.type = this.getUserRole();
 				jsonObject.selectedEmployer = this.getSelectedEmployer();
+				jsonObject.employerName = this.getEmployerName();
+				jsonObject.employerLogo = this.getEmployerLogo();
 				//jsonObject.notificationsCount = this.getNotificationsCount();
 			return jsonObject;
 		}

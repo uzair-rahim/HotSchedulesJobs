@@ -175,6 +175,7 @@ define([
 				this.attributes.logged = false;
 				this.attributes.expired = false;
 				this.attributes.employers = null;
+				this.attributes.selectedEmployer = 0;
 				this.updateUserSession();
 			}
 

@@ -541,6 +541,7 @@ define([
 			ShowSharePostedJobAlert : function(jobGUID){
 				var alertDialog = $(document).find("#app-alert-share-posted-job");
 					alertDialog.attr("data-job", jobGUID);
+					alertDialog.find("input[type='checkbox']").prop("checked", "checked");
 				var app = $(document).find(".app");
 					alertDialog.addClass("show");
 					app.append('<div class="view-modal"></div>');

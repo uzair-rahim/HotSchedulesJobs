@@ -424,10 +424,12 @@ define([
 				}else if(message === ""){
 					Utils.ShowToast({type : "error", message : "Message cannot be empty"});
 				}else{
-					var employerGUID = App.session.getEmployerGUID();
+					var employerGUID = this.options.app.session.getEmployerGUID();
 					var users = Utils.GetNewMessageRecipients();
 
 					var dataArray = new Array();
+
+					var that = this;
 
 					$.each(users,function(){
 						var data = new Object();
@@ -444,7 +446,7 @@ define([
 
 						var message = new Object();
 							message.sender = new Object();
-							message.sender.guid = App.session.get("guid");
+							message.sender.guid = that.options.app.session.get("guid");
 							message.chatMessageContent = new Object();
 							message.chatMessageContent.text = $("#new-message-text").val();
 							message.employerSeen = new Object();
@@ -487,7 +489,7 @@ define([
 
 			showQuickChatMessage : function(event){
 				var that = this;
-				var employerGUID = App.session.getEmployerGUID();
+				var employerGUID = this.options.app.session.getEmployerGUID();
 				var chatGUID = $(event.target).closest("#quick-message-list > li").attr("data-guid");
 				var item = $(event.target).closest("#quick-message-list > li");
 				var isUnseen = item.hasClass("new");
@@ -519,7 +521,7 @@ define([
 				
 				var message = new Object();
 					message.sender = new Object();
-					message.sender.guid = App.session.get("guid");
+					message.sender.guid = this.options.app.session.get("guid");
 					message.chatMessageContent = new Object();
 					message.chatMessageContent.text = textField.val();
 					message.employerSeen = new Object();
@@ -535,7 +537,7 @@ define([
 			},
 
 			getEmployerChats : function(){
-				var employerGUID = App.session.getEmployerGUID();
+				var employerGUID = this.options.app.session.getEmployerGUID();
 				var chat = new ModelChat();
 					chat.getEmployerChats(employerGUID, 0, 1, function(response){
 						var dialog = $(document).find("#quick-message-view");

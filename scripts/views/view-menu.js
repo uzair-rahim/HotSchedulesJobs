@@ -174,12 +174,20 @@ define([
 
 		getEmployerName : function(){
 			var model = this.options.app.session.attributes;
-			return model.employers[this.getSelectedEmployer()].name;
+			var name = ""
+			if(model.employers.length > 0){
+				name = model.employers[this.getSelectedEmployer()].name;	
+			}
+			return name;
 		},
 
 		getEmployerLogo : function(){
 			var model = this.options.app.session.attributes;
-			return model.employers[this.getSelectedEmployer()].logo;
+			var logo = null;
+			if(model.employers.length > 0){
+				logo = model.employers[this.getSelectedEmployer()].logo;
+			}
+			return logo;
 		},
 
 		setSelection : function(item){

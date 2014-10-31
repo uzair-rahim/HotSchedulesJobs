@@ -3,6 +3,9 @@ define([
 	], function (Handlebars) {
 	
 		function ifEmployerHasLogo(user, selected, options) {
+		    if (user.employers === null || typeof(user.employers) === "undefined") {
+		        return options.inverse(this);
+		    }
 			var employer = user.employers[selected];
 			if(employer === null || typeof(employer) === "undefined"){
 				return options.inverse(this);

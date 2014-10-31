@@ -626,7 +626,7 @@ input[type="password"]::selection{
 			white-space: nowrap;
 		}
 
-			#app-head > .icon{
+			#app-head .icon{
 				display: none;
 				float: left;
 				width: 40px;
@@ -638,16 +638,16 @@ input[type="password"]::selection{
 			}
 
 			@media screen and (max-width: 1024px){
-				#app-head > .icon{
+				#app-head .icon{
 					display: block;
 				}
 
-				.app.portal #app-head > .icon{
+				.app.portal #app-head .icon{
 					display: none;
 				}
 			}
 
-			#app-head > .logo{
+			#app-head .logo{
 				display: block;
 				float: left;
 				width: 40px;
@@ -659,16 +659,16 @@ input[type="password"]::selection{
 			}
 
 			@media screen and (max-width: 1024px){
-				#app-head > .logo{
+				#app-head .logo{
 					display: none;
 				}
 
-				.app.portal #app-head > .logo{
+				.app.portal #app-head .logo{
 					display: block;
 				}
 			}
 
-			#app-head > .heading{
+			#app-head .heading{
 				display: block;
 				float: left;
 				line-height: 40px;
@@ -682,12 +682,12 @@ input[type="password"]::selection{
 			}
 
 			@media screen and (max-width: 465px){
-				#app-main.collapse #app-head > .heading{
+				#app-main.collapse #app-head .heading{
 					width: 50%;
 				}
 			}
 
-			#app-head > .message{
+			#app-head .message{
 				display: none;
 				width: 320px;
 				height: 40px;
@@ -702,13 +702,13 @@ input[type="password"]::selection{
 				white-space: nowrap;
 			}
 
-			.app.portal #app-head > .message{
+			.app.portal #app-head .message{
 				display: block;
 			}
 
 			@media screen and (max-width: 800px){
-				#app-head > .message,
-				.app.portal #app-head > .message{
+				#app-head .message,
+				.app.portal #app-head .message{
 					display: none;
 				}
 			}

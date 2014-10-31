@@ -118,15 +118,14 @@ define([
 					App.router.navigate("logout", true);
 				break;
 				case 500 :
-					Utils.ShowToast({message : "Internal Server Error"});
 					var response = request.responseJSON;
 					if(response.errorCode === 26){
 						Utils.ShowToast({ type: "error", message : "User is not verified"});
 					}else{
+						Utils.ShowToast({message : "Internal Server Error"});
 						App.router.navigate("logout", true);	
 					}
-					
-				break;	
+				break;
 			}
 		});
 

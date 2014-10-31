@@ -19,6 +19,7 @@ define([
 		"scripts/views/view-messages",
 		"scripts/views/view-settings",
 		"scripts/views/view-employer-profile",
+		"scripts/views/view-premium-services",
 		"scripts/views/view-support",
 		"scripts/views/view-select-employer",
 		"scripts/views/view-training",
@@ -26,6 +27,7 @@ define([
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer",
 		"scripts/models/model-employer-ppa",
+		"scripts/models/model-employer-type",
 		"scripts/models/model-employer-yelp-rating",
 		"scripts/models/model-chat",
 		"scripts/collections/collection-employers",
@@ -37,7 +39,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerYelpRating, ModelChat, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewPremium, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerType, ModelEmployerYelpRating, ModelChat, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -110,6 +112,8 @@ define([
 						user.logged = true;
 						user.employers = [params.e];
 						user.roles = ["employerAdmin", "user"];
+
+						var that = this;
 
 					var collection = new CollectionEmployers();
 						collection.getEmployers(user.employers, function(){
@@ -464,6 +468,7 @@ define([
 					var employerGUID = App.session.getEmployerGUID();
 
 					var employerPPA = new ModelEmployerPPA();
+					var employerType = new ModelEmployerType();
 					var employerYelpRating = new ModelEmployerYelpRating({guid : employerGUID});
 					var employerProfiles = new CollectionEmployerProfiles({guid : employerGUID});
 					var models = new Object();
@@ -476,6 +481,16 @@ define([
 							error : function(){
 								console.log("Error fetching employer ppa...")
 								Utils.ShowToast({ message : "Error fetching employer ppa..."});
+							}
+						}),
+						
+						employerType.fetch({
+							success : function(response){
+								models.type = response.attributes;
+							},
+							error : function(){
+								console.log("Error fetching employer type...")
+								Utils.ShowToast({ message : "Error fetching employer type..."});
 							}
 						}),
 
@@ -510,6 +525,30 @@ define([
 					App.router.navigate("login", true);
 				}
 			},
+
+			premiumServices : function(){
+
+                var that = this;
+
+            	if(App.session.isLoggedIn() && App.session.isVerified()){
+            		App.clearTrail();
+            		App.pushTrail("Premium Services");
+
+            		this.removeBackground();
+            		this.setLayout();
+
+            		var mdl = new Object();
+                    	mdl.employerGuid = App.session.getEmployerGUID();
+                    	mdl.userEmail = App.session.get("email");
+
+   					var view = new ViewPremium({model : mdl});
+                    App.layout.body.show(view);
+                    that.setMenuSelection("#menu-premium-services");
+
+            	} else {
+            		App.router.navigate("login", true);
+            	}
+            },
 
 			profile : function(id, selection){
 
@@ -604,6 +643,9 @@ define([
 									collection.getEmployers(userEmployers, function(){
 										App.session.set("logged", true);
 										App.session.set({employers : collection.models});
+										Utils.EnablePremiumTab(
+										    App.session.getEmployers()[App.session.getSelectedEmployer()].premium
+										);
 										App.menu.render();
 										var route = Utils.GetDefaultRoute();
 										App.router.navigate(route, true);

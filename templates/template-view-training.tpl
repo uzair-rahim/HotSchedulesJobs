@@ -4,7 +4,6 @@
 <div id="app-alert-training-job" class="app-alert training show">
 	<div class="alert-title">Post A Job</div>
 	<div class="alert-body">
-		<div class="training-image job"></div>
 		<p>Click <strong>"Add New Job"</strong> (upper left corner) from the the Jobs Page to post an open position at your store.</p>
 		<ul>
 			<li>Select Position</li>
@@ -22,7 +21,6 @@
 <div id="app-alert-training-spread" class="app-alert training">
 	<div class="alert-title">Spread The Word</div>
 	<div class="alert-body">
-		<div class="training-image word"></div>
 		<p>Attract great talent by sharing your posted jobs with others, from the Jobs Page. You can share your jobs with...</p>
 		<ul>
 			<li>Connection <span>(People in your network)</span></li>
@@ -41,7 +39,6 @@
 <div id="app-alert-training-talent" class="app-alert training">
 	<div class="alert-title">Hire Great Talent</div>
 	<div class="alert-body">
-		<div class="training-image talent"></div>
 		<p>Click <strong>"Candidates"</strong> (top left corner) to review applicants for jobs you've posted. You can select the right candidate for each position by...</p>
 		<ul>
 			<li>Reviewing their profile <span>(work history, mutual connections, etc)</span></li>

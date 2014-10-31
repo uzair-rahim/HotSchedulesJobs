@@ -1,3 +1,7 @@
+#job-list{
+	min-width: 320px;
+}
+
 #candidates-list-container,
 #archived-candidates-list-container,
 #employees-list-container,

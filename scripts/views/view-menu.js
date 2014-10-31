@@ -22,6 +22,7 @@ define([
 			"click #menu-messages"	 		: "messages",
 			"click #menu-account-settings"	: "accountSettings",
 			"click #menu-profile-settings"	: "profileSettings",
+			"click #menu-premium-services"  : "premiumServices",
 			"click #menu-terms"				: "termsAndConditions",
 			"click #menu-logout"	 		: "logout"
 		},
@@ -102,6 +103,11 @@ define([
 		profileSettings : function(){
 			this.hideMenuAndNotification();
 			this.options.app.router.navigate("profileSettings", true);
+		},
+
+		premiumServices : function(){
+		    this.hideMenuAndNotification();
+		    this.options.app.router.navigate("premiumServices", true);
 		},
 
 		termsAndConditions : function(){

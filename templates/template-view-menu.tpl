@@ -19,7 +19,7 @@
 	{{/if_gt}}
 </div>
 <ul class="menu-list">
-	{{#if_eq user.type "employerAdmin"}}
+	{{#if_not_eq user.type "support"}}
 		<li id="menu-getting-started">
 			<label>Getting Started</label>
 		</li>
@@ -54,7 +54,7 @@
 		<li id="menu-terms">
 			<label>Terms & Conditions</label>
 		</li>
-	{{/if_eq}}
+	{{/if_not_eq}}
 	<li id="menu-logout">
 		<label>Logout</label>
 	</li>

@@ -58,8 +58,8 @@
 						</ul>
 					</div>
 				</div>
-				<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
-				<div class="candidate-network sync">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
+				<div class="candidate-endorse" title="Total number of Endorsements">{{this.attributes.endorsementCount}}</div>
+				<div class="candidate-network sync" title="Total number of Connections">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 				<div class="hourly-profile">
 					<div class="about-section">
 						<label>About</label>
@@ -104,8 +104,8 @@
 							</ul>
 						</div>
 					</div>
-					<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
-					<div class="candidate-network sync">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
+					<div class="candidate-endorse" title="Total number of Endorsements">{{this.attributes.endorsementCount}}</div>
+					<div class="candidate-network sync" title="Total number of Connections">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 					<div class="hourly-profile">
 						<div class="about-section">
 							<label>About</label>
@@ -152,8 +152,8 @@
 							</ul>
 						</div>
 					</div>
-					<div class="candidate-endorse">{{this.attributes.endorsementCount}}</div>
-					<div class="candidate-network sync">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
+					<div class="candidate-endorse" title="Total number of Endorsements">{{this.attributes.endorsementCount}}</div>
+					<div class="candidate-network sync" title="Total number of Connections">{{#if_gt this.attributes.sharedNetworkConnectionCount 500}}500+{{else}}{{this.attributes.sharedNetworkConnectionCount}}{{/if_gt}}</div>
 					<div class="hourly-profile">
 						<div class="about-section">
 							<label>About</label>

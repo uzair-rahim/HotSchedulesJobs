@@ -32,13 +32,13 @@ define([
 				jobs			: true,
 				network			: true,
 				messages		: true,
-				settings		: true
+				settings		: true,
+				premium         : false
 			},
 
 			// Get URL
 			GetURL : function(url){
-				//return this.CONTEXT + url;
-				return "../services" + url;
+				return this.CONTEXT + url;
 			},
 
 			// Get Default Route
@@ -279,7 +279,7 @@ define([
 			},
 
 			InitMaxTextAreaLength : function(){
-				var maxlengthAbout = 512;
+				var maxlengthAbout = 500;
 				var maxlengthMessage = 1000;
 				$(document.body).delegate("textarea:not('#new-message-text')", "keyup", function(){
 					if ($(this).val().length > maxlengthAbout) {  
@@ -784,6 +784,10 @@ define([
 				alertDialog.addClass("show");
 				app.append('<div class="view-modal"></div>');
 				
+			},
+
+			EnablePremiumTab : function(enabled) {
+			    this.AppConfig.premium = enabled;
 			}
 			
 		});

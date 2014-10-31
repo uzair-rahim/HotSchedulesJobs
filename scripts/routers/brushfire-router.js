@@ -23,6 +23,7 @@ define([
 				"messages"				: "messages",
 				"accountSettings"		: "accountSettings",
 				"profileSettings"		: "profileSettings",
+				"premiumServices"       : "premiumServices",
 				"logout"				: "logout",
 				"support"				: "support",
 				"selectEmployer"		: "selectEmployer",

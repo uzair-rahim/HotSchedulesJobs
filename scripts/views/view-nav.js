@@ -23,6 +23,7 @@ define([
 			"click #settings" 			: "settings",
 			"click #account-settings" 	: "accountSettings",
 			"click #profile-settings" 	: "profileSettings",
+			"click #premium-services"   : "premiumServices",
 			"click #stores-list" 		: "switchStore",
 			"click #terms-conditions" 	: "termsAndCondition",
 			"click #getting-started" 	: "gettingStarted",
@@ -128,6 +129,10 @@ define([
 
 		profileSettings : function(){
 			this.route("profileSettings");
+		},
+
+		premiumServices : function() {
+		    this.route("premiumServices");
 		},
 
 		switchStore : function(event){

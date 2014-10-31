@@ -307,27 +307,32 @@ define([
 
 			var employeesList = $("#employees-list");
 			var followersList = $("#followers-list");
+			var endorsementsList = $("#endorsements-list");
 
 			var isCheckboxSelected = $(checkboxes).length > 0;
 
 			if(!isCheckboxSelected){
 				$(employeesList).find(".view-profile").show();
 				$(followersList).find(".view-profile").show();
+				$(endorsementsList).find(".view-profile").show();
 			}else{
 
 				$(employeesList).find(".view-profile").hide();
 				$(followersList).find(".view-profile").hide();
+				$(endorsementsList).find(".view-profile").hide();
 
 				$(checkboxes).each(function(){
 					var jobname = $(this).next().text();
 						$(employeesList).find(".candidate-job:Contains('"+jobname+"')").closest(".view-profile").show();
 						$(followersList).find(".candidate-job:Contains('"+jobname+"')").closest(".view-profile").show();
+						$(endorsementsList).find(".candidate-job:Contains('"+jobname+"')").closest(".view-profile").show();
 				});
 
 			}
 
 			$(employeesList).prev().text("Current Employees ("+$(employeesList).find(".view-profile:visible").length+")");
 			$(followersList).prev().text("People Following Your Business ("+$(followersList).find(".view-profile:visible").length+")");
+			$(endorsementsList).prev().text("People Endorsed Your Business ("+$(endorsementsList).find(".view-profile:visible").length+")");
 
 			this.hideFilter();
 		},

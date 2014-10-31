@@ -11,7 +11,7 @@ define([
 
 	var ViewHead = Marionette.ItemView.extend({
 		tagName : "div",
-		className : "heading",
+		className : "",
 		template: Template,
 		events : {
 			

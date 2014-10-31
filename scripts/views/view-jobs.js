@@ -187,7 +187,6 @@ define([
 				$(li).addClass("expanded");
 			}
 
-			event.stopPropagation();
 		},
 
 		cancelEdit : function(event){

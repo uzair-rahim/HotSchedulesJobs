@@ -13,6 +13,26 @@
 <div class="profile-info">
 	<div class="settings-heading">Your Account Information</div>
 	<div class="employer-profile-container no-border">
+		<div class="picture-container">
+			<div class="picture">
+				{{#hasPhoto employerProfile.logo}}
+					<img id="logo" src="{{employerProfile.logo.url}}?{{bust}}"/>
+				{{/hasPhoto}}
+			</div>
+			<div class="picture-action-container">
+				<div id="picture-action" class="custom-select" data-index="0" data-value="0">
+					<button class="custom-select-button">Update Picture</button>
+					<ul class="custom-select-list">
+						<li id="upload-picture">Update Picture</li>
+						<li id="remove-picture">Remove Picture</li>
+					</ul>
+				</div>
+				<div class="allowed-types">.jpg, .jpeg, .gif, .png</div>
+				<form enctype="multipart/form-data" data-remote="true">
+					<input type="file" id="picture-file" name="file" accept="image/jpg,image/jpeg,image/gif,image/png"/>
+				</form>
+			</div>
+		</div>
 		<div class="field-container one-half">
 			<label>First Name</label>
 			<input type="text" id="firstname" value="{{user.firstname}}" placeholder="First Name" disabled/>

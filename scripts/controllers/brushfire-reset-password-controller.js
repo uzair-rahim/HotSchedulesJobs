@@ -13,8 +13,6 @@ define([
 
 			reset : function(){
 
-				Utils.ResetLayout();
-
 				var head = new ViewHead();
 				App.layout.head.show(head);
 

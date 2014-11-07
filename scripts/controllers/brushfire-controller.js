@@ -24,6 +24,7 @@ define([
 		"scripts/views/view-select-employer",
 		"scripts/views/view-training",
 		"scripts/models/model-user",
+		"scripts/models/model-job",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer",
 		"scripts/models/model-employer-ppa",
@@ -39,7 +40,7 @@ define([
 		"scripts/collections/collection-followers",
 		"scripts/collections/collection-endorsements",
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewPremium, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerType, ModelEmployerYelpRating, ModelChat, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewPremium, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJob, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerType, ModelEmployerYelpRating, ModelChat, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -190,64 +191,23 @@ define([
 			},
 
 			jobs : function(){
-
 				if(App.session.isLoggedIn() && App.session.isVerified()){
-
-					var hasEmployerID = App.session.getEmployers().length > 0
-
-					if(!hasEmployerID){
-						App.router.navigate("logout", true);
-					}else{
-						var that = this;
-
-						App.clearTrail();
-						App.pushTrail(App.Language.jobs);
-
-						var jobtypes = new ModelJobTypes();
-						var jobs = new CollectionJobs();
-						var models = new Object();
-
-						$.when(
-							jobtypes.fetch({
-								success : function(jobtypesResponse){
-									console.log("Job Types fetched successfully...");
-									models.jobtypes = jobtypesResponse.attributes;
-								},
-								error : function(){
-									console.log("Error fetching Job Types...");
-									Utils.ShowToast({ message : "Error fetching Job Types..."});
-								}
-							}),
-							jobs.fetch({
-								success : function(collection, jobsResponse){
-									console.log("Jobs fetched successfully...");
-									models.jobs = jobsResponse;
-								},
-								error : function(){
-									console.log("Error fetching Jobs...");
-									Utils.ShowToast({message : "Error fetching Jobs..."});
-								}
-							})
-
-						).then(function(){
-							that.removeBackground();
-							that.setLayout();
-
-							var view = new ViewJobs({model : models});
+					var that = this;
+					var data = new Object();
+					var job = new ModelJob();
+						job.getJobTypes(function(response){
+							data.types = response;
+							job.getEmployerJobs(App.session.getEmployerGUID(), function(response){
+								data.jobs = response;
+								that.removeBackground();
+								var view = new ViewJobs({model : data});
 								App.layout.body.show(view);
-								if(localStorage.getItem("training") == "null"){
-									that.training();
-								}
 								that.setMenuSelection("#menu-jobs");	
-								
-						});	
-					}
-
+							});
+						});
 				}else{
 					App.router.navigate("logout", true);
 				}
-
-				
 			},
 
 			candidates : function(){

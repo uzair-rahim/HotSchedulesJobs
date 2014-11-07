@@ -17,8 +17,6 @@ define([
 				var app = $(document).find(".app");
 				$(app).addClass("background");
 
-				Utils.ResetLayout();
-
 				var head = new ViewHead();
 				App.layout.head.show(head);
 

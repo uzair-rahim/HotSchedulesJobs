@@ -3191,7 +3191,8 @@ ul.chat-list li.date span{
 }
 
 
-#logo-file{
+#logo-file,
+#picture-file{
 	position: absolute;
 	left: -2000px;
 }
@@ -3215,7 +3216,8 @@ ul.chat-list li.date span{
 	border-bottom: none;
 }
 
-.profile-info .employer-profile-container .logo-container{
+.profile-info .employer-profile-container .logo-container,
+.profile-info .employer-profile-container .picture-container{
 	display: block;
 	float: left;
 	clear: both;
@@ -3224,7 +3226,8 @@ ul.chat-list li.date span{
 	margin: 0 0 10px 0; 
 }
 
-.profile-info .employer-profile-container .logo-container .logo{
+.profile-info .employer-profile-container .logo-container .logo,
+.profile-info .employer-profile-container .picture-container .picture{
 	display: block;
 	float: left;
 	width: 80px;
@@ -3239,22 +3242,31 @@ ul.chat-list li.date span{
 	overflow: hidden;
 }
 
-.profile-info .employer-profile-container .logo-container .logo img{
+.profile-info .employer-profile-container .picture-container .picture{
+	background-size: 80px auto;
+	background-image: url("../images/default-avatar.png");
+}
+
+.profile-info .employer-profile-container .logo-container .logo img,
+.profile-info .employer-profile-container .picture-container .picture img{
 	width: 80px;
 	height: 80px;
 }
 
-.profile-info .employer-profile-container .logo-container .logo-action-container{
+.profile-info .employer-profile-container .logo-container .logo-action-container,
+.profile-info .employer-profile-container .picture-container .picture-action-container{
 	float: left;
 }
 
-.profile-info .employer-profile-container .logo-container .logo-action-container #logo-action{
+.profile-info .employer-profile-container .logo-container .logo-action-container #logo-action,
+.profile-info .employer-profile-container .picture-container .picture-action-container #picture-action{
 	float: left;
 	clear: both;
 	margin: 20px 0 0 15px;
 }
 
-.profile-info .employer-profile-container .logo-container .logo-action-container .allowed-types{
+.profile-info .employer-profile-container .logo-container .logo-action-container .allowed-types,
+.profile-info .employer-profile-container .picture-container .picture-action-container .allowed-types{
 	position: absolute;
 	float: left;
 	clear: both;

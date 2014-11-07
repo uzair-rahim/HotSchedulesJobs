@@ -50,6 +50,11 @@
 		<li id="menu-profile-settings">
 			<label>Profile Settings</label>
 		</li>
+		{{#if_true config.accountUpgradable}}
+		<li id="menu-premium-services">
+		    <label>Premium Services</label>
+		</li>
+		{{/if_true}}
 		<li class="divider"></li>
 		<li id="menu-terms">
 			<label>Terms & Conditions</label>

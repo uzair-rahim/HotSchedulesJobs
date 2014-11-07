@@ -189,6 +189,7 @@
                 return;
             }
             var saveUrl = window.location;
+            ga('create', 'UA-52257201-1', 'hotschedulespost.com');
             ga('send', 'pageview');
             var device = detectDevice();
             if(device === "Android"){

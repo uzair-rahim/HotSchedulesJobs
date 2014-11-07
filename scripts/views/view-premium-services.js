@@ -30,17 +30,25 @@ define([
 
 		premiumSubscribe : function(){
 
-		    var restUrl = Utils.GetURL("/services/rest/payment/plan/testMonthlyPlan/")
+            if (this.model.offers.length < 1) {
+                return;
+            }
+
+            var offer = this.model.offers[0];
+            var restUrl = Utils.GetURL("/services/rest/payment/plan/")
+		                            + offer.id + "/"
                                     + this.model.employerGuid + "/";
             var userEmail = this.model.userEmail;
             var imageUrl = Utils.GetURL("/images/icon175x175.jpeg");
+            var publicKey = this.model.publicKey;
+
 
             $.ajax({
                 url: "https://checkout.stripe.com/checkout.js",
                 dataType: "script",
                 success : function() {
                     var handler = StripeCheckout.configure({
-                        key: 'pk_test_8dg9x6425a8g5wJugEkMqYc7',
+                        key: publicKey,
                         token: function(token) {
                             $.ajax({
                                 url : restUrl + token.id,
@@ -57,7 +65,7 @@ define([
                         },
                         image: imageUrl,
                         email: userEmail,
-                        opened: function() {
+                        closed: function() {
                             Utils.HideLoadingAnimation();
                         }
                     });
@@ -65,8 +73,8 @@ define([
                     Utils.ShowLoadingAnimation();
                     handler.open({
                         name: 'HotSchedules POST',
-                        description: 'Test Monthly Plan',
-                        amount: 3199
+                        description: offer.shortName,
+                        amount: offer.amount
                         });
                 },
                 error : function() {

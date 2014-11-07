@@ -33,12 +33,27 @@ define([
 				network			: true,
 				messages		: true,
 				settings		: true,
-				premium         : false
+				accountUpgradable : false
+			},
+
+			GoogleAnalytics : {
+			    id : "UA-52257201-1",
+			    domain : "hotschedulespost.com"
+			},
+			 
+			StoreLinks : {
+			    google : "https://play.google.com/store/apps/details?id=com.hotschedules.brushfire",
+			    apple : "https://itunes.apple.com/us/app/hotschedules/id888794188?mt=8"
+			},
+			 
+			GoogleMaps : {
+			    key : "AIzaSyDRIMgVwlD1T9YvqxVOHMGyxQyM1HxXSJs"
 			},
 
 			// Get URL
 			GetURL : function(url){
-				return this.CONTEXT + url;
+				//return this.CONTEXT + url;
+				return "../services" + url;
 			},
 
 			// Get Default Route
@@ -786,8 +801,8 @@ define([
 				
 			},
 
-			EnablePremiumTab : function(enabled) {
-			    this.AppConfig.premium = enabled;
+			EnableAccountUpgrade : function(enabled) {
+			    this.AppConfig.accountUpgradable = enabled;
 			}
 			
 		});

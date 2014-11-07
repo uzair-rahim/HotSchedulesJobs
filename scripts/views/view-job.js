@@ -6,7 +6,7 @@ define([
 		"utils",
 		"marionette",
 		"hbs!templates/template-view-job",
-		"async!https://maps.googleapis.com/maps/api/js?key=AIzaSyA6cyoae_8rRsygZxbPIiuNp220ipankW0&sensor=false"
+		"async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDRIMgVwlD1T9YvqxVOHMGyxQyM1HxXSJs&sensor=false"
 	],
 	function($, Cookie, Analytics, App, Utils, Marionette, Template, Async){
 	"use strict";

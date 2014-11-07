@@ -46,6 +46,7 @@
                 }
                 var saveUrl = window.location;
                 if ('<%=appliedFor%>' === 'true') {
+                    ga('create', 'UA-52257201-1', 'hotschedulespost.com');
                     ga('send', 'pageview', '/job-applied-for');
                 }
                 var device = detectDevice();

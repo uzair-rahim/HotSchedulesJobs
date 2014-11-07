@@ -18,36 +18,6 @@ define([
 				return url;
 			},
 
-			getJobTypes : function(callback){
-				var that = this;
-				var url = Utils.GetURL("/services/rest/jobtypes");
-				$.ajax({
-					type : "GET",
-					url : url,
-					success : function(response){
-						callback(response);
-					},
-					error : function(){
-						console.log("Error fetching job types")
-					}
-				});
-			},
-
-			getEmployerJobs : function(employerGUID,callback){
-				var that = this;
-				var url = this.urlRoot() + "/list/"+employerGUID;
-				$.ajax({
-					type : "GET",
-					url : url,
-					success : function(response){
-						callback(response);
-					},
-					error : function(){
-						console.log("Error fetching jobs for employer");
-					}
-				});
-			},
-
 			updateCandidateHired : function(candidateGUID,candidate,callback){
 				var that = this;
 				var url = this.urlRoot() + "/candidate/" + candidateGUID + "/hired";

@@ -20,7 +20,7 @@ define([
 				var head = new ViewHead();
 				App.layout.head.show(head);
 
-                var qs = window.location.href.split('?')[1];
+				var qs = window.location.href.split('?')[1];
                 var args = Utils.GetQueryParameters(qs);
 				var jobGUID = args.id;
 				var appliedFor = args.appliedFor;

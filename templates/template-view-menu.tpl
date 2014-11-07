@@ -50,7 +50,7 @@
 		<li id="menu-profile-settings">
 			<label>Profile Settings</label>
 		</li>
-		{{#if_true config.accountUpgradable}}
+		{{#if_true accountUpgradable}}
 		<li id="menu-premium-services">
 		    <label>Premium Services</label>
 		</li>

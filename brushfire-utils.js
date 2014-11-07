@@ -32,8 +32,7 @@ define([
 				jobs			: true,
 				network			: true,
 				messages		: true,
-				settings		: true,
-				accountUpgradable : false
+				settings		: true
 			},
 
 			GoogleAnalytics : {
@@ -50,24 +49,10 @@ define([
 			    key : "AIzaSyDRIMgVwlD1T9YvqxVOHMGyxQyM1HxXSJs"
 			},
 
-			GoogleAnalytics : {
-			    id : "UA-52257201-1",
-			    domain : "hotschedulespost.com"
-			},
-			 
-			StoreLinks : {
-			    google : "https://play.google.com/store/apps/details?id=com.hotschedules.brushfire",
-			    apple : "https://itunes.apple.com/us/app/hotschedules/id888794188?mt=8"
-			},
-			 
-			GoogleMaps : {
-			    key : "AIzaSyDRIMgVwlD1T9YvqxVOHMGyxQyM1HxXSJs"
-			},
 
 			// Get URL
 			GetURL : function(url){
-				//return this.CONTEXT + url;
-				return "../services" + url;
+				return this.CONTEXT + url;
 			},
 
 			// Get Default Route
@@ -813,10 +798,6 @@ define([
 				alertDialog.addClass("show");
 				app.append('<div class="view-modal"></div>');
 				
-			},
-
-			EnableAccountUpgrade : function(enabled) {
-			    this.AppConfig.accountUpgradable = enabled;
 			}
 			
 		});

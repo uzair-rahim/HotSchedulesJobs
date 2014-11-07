@@ -118,7 +118,10 @@
 			<label>Web URL</label>
 			<input type="text" id="website" value="{{employerProfile.url}}"/>
 		</div>
-		<div class="field-container">
+		
+		
+		
+		<div class="field-container one-third">
 			<label>Price Per Person</label>
 			<div id="ppa" class="custom-select" data-index="{{employerProfile.ppa}}" data-value="{{getEmployerPPA employerPPA employerProfile.ppa}}">
 				<button class="custom-select-button">{{getEmployerPPA employerPPA employerProfile.ppa}}</button>
@@ -129,6 +132,20 @@
 				</ul>
 			</div>
 		</div>
+		
+		<div class="field-container two-third">
+			<label>Store Type</label>
+			<div id="type" class="custom-select" data-index="{{employerProfile.type}}" data-value="{{getEmployerType employerType employerProfile.type}}">
+				<button class="custom-select-button">{{getEmployerType employerType employerProfile.type}}</button>
+				<ul class="custom-select-list">
+				{{#each employerType}}
+					<li>{{this.label}}</li>
+				{{/each}}
+				</ul>
+			</div>
+		</div>
+		
+		
 		{{#isNotNull employerProfile.about}}
 			<div class="field-container about">
 				<label>About</label>

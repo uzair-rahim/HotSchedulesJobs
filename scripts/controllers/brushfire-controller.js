@@ -24,13 +24,14 @@ define([
 		"scripts/views/view-select-employer",
 		"scripts/views/view-training",
 		"scripts/models/model-user",
-		"scripts/models/model-job",
 		"scripts/models/model-jobtypes",
 		"scripts/models/model-employer",
 		"scripts/models/model-employer-ppa",
 		"scripts/models/model-employer-type",
 		"scripts/models/model-employer-yelp-rating",
 		"scripts/models/model-chat",
+		"scripts/models/model-network",
+		"scripts/models/model-payment-config",
 		"scripts/collections/collection-employers",
 		"scripts/collections/collection-jobs",
 		"scripts/collections/collection-jobs-info",
@@ -38,9 +39,9 @@ define([
 		"scripts/collections/collection-network",
 		"scripts/collections/collection-employees",
 		"scripts/collections/collection-followers",
-		"scripts/collections/collection-endorsements",
+		"scripts/collections/collection-endorsements"
 	],
-	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewPremium, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJob, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerType, ModelEmployerYelpRating, ModelChat, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
+	function($, App, Utils, Marionette, LayoutApp, ViewLogin, ViewForgotPassword, ViewSignup, ViewFindBusiness, ViewAddBusiness, ViewAccountVerification, ViewJobs, ViewCandidates, ViewCandidatesByJob, ViewProfile, ViewConnections, ViewNetwork, ViewMessages, ViewSettings, ViewEmployerProfile, ViewPremium, ViewSupport, ViewSelectEmployer, ViewTraining, ModelUser, ModelJobTypes, ModelEmployer, ModelEmployerPPA, ModelEmployerType, ModelEmployerYelpRating, ModelChat, ModelNetwork, PaymentConfig, CollectionEmployers, CollectionJobs, CollectionJobsInfo, CollectionEmployerProfiles, CollectionNetwork, CollectionEmployees, CollectionFollowers, CollectionEndorsements){
 		"use strict";
 
 		var AppController = Marionette.Controller.extend({
@@ -126,13 +127,55 @@ define([
 								user.trainingCompleted = response.completed !== null;
 								user.trainingEventGUID = response.guid;
 
-								App.session.set(user);		
-								App.menu.render();
+								var networkModel = new ModelNetwork();
+									networkModel.getConnections(user.guid, function(data){
+										var connections = [];
 
-								App.router.navigate("jobs", true);
-								if(!App.session.get("trainingCompleted")){
-									that.training();
-								}
+										$.each(data, function(){
+											var connection = new Object();
+											connection.guid = this.guid;
+											connection.fromUserGUID = this.fromUserGuid;
+											connection.toUserGUID = this.toUserGuid;
+											connection.state = "connected";
+											connections.push(connection);
+										});
+
+												
+										networkModel.getReceivedRequests(user.guid, function(data){
+											$.each(data, function(){
+												var connection = new Object();
+												connection.guid = this.guid;
+												connection.fromUserGUID = this.fromUserGuid;
+												connection.toUserGUID = this.toUserGuid;
+												connection.state = "received";
+												connections.push(connection);
+											});
+
+											networkModel.getSentRequests(user.guid, function(data){
+												$.each(data, function(){
+													var connection = new Object();
+													connection.guid = this.guid;
+													connection.fromUserGUID = this.fromUserGuid;
+													connection.toUserGUID = this.toUserGuid;
+													connection.state = "sent";
+													connections.push(connection);
+												});
+
+												Utils.SetUserConnectionsList(connections);
+												
+												App.session.set(user);		
+												App.menu.render();
+
+												App.router.navigate("jobs", true);
+												if(!App.session.get("trainingCompleted")){
+													that.training();
+												}
+
+											});
+
+										});
+
+									});
 
 							});
 
@@ -191,23 +234,64 @@ define([
 			},
 
 			jobs : function(){
+
 				if(App.session.isLoggedIn() && App.session.isVerified()){
-					var that = this;
-					var data = new Object();
-					var job = new ModelJob();
-						job.getJobTypes(function(response){
-							data.types = response;
-							job.getEmployerJobs(App.session.getEmployerGUID(), function(response){
-								data.jobs = response;
-								that.removeBackground();
-								var view = new ViewJobs({model : data});
+
+					var hasEmployerID = App.session.getEmployers().length > 0
+
+					if(!hasEmployerID){
+						App.router.navigate("logout", true);
+					}else{
+						var that = this;
+
+						App.clearTrail();
+						App.pushTrail(App.Language.jobs);
+
+						var jobtypes = new ModelJobTypes();
+						var jobs = new CollectionJobs();
+						var models = new Object();
+
+						$.when(
+							jobtypes.fetch({
+								success : function(jobtypesResponse){
+									console.log("Job Types fetched successfully...");
+									models.jobtypes = jobtypesResponse.attributes;
+								},
+								error : function(){
+									console.log("Error fetching Job Types...");
+									Utils.ShowToast({ message : "Error fetching Job Types..."});
+								}
+							}),
+							jobs.fetch({
+								success : function(collection, jobsResponse){
+									console.log("Jobs fetched successfully...");
+									models.jobs = jobsResponse;
+								},
+								error : function(){
+									console.log("Error fetching Jobs...");
+									Utils.ShowToast({message : "Error fetching Jobs..."});
+								}
+							})
+
+						).then(function(){
+							that.removeBackground();
+							that.setLayout();
+
+							var view = new ViewJobs({model : models});
 								App.layout.body.show(view);
+								if(localStorage.getItem("training") == "null"){
+									that.training();
+								}
 								that.setMenuSelection("#menu-jobs");	
-							});
-						});
+								
+						});	
+					}
+
 				}else{
 					App.router.navigate("logout", true);
 				}
+
+				
 			},
 
 			candidates : function(){
@@ -501,6 +585,18 @@ define([
                     	mdl.employerGuid = App.session.getEmployerGUID();
                     	mdl.userEmail = App.session.get("email");
 
+                    var paymentConfig = new PaymentConfig();
+                    paymentConfig.fetch({
+                        success : function(response){
+                            mdl.publicKey = response.attributes.publicKey;
+                            mdl.offers = response.attributes.offers;
+                        },
+                        error : function(){
+                            console.log("Error fetching payment config...")
+                            Utils.ShowToast({ message : "Error fetching premium services payment config"});
+                        }
+                    });
+
    					var view = new ViewPremium({model : mdl});
                     App.layout.body.show(view);
                     that.setMenuSelection("#menu-premium-services");
@@ -603,8 +699,9 @@ define([
 									collection.getEmployers(userEmployers, function(){
 										App.session.set("logged", true);
 										App.session.set({employers : collection.models});
-										Utils.EnablePremiumTab(
-										    App.session.getEmployers()[App.session.getSelectedEmployer()].premium
+										App.session.set(
+										    "accountUpgradable",
+										    App.session.getEmployers()[App.session.getSelectedEmployer()].accountUpgradable
 										);
 										App.menu.render();
 										var route = Utils.GetDefaultRoute();

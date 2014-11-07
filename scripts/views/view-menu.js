@@ -211,6 +211,7 @@ define([
 				jsonObject.selectedEmployer = this.getSelectedEmployer();
 				jsonObject.employerName = this.getEmployerName();
 				jsonObject.employerLogo = this.getEmployerLogo();
+				jsonObject.accountUpgradable = this.options.app.session.isAccountUpgradable();
 				//jsonObject.notificationsCount = this.getNotificationsCount();
 			return jsonObject;
 		}

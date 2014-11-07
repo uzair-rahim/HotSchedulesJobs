@@ -19,7 +19,8 @@ define([
 				roles				: null,
 				notificationsCount	: 0,
 				trainingCompleted	: false,
-				trainingEventGUID	: null
+				trainingEventGUID	: null,
+				accountUpgradable   : false
 			},
 
 			initialize : function(options){
@@ -169,6 +170,10 @@ define([
 
 			isSupport : function(){
 				return this.getRole() === "support";
+			},
+
+			isAccountUpgradable : function() {
+			    return this.attributes.accountUpgradable;
 			},
 
 			endSession : function(){

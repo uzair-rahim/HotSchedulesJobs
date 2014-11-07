@@ -299,6 +299,8 @@ define([
 					employer.url = $("#website").val();
 					employer.phone = $("#phone").val();
 					employer.ppa = $("#ppa").attr("data-index");
+					employer.type = $("#type").attr("data-index");
+					
 
 				var about = $("#about").val();
 
@@ -414,6 +416,7 @@ define([
 		serializeData : function(){
 			var jsonObject = new Object();
 				jsonObject.employerPPA = this.model.ppa;
+				jsonObject.employerType = this.model.type;
 				jsonObject.employerRating = this.model.rating;
 				jsonObject.employerProfile = this.model.profile;
 				jsonObject.language = App.Language;
